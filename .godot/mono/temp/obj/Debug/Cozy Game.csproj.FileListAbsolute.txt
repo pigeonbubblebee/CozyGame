@@ -1,0 +1,19 @@
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.deps.json
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.runtimeconfig.json
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.pdb
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.AssemblyReference.cache
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.AssemblyInfoInputs.cache
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.AssemblyInfo.cs
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.CoreCompileInputs.cache
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.CopyComplete
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\refint\Cozy Game.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.pdb
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.genruntimeconfig.cache
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\ref\Cozy Game.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvpmp8o31rqpk"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
+[ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
+[ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="2_4jqy4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hj5nv"]
+size = Vector2(1664, 138)
+
+[node name="Testing" type="Node2D"]
+script = ExtResource("1_ibhl6")
+
+[node name="Player" parent="." instance=ExtResource("1_s66b3")]
+
+[node name="TestingGround" type="StaticBody2D" parent="."]
+position = Vector2(0, 448)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestingGround"]
+position = Vector2(0, 59)
+shape = SubResource("RectangleShape2D_hj5nv")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestingGround"]
+position = Vector2(7.99993, 56)
+scale = Vector2(13, 1)
+texture = ExtResource("2_4jqy4")
+
+[node name="TestingGround2" type="StaticBody2D" parent="."]
+position = Vector2(-144, 208)
+scale = Vector2(0.112826, 0.546652)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestingGround2"]
+position = Vector2(0, 59)
+shape = SubResource("RectangleShape2D_hj5nv")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestingGround2"]
+position = Vector2(7.99993, 56)
+scale = Vector2(13, 1)
+texture = ExtResource("2_4jqy4")

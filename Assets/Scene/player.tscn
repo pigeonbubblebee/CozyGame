@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://eo4g5684jr7v"]
+
+[ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs" id="4_37u3h"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs" id="5_0xgu4"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs" id="6_npsk0"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs" id="7_tcmgt"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerMovementController.cs" id="8_8py8k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qth3"]
+size = Vector2(128, 256)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine", "MovementController")]
+script = ExtResource("1_l6ek3")
+StateMachine = NodePath("StateMachine")
+MovementController = NodePath("PlayerMovementController")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0qth3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-06, -3.51667e-06)
+scale = Vector2(1, 2)
+texture = ExtResource("1_8vckk")
+
+[node name="PlayerMovementController" type="Node2D" parent="."]
+script = ExtResource("8_8py8k")
+Speed = 1000.0
+Acceleration = 200.0
+DirectionSwitchSpeed = 600.0
+Friction = 350.0
+JumpVelocity = 3750.0
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("3_c3qdv")
+PlayerIdleStatePath = NodePath("Idle")
+PlayerRunStatePath = NodePath("Run")
+PlayerJumpStatePath = NodePath("Jump")
+PlayerFallStatePath = NodePath("Fall")
+
+[node name="Idle" type="Node2D" parent="StateMachine"]
+script = ExtResource("4_37u3h")
+
+[node name="Run" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_0xgu4")
+
+[node name="Jump" type="Node2D" parent="StateMachine"]
+script = ExtResource("6_npsk0")
+
+[node name="Fall" type="Node2D" parent="StateMachine"]
+script = ExtResource("7_tcmgt")
