@@ -1,17 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "fVUOKX8eedhWj6PQJQvjhauhA5ncds2xqu/qKneBxjvrwHkRJ4PKTcndJXAS5FIkgA3gvEl4iaL7Rz4mbgBe1w==",
+  "dgSpecHash": "T1UJXbtq5fklKIMGNHkAkVXRJScxAIGh3fFWTjJO+fF+2V3A0dUAH5HwZVdy5jnq6XNAFbp6IKpHAtoPP/4c8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MattM\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",
-    "C:\\Users\\MattM\\.nuget\\packages\\godotsharpeditor\\4.1.1\\godotsharpeditor.4.1.1.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.11\\microsoft.netcore.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\MattM\\.nuget\\packages\\microsoft.netcore.app.runtime.osx-arm64\\6.0.11\\microsoft.netcore.app.runtime.osx-arm64.6.0.11.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.11\\microsoft.windowsdesktop.app.ref.6.0.11.nupkg.sha512",
-    "C:\\Users\\MattM\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512"
+    "C:\\Users\\MattM\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\MattM\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.osx-arm64\\6.0.11\\microsoft.aspnetcore.app.runtime.osx-arm64.6.0.11.nupkg.sha512"
   ],
   "logs": []
 }

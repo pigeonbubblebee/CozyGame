@@ -64,3 +64,7 @@ dash={
 [physics]
 
 2d/default_gravity=200.0
+
+[rendering]
+
+textures/vram_compression/import_s3tc_bptc=true

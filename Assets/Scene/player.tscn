@@ -36,12 +36,11 @@ texture = ExtResource("1_8vckk")
 [node name="PlayerMovementController" type="Node2D" parent="."]
 script = ExtResource("8_8py8k")
 Speed = 1000.0
-Acceleration = 200.0
+Acceleration = 400.0
 DirectionSwitchSpeed = 600.0
-Friction = 350.0
+Friction = 500.0
 JumpVelocity = 2650.0
 jumpingGravity = 150.0
-DashSpeed = 3500.0
 DashFriction = 100.0
 DashCooldown = 0.5
 DashBufferPath = NodePath("DashBuffer")
