@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {}
+    "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {
+    "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+        "projectUniqueName": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
         "projectName": "Cozy Game",
-        "projectPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+        "projectPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
         "packagesPath": "C:\\Users\\MattM\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MattM\\AppData\\Roaming\\NuGet\\NuGet.Config"

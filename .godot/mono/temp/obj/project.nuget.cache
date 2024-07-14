@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5cSpIPaYowCCNaTpvggTic21JE/u3Z2Zl2v80u3vW9a3e+9CUFcf/o70Xk2ImviZdKuLh+J7Bk45sscL8jz7Rg==",
+  "dgSpecHash": "fVUOKX8eedhWj6PQJQvjhauhA5ncds2xqu/qKneBxjvrwHkRJ4PKTcndJXAS5FIkgA3gvEl4iaL7Rz4mbgBe1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+  "projectFilePath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MattM\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
     "C:\\Users\\MattM\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",

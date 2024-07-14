@@ -1,4 +1,5 @@
 res://Assets/Scripts/Character/Player
+res://Assets/Scripts/Character/Player/StateMachine
 res://Assets/Scripts/Core/System/Input
 res://Assets/Scripts/Core/Game
 res://Assets/Scripts/Core/Scene

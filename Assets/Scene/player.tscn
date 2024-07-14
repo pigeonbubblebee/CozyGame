@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=14 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -8,19 +8,27 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs" id="6_npsk0"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs" id="7_tcmgt"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerMovementController.cs" id="8_8py8k"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs" id="9_h5pyd"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerAttackController.cs" id="9_kewep"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs" id="10_use1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qth3"]
 size = Vector2(128, 256)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine", "MovementController")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82cr8"]
+size = Vector2(266, 154)
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_l6ek3")
-StateMachine = NodePath("StateMachine")
-MovementController = NodePath("PlayerMovementController")
+StateMachinePath = NodePath("StateMachine")
+MovementControllerPath = NodePath("PlayerMovementController")
+AttackControllerPath = NodePath("PlayerAttackController")
+PlayerSpritePath = NodePath("Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0qth3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-4.76837e-06, -3.51667e-06)
 scale = Vector2(1, 2)
 texture = ExtResource("1_8vckk")
@@ -31,7 +39,26 @@ Speed = 1000.0
 Acceleration = 200.0
 DirectionSwitchSpeed = 600.0
 Friction = 350.0
-JumpVelocity = 3750.0
+JumpVelocity = 2650.0
+jumpingGravity = 150.0
+DashSpeed = 3500.0
+DashFriction = 100.0
+DashCooldown = 0.5
+DashBufferPath = NodePath("DashBuffer")
+CoyoteTimePath = NodePath("CoyoteTime")
+JumpBufferPath = NodePath("JumpBuffer")
+
+[node name="CoyoteTime" type="Timer" parent="PlayerMovementController"]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="PlayerMovementController"]
+wait_time = 0.05
+one_shot = true
+
+[node name="DashBuffer" type="Timer" parent="PlayerMovementController"]
+wait_time = 0.5
+one_shot = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_c3qdv")
@@ -39,6 +66,9 @@ PlayerIdleStatePath = NodePath("Idle")
 PlayerRunStatePath = NodePath("Run")
 PlayerJumpStatePath = NodePath("Jump")
 PlayerFallStatePath = NodePath("Fall")
+PlayerAttackStatePath = NodePath("Attack")
+PlayerDashStatePath = NodePath("Dash")
+_logStates = true
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_37u3h")
@@ -51,3 +81,64 @@ script = ExtResource("6_npsk0")
 
 [node name="Fall" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_tcmgt")
+
+[node name="Attack" type="Node2D" parent="StateMachine"]
+script = ExtResource("9_h5pyd")
+
+[node name="Dash" type="Node2D" parent="StateMachine"]
+script = ExtResource("10_use1l")
+
+[node name="PlayerAttackController" type="Node2D" parent="."]
+script = ExtResource("9_kewep")
+SlashTime = 0.1
+SlashDamage = 4
+SlashRange = 1
+SlashCooldown = 0.3
+SlashBufferPath = NodePath("AttackBuffer")
+AttackAreaPath = NodePath("SwordHit")
+RightAttackAreaColliderPath = NodePath("SwordHit/Right")
+LeftAttackAreaColliderPath = NodePath("SwordHit/Left")
+RightAttackSpritePath = NodePath("Right2")
+LeftAttackSpritePath = NodePath("Left2")
+
+[node name="Right2" type="Sprite2D" parent="PlayerAttackController"]
+visible = false
+position = Vector2(200, -8)
+scale = Vector2(2.125, 1.25)
+texture = ExtResource("1_8vckk")
+
+[node name="Left2" type="Sprite2D" parent="PlayerAttackController"]
+visible = false
+position = Vector2(-201, -8)
+scale = Vector2(2.125, 1.25)
+texture = ExtResource("1_8vckk")
+
+[node name="SwordHit" type="Area2D" parent="PlayerAttackController"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Right" type="CollisionShape2D" parent="PlayerAttackController/SwordHit"]
+position = Vector2(201, -8)
+shape = SubResource("RectangleShape2D_82cr8")
+disabled = true
+
+[node name="Left" type="CollisionShape2D" parent="PlayerAttackController/SwordHit"]
+position = Vector2(-200, -8)
+shape = SubResource("RectangleShape2D_82cr8")
+disabled = true
+
+[node name="AttackBuffer" type="Timer" parent="PlayerAttackController"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -120)
+zoom = Vector2(0.785, 0.785)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1

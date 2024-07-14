@@ -7,6 +7,3 @@
 script = ExtResource("1_64fni")
 
 [node name="Testing" parent="." instance=ExtResource("1_hcyuf")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.785, 0.785)

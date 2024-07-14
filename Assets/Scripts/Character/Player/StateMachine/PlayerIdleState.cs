@@ -26,11 +26,20 @@ public partial class PlayerIdleState : PlayerState
 
     protected override bool CheckStates()
     {
+		if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+			return true;
+		}
+		if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.AttackState);
+			return true;
+		}
         if(!MovementController.Grounded) {
+			MovementController.StartCoyoteTimer();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.FallState);
 			return true;
 		}
-		if(MovementController.DesiredJump) {
+		if(MovementController.DesiredJump || !MovementController.GetJumpBufferStop()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.JumpState);
 			return true;
 		}
