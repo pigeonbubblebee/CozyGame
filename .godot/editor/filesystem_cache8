@@ -1,22 +1,26 @@
 2a60927148abd1d33b818b535e306557
-::res://::1720922279
-export_presets.cfg::TextFile::-1::1720922224::0::1::::<><>::
+::res://::1724126619
+export_presets.cfg::TextFile::-1::1721424068::0::1::::<><>::
 icon.svg::CompressedTexture2D::4508193827882657020::1708362359::1708362392::1::::<><>::
 README.md::TextFile::-1::1715685995::0::1::::<><>::
 ::res://Assets/::1719285553
 ::res://Assets/Art/::1719285563
 ::res://Assets/Art/Tileset/::1719285563
 neoncitytileset.png::CompressedTexture2D::2967491028140787025::1719285536::1719285563::1::::<><>::
-::res://Assets/Scene/::1720922265
-main.tscn::PackedScene::1425212289073466234::1720922265::0::1::::<><>::res://Assets/Scripts/Core/Game/GameManager.cs<>uid://bvpmp8o31rqpk::::res://Assets/Scene/testing.tscn
-player.tscn::PackedScene::311429795790561681::1720922265::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Character/Player/Player.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs<>res://Assets/Scripts/Character/Player/PlayerMovementController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs<>res://Assets/Scripts/Character/Player/PlayerAttackController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs
-testing.tscn::PackedScene::3892109213429889136::1720922265::0::1::::<><>::res://Assets/Scripts/Core/Scene/SceneManager.cs<>uid://eo4g5684jr7v::::res://Assets/Scene/player.tscn<>uid://b5h2j8rglt8my::::res://icon.svg<>uid://bijqe5ddtj73b::::res://Assets/Art/Tileset/neoncitytileset.png<>res://Assets/Scripts/Core/Scene/Tilemap.cs<>res://Assets/Scripts/Combat/TestingDummy.cs
-::res://Assets/Scripts/::1719802486
+::res://Assets/Scene/::1724026479
+control.tscn::PackedScene::7087620603772264199::1724026479::0::1::::<><>::
+main.tscn::PackedScene::1425212289073466234::1724026479::0::1::::<><>::res://Assets/Scripts/Core/Game/GameManager.cs<>uid://bvpmp8o31rqpk::::res://Assets/Scene/testing.tscn
+player.tscn::PackedScene::311429795790561681::1724026479::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Character/Player/Player.cs<>uid://pffa3f4xmb1o::::res://Data/player_stats.tres<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs<>res://Assets/Scripts/Character/Player/PlayerMovementController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs<>res://Assets/Scripts/Character/Player/PlayerAttackController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs<>res://Assets/Scripts/Character/Player/PlayerInteractionController.cs<>res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
+testing.tscn::PackedScene::3892109213429889136::1724026479::0::1::::<><>::res://Assets/Scripts/Core/Scene/SceneManager.cs<>uid://eo4g5684jr7v::::res://Assets/Scene/player.tscn<>uid://b5h2j8rglt8my::::res://icon.svg<>uid://bijqe5ddtj73b::::res://Assets/Art/Tileset/neoncitytileset.png<>res://Assets/Scripts/Core/Scene/Tilemap.cs<>res://Assets/Scripts/Combat/TestingDummy.cs<>res://Assets/Scripts/Core/User Interface/UIManager.cs<>uid://c78kctwoddfg6::::res://Assets/Scene/control.tscn<>res://Assets/Scripts/Interactables/TestingItem.cs
+::res://Assets/Scripts/::1722786423
 ::res://Assets/Scripts/Character/::1708382665
-::res://Assets/Scripts/Character/Player/::1720919419
-Player.cs::CSharpScript::-1::1720752844::0::1::::<><>::
-PlayerAttackController.cs::CSharpScript::-1::1720921016::0::1::::<><>::
-PlayerMovementController.cs::CSharpScript::-1::1720920969::0::1::::<><>::
+::res://Assets/Scripts/Character/Player/::1724025867
+Player.cs::CSharpScript::-1::1724025689::0::1::::<><>::
+PlayerAttackController.cs::CSharpScript::-1::1721788773::0::1::::<><>::
+PlayerInteractionController.cs::CSharpScript::-1::1723323569::0::1::::<><>::
+PlayerInventoryManager.cs::CSharpScript::-1::1724025867::0::1::::<><>::
+PlayerMovementController.cs::CSharpScript::-1::1724025905::0::1::::<><>::
+PlayerStats.cs::CSharpScript::-1::1724025659::0::1::::PlayerStats<>Resource<>::
 ::res://Assets/Scripts/Character/Player/StateMachine/::1720469864
 PlayerAttackState.cs::CSharpScript::-1::1720920541::0::1::::<><>::
 PlayerDashState.cs::CSharpScript::-1::1720920976::0::1::::<><>::
@@ -24,15 +28,15 @@ PlayerFallState.cs::CSharpScript::-1::1720918256::0::1::::<><>::
 PlayerIdleState.cs::CSharpScript::-1::1720918200::0::1::::<><>::
 PlayerJumpState.cs::CSharpScript::-1::1720918237::0::1::::<><>::
 PlayerRunState.cs::CSharpScript::-1::1720918215::0::1::::<><>::
-PlayerState.cs::CSharpScript::-1::1719634513::0::1::::<><>::
-PlayerStateMachine.cs::CSharpScript::-1::1720473115::0::1::::<><>::
+PlayerState.cs::CSharpScript::-1::1722282517::0::1::::<><>::
+PlayerStateMachine.cs::CSharpScript::-1::1722282485::0::1::::<><>::
 ::res://Assets/Scripts/Character/StateMachine/::1708391108
 State.cs::CSharpScript::-1::1715133390::0::1::::<><>::
 StateMachine.cs::CSharpScript::-1::1715566168::0::1::::<><>::
 ::res://Assets/Scripts/Combat/::1719804451
 IHittable.cs::CSharpScript::-1::1719802584::0::1::::<><>::
 TestingDummy.cs::CSharpScript::-1::1720046148::0::1::::<><>::
-::res://Assets/Scripts/Core/::1719802012
+::res://Assets/Scripts/Core/::1721788443
 ::res://Assets/Scripts/Core/Game/::1711336160
 DependencyInjectionContainer.cs::CSharpScript::-1::1711335557::0::1::::<><>::
 DependencyInjectionManager.cs::CSharpScript::-1::1711336418::0::1::::<><>::
@@ -44,14 +48,15 @@ SceneManager.cs::CSharpScript::-1::1710264833::0::1::::<><>::
 Tilemap.cs::CSharpScript::-1::1719461418::0::1::::<><>::
 ::res://Assets/Scripts/Core/System/::1711333671
 ::res://Assets/Scripts/Core/System/Input/::1711333671
-IInputManager.cs::CSharpScript::-1::1720406233::0::1::::<><>::
-InputManager.cs::CSharpScript::-1::1720473196::0::1::::<><>::
+IInputManager.cs::CSharpScript::-1::1722282868::0::1::::<><>::
+InputManager.cs::CSharpScript::-1::1722706510::0::1::::<><>::
+::res://Assets/Scripts/Core/User Interface/::1721788446
+UIManager.cs::CSharpScript::-1::1721789024::0::1::::<><>::
 ::res://Assets/Scripts/Core/Util/::1719802034
-PhysicsLayers.cs::CSharpScript::-1::1719802284::0::1::::<><>::
-::res://Builds/::1720921901
-::res://Builds/Testing/::1720921907
-::res://Builds/Testing/V1/::1720921913
-::res://Builds/Testing/V1/Windows/::1720922154
-::res://Builds/Testing/V1/Windows/data_Cozy Game_x86_64/::1720922154
-Cozy Game.deps.json::JSON::-1::1720922150::0::1::::<><>::
-Cozy Game.runtimeconfig.json::JSON::-1::1720922150::0::1::::<><>::
+PhysicsLayers.cs::CSharpScript::-1::1722706411::0::1::::<><>::
+::res://Assets/Scripts/Interactables/::1723322983
+IInteractable.cs::CSharpScript::-1::1723322100::0::1::::<><>::
+Interactable.cs::CSharpScript::-1::1723323565::0::1::::<><>::
+TestingItem.cs::CSharpScript::-1::1723622600::0::1::::<><>::
+::res://Data/::1724026140
+player_stats.tres::Resource/PlayerStats::1063459608031279798::1724026140::0::1::::<><>::res://Assets/Scripts/Character/Player/PlayerStats.cs

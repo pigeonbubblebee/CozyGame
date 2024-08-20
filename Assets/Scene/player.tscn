@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=18 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
+[ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_wfd7o"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs" id="4_37u3h"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs" id="5_0xgu4"]
@@ -11,6 +12,8 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs" id="9_h5pyd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerAttackController.cs" id="9_kewep"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs" id="10_use1l"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInteractionController.cs" id="12_4sjmy"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs" id="13_f1mh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qth3"]
 size = Vector2(128, 256)
@@ -18,12 +21,17 @@ size = Vector2(128, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82cr8"]
 size = Vector2(266, 154)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a61ee"]
+size = Vector2(128, 256)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_l6ek3")
 StateMachinePath = NodePath("StateMachine")
 MovementControllerPath = NodePath("PlayerMovementController")
 AttackControllerPath = NodePath("PlayerAttackController")
 PlayerSpritePath = NodePath("Sprite")
+InteractionControllerPath = NodePath("PlayerInteractionController")
+PlayerStatsResource = ExtResource("2_wfd7o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0qth3")
@@ -35,14 +43,6 @@ texture = ExtResource("1_8vckk")
 
 [node name="PlayerMovementController" type="Node2D" parent="."]
 script = ExtResource("8_8py8k")
-Speed = 1000.0
-Acceleration = 400.0
-DirectionSwitchSpeed = 600.0
-Friction = 500.0
-JumpVelocity = 2650.0
-jumpingGravity = 150.0
-DashFriction = 100.0
-DashCooldown = 0.5
 DashBufferPath = NodePath("DashBuffer")
 CoyoteTimePath = NodePath("CoyoteTime")
 JumpBufferPath = NodePath("JumpBuffer")
@@ -67,7 +67,6 @@ PlayerJumpStatePath = NodePath("Jump")
 PlayerFallStatePath = NodePath("Fall")
 PlayerAttackStatePath = NodePath("Attack")
 PlayerDashStatePath = NodePath("Dash")
-_logStates = true
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_37u3h")
@@ -89,10 +88,6 @@ script = ExtResource("10_use1l")
 
 [node name="PlayerAttackController" type="Node2D" parent="."]
 script = ExtResource("9_kewep")
-SlashTime = 0.1
-SlashDamage = 4
-SlashRange = 1
-SlashCooldown = 0.3
 SlashBufferPath = NodePath("AttackBuffer")
 AttackAreaPath = NodePath("SwordHit")
 RightAttackAreaColliderPath = NodePath("SwordHit/Right")
@@ -102,12 +97,14 @@ LeftAttackSpritePath = NodePath("Left2")
 
 [node name="Right2" type="Sprite2D" parent="PlayerAttackController"]
 visible = false
+z_index = 2
 position = Vector2(200, -8)
 scale = Vector2(2.125, 1.25)
 texture = ExtResource("1_8vckk")
 
 [node name="Left2" type="Sprite2D" parent="PlayerAttackController"]
 visible = false
+z_index = 2
 position = Vector2(-201, -8)
 scale = Vector2(2.125, 1.25)
 texture = ExtResource("1_8vckk")
@@ -141,3 +138,12 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+
+[node name="PlayerInteractionController" type="Area2D" parent="."]
+script = ExtResource("12_4sjmy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractionController"]
+shape = SubResource("RectangleShape2D_a61ee")
+
+[node name="PlayerInventoryManager" type="Node2D" parent="."]
+script = ExtResource("13_f1mh6")

@@ -4,10 +4,6 @@ using System.Threading.Tasks;
 
 public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 {
-	[Export] public float SlashTime;
-	[Export] public int SlashDamage;
-	[Export] public int SlashRange;
-	[Export] public float SlashCooldown;
 	[Export] public NodePath SlashBufferPath;
 	private Timer _slashBuffer;
 
@@ -38,6 +34,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	public bool CanSlash { get; private set; }
 
 	private Player _player;
+	private PlayerStats _playerStats;
 
 	private PlayerMovementController _movementController;
 
@@ -54,6 +51,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_leftAttackSprite = GetNode<Sprite2D>(LeftAttackSpritePath);
 
 		_slashBuffer = GetNode<Timer>(SlashBufferPath);
+		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
 
 		_attackArea.AreaEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.HittableLayer;
@@ -66,6 +64,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public void Initialize(Player player) {
 		_player = player;
+		_playerStats = player.PlayerStatsResource;
 		_movementController = _player.MovementController;
 	}
 
@@ -83,16 +82,14 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		return _inputManager.GetAttackActuation();
 	}
 
-	
-
 	public void Slash() {
 		CanSwitchAttackDirection = false;
-		SlashEvent?.Invoke(SlashDamage, SlashTime, SlashRange);
+		SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);
 
 		_canHit = true;
 		_currentAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
 		
-		GetTree().CreateTimer(SlashTime).Timeout += _FinishSlash;
+		GetTree().CreateTimer(_playerStats.SlashTime).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}
 
@@ -106,7 +103,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public void StartSlashCooldown() {
 		CanSlash = false;
-		GetTree().CreateTimer(SlashCooldown).Timeout += _FinishSlashCooldown;
+		GetTree().CreateTimer(_playerStats.SlashCooldown).Timeout += _FinishSlashCooldown;
 	}
 
 	private void _FinishSlashCooldown() {
@@ -118,7 +115,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			return;
 		}
 
-		HitEvent?.Invoke((IHittable) hit, SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1);
+		HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1);
 	}
 
 	private void _OnHit(IHittable hittable, int damage, int direction) {

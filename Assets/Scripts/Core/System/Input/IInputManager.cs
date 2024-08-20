@@ -17,4 +17,11 @@ public interface IInputManager
     public abstract bool GetDashing();
     public abstract bool GetDashActuation();
     public abstract bool GetDashReleaseActuation();
+
+    public abstract bool GetInventoryActuation();
+    public abstract bool GetEscapeActuation();
+    
+    public abstract bool GetInteracting();
+    public abstract bool GetInteractActuation();
+    public abstract bool GetInteractReleaseActuation();
 }

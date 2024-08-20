@@ -1,10 +1,10 @@
-C:/Users/MattM/OneDrive/Documents/GitHub/CozyGame/CozyGame/Builds/Testing/V1/Mac
-C:/Users/MattM/OneDrive/Documents/GitHub/CozyGame/CozyGame/Builds/Testing/V1/Windows
-C:/Users/MattM/OneDrive/Documents/GitHub/CozyGame/CozyGame/Builds
+res://Data
 res://Assets/Scripts/Character/Player
+res://Assets/Scripts/Core/User Interface
+res://Assets/Scene
+C:/Users/MattM/OneDrive/Documents/CozyGameBuilds/Testing/2
 res://Assets/Scripts/Character/Player/StateMachine
 res://Assets/Scripts/Core/System/Input
 res://Assets/Scripts/Core/Game
 res://Assets/Scripts/Core/Scene
-res://Assets/Scene
 C:/Users/MattM/AppData/Local/Programs/Microsoft VS Code

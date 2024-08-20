@@ -42,7 +42,7 @@ public partial class PlayerJumpState : PlayerState
 
 	protected override bool CheckStates() {
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash))
-			&& MovementController.CanAirDash && MovementController.UseAirDash()) {
+			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
 			return true;
 		}

@@ -7,23 +7,7 @@ using System.Threading.Tasks;
 public partial class PlayerMovementController : Node
 {
 	// --------- Settings Vars, Move to PlayerData ---------
-	[Export] public float Speed = 500.0f;
-	[Export] public float Acceleration = 50.0f;
-	[Export] public float DirectionSwitchSpeed = 100.0f;
-	[Export] public float Friction = 70.0f;
-	
-	[Export] public float JumpVelocity = 4500.0f;
-	[Export] public int MaxJumps = 2;
-	[Export] public float jumpingGravity = 200f;
-
-	[Export] public float DashSpeed = 3000.0f;
-	// [Export] public float DashAcceleration = 1000.0f;
-	[Export] public float DashFriction = 1000.0f;
-	[Export] public float DashTime = 0.1f;
-	[Export] public bool CanAirDash = true;
-	[Export] public int MaxAirDash = 1;
 	private int _airDashesLeft = 1;
-	[Export] public float DashCooldown;
 	[Export] public NodePath DashBufferPath;
 	private Timer _dashBuffer;
 
@@ -52,6 +36,7 @@ public partial class PlayerMovementController : Node
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	private CharacterBody2D _playerBody;
+	private PlayerStats _playerStats;
 	
 	private IInputManager _inputManager;
 
@@ -67,10 +52,15 @@ public partial class PlayerMovementController : Node
 		_coyoteTime = GetNode<Timer>(CoyoteTimePath);
 		_jumpBuffer = GetNode<Timer>(JumpBufferPath);
 		_dashBuffer = GetNode<Timer>(DashBufferPath);
+
+		_coyoteTime.WaitTime = _playerStats.CoyoteTime;
+		_jumpBuffer.WaitTime = _playerStats.JumpBuffer;
+		_dashBuffer.WaitTime = _playerStats.DashBuffer;
 	}
 
-	public void Initialize(CharacterBody2D body) {
+	public void Initialize(Player body) {
 		_playerBody = body;
+		_playerStats = body.PlayerStatsResource;
 	}
 
 	public override void _Process(double delta) {
@@ -100,7 +90,7 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void Accelerate(Vector2 direction) {
-		Vector2 velocity = _playerBody.Velocity.MoveToward(Speed * direction, Acceleration);
+		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
@@ -108,11 +98,11 @@ public partial class PlayerMovementController : Node
 	public void DashAccelerate() {
 		// Vector2 velocity = _playerBody.Velocity.MoveToward(DashAcceleration * direction, DashAcceleration);
 		// velocity.Y = Velocity.Y;
-		_playerBody.Velocity = new Vector2(DashSpeed * Direction, 0f);
+		_playerBody.Velocity = new Vector2(_playerStats.DashSpeed * Direction, 0f);
 	}
 
 	public void SwitchDirection(Vector2 direction) {
-		Vector2 velocity = _playerBody.Velocity.MoveToward(Speed * direction, DirectionSwitchSpeed);
+		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.DirectionSwitchSpeed);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
@@ -120,13 +110,13 @@ public partial class PlayerMovementController : Node
 	public void AddFriction() {
 		Vector2 zero = Vector2.Zero;
 		zero.Y = Velocity.Y;
-		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, Friction);
+		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.Friction);
 	}
 
 	public void AddDashFriction() {
 		Vector2 zero = Vector2.Zero;
 		zero.Y = Velocity.Y;
-		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, DashFriction);
+		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.DashFriction);
 	}
 
 	private void _PlayerMovement() {
@@ -152,7 +142,7 @@ public partial class PlayerMovementController : Node
 
 	public void Jump() {
 		Vector2 velocity = _playerBody.Velocity;
-		velocity.Y = -JumpVelocity;
+		velocity.Y = -_playerStats.JumpVelocity;
 
 		_playerBody.Velocity = velocity;
 	}
@@ -181,7 +171,7 @@ public partial class PlayerMovementController : Node
 
 	public void JumpFall() {
 		Vector2 velocity = _playerBody.Velocity;
-		velocity.Y += jumpingGravity;
+		velocity.Y += _playerStats.JumpingGravity;
 
 		_playerBody.Velocity = velocity;
 	}
@@ -207,7 +197,7 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void Dash() {
-		GetTree().CreateTimer(DashTime).Timeout += FinishDashEvent;
+		GetTree().CreateTimer(_playerStats.DashTime).Timeout += FinishDashEvent;
 	}
 
 	public bool UseAirDash() {
@@ -221,13 +211,13 @@ public partial class PlayerMovementController : Node
 
 	private void _ResetDash() {
 		if(Grounded) {
-			_airDashesLeft = MaxAirDash;
+			_airDashesLeft = _playerStats.MaxAirDash;
 		}
 	}
 
 	public void StartDashCooldown() {
 		CanDash = false;
-		GetTree().CreateTimer(DashCooldown).Timeout += _FinishDashCooldown;
+		GetTree().CreateTimer(_playerStats.DashCooldown).Timeout += _FinishDashCooldown;
 	}
 
 	private void _FinishDashCooldown() {

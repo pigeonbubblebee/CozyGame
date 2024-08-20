@@ -3,9 +3,11 @@ using System;
 
 public abstract partial class PlayerState : State
 {
-	protected PlayerStateMachine ParentPlayerStateMachine => (ParentStateMachine as PlayerStateMachine);
+	protected PlayerStateMachine ParentPlayerStateMachine => ParentStateMachine as PlayerStateMachine;
 	protected PlayerMovementController MovementController => ParentPlayerStateMachine.MovementController;
 	protected PlayerAttackController AttackController => ParentPlayerStateMachine.AttackController;
+	protected PlayerInteractionController InteractionController => ParentPlayerStateMachine.InteractionController;
+	protected PlayerStats Stats => ParentPlayerStateMachine.Stats;
 	
 	// protected Player _player => ParentPlayerStateMachine.Player;
 

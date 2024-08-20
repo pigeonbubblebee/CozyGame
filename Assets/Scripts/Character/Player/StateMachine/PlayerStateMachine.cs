@@ -6,6 +6,8 @@ public partial class PlayerStateMachine : StateMachine
 	private IInputManager _inputManager;
 	public PlayerMovementController MovementController { get; private set; }
 	public PlayerAttackController AttackController { get; private set; }
+	public PlayerInteractionController InteractionController { get; private set; }
+	public PlayerStats Stats { get; private set; }
 	
 	[Export] public NodePath PlayerIdleStatePath;
 	public PlayerIdleState IdleState { get; private set; }
@@ -23,6 +25,8 @@ public partial class PlayerStateMachine : StateMachine
 	public void Initialize(Player player) {
 		MovementController = player.MovementController;
 		AttackController = player.AttackController;
+		InteractionController = player.InteractionController;
+		Stats = player.PlayerStatsResource;
 	}
 	
 	public override void _Ready() {

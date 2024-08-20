@@ -16,11 +16,22 @@ public partial class InputManager : Node, IInputManager
 	private bool _dashActuation;
 	private bool _dashReleaseActuation;
 
+	private bool _inventoryActuation;
+	private bool _escapeActuation;
+
+	private bool _interacting;
+	private bool _interactActuation;
+	private bool _interactReleaseActuation;
+
+	// Vars for control bind names on input maps
 	private readonly string MOVE_LEFT = "move_left";
 	private readonly string MOVE_RIGHT = "move_right";
 	private readonly string JUMP = "jump";
 	private readonly string ATTACK = "attack";
 	private readonly string DASH = "dash";
+	private readonly string INVENTORY = "menu";
+	private readonly string ESCAPE = "escape";
+	private readonly string INTERACT = "interact";
 
 	public override void _Process(double delta) {
 		GetInput();
@@ -44,6 +55,13 @@ public partial class InputManager : Node, IInputManager
 		_dashing = Input.IsActionPressed(DASH);
 		_dashActuation = Input.IsActionJustPressed(DASH);
 		_dashReleaseActuation = Input.IsActionJustReleased(DASH);
+
+		_inventoryActuation = Input.IsActionJustPressed(INVENTORY);
+		_escapeActuation = Input.IsActionJustPressed(ESCAPE);
+
+		_interacting = Input.IsActionPressed(INTERACT);
+		_interactActuation = Input.IsActionJustPressed(INTERACT);
+		_interactReleaseActuation = Input.IsActionJustReleased(INTERACT);
 	}
 
 	public Vector2 GetMovementDirection() {
@@ -77,5 +95,22 @@ public partial class InputManager : Node, IInputManager
 	}
 	public bool GetDashReleaseActuation() {
 		return _dashReleaseActuation;
+	}
+
+	public bool GetInventoryActuation() {
+		return _inventoryActuation;
+	}
+	public bool GetEscapeActuation() {
+		return _escapeActuation;
+	}
+
+	public bool GetInteracting() {
+		return _interacting;
+	}
+    public bool GetInteractActuation() {
+		return _interactActuation;
+	}
+	public bool GetInteractReleaseActuation() {
+		return _interactReleaseActuation;
 	}
 }

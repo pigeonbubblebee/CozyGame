@@ -1,8 +1,15 @@
-Sprite2D
-Timer
 Node2D
+Sprite2D
 CollisionShape2D
 Area2D
+RichTextLabel
+CanvasLayer
+ColorRect
+Panel
+CenterContainer
+GridContainer
+Control
+Timer
 StaticBody2D
 TileMap
 Node
