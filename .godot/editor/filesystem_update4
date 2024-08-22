@@ -1,7 +1,8 @@
+res://Assets/Scene/testing.tscn
+res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Character/Player/PlayerAttackController.cs
 res://Assets/Scripts/Character/Player/PlayerInteractionController.cs
-res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
 res://Assets/Scripts/Character/Player/PlayerMovementController.cs
 res://Assets/Scripts/Character/Player/PlayerStats.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs
@@ -23,8 +24,6 @@ res://Assets/Scripts/Core/System/Input/InputManager.cs
 res://Assets/Scripts/Core/User Interface/UIManager.cs
 res://Assets/Scripts/Interactables/Interactable.cs
 res://Assets/Scripts/Interactables/TestingItem.cs
-res://Assets/Scene/player.tscn
-res://Data/player_stats.tres
-res://Assets/Scene/testing.tscn
 res://Assets/Scene/main.tscn
+res://Assets/Scene/player.tscn
 res://Assets/Scene/control.tscn

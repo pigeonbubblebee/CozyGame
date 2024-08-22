@@ -9,7 +9,7 @@ public partial class PlayerInteractionController : Area2D
 
 	private Player _player;
 
-	public Interactable ObjectCurrentlyInteracting;
+	public IInteractable ObjectCurrentlyInteracting;
 
 	public void Initialize(Player player) {
 		_player = player;
@@ -21,7 +21,21 @@ public partial class PlayerInteractionController : Area2D
 
 		this.CollisionMask = (uint) PhysicsLayers.InteractableLayer;
 		this.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
+		AreaEntered += _OnItemOverlap;
+		AreaExited += _OnItemExit;
     }
+
+	private void _OnItemOverlap(Node2D hit) {
+		if(hit is IInteractable) {
+			ObjectCurrentlyInteracting = (IInteractable) hit;
+		}
+	}
+
+	private void _OnItemExit(Node2D hit) {
+		if(hit is IInteractable) {
+			ObjectCurrentlyInteracting = null;
+		}
+	}
 
 	public override void _Process(double delta) {
 		if(DesiredInteract) { // TODO: Add Press + Hold Mode

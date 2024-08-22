@@ -24,4 +24,4 @@ SlashTime = 0.1
 SlashDamage = 4
 SlashRange = 1
 SlashCooldown = 0.3
-SlashBuffer = 0.15
+SlashBuffer = 0.3
