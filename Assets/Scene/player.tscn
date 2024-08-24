@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=19 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
 [ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_wfd7o"]
+[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="3_2ohgx"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs" id="4_37u3h"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs" id="5_0xgu4"]
@@ -31,7 +32,9 @@ MovementControllerPath = NodePath("PlayerMovementController")
 AttackControllerPath = NodePath("PlayerAttackController")
 PlayerSpritePath = NodePath("Sprite")
 InteractionControllerPath = NodePath("PlayerInteractionController")
+InventoryManagerPath = NodePath("PlayerInventoryManager")
 PlayerStatsResource = ExtResource("2_wfd7o")
+i = ExtResource("3_2ohgx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0qth3")

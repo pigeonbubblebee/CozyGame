@@ -13,6 +13,8 @@ public partial class Player : CharacterBody2D
 	public PlayerInteractionController InteractionController  { get; private set; }
 	[Export] public NodePath InteractionControllerPath;
 	public Sprite2D PlayerSprite  { get; private set; }
+	[Export] public NodePath InventoryManagerPath;
+	public PlayerInventoryManager InventoryManager  { get; private set; }
 	[Export] public PlayerStats PlayerStatsResource;
 
 	public override void _EnterTree()
@@ -24,6 +26,7 @@ public partial class Player : CharacterBody2D
 		StateMachine = GetNode<PlayerStateMachine>(StateMachinePath);
 		PlayerSprite = GetNode<Sprite2D>(PlayerSpritePath);
 		InteractionController = GetNode<PlayerInteractionController>(InteractionControllerPath);
+		InventoryManager = GetNode<PlayerInventoryManager>(InventoryManagerPath);
 
 		StateMachine.Initialize(this);
 		MovementController.Initialize(this);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=17 format=3 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="6_uyku7"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/control.tscn" id="7_s1tnd"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
+[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="10_ewqkv"]
+[ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="11_o0t2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj5nv"]
 size = Vector2(1664, 138)
@@ -284,13 +286,15 @@ texture = ExtResource("2_4jqy4")
 position = Vector2(0, 2.71875)
 shape = SubResource("RectangleShape2D_igpne")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="TestingItem" type="Area2D" parent="."]
 position = Vector2(-1240, -248)
 script = ExtResource("9_vhrep")
+ItemResource = ExtResource("10_ewqkv")
+p = ExtResource("11_o0t2j")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="TestingItem"]
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("2_4jqy4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestingItem"]
 shape = SubResource("CircleShape2D_ewan5")
