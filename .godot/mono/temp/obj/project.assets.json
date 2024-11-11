@@ -2,13 +2,13 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Godot.SourceGenerators/4.1.1": {
+      "Godot.SourceGenerators/4.1.2": {
         "type": "package",
         "build": {
           "build/Godot.SourceGenerators.props": {}
         }
       },
-      "GodotSharp/4.1.1": {
+      "GodotSharp/4.1.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/GodotSharp.dll": {
@@ -21,10 +21,10 @@
           }
         }
       },
-      "GodotSharpEditor/4.1.1": {
+      "GodotSharpEditor/4.1.2": {
         "type": "package",
         "dependencies": {
-          "GodotSharp": "4.1.1"
+          "GodotSharp": "4.1.2"
         },
         "compile": {
           "lib/net6.0/GodotSharpEditor.dll": {
@@ -75,40 +75,40 @@
     }
   },
   "libraries": {
-    "Godot.SourceGenerators/4.1.1": {
-      "sha512": "Kti3AjqGFT/myqAg87ykwoGAMrSUZkQaLdpZRWqvO0w2VhDtwUgEEKZk5HK94GzlWHOHZx2UW2fO88G7h56VgA==",
+    "Godot.SourceGenerators/4.1.2": {
+      "sha512": "WVZ+0PsBSwASQNGmmnv5OEkClwe3M0E0LfzmnRKYNzU7V+qnaW+QU0COTVjzQLBlhIdS9sX2gHAR/ogZdKnhVA==",
       "type": "package",
-      "path": "godot.sourcegenerators/4.1.1",
+      "path": "godot.sourcegenerators/4.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "analyzers/dotnet/cs/Godot.SourceGenerators.dll",
         "build/Godot.SourceGenerators.props",
-        "godot.sourcegenerators.4.1.1.nupkg.sha512",
+        "godot.sourcegenerators.4.1.2.nupkg.sha512",
         "godot.sourcegenerators.nuspec"
       ]
     },
-    "GodotSharp/4.1.1": {
-      "sha512": "r07Z+O82m5dAqeJMYHDJCGdD0p1gb8vNVi+kIFYGjDNk39Ys3fgsm+x7ZpHEfNSW2oHTn62SCuCE38UAVy17MA==",
+    "GodotSharp/4.1.2": {
+      "sha512": "iuXYVigWjGVLUIhqGDf5f/kba2ILQKZbE3U6eQrc1582yn5U39j2rDwFPlzfamvxiSu340tHzBnQ3IDi/T/Htw==",
       "type": "package",
-      "path": "godotsharp/4.1.1",
+      "path": "godotsharp/4.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "godotsharp.4.1.1.nupkg.sha512",
+        "godotsharp.4.1.2.nupkg.sha512",
         "godotsharp.nuspec",
         "lib/net6.0/GodotSharp.dll",
         "lib/net6.0/GodotSharp.xml"
       ]
     },
-    "GodotSharpEditor/4.1.1": {
-      "sha512": "t29ltWPBHhWDKncK2XFXmHx29jGOqtsR9PFdkjIcRWG5+PdcCJNrCng5cls/H+zGtluGF5L6rNBFbFlBBvTgkA==",
+    "GodotSharpEditor/4.1.2": {
+      "sha512": "L8toPAj+YzsHVtR7JEKC11//oBEVoB91kVY49kjCkVuqTLSsg8NKPaYE+54YRyI2g9lqSES9xX5bQ/6yT9rOWA==",
       "type": "package",
-      "path": "godotsharpeditor/4.1.1",
+      "path": "godotsharpeditor/4.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "godotsharpeditor.4.1.1.nupkg.sha512",
+        "godotsharpeditor.4.1.2.nupkg.sha512",
         "godotsharpeditor.nuspec",
         "lib/net6.0/GodotSharpEditor.dll",
         "lib/net6.0/GodotSharpEditor.xml"
@@ -181,27 +181,27 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Godot.SourceGenerators >= 4.1.1",
-      "GodotSharp >= 4.1.1",
-      "GodotSharpEditor >= 4.1.1",
+      "Godot.SourceGenerators >= 4.1.2",
+      "GodotSharp >= 4.1.2",
+      "GodotSharpEditor >= 4.1.2",
       "Microsoft.Extensions.DependencyInjection >= 8.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MattM\\.nuget\\packages\\": {}
+    "C:\\Users\\trex0\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
+      "projectUniqueName": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
       "projectName": "Cozy Game",
-      "projectPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\Cozy Game.csproj",
-      "packagesPath": "C:\\Users\\MattM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MattM\\OneDrive\\Documents\\GitHub\\CozyGame\\CozyGame\\.godot\\mono\\temp\\obj\\",
+      "projectPath": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+      "packagesPath": "C:\\Users\\trex0\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MattM\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\trex0\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -227,15 +227,15 @@
         "dependencies": {
           "Godot.SourceGenerators": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.1.2, )"
           },
           "GodotSharp": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.1.2, )"
           },
           "GodotSharpEditor": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.1.2, )"
           },
           "Microsoft.Extensions.DependencyInjection": {
             "target": "Package",
@@ -257,26 +257,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.11, 6.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.11, 6.0.11]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.11, 6.0.11]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.415\\RuntimeIdentifierGraph.json"
       }
     }
   }

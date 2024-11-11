@@ -1,12 +1,22 @@
+res://Assets/Scene/bullet.tscn
+res://Assets/Scripts/Character/Player/PlayerStats.cs
+res://Assets/Scripts/Combat/Bullet/Bullet.cs
+res://Assets/Scripts/Character/Player/PlayerSpellController.cs
+res://Assets/Scene/testing.tscn
+res://Assets/Scene/main.tscn
+res://Assets/Scene/player.tscn
+res://Assets/Scene/ui_manager.tscn
+res://Assets/Scene/inventory.tscn
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Character/Player/PlayerAttackController.cs
+res://Assets/Scripts/Character/Player/PlayerHealController.cs
 res://Assets/Scripts/Character/Player/PlayerInteractionController.cs
 res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
 res://Assets/Scripts/Character/Player/PlayerMovementController.cs
-res://Assets/Scripts/Character/Player/PlayerStats.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs
+res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs
@@ -20,13 +30,15 @@ res://Assets/Scripts/Core/Game/GameManager.cs
 res://Assets/Scripts/Core/Scene/SceneManager.cs
 res://Assets/Scripts/Core/Scene/Tilemap.cs
 res://Assets/Scripts/Core/System/Input/InputManager.cs
+res://Assets/Scripts/Core/User Interface/HealthHUD.cs
+res://Assets/Scripts/Core/User Interface/HUD.cs
+res://Assets/Scripts/Core/User Interface/InventorySlot.cs
+res://Assets/Scripts/Core/User Interface/InventoryUI.cs
 res://Assets/Scripts/Core/User Interface/UIManager.cs
 res://Assets/Scripts/Interactables/Interactable.cs
 res://Assets/Scripts/Interactables/TestingItem.cs
 res://Assets/Scripts/Items/Item.cs
-res://Assets/Scene/player.tscn
-res://Assets/Scene/testing.tscn
-res://Data/Items/TestingItem.tres
-res://Assets/Scene/main.tscn
-res://Assets/Scene/control.tscn
-res://Data/new_resource.tres
+res://HealthSystem.cs
+res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs
+res://Assets/Scripts/Core/System/Input/IInputManager.cs
+res://Data/player_stats.tres

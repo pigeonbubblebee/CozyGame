@@ -3,12 +3,12 @@ using System;
 
 public partial class Tilemap : Node
 {
-	[Export] public NodePath GroundCanvasItemPath;
+	[Export] private NodePath _groundCanvasItemPath;
 	private CanvasItem GroundCanvasItem;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GroundCanvasItem = GetNode<CanvasItem>(GroundCanvasItemPath);
+		GroundCanvasItem = GetNode<CanvasItem>(_groundCanvasItemPath);
 		GroundCanvasItem.ZIndex = RenderingLayers.GroundLayer;
 	}
 

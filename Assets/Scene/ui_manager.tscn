@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8lcxi3dix7ax"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
+[ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/HUD.cs" id="2_u5q2o"]
+[ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="3_cd71o"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/HealthHUD.cs" id="4_cp6gb"]
+[ext_resource type="Texture2D" uid="uid://bd123ys2hihk3" path="res://hit.svg" id="5_aaqmb"]
+
+[node name="UIManager" type="Node2D"]
+script = ExtResource("1_fitbl")
+_inventoryPath = NodePath("GUI/Inventory")
+_hudPath = NodePath("GUI/HUD")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_u5q2o")
+_healBarPath = NodePath("HealBar")
+_manaBarPath = NodePath("ManaBar")
+_healthHUDPath = NodePath("HealthBar")
+
+[node name="HealBar" type="TextureProgressBar" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 63.8712
+offset_top = 63.7166
+offset_right = 95.8712
+offset_bottom = 107.717
+scale = Vector2(3, 3)
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_progress = ExtResource("3_cd71o")
+radial_fill_degrees = 0.0
+
+[node name="ManaBar" type="TextureProgressBar" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 143.0
+offset_right = 306.0
+offset_bottom = 155.0
+scale = Vector2(3, 3)
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_progress = ExtResource("3_cd71o")
+radial_fill_degrees = 0.0
+
+[node name="HealthBar" type="GridContainer" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 72.0
+offset_right = 3465.0
+offset_bottom = 200.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/h_separation = 50
+columns = 15
+script = ExtResource("4_cp6gb")
+_healthImageHit = ExtResource("5_aaqmb")
+_healthImageUnhit = ExtResource("3_cd71o")
+
+[node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]

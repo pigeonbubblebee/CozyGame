@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dh64y30leyvhe"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_0nfu8"]
+[ext_resource type="Texture2D" uid="uid://bd123ys2hihk3" path="res://hit.svg" id="1_fn6ql"]
+
+[resource]
+script = ExtResource("1_0nfu8")
+ID = "sword"
+Description = ""
+ItemTier = 15
+SortingID = 6
+Image = ExtResource("1_fn6ql")
+Type = 0

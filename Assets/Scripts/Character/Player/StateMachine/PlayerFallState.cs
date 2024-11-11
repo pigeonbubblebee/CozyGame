@@ -9,21 +9,21 @@ public partial class PlayerFallState : PlayerState
 	}
 
 	public override void Process(double delta)
-    {
+	{
 		if(MovementController.DesiredJump) {
 			MovementController.StartJumpBuffer();
 		}
-    }
+	}
 
-     public override void PhysicsProcess(double delta) {
+	 public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
-        
-        _HandleHorizontalMovement();
+		
+		_HandleHorizontalMovement();
 
 		MovementController.Fall();
 	}
 
-    private void _HandleHorizontalMovement() {
+	private void _HandleHorizontalMovement() {
 		Vector2 inputDir = MovementController.InputVector;
 		
 		if(inputDir != Vector2.Zero) {
@@ -41,6 +41,10 @@ public partial class PlayerFallState : PlayerState
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) 
 			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+			return true;
+		}
+		if(SpellController.DesiredShoot || (!SpellController.GetShootBufferStop() && SpellController.CanShoot)) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.SpellState);
 			return true;
 		}
 		if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {

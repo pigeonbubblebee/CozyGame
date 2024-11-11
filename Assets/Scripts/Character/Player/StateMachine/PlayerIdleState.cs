@@ -13,28 +13,36 @@ public partial class PlayerIdleState : PlayerState
 		// TODO: Start Idle Animation
 	}
 
-    public override void Process(double delta)
-    {
-        CheckStates();
-    }
+	public override void Process(double delta)
+	{
+		CheckStates();
+	}
 
-    public override void PhysicsProcess(double delta) {
+	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
 		MovementController.AddFriction();
 	}
 
-    protected override bool CheckStates()
-    {
+	protected override bool CheckStates()
+	{
+		if(HealController.DesiredHeal && HealController.HealCooldownOff) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
+			return true;
+		}
 		if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+			return true;
+		}
+		if(SpellController.DesiredShoot || (!SpellController.GetShootBufferStop()  && SpellController.CanShoot)) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.SpellState);
 			return true;
 		}
 		if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.AttackState);
 			return true;
 		}
-        if(!MovementController.Grounded) {
+		if(!MovementController.Grounded) {
 			MovementController.StartCoyoteTimer();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.FallState);
 			return true;
@@ -49,5 +57,5 @@ public partial class PlayerIdleState : PlayerState
 		}
 
 		return false;
-    }
+	}
 }

@@ -22,6 +22,14 @@ public partial class InputManager : Node, IInputManager
 	private bool _interacting;
 	private bool _interactActuation;
 	private bool _interactReleaseActuation;
+	
+	private bool _healing;
+	private bool _healActuation;
+	private bool _healReleaseActuation;
+	
+	private bool _shooting;
+	private bool _shootActuation;
+	private bool _shootReleaseActuation;
 
 	// Vars for control bind names on input maps
 	private readonly string MOVE_LEFT = "move_left";
@@ -32,6 +40,8 @@ public partial class InputManager : Node, IInputManager
 	private readonly string INVENTORY = "menu";
 	private readonly string ESCAPE = "escape";
 	private readonly string INTERACT = "interact";
+	private readonly string HEAL = "heal";
+	private readonly string SHOOT = "shoot";
 
 	public override void _Process(double delta) {
 		GetInput();
@@ -62,15 +72,23 @@ public partial class InputManager : Node, IInputManager
 		_interacting = Input.IsActionPressed(INTERACT);
 		_interactActuation = Input.IsActionJustPressed(INTERACT);
 		_interactReleaseActuation = Input.IsActionJustReleased(INTERACT);
+		
+		_healing = Input.IsActionPressed(HEAL);
+		_healActuation = Input.IsActionJustPressed(HEAL);
+		_healReleaseActuation = Input.IsActionJustReleased(HEAL);
+		
+		_shooting = Input.IsActionPressed(SHOOT);
+		_shootActuation = Input.IsActionJustPressed(SHOOT);
+		_shootReleaseActuation = Input.IsActionJustReleased(SHOOT);
 	}
 
 	public Vector2 GetMovementDirection() {
 		return _movementDirection;
 	}
-    public bool GetJumping() {
+	public bool GetJumping() {
 		return _jumping;
 	}
-    public bool GetJumpActuation() {
+	public bool GetJumpActuation() {
 		return _jumpActuation;
 	}
 	public bool GetJumpReleaseActuation() {
@@ -80,7 +98,7 @@ public partial class InputManager : Node, IInputManager
 	public bool GetAttacking() {
 		return _attacking;
 	}
-    public bool GetAttackActuation() {
+	public bool GetAttackActuation() {
 		return _attackActuation;
 	}
 	public bool GetAttackReleaseActuation() {
@@ -90,7 +108,7 @@ public partial class InputManager : Node, IInputManager
 	public bool GetDashing() {
 		return _dashing;
 	}
-    public bool GetDashActuation() {
+	public bool GetDashActuation() {
 		return _dashActuation;
 	}
 	public bool GetDashReleaseActuation() {
@@ -107,10 +125,30 @@ public partial class InputManager : Node, IInputManager
 	public bool GetInteracting() {
 		return _interacting;
 	}
-    public bool GetInteractActuation() {
+	public bool GetInteractActuation() {
 		return _interactActuation;
 	}
 	public bool GetInteractReleaseActuation() {
 		return _interactReleaseActuation;
+	}
+	
+	public bool GetHeal() {
+		return _healing;
+	}
+	public bool GetHealActuation() {
+		return _healActuation;
+	}
+	public bool GetHealReleaseActuation() {
+		return _healReleaseActuation;
+	}
+	
+	public bool GetShoot() {
+		return _shooting;
+	}
+	public bool GetShootActuation() {
+		return _shootActuation;
+	}
+	public bool GetShootReleaseActuation() {
+		return _shootReleaseActuation;
 	}
 }

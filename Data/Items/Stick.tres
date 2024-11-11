@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cy7j7pcjeceba"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_3lddr"]
+[ext_resource type="Texture2D" uid="uid://2fte26d3sb46" path="res://Sprite-0002.png" id="1_122o2"]
+
+[resource]
+script = ExtResource("1_3lddr")
+ID = "stick"
+Description = "stick"
+ItemTier = 3
+SortingID = 1
+Image = ExtResource("1_122o2")
+Type = 0

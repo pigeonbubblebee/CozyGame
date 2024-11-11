@@ -7,43 +7,58 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerMovementController MovementController { get; private set; }
 	public PlayerAttackController AttackController { get; private set; }
 	public PlayerInteractionController InteractionController { get; private set; }
-	public PlayerStats Stats { get; private set; }
+	public PlayerHealController HealController { get; private set; }
+	public PlayerSpellController SpellController { get; private set; }
 	
-	[Export] public NodePath PlayerIdleStatePath;
+	private Player _player;
+	public PlayerStats Stats => _player.CurrentPlayerStats;
+	
+	[Export] private NodePath _playerIdleStatePath;
 	public PlayerIdleState IdleState { get; private set; }
-	[Export] public NodePath PlayerRunStatePath;
+	[Export] private NodePath _playerRunStatePath;
 	public PlayerRunState RunState { get; private set; }
-	[Export] public NodePath PlayerJumpStatePath;
+	[Export] private NodePath _playerJumpStatePath;
 	public PlayerJumpState JumpState { get; private set; }
-	[Export] public NodePath PlayerFallStatePath;
+	[Export] private NodePath _playerFallStatePath;
 	public PlayerFallState FallState { get; private set; }
-	[Export] public NodePath PlayerAttackStatePath;
+	[Export] private NodePath _playerAttackStatePath;
 	public PlayerAttackState AttackState { get; private set; }
-	[Export] public NodePath PlayerDashStatePath;
+	[Export] private NodePath _playerDashStatePath;
 	public PlayerDashState DashState { get; private set; }
+	[Export] private NodePath _playerHealStatePath;
+	public PlayerHealState HealState { get; private set; }
+	[Export] private NodePath _playerSpellStatePath;
+	public PlayerSpellState SpellState { get; private set; }
 	
 	public void Initialize(Player player) {
+		_player = player;
 		MovementController = player.MovementController;
 		AttackController = player.AttackController;
 		InteractionController = player.InteractionController;
-		Stats = player.PlayerStatsResource;
+		HealController = player.HealController;
+		SpellController = player.SpellController;
+		// Stats = player.PlayerStatsResource;
 	}
 	
 	public override void _Ready() {
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 
-		IdleState = GetNode<PlayerIdleState>(PlayerIdleStatePath);
+		IdleState = GetNode<PlayerIdleState>(_playerIdleStatePath);
 		IdleState.Initialize(this);
-		RunState = GetNode<PlayerRunState>(PlayerRunStatePath);
+		RunState = GetNode<PlayerRunState>(_playerRunStatePath);
 		RunState.Initialize(this);
-		JumpState = GetNode<PlayerJumpState>(PlayerJumpStatePath);
+		JumpState = GetNode<PlayerJumpState>(_playerJumpStatePath);
 		JumpState.Initialize(this);
-		FallState = GetNode<PlayerFallState>(PlayerFallStatePath);
+		FallState = GetNode<PlayerFallState>(_playerFallStatePath);
 		FallState.Initialize(this);
-		AttackState = GetNode<PlayerAttackState>(PlayerAttackStatePath);
+		AttackState = GetNode<PlayerAttackState>(_playerAttackStatePath);
 		AttackState.Initialize(this);
-		DashState = GetNode<PlayerDashState>(PlayerDashStatePath);
+		DashState = GetNode<PlayerDashState>(_playerDashStatePath);
 		DashState.Initialize(this);
+		HealState = GetNode<PlayerHealState>(_playerHealStatePath);
+		HealState.Initialize(this);
+		SpellState = GetNode<PlayerSpellState>(_playerSpellStatePath);
+		SpellState.Initialize(this);
 
 		EnterDefaultState();
 	}

@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 public partial class PlayerMovementController : Node
 {
-	// --------- Settings Vars, Move to PlayerData ---------
 	private int _airDashesLeft = 1;
-	[Export] public NodePath DashBufferPath;
+	[Export] private NodePath _dashBufferPath;
 	private Timer _dashBuffer;
 
 	// --------- Jump Timer Variables ---------
-	[Export] public NodePath CoyoteTimePath;
+	[Export] private NodePath _coyoteTimePath;
 	private Timer _coyoteTime;
-	[Export] public NodePath JumpBufferPath;
+	[Export] private NodePath _jumpBufferPath;
 	private Timer _jumpBuffer;
 
 	// --------- Jump Variables ---------
-	// [Export] public float JumpReleaseVelocity = 100f;
-	private int _CurrentJump = 1;
+	private int _currentJump = 0;
 	public bool DesiredJump => _CheckDesiredJump();
 	private bool _Jumping = false;
+	public bool CanJump => _currentJump < _playerStats.MaxJumps;
 	public bool DesiredFall => _CheckDesiredFall();
 	public bool Grounded => _playerBody.IsOnFloor();
 
@@ -34,13 +33,14 @@ public partial class PlayerMovementController : Node
 	public event Action FinishDashEvent;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	private CharacterBody2D _playerBody;
-	private PlayerStats _playerStats;
+	public readonly float GRAVITY = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	private Player _playerBody;
+	private PlayerStats _playerStats => _playerBody.CurrentPlayerStats;
 	
 	private IInputManager _inputManager;
 
 	public int Direction = 1;
+	public bool CanSwitchDirections = true;
 	public bool CanDash { get; private set; }
 
 	public override void _Ready()
@@ -49,9 +49,9 @@ public partial class PlayerMovementController : Node
 
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 
-		_coyoteTime = GetNode<Timer>(CoyoteTimePath);
-		_jumpBuffer = GetNode<Timer>(JumpBufferPath);
-		_dashBuffer = GetNode<Timer>(DashBufferPath);
+		_coyoteTime = GetNode<Timer>(_coyoteTimePath);
+		_jumpBuffer = GetNode<Timer>(_jumpBufferPath);
+		_dashBuffer = GetNode<Timer>(_dashBufferPath);
 
 		_coyoteTime.WaitTime = _playerStats.CoyoteTime;
 		_jumpBuffer.WaitTime = _playerStats.JumpBuffer;
@@ -60,7 +60,7 @@ public partial class PlayerMovementController : Node
 
 	public void Initialize(Player body) {
 		_playerBody = body;
-		_playerStats = body.PlayerStatsResource;
+		// _playerStats = body.PlayerStatsResource;
 	}
 
 	public override void _Process(double delta) {
@@ -78,19 +78,35 @@ public partial class PlayerMovementController : Node
 	}
 
 	private void _DirectionCheck() {
+		if(!CanSwitchDirections) {
+			return;
+		}
+		/*
 		if(Direction == 1 && Velocity.X < 0) {
 			Direction = -1;
 		} else if(Direction == -1 && Velocity.X > 0) {
 			Direction = 1;
 		}
+		*/
+		if(Direction == 1 && InputVector.X < 0) {
+			Direction = -1;
+		} else if(Direction == -1 && InputVector.X > 0) {
+			Direction = 1;
+		}
 	}
 
-    private Vector2 _GetInputVector() {
+	private Vector2 _GetInputVector() {
 		return _inputManager.GetMovementDirection();
 	}
 
 	public void Accelerate(Vector2 direction) {
 		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration);
+		velocity.Y = Velocity.Y;
+		_playerBody.Velocity = velocity;
+	}
+	
+	public void Recoil(float maxSpeed, float magnitude) {
+		Vector2 velocity = _playerBody.Velocity.MoveToward(maxSpeed * new Vector2(Direction == 1 ? -1 : 1, 0), magnitude);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
@@ -125,11 +141,6 @@ public partial class PlayerMovementController : Node
 	
 	private bool _CheckDesiredJump() {
 		if(_inputManager.GetJumpActuation()) {
-			// if(_CurrentJump < MaxJumps) { // Add Coyote & Buffer
-			// 	_CurrentJump ++;
-			// 	_Jumping = true;
-			// }
-
 			return true;
 		}
 
@@ -141,10 +152,17 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void Jump() {
+		if(!CanJump) {
+			GD.Print(_currentJump);
+			return;
+		}
+		
 		Vector2 velocity = _playerBody.Velocity;
 		velocity.Y = -_playerStats.JumpVelocity;
 
 		_playerBody.Velocity = velocity;
+		
+		_currentJump ++;
 	}
 
 	public void JumpFallTransition() {
@@ -158,13 +176,13 @@ public partial class PlayerMovementController : Node
 
 	private void _ResetJump() {
 		if(Grounded) {
-			_CurrentJump = 1;
+			_currentJump = 0;
 		}
 	}
 
 	public void Fall() {
 		Vector2 velocity = _playerBody.Velocity;
-		velocity.Y += gravity;
+		velocity.Y += GRAVITY;
 
 		_playerBody.Velocity = velocity;
 	}

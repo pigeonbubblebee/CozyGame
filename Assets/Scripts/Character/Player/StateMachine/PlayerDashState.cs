@@ -26,14 +26,20 @@ public partial class PlayerDashState : PlayerState
 	}
 
 	public override void Process(double delta)
-    {
+	{
 		if(AttackController.DesiredAttack) {
 			AttackController.StartSlashBuffer();
 		}
 		if(MovementController.DesiredDash) {
 			MovementController.StartDashBuffer();
 		}
-    }
+		if(MovementController.DesiredJump) {
+			MovementController.StartJumpBuffer();
+		}
+		if(SpellController.DesiredShoot) {
+			SpellController.StartShootBuffer();
+		}
+	}
 
 	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
@@ -55,6 +61,6 @@ public partial class PlayerDashState : PlayerState
 	}
 
 	private void _EnterDefaultState() {
-        ParentPlayerStateMachine.EnterDefaultState();
-    }
+		ParentPlayerStateMachine.EnterDefaultState();
+	}
 }

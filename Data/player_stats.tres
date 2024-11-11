@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource("1_ylt6r")
-Speed = 900.0
+Speed = 600.0
 Acceleration = 400.0
-DirectionSwitchSpeed = 600.0
+DirectionSwitchSpeed = 800.0
 Friction = 500.0
-JumpVelocity = 2500.0
-MaxJumps = 2
-JumpingGravity = 125.0
+JumpVelocity = 2120.0
+MaxJumps = 1
+JumpingGravity = 110.0
 CoyoteTime = 0.15
 JumpBuffer = 0.05
 DashSpeed = 3000.0
@@ -24,4 +24,16 @@ SlashTime = 0.1
 SlashDamage = 4
 SlashRange = 1
 SlashCooldown = 0.3
-SlashBuffer = 0.3
+SlashBuffer = 0.2
+MaxHealth = 5
+MaxHeals = 5
+HealTime = 1.25
+HealCooldown = 1.75
+MaxMana = 5
+ShootTime = 0.1
+ShootCooldown = 0.6
+ShotDamage = 8
+ShootBuffer = 0.3
+BulletObjectPool = 5
+ShootMaxRecoil = 1600.0
+ShootRecoil = 1600.0

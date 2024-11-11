@@ -31,7 +31,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	public override void Process(double delta)
-    {
+	{
 		_HandleVerticalChanges();
 
 		if(_subState == JUMPING || _subState == FALLING) {
@@ -46,16 +46,19 @@ public partial class PlayerAttackState : PlayerState
 		if(MovementController.DesiredDash) {
 			MovementController.StartDashBuffer();
 		}
-    }
+		if(SpellController.DesiredShoot) {
+			SpellController.StartShootBuffer();
+		}
+	}
 
-     public override void PhysicsProcess(double delta) {
+	 public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
-        
-        _HandleHorizontalMovement();
+		
+		_HandleHorizontalMovement();
 		_HandleVerticalMovement();
 	}
 
-    private void _HandleHorizontalMovement() {
+	private void _HandleHorizontalMovement() {
 		Vector2 inputDir = MovementController.InputVector;
 		
 		if(inputDir != Vector2.Zero) {
@@ -132,6 +135,6 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	private void _EnterDefaultState() {
-        ParentPlayerStateMachine.EnterDefaultState();
-    }
+		ParentPlayerStateMachine.EnterDefaultState();
+	}
 }

@@ -14,9 +14,9 @@ public partial class PlayerRunState : PlayerState
 	}
 
 	public override void Process(double delta)
-    {
+	{
 		
-    }
+	}
 
 	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
@@ -35,8 +35,16 @@ public partial class PlayerRunState : PlayerState
 	}
 
 	protected override bool CheckStates() {
+		if(HealController.DesiredHeal && HealController.HealCooldownOff) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
+			return true;
+		}
 		if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+			return true;
+		}
+		if(SpellController.DesiredShoot || (!SpellController.GetShootBufferStop() && SpellController.CanShoot)) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.SpellState);
 			return true;
 		}
 		if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {

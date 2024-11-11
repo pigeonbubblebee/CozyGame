@@ -1,9 +1,10 @@
-res://Data
 res://Assets/Scripts/Character/Player
-res://Assets/Scripts/Interactables
 res://Data/Items
 res://Assets/Scripts/Core/User Interface
+res://Assets
 res://Assets/Scene
+res://Data
+res://Assets/Scripts/Interactables
 C:/Users/MattM/OneDrive/Documents/CozyGameBuilds/Testing/2
 res://Assets/Scripts/Character/Player/StateMachine
 res://Assets/Scripts/Core/System/Input

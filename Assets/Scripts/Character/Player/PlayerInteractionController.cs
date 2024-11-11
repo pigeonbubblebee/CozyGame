@@ -10,20 +10,20 @@ public partial class PlayerInteractionController : Area2D
 	private Player _player;
 
 	public IInteractable ObjectCurrentlyInteracting;
-
+	
 	public void Initialize(Player player) {
 		_player = player;
 	}
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 
 		this.CollisionMask = (uint) PhysicsLayers.InteractableLayer;
 		this.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
 		AreaEntered += _OnItemOverlap;
 		AreaExited += _OnItemExit;
-    }
+	}
 
 	private void _OnItemOverlap(Node2D hit) {
 		if(hit is IInteractable) {
@@ -43,7 +43,7 @@ public partial class PlayerInteractionController : Area2D
 		}
 	}
 
-    private bool _CheckDesiredInteract() {
+	private bool _CheckDesiredInteract() {
 		return _inputManager.GetInteractActuation();
 	}
 	

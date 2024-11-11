@@ -1,0 +1,207 @@
+[gd_scene load_steps=15 format=3 uid="uid://c78kctwoddfg6"]
+
+[ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_71fcw"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InventoryUI.cs" id="1_pvkgr"]
+[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="2_1tf1v"]
+[ext_resource type="Resource" uid="uid://cy7j7pcjeceba" path="res://Data/Items/Stick.tres" id="3_31qnq"]
+[ext_resource type="Texture2D" uid="uid://2fte26d3sb46" path="res://Sprite-0002.png" id="3_hy8f1"]
+[ext_resource type="Resource" uid="uid://dh64y30leyvhe" path="res://Data/Items/Sword.tres" id="4_p7336"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_c5hoj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxnpu"]
+bg_color = Color(0.0588235, 0.14902, 0.223529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27ncr"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.74902)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8lnv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ex4kv"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.752941, 0.960784, 0.94902, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwa84"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_pev6t"]
+VScrollBar/icons/decrement = SubResource("ImageTexture_c5hoj")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_c5hoj")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_c5hoj")
+VScrollBar/icons/increment = SubResource("ImageTexture_c5hoj")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_c5hoj")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_c5hoj")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_vxnpu")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_27ncr")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_a8lnv")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ex4kv")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_kwa84")
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pvkgr")
+t = ExtResource("2_1tf1v")
+t2 = ExtResource("3_31qnq")
+t3 = ExtResource("4_p7336")
+_gridContainerPath = NodePath("CenterContainer/Panel/ScrollContainer/GridContainer")
+_ItemDisplayNamePath = NodePath("CenterContainer/Panel/ItemDisplay/ItemName")
+_ItemDisplayDescriptionPath = NodePath("CenterContainer/Panel/ItemDisplay/ScrollContainer/ItemDesc")
+_ItemDisplayImagePath = NodePath("CenterContainer/Panel/ItemDisplay/Image")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+offset_right = 1600.0
+offset_bottom = 900.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(1500, 800)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")
+
+[node name="InvLabel" type="RichTextLabel" parent="CenterContainer/Panel"]
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center] INVENTORY [/center]"
+scroll_active = false
+
+[node name="ItemDisplay" type="Control" parent="CenterContainer/Panel"]
+anchors_preset = 0
+offset_right = 1500.0
+offset_bottom = 800.0
+
+[node name="ItemName" type="RichTextLabel" parent="CenterContainer/Panel/ItemDisplay"]
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1006.0
+offset_top = 102.0
+offset_right = -341.0
+offset_bottom = 140.0
+grow_horizontal = 2
+scale = Vector2(2.5, 2.5)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center] ITEM [/center]"
+scroll_active = false
+
+[node name="Image" type="TextureRect" parent="CenterContainer/Panel/ItemDisplay"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 200.0
+offset_right = 1294.5
+offset_bottom = 392.5
+texture = ExtResource("1_71fcw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Panel/ItemDisplay"]
+layout_mode = 0
+offset_left = 1070.0
+offset_top = 422.0
+offset_right = 1326.0
+offset_bottom = 582.0
+
+[node name="ItemDesc" type="RichTextLabel" parent="CenterContainer/Panel/ItemDisplay/ScrollContainer"]
+visibility_layer = 512
+custom_minimum_size = Vector2(245, 160)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "ITEM DESC Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
+fit_content = true
+scroll_active = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 78.0
+offset_right = 894.0
+offset_bottom = 718.0
+theme = SubResource("Theme_pev6t")
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/Panel/ScrollContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 5
+
+[node name="Panel" type="Panel" parent="CenterContainer/Panel/ScrollContainer/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/Panel/ScrollContainer/GridContainer/Panel"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("3_hy8f1")
+
+[node name="Button" type="Button" parent="CenterContainer/Panel/ScrollContainer/GridContainer/Panel"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

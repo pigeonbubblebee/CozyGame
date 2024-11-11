@@ -5,7 +5,11 @@ using System.Collections.Generic;
 public partial class PlayerInventoryManager : Node
 {
 	private SortedDictionary<Item, int> _playerInventory = new SortedDictionary<Item, int>(new ItemComparer());
-
+	public SortedDictionary<Item, int> CurrentInventory => _playerInventory;
+	
+	public event Action<Item> InventoryAddItemEvent;
+	public event Action<Item> InventoryRemoveItemEvent;
+	
 	public int GetItemCount(Item i) {
 		int value;
 		if(_playerInventory.TryGetValue(i, out value)) {
@@ -23,6 +27,8 @@ public partial class PlayerInventoryManager : Node
 		} else {
 			_playerInventory.Add(i, 1);
 		}
+
+		InventoryAddItemEvent?.Invoke(i);
 	}
 
 	public void RemoveItemFromInventory(Item i) {
@@ -33,5 +39,6 @@ public partial class PlayerInventoryManager : Node
 				_playerInventory.Remove(i);
 			}
 		}
+		InventoryRemoveItemEvent?.Invoke(i);
 	}
 }

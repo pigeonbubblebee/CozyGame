@@ -7,6 +7,8 @@ public abstract partial class PlayerState : State
 	protected PlayerMovementController MovementController => ParentPlayerStateMachine.MovementController;
 	protected PlayerAttackController AttackController => ParentPlayerStateMachine.AttackController;
 	protected PlayerInteractionController InteractionController => ParentPlayerStateMachine.InteractionController;
+	protected PlayerHealController HealController => ParentPlayerStateMachine.HealController;
+	protected PlayerSpellController SpellController => ParentPlayerStateMachine.SpellController;
 	protected PlayerStats Stats => ParentPlayerStateMachine.Stats;
 	
 	// protected Player _player => ParentPlayerStateMachine.Player;
@@ -35,21 +37,21 @@ public abstract partial class PlayerState : State
 		return false;
 	}
 
-    public override void Process(double delta)
-    {
-        base.Process(delta);
+	public override void Process(double delta)
+	{
+		base.Process(delta);
 
 		if(CheckStates()) {
 			return;
 		}
-    }
+	}
 
 	public override void PhysicsProcess(double delta)
-    {
-        base.Process(delta);
+	{
+		base.Process(delta);
 
 		if(CheckStates()) {
 			return;
 		}
-    }
+	}
 }

@@ -36,3 +36,22 @@ C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\CozyGame\.godot\mono\temp\obj\
 C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.pdb
 C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.genruntimeconfig.cache
 C:\Users\MattM\OneDrive\Documents\GitHub\CozyGame\CozyGame\.godot\mono\temp\obj\Debug\ref\Cozy Game.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.deps.json
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.runtimeconfig.json
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Cozy Game.pdb
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.AssemblyReference.cache
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.AssemblyInfoInputs.cache
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.AssemblyInfo.cs
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.CoreCompileInputs.cache
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.csproj.CopyComplete
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\refint\Cozy Game.dll
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.pdb
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.genruntimeconfig.cache
+C:\Users\trex0\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\ref\Cozy Game.dll

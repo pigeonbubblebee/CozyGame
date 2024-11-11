@@ -3,17 +3,16 @@ using System;
 
 public partial class TestingItem : Area2D, IInteractable
 {
-	[Export] public Item ItemResource { get; set; } // TO FIX: ItemResource Always null??
-	[Export] public PlayerStats p { get; set; }
-	public override void _Ready() { // TODO: Move to manager item?
-		GD.Print(ItemResource);
+	[Export] private Item _itemResource { get; set; } // TO FIX: ItemResource Always null??
+
+	public override void _Ready() { // TODO: Move to manager item?d
 		CollisionLayer = (uint) PhysicsLayers.InteractableLayer;
 	}
 	public void OnInteract(Player player) {
 		GD.Print("Interacted!");
-		// GD.Print(ItemResource);
-		// player.InventoryManager.AddItemToInventory(ItemResource);
-		// this.QueueFree();
+		GD.Print(_itemResource);
+		player.InventoryManager.AddItemToInventory(_itemResource);
+		this.QueueFree();
 	}
 
 	public void OnInteractHold(Player player) {}

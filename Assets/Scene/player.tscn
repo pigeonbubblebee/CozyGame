@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=23 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
 [ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_wfd7o"]
-[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="3_2ohgx"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs" id="4_37u3h"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs" id="5_0xgu4"]
@@ -14,41 +13,49 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerAttackController.cs" id="9_kewep"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs" id="10_use1l"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInteractionController.cs" id="12_4sjmy"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs" id="12_lnqox"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs" id="13_41u0j"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs" id="13_f1mh6"]
+[ext_resource type="Script" path="res://HealthSystem.cs" id="15_77p5y"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerHealController.cs" id="16_gssuq"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSpellController.cs" id="17_ixdfb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qth3"]
-size = Vector2(128, 256)
+size = Vector2(112, 204)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82cr8"]
-size = Vector2(266, 154)
+size = Vector2(189.25, 154)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a61ee"]
-size = Vector2(128, 256)
+size = Vector2(118, 202)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_l6ek3")
-StateMachinePath = NodePath("StateMachine")
-MovementControllerPath = NodePath("PlayerMovementController")
-AttackControllerPath = NodePath("PlayerAttackController")
-PlayerSpritePath = NodePath("Sprite")
-InteractionControllerPath = NodePath("PlayerInteractionController")
-InventoryManagerPath = NodePath("PlayerInventoryManager")
+_stateMachinePath = NodePath("StateMachine")
+_movementControllerPath = NodePath("PlayerMovementController")
+_attackControllerPath = NodePath("PlayerAttackController")
+_playerSpritePath = NodePath("Sprite")
+_interactionControllerPath = NodePath("PlayerInteractionController")
+_inventoryManagerPath = NodePath("PlayerInventoryManager")
 PlayerStatsResource = ExtResource("2_wfd7o")
-i = ExtResource("3_2ohgx")
+_healthSystemPath = NodePath("HealthSystem")
+_healControllerPath = NodePath("HealController")
+_spellControllerPath = NodePath("PlayerSpellController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_0qth3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-06, -3.51667e-06)
-scale = Vector2(1, 2)
+position = Vector2(0, 24)
+scale = Vector2(0.8125, 1.59375)
 texture = ExtResource("1_8vckk")
 
 [node name="PlayerMovementController" type="Node2D" parent="."]
 script = ExtResource("8_8py8k")
-DashBufferPath = NodePath("DashBuffer")
-CoyoteTimePath = NodePath("CoyoteTime")
-JumpBufferPath = NodePath("JumpBuffer")
+_dashBufferPath = NodePath("DashBuffer")
+_coyoteTimePath = NodePath("CoyoteTime")
+_jumpBufferPath = NodePath("JumpBuffer")
 
 [node name="CoyoteTime" type="Timer" parent="PlayerMovementController"]
 wait_time = 0.15
@@ -64,12 +71,14 @@ one_shot = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_c3qdv")
-PlayerIdleStatePath = NodePath("Idle")
-PlayerRunStatePath = NodePath("Run")
-PlayerJumpStatePath = NodePath("Jump")
-PlayerFallStatePath = NodePath("Fall")
-PlayerAttackStatePath = NodePath("Attack")
-PlayerDashStatePath = NodePath("Dash")
+_playerIdleStatePath = NodePath("Idle")
+_playerRunStatePath = NodePath("Run")
+_playerJumpStatePath = NodePath("Jump")
+_playerFallStatePath = NodePath("Fall")
+_playerAttackStatePath = NodePath("Attack")
+_playerDashStatePath = NodePath("Dash")
+_playerHealStatePath = NodePath("Heal")
+_playerSpellStatePath = NodePath("Spell")
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_37u3h")
@@ -89,27 +98,33 @@ script = ExtResource("9_h5pyd")
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("10_use1l")
 
+[node name="Heal" type="Node2D" parent="StateMachine"]
+script = ExtResource("12_lnqox")
+
+[node name="Spell" type="Node2D" parent="StateMachine"]
+script = ExtResource("13_41u0j")
+
 [node name="PlayerAttackController" type="Node2D" parent="."]
 script = ExtResource("9_kewep")
-SlashBufferPath = NodePath("AttackBuffer")
-AttackAreaPath = NodePath("SwordHit")
-RightAttackAreaColliderPath = NodePath("SwordHit/Right")
-LeftAttackAreaColliderPath = NodePath("SwordHit/Left")
-RightAttackSpritePath = NodePath("Right2")
-LeftAttackSpritePath = NodePath("Left2")
+_slashBufferPath = NodePath("SlashBuffer")
+_attackAreaPath = NodePath("SwordHit")
+_rightAttackAreaColliderPath = NodePath("SwordHit/Right")
+_leftAttackAreaColliderPath = NodePath("SwordHit/Left")
+_rightAttackSpritePath = NodePath("Right2")
+_leftAttackSpritePath = NodePath("Left2")
 
 [node name="Right2" type="Sprite2D" parent="PlayerAttackController"]
 visible = false
 z_index = 2
-position = Vector2(200, -8)
-scale = Vector2(2.125, 1.25)
+position = Vector2(160, 16)
+scale = Vector2(1.5, 1.25)
 texture = ExtResource("1_8vckk")
 
 [node name="Left2" type="Sprite2D" parent="PlayerAttackController"]
 visible = false
 z_index = 2
-position = Vector2(-201, -8)
-scale = Vector2(2.125, 1.25)
+position = Vector2(-160.25, 16)
+scale = Vector2(1.49609, 1.25)
 texture = ExtResource("1_8vckk")
 
 [node name="SwordHit" type="Area2D" parent="PlayerAttackController"]
@@ -117,16 +132,16 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Right" type="CollisionShape2D" parent="PlayerAttackController/SwordHit"]
-position = Vector2(201, -8)
+position = Vector2(160, 16)
 shape = SubResource("RectangleShape2D_82cr8")
 disabled = true
 
 [node name="Left" type="CollisionShape2D" parent="PlayerAttackController/SwordHit"]
-position = Vector2(-200, -8)
+position = Vector2(-160, 16)
 shape = SubResource("RectangleShape2D_82cr8")
 disabled = true
 
-[node name="AttackBuffer" type="Timer" parent="PlayerAttackController"]
+[node name="SlashBuffer" type="Timer" parent="PlayerAttackController"]
 wait_time = 0.1
 one_shot = true
 
@@ -137,16 +152,41 @@ position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
+drag_left_margin = 0.15
+drag_top_margin = 0.15
+drag_right_margin = 0.15
+drag_bottom_margin = 0.15
 
 [node name="PlayerInteractionController" type="Area2D" parent="."]
 script = ExtResource("12_4sjmy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractionController"]
+position = Vector2(0, 21)
 shape = SubResource("RectangleShape2D_a61ee")
 
 [node name="PlayerInventoryManager" type="Node2D" parent="."]
 script = ExtResource("13_f1mh6")
+
+[node name="HealthSystem" type="Node2D" parent="."]
+script = ExtResource("15_77p5y")
+MaxHealthPoints = 5
+CurrentHealthPoints = 5
+
+[node name="HealController" type="Node2D" parent="."]
+script = ExtResource("16_gssuq")
+CurrentHeals = 5
+_healTimerPath = NodePath("HealTimer")
+
+[node name="HealTimer" type="Timer" parent="HealController"]
+one_shot = true
+
+[node name="PlayerSpellController" type="Node2D" parent="."]
+script = ExtResource("17_ixdfb")
+_objectPoolPath = NodePath("ObjectPool")
+_shootBufferPath = NodePath("ShootBuffer")
+
+[node name="ObjectPool" type="Node" parent="PlayerSpellController"]
+
+[node name="ShootBuffer" type="Timer" parent="PlayerSpellController"]
+wait_time = 0.1
+one_shot = true

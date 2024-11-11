@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 {
-	[Export] public NodePath SlashBufferPath;
+	[Export] private NodePath _slashBufferPath;
 	private Timer _slashBuffer;
 
 	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash;
@@ -14,16 +14,16 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	public event Action<IHittable, int, int> HitEvent; // Hittable, Damage, Direction
 	public event Action FinishSlashEvent;
 
-	[Export] public NodePath AttackAreaPath;
+	[Export] private NodePath _attackAreaPath;
 	private Area2D _attackArea;
-	[Export] public NodePath RightAttackAreaColliderPath;
+	[Export] private NodePath _rightAttackAreaColliderPath;
 	private CollisionShape2D _rightAttackAreaCollider;
-	[Export] public NodePath LeftAttackAreaColliderPath;
+	[Export] private NodePath _leftAttackAreaColliderPath;
 	private CollisionShape2D _leftAttackAreaCollider;
 
-	[Export] public NodePath RightAttackSpritePath;
+	[Export] private NodePath _rightAttackSpritePath;
 	private Sprite2D _rightAttackSprite;
-	[Export] public NodePath LeftAttackSpritePath;
+	[Export] private NodePath _leftAttackSpritePath;
 	private Sprite2D _leftAttackSprite;
 
 	private CollisionShape2D _currentAttackAreaCollider;
@@ -34,7 +34,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	public bool CanSlash { get; private set; }
 
 	private Player _player;
-	private PlayerStats _playerStats;
+	private PlayerStats _playerStats => _player.CurrentPlayerStats;
 
 	private PlayerMovementController _movementController;
 
@@ -43,14 +43,14 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		CanSlash = true;
 
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
-		_attackArea = GetNode<Area2D>(AttackAreaPath);
-		_rightAttackAreaCollider = GetNode<CollisionShape2D>(RightAttackAreaColliderPath);
-		_leftAttackAreaCollider = GetNode<CollisionShape2D>(LeftAttackAreaColliderPath);
+		_attackArea = GetNode<Area2D>(_attackAreaPath);
+		_rightAttackAreaCollider = GetNode<CollisionShape2D>(_rightAttackAreaColliderPath);
+		_leftAttackAreaCollider = GetNode<CollisionShape2D>(_leftAttackAreaColliderPath);
 
-		_rightAttackSprite = GetNode<Sprite2D>(RightAttackSpritePath);
-		_leftAttackSprite = GetNode<Sprite2D>(LeftAttackSpritePath);
+		_rightAttackSprite = GetNode<Sprite2D>(_rightAttackSpritePath);
+		_leftAttackSprite = GetNode<Sprite2D>(_leftAttackSpritePath);
 
-		_slashBuffer = GetNode<Timer>(SlashBufferPath);
+		_slashBuffer = GetNode<Timer>(_slashBufferPath);
 		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
 
 		_attackArea.AreaEntered += _OnSlashHit;
@@ -64,7 +64,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public void Initialize(Player player) {
 		_player = player;
-		_playerStats = player.PlayerStatsResource;
+		// _playerStats = player.PlayerStatsResource;
 		_movementController = _player.MovementController;
 	}
 
