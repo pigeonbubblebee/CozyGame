@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public partial class PlayerSpellController : Node2D
 {	
-	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot;
+	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot && CurrentMana >= _playerStats.ManaUsage;
+	
 	private int _maxMana => _playerStats.MaxMana;
 	[Export] public int CurrentMana { get; private set; }
 
 	public event Action<int> ManaUseEvent;
 	public event Action<int> AddManaEvent;
+	
+	public event Action<IHittable, int, int> HitEvent; // Hittable, Damage, Direction
 	
 	public event Action FinishShootEvent;
 	
@@ -50,6 +53,8 @@ public partial class PlayerSpellController : Node2D
 		_shootBuffer = GetNode<Timer>(_shootBufferPath);
 		_shootBuffer.WaitTime = _playerStats.ShootBuffer;
 		
+		HitEvent += _OnHit;
+		
 		for(int i = 0; i < _playerStats.BulletObjectPool; i++) {
 			InstantiateBullet();
 		}
@@ -72,17 +77,10 @@ public partial class PlayerSpellController : Node2D
 		CurrentMana = Mathf.Min(CurrentMana, _maxMana);
 		AddManaEvent?.Invoke(amt);
 	}
-
-	public void UseMana(int amt) { // Temp until spells implemented
-		if(CurrentMana - amt < 0) {
-			return;
-		}
-		
-		CurrentMana -= amt;
-		ManaUseEvent?.Invoke(amt);
-	}
 	
 	public void UseSpell() {
+		CurrentMana -= _playerStats.ManaUsage;
+		ManaUseEvent?.Invoke(_playerStats.ManaUsage);
 		// CanSwitchAttackDirection = false;
 		// ShootEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);
 		// GD.Print("PEW");
@@ -127,6 +125,10 @@ public partial class PlayerSpellController : Node2D
 		ObjectPool.AddChild(bullet);
 		bullet.Position = this.GlobalPosition;
 		bullets.Add(bullet);
+		
+		bullet.InUseAreaEntered += _OnBulletHit;
+		bullet.CollisionMask = (uint) PhysicsLayers.HittableLayer;
+		bullet.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
 	}
 	
 	public void StartShootBuffer() {
@@ -135,5 +137,22 @@ public partial class PlayerSpellController : Node2D
 
 	public bool GetShootBufferStop() {
 		return _shootBuffer.IsStopped();
+	}
+	
+	private void _OnBulletHit(Node2D hit, Bullet b) {
+		if(hit is IHittable || hit.IsInGroup("Ground")) {
+			b.ReturnToPool();
+		}
+		
+		if(!(hit is IHittable)) {
+			return;
+		}
+		
+		HitEvent?.Invoke((IHittable) hit, _playerStats.ShootDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1);
+	}
+
+	private void _OnHit(IHittable hittable, int damage, int direction) {
+		hittable.OnHit(_player, damage, direction); // Maybe flip direction, not sure yet
+		// TODO: Slash Particle, Screen Shake
 	}
 }

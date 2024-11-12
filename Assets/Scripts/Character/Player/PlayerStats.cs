@@ -36,9 +36,10 @@ public partial class PlayerStats : Resource
 	[Export] public float HealCooldown { get; private set; }
 	[ExportCategory("Shooting")]
 	[Export] public int MaxMana { get; private set; }
+	[Export] public int ManaUsage { get; private set; }
 	[Export] public float ShootTime { get; private set; }
 	[Export] public float ShootCooldown { get; private set; }
-	[Export] public int ShotDamage { get; private set; }
+	[Export] public int ShootDamage { get; private set; }
 	[Export] public float ShootBuffer { get; private set; }
 	[Export] public int BulletObjectPool { get; private set; }
 	[Export] public float ShootMaxRecoil { get; private set; }

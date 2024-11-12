@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Tilemap : Node
+public partial class Tilemap : Godot.TileMap, IHittable
 {
 	[Export] private NodePath _groundCanvasItemPath;
 	private CanvasItem GroundCanvasItem;
@@ -15,5 +15,14 @@ public partial class Tilemap : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+	}
+	
+	public void OnHit(Player player, int damage, int direction) {
+		GD.Print("DONG!");
+	}
+
+	public Vector2 GetSlashEffectPosition() {
+		return this.GlobalPosition; // tODO: Add player pos to input
 	}
 }

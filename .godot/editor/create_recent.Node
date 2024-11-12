@@ -1,8 +1,11 @@
+Sprite2D
+CollisionShape2D
+RigidBody2D
+Timer
+Area2D
 Node
 Node2D
 RemoteTransform2D
-Sprite2D
-Timer
 Button
 ScrollContainer
 TextureRect
@@ -11,8 +14,6 @@ Panel
 CanvasLayer
 GridContainer
 TextureProgressBar
-CollisionShape2D
-Area2D
 RichTextLabel
 ColorRect
 CenterContainer

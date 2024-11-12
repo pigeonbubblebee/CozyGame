@@ -220,7 +220,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_uax27"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/0 = SubResource("TileSetAtlasSource_tujtu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
@@ -248,7 +248,7 @@ position = Vector2(7.99993, 56)
 scale = Vector2(13, 1)
 texture = ExtResource("2_4jqy4")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["Ground"]]
 z_index = -1
 position = Vector2(0, -112)
 scale = Vector2(2, 2)

@@ -1,11 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctuqbvm6mv8uh"]
+[gd_scene load_steps=4 format=3 uid="uid://ctuqbvm6mv8uh"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_4uls3"]
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/Bullet/Bullet.cs" id="1_eoywk"]
 
-[node name="Bullet" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ifv"]
+size = Vector2(128, 128)
+
+[node name="Bullet" type="Area2D"]
 script = ExtResource("1_eoywk")
+Lifetime = 2.0
 SpritePath = NodePath("Sprite2D")
+LifetimePath = NodePath("Lifetime")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_4uls3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k6ifv")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_AreaEntered"]
