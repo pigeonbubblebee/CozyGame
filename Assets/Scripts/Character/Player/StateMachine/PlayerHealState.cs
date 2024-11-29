@@ -18,7 +18,7 @@ public partial class PlayerHealState : PlayerState
 
 	public override void Process(double delta)
 	{
-		MovementController.AddFriction();
+		MovementController.AddFriction(delta);
 		// GD.Print("HEAL");
 	}
 

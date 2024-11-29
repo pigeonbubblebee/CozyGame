@@ -5,5 +5,5 @@ public interface IHittable
 {
 	void OnHit(Player player, int damage, int direction);
 
-	Vector2 GetSlashEffectPosition();
+	Vector2 GetSlashEffectPosition(Vector2 playerPosition);
 }

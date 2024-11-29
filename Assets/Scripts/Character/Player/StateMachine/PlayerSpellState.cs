@@ -15,7 +15,7 @@ public partial class PlayerSpellState : PlayerState
 		SpellController.StartShootCooldown();
 		// GetTree().CreateTimer(Stats.ShootTime).Timeout += _EnterDefaultState;
 		
-		MovementController.Recoil(Stats.ShootMaxRecoil, Stats.ShootRecoil); // Link to Pstats
+		MovementController.Recoil(Stats.ShootMaxRecoil); // Link to Pstats
 		// TODO: Reset Colliders
 		
 		MovementController.CanSwitchDirections = false;
@@ -46,7 +46,7 @@ public partial class PlayerSpellState : PlayerState
 	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
-		MovementController.AddFriction(); // TODO: Add Recoil
+		MovementController.AddFriction(delta); // TODO: Add Recoil
 		
 	}
 

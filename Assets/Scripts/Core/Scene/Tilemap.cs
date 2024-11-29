@@ -22,7 +22,7 @@ public partial class Tilemap : Godot.TileMap, IHittable
 		GD.Print("DONG!");
 	}
 
-	public Vector2 GetSlashEffectPosition() {
+	public Vector2 GetSlashEffectPosition(Vector2 playerPos) {
 		return this.GlobalPosition; // tODO: Add player pos to input
 	}
 }

@@ -54,31 +54,31 @@ public partial class PlayerAttackState : PlayerState
 	 public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
-		_HandleHorizontalMovement();
-		_HandleVerticalMovement();
+		_HandleHorizontalMovement(delta);
+		_HandleVerticalMovement(delta);
 	}
 
-	private void _HandleHorizontalMovement() {
+	private void _HandleHorizontalMovement(double delta) {
 		Vector2 inputDir = MovementController.InputVector;
 		
 		if(inputDir != Vector2.Zero) {
 			if((inputDir.X > 0 && MovementController.Velocity.X < 0) || (inputDir.X < 0 && MovementController.Velocity.X > 0)) {
-				MovementController.SwitchDirection(inputDir);
+				MovementController.SwitchDirection(inputDir, delta);
 			} else {
-				MovementController.Accelerate(inputDir);
+				MovementController.Accelerate(inputDir, delta);
 			}
 		} else {
-			MovementController.AddFriction();
+			MovementController.AddFriction(delta);
 		}
 	}
 
-	private void _HandleVerticalMovement() {
+	private void _HandleVerticalMovement(double delta) {
 		if(_subState == JUMPING) {
-			MovementController.JumpFall();
+			MovementController.JumpFall(delta);
 		}
 
 		if(_subState == FALLING) {
-			MovementController.Fall();
+			MovementController.Fall(delta);
 		}
 	}
 

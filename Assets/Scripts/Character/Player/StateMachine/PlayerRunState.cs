@@ -25,9 +25,9 @@ public partial class PlayerRunState : PlayerState
 		
 		if(inputDir != Vector2.Zero) {
 			if((inputDir.X > 0 && MovementController.Velocity.X < 0) || (inputDir.X < 0 && MovementController.Velocity.X > 0)) {
-				MovementController.SwitchDirection(inputDir);
+				MovementController.SwitchDirection(inputDir, delta);
 			} else {
-				MovementController.Accelerate(inputDir);
+				MovementController.Accelerate(inputDir, delta);
 			}
 		} else {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.IdleState);

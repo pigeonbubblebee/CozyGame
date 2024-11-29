@@ -7,7 +7,7 @@ public partial class TestingDummy : Area2D, IHittable
 		GD.Print("YEOWCH!");
 	}
 
-	public Vector2 GetSlashEffectPosition() {
+	public Vector2 GetSlashEffectPosition(Vector2 playerPosition) {
 		return this.GlobalPosition;
 	}
 }

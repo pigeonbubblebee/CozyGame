@@ -1,10 +1,12 @@
-Sprite2D
+Node2D
+RayCast2D
+Node
 CollisionShape2D
+CharacterBody2D
+Sprite2D
 RigidBody2D
 Timer
 Area2D
-Node
-Node2D
 RemoteTransform2D
 Button
 ScrollContainer
@@ -19,5 +21,4 @@ ColorRect
 CenterContainer
 StaticBody2D
 TileMap
-CharacterBody2D
 Camera2D

@@ -16,9 +16,9 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs" id="12_lnqox"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs" id="13_41u0j"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs" id="13_f1mh6"]
-[ext_resource type="Script" path="res://HealthSystem.cs" id="15_77p5y"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerHealController.cs" id="16_gssuq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSpellController.cs" id="17_ixdfb"]
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="17_qt607"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qth3"]
 size = Vector2(112, 204)
@@ -168,7 +168,7 @@ shape = SubResource("RectangleShape2D_a61ee")
 script = ExtResource("13_f1mh6")
 
 [node name="HealthSystem" type="Node2D" parent="."]
-script = ExtResource("15_77p5y")
+script = ExtResource("17_qt607")
 MaxHealthPoints = 5
 CurrentHealthPoints = 5
 

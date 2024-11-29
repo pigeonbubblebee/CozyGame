@@ -21,7 +21,7 @@ public partial class PlayerIdleState : PlayerState
 	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
-		MovementController.AddFriction();
+		MovementController.AddFriction(delta);
 	}
 
 	protected override bool CheckStates()

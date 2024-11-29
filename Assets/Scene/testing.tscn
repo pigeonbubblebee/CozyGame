@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=15 format=3 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="2_4jqy4"]
 [ext_resource type="Texture2D" uid="uid://bijqe5ddtj73b" path="res://Assets/Art/Tileset/neoncitytileset.png" id="4_eovxe"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/Tilemap.cs" id="5_x4ylc"]
-[ext_resource type="Script" path="res://Assets/Scripts/Combat/TestingDummy.cs" id="6_177cj"]
+[ext_resource type="PackedScene" uid="uid://77s2x2dymf6j" path="res://Assets/Scene/patrolling_enemy.tscn" id="6_hnbkm"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/TestingDummy.cs" id="7_xplhy"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="10_ewqkv"]
 
@@ -260,11 +261,14 @@ layer_0/tile_data = PackedInt32Array(524282, 65536, 0, 524283, 65536, 0, 524284,
 script = ExtResource("5_x4ylc")
 _groundCanvasItemPath = NodePath(".")
 
+[node name="PatrollingEnemy" parent="." instance=ExtResource("6_hnbkm")]
+position = Vector2(-376, -96)
+
 [node name="TestingDummy" type="Area2D" parent="."]
 position = Vector2(464, 256)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("6_177cj")
+script = ExtResource("7_xplhy")
 
 [node name="Sprite2D" type="Sprite2D" parent="TestingDummy"]
 scale = Vector2(0.65625, 1.625)

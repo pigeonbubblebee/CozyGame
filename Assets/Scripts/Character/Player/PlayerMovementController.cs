@@ -42,6 +42,8 @@ public partial class PlayerMovementController : Node
 	public int Direction = 1;
 	public bool CanSwitchDirections = true;
 	public bool CanDash { get; private set; }
+	
+	private double _currentPhysicsDelta;
 
 	public override void _Ready()
 	{
@@ -99,14 +101,14 @@ public partial class PlayerMovementController : Node
 		return _inputManager.GetMovementDirection();
 	}
 
-	public void Accelerate(Vector2 direction) {
-		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration);
+	public void Accelerate(Vector2 direction, double delta) {
+		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration * (float)delta * 60f);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
 	
-	public void Recoil(float maxSpeed, float magnitude) {
-		Vector2 velocity = _playerBody.Velocity.MoveToward(maxSpeed * new Vector2(Direction == 1 ? -1 : 1, 0), magnitude);
+	public void Recoil(float maxSpeed) {
+		Vector2 velocity = maxSpeed * new Vector2(Direction == 1 ? -1 : 1, 0);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
@@ -117,22 +119,22 @@ public partial class PlayerMovementController : Node
 		_playerBody.Velocity = new Vector2(_playerStats.DashSpeed * Direction, 0f);
 	}
 
-	public void SwitchDirection(Vector2 direction) {
-		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.DirectionSwitchSpeed);
+	public void SwitchDirection(Vector2 direction, double delta) {
+		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.DirectionSwitchSpeed  * (float)delta * 60f);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
 
-	public void AddFriction() {
+	public void AddFriction(double delta) {
 		Vector2 zero = Vector2.Zero;
 		zero.Y = Velocity.Y;
-		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.Friction);
+		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.Friction  * (float)delta * 60f);
 	}
 
-	public void AddDashFriction() {
+	public void AddDashFriction(double delta) {
 		Vector2 zero = Vector2.Zero;
 		zero.Y = Velocity.Y;
-		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.DashFriction);
+		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.DashFriction  * (float)delta * 60f);
 	}
 
 	private void _PlayerMovement() {
@@ -180,16 +182,16 @@ public partial class PlayerMovementController : Node
 		}
 	}
 
-	public void Fall() {
+	public void Fall(double delta) {
 		Vector2 velocity = _playerBody.Velocity;
-		velocity.Y += GRAVITY;
+		velocity.Y += GRAVITY * (float) delta * 60f;
 
 		_playerBody.Velocity = velocity;
 	}
 
-	public void JumpFall() {
+	public void JumpFall(double delta) {
 		Vector2 velocity = _playerBody.Velocity;
-		velocity.Y += _playerStats.JumpingGravity;
+		velocity.Y += _playerStats.JumpingGravity * (float) delta * 60f;
 
 		_playerBody.Velocity = velocity;
 	}
