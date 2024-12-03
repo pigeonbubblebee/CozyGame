@@ -23,6 +23,8 @@ public partial class Player : CharacterBody2D
 	public PlayerHealController HealController  { get; private set; }
 	[Export] private NodePath _spellControllerPath;
 	public PlayerSpellController SpellController  { get; private set; }
+	[Export] private NodePath _animationControllerPath;
+	public PlayerAnimationController AnimationController  { get; private set; }
 
 	public override void _EnterTree()
 	{
@@ -37,6 +39,7 @@ public partial class Player : CharacterBody2D
 		PlayerHealth = GetNode<HealthSystem>(_healthSystemPath);
 		HealController = GetNode<PlayerHealController>(_healControllerPath);
 		SpellController = GetNode<PlayerSpellController>(_spellControllerPath);
+		AnimationController = GetNode<PlayerAnimationController>(_animationControllerPath);
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
 		PlayerHealth.ResetHealth();
@@ -48,6 +51,7 @@ public partial class Player : CharacterBody2D
 		InteractionController.Initialize(this);
 		HealController.Initialize(this);
 		SpellController.Initialize(this);
+		AnimationController.Initialize(this);
 		
 		SpellController.ResetMana();
 		HealController.ResetHeals();

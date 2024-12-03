@@ -18,7 +18,7 @@ public partial class Tilemap : Godot.TileMap, IHittable
 		
 	}
 	
-	public void OnHit(Player player, int damage, int direction) {
+	public void OnHit(Player player, int damage, int direction, int postureDamage) {
 		GD.Print("DONG!");
 	}
 

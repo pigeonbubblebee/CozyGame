@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PatrolStateMachine : StateMachine
+public partial class PatrolStateMachine : EnemyStateMachine
 {
 	// private IInputManager _inputManager;
 	
@@ -10,20 +10,24 @@ public partial class PatrolStateMachine : StateMachine
 	[Export] private NodePath _idleStatePath;
 	public PatrolIdleState IdleState { get; private set; }
 	
-	public EnemyPatrolAI PatrolAI { get; private set; }
+	public EnemyPatrolAI PatrolAI => (EnemyPatrolAI) EnemyAI;
+
 	/*
 	public int NextPatrolPoint() {
 		return PatrolAI.NextPatrolPoint();
 	}
 	*/
 	
-	public void Initialize(EnemyPatrolAI e) {
-		PatrolAI = e;
+	public override void Initialize(Enemy e) {
+		base.Initialize(e);
+		// PatrolAI = (EnemyPatrolAI) e;
+		// Sprite = PatrolAI.Sprite;
 	}
 	
 	public override void _Ready() {
 		// _inputManager = GetNode<IInputManager>("/root/InputManager");
-
+		base._Ready();
+		
 		PatrolState = GetNode<PatrolState>(_patrolStatePath);
 		PatrolState.Initialize(this);
 		IdleState = GetNode<PatrolIdleState>(_idleStatePath);
@@ -32,12 +36,8 @@ public partial class PatrolStateMachine : StateMachine
 		EnterDefaultState();
 	}
 	
-	public void PlayStateAnimation() {
-		
-	}
-	
-	public bool EnterDefaultState() {
-		ChangeState(PatrolState);
+	public override bool EnterDefaultState() {
+		ChangeState(IdleState);
 
 		return true;
 	}

@@ -14,9 +14,17 @@ public partial class PlayerAttackState : PlayerState
 
 		AttackController.FinishSlashEvent += _EnterDefaultState;
 	}
+	
+	public override void PlayStateAnimation() {
+		AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
+		// TODO: Start Idle Animation
+	}
 
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
+		
+		CanFlip = false;
+		
 		// TODO: Reset Colliders
 		AttackController.Slash();
 		AttackController.StartSlashCooldown();

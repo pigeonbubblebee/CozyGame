@@ -11,7 +11,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	private IInputManager _inputManager;
 
 	public event Action<int, float, float> SlashEvent; // Damage, Speed, Range
-	public event Action<IHittable, int, int> HitEvent; // Hittable, Damage, Direction
+	public event Action<IHittable, int, int, int> HitEvent; // Hittable, Damage, Direction
 	public event Action FinishSlashEvent;
 
 	[Export] private NodePath _attackAreaPath;
@@ -95,10 +95,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	private void _FinishSlash() {
 		_canHit = false;
-		_currentAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-
-		FinishSlashEvent?.Invoke();
+		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		CanSwitchAttackDirection = true;
+		FinishSlashEvent?.Invoke();
 	}
 
 	public void StartSlashCooldown() {
@@ -115,18 +115,20 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			return;
 		}
 
-		HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1);
+		HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
 	}
 
-	private void _OnHit(IHittable hittable, int damage, int direction) {
-		hittable.OnHit(_player, damage, direction); // Maybe flip direction, not sure yet
+	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
+		hittable.OnHit(_player, damage, direction, postureDamage); // Maybe flip direction, not sure yet
 		// TODO: Slash Particle, Screen Shake
 	}
 
 	private void _UpdateAttackCollider() {
-		if(!CanSwitchAttackDirection) {
-			return;
-		}
+		// if(!CanSwitchAttackDirection) {
+		//	return;
+		// }
+		
+		// GD.Print(_movementController.Direction);
 
 		_currentAttackSprite = _movementController.Direction == 1 ? _rightAttackSprite : _leftAttackSprite;
 
@@ -146,6 +148,9 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	private void _DisableSlashSprite() {
-		_currentAttackSprite.Visible = false;
+		// _currentAttackSprite.Visible = false;
+		
+		_rightAttackSprite.Visible = false;
+		_leftAttackSprite.Visible = false;
 	}
 }

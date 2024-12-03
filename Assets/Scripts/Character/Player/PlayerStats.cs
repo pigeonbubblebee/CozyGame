@@ -26,6 +26,7 @@ public partial class PlayerStats : Resource
 	[ExportCategory("Slashing")]
 	[Export] public float SlashTime { get; private set; }
 	[Export] public int SlashDamage { get; private set; }
+	[Export] public int SlashPostureDamage { get; private set; }
 	[Export] public int SlashRange { get; private set; }
 	[Export] public float SlashCooldown { get; private set; }
 	[Export] public float SlashBuffer { get; private set; }
@@ -40,6 +41,7 @@ public partial class PlayerStats : Resource
 	[Export] public float ShootTime { get; private set; }
 	[Export] public float ShootCooldown { get; private set; }
 	[Export] public int ShootDamage { get; private set; }
+	[Export] public int ShootPostureDamage { get; private set; }
 	[Export] public float ShootBuffer { get; private set; }
 	[Export] public int BulletObjectPool { get; private set; }
 	[Export] public float ShootMaxRecoil { get; private set; }

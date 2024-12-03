@@ -9,6 +9,7 @@ public abstract partial class PlayerState : State
 	protected PlayerInteractionController InteractionController => ParentPlayerStateMachine.InteractionController;
 	protected PlayerHealController HealController => ParentPlayerStateMachine.HealController;
 	protected PlayerSpellController SpellController => ParentPlayerStateMachine.SpellController;
+	protected PlayerAnimationController AnimationController => ParentPlayerStateMachine.AnimationController;
 	protected PlayerStats Stats => ParentPlayerStateMachine.Stats;
 	
 	// protected Player _player => ParentPlayerStateMachine.Player;

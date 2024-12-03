@@ -12,7 +12,7 @@ public partial class PlayerSpellController : Node2D
 	public event Action<int> ManaUseEvent;
 	public event Action<int> AddManaEvent;
 	
-	public event Action<IHittable, int, int> HitEvent; // Hittable, Damage, Direction
+	public event Action<IHittable, int, int, int> HitEvent; // Hittable, Damage, Direction, Posture
 	
 	public event Action FinishShootEvent;
 	
@@ -148,11 +148,11 @@ public partial class PlayerSpellController : Node2D
 			return;
 		}
 		
-		HitEvent?.Invoke((IHittable) hit, _playerStats.ShootDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1);
+		HitEvent?.Invoke((IHittable) hit, _playerStats.ShootDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.ShootPostureDamage);
 	}
 
-	private void _OnHit(IHittable hittable, int damage, int direction) {
-		hittable.OnHit(_player, damage, direction); // Maybe flip direction, not sure yet
+	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
+		hittable.OnHit(_player, damage, direction, postureDamage); // Maybe flip direction, not sure yet
 		// TODO: Slash Particle, Screen Shake
 	}
 }

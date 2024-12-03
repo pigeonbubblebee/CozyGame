@@ -3,11 +3,13 @@ using System;
 
 public partial class EnemyPatrolAI : Enemy
 {
-	[Export] public NodePath StateMachinePath;
-	private PatrolStateMachine _stateMachine;
 	
-	[Export] public NodePath RayCastLedgePath;
+	
+	[Export] public NodePath RayCastLedgePath { get; private set; }
 	private RayCast2D _rayCastLedge;
+	
+	[Export] public NodePath RayCastWallPath { get; private set; }
+	private RayCast2D _rayCastWall;
 	
 	[Export] public float Speed;
 	[Export] public float WaitTimeBetweenFlips;
@@ -15,11 +17,6 @@ public partial class EnemyPatrolAI : Enemy
 	
 	public bool CanPatrol = true;
 	[Export] public bool Idle = false;
-	
-	public override void _EnterTree() {
-		_stateMachine = GetNode<PatrolStateMachine>(StateMachinePath);
-		_stateMachine.Initialize(this);
-	}
 	
 	public override void _Ready() {
 		base._Ready();
@@ -30,6 +27,7 @@ public partial class EnemyPatrolAI : Enemy
 		}
 		
 		_rayCastLedge = GetNode<RayCast2D>(RayCastLedgePath);
+		_rayCastWall = GetNode<RayCast2D>(RayCastWallPath);
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -39,18 +37,31 @@ public partial class EnemyPatrolAI : Enemy
 		MoveAndSlide();
 	}
 	
-	public void CheckLedge() {
-		if(!_rayCastLedge.IsColliding() && IsOnFloor()) {
-			Flip();
-			
+	public bool CheckLedge(bool flip) {
+		bool wallFront = false;
+		
+		if(_rayCastWall.IsColliding()) {
+			if(_rayCastWall.GetCollider() is Node) {
+				wallFront = ((Node)_rayCastWall.GetCollider()).IsInGroup("Ground");
+			}
+		}
+		
+		if((!_rayCastLedge.IsColliding() && IsOnFloor()) || wallFront) {
+			if(!flip) {
+				return true;
+			}
 			if(WaitTimeBetweenFlips > 0f) {
 				CanPatrol = false;
 				GetTree().CreateTimer(WaitTimeBetweenFlips).Timeout += _FinishWait;
 			}
+			return true;
 		}
+		
+		return false;
 	}
 	
 	private void _FinishWait() {
+		Flip();
 		CanPatrol = true; 
 	}
 	
@@ -62,9 +73,14 @@ public partial class EnemyPatrolAI : Enemy
 		this.Velocity = new Vector2(0f, Velocity.Y);
 	}
 	
-	protected void Flip() {
+	public void Flip() {
+		GD.Print("Flip!");
 		moveDirection = 0 - moveDirection;	
-		GD.Print(moveDirection);
+		// GD.Print(moveDirection);
 		Scale = new Vector2(Mathf.Abs(Scale.X) * -1, Scale.Y);
+	}
+	
+	public int GetMoveDirection() {
+		return moveDirection;
 	}
 }

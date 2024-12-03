@@ -14,12 +14,17 @@ public partial class PatrolState : State
 		base.Initialize(stateMachine);
 		this._patrolAI = ((PatrolStateMachine) stateMachine).PatrolAI;
 	}
-
+	
+	public override void Enter(State prev) {
+		_patrolAI.Sprite.Play("patrol");
+	}
+	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
-		_patrolAI.CheckLedge();
+		_patrolAI.CheckLedge(true);
 		_patrolAI.Accelerate();
+		_patrolAI.RegeneratePosture();
 		
 		if(!_patrolAI.CanPatrol) {
 			PatrolStateMachine patrolStateMachine = ((PatrolStateMachine) ParentStateMachine);

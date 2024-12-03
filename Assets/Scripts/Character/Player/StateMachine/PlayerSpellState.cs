@@ -11,6 +11,9 @@ public partial class PlayerSpellState : PlayerState
 	
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
+		
+		CanFlip = false;
+		
 		SpellController.UseSpell();
 		SpellController.StartShootCooldown();
 		// GetTree().CreateTimer(Stats.ShootTime).Timeout += _EnterDefaultState;

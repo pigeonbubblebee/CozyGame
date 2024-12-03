@@ -3,10 +3,10 @@ using System;
 
 public partial class EnemyHitbox : Area2D, IHittable
 {
-	public event Action<Player, int, int> OnHitEvent;
+	public event Action<Player, int, int, int> OnHitEvent;
 
-	public void OnHit(Player player, int damage, int direction) {
-		OnHitEvent?.Invoke(player, damage, direction);
+	public void OnHit(Player player, int damage, int direction, int postureDamage) {
+		OnHitEvent?.Invoke(player, damage, direction, postureDamage);
 		// GD.Print("HIT!");
 	}
 

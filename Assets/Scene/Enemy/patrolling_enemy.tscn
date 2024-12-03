@@ -1,0 +1,164 @@
+[gd_scene load_steps=19 format=3 uid="uid://77s2x2dymf6j"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs" id="1_qoybc"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs" id="2_0ksde"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/PatrolStateMachine.cs" id="3_ri3qa"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/PatrolState.cs" id="4_k5mol"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/PatrolIdleState.cs" id="5_fwpp4"]
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="6_h5og3"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="6_tr3xk"]
+[ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="7_lulx5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
+size = Vector2(78.5, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_noim0"]
+size = Vector2(80, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27hjv"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kydg"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnumc"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0amv1"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boi6j"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73lyn"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d5f2"]
+atlas = ExtResource("7_lulx5")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fagf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27hjv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kydg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnumc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0amv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boi6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73lyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d5f2")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 10.0
+}]
+
+[node name="PatrollingEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_qoybc")
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+Speed = 230.0
+WaitTimeBetweenFlips = 1.0
+HitboxPath = NodePath("Hurtbox")
+HealthSystemPath = NodePath("Health")
+MaxHealth = 12
+MaxPosture = 100
+PostureRegenerationCooldownTime = 3.0
+PostureRegenerationTime = 0.5
+PostureRegenerationRate = 30
+_postureRegenerationCooldownTimerPath = NodePath("PostureRegenerationCooldown")
+_postureRegenerationTimerPath = NodePath("PostureRegeneration")
+_attacksParentPath = NodePath("AttackPatterns")
+_spritePath = NodePath("AnimatedSprite2D")
+StateMachinePath = NodePath("StateMachine")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_0ksde")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 4.00005)
+shape = SubResource("RectangleShape2D_igpne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_noim0")
+
+[node name="AttackPatterns" type="Node2D" parent="."]
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("3_ri3qa")
+_patrolStatePath = NodePath("PatrolState")
+_idleStatePath = NodePath("IdleState")
+_attackStatePath = NodePath("AttackState")
+
+[node name="PatrolState" type="Node2D" parent="StateMachine"]
+script = ExtResource("4_k5mol")
+
+[node name="IdleState" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_fwpp4")
+
+[node name="AttackState" type="Node2D" parent="StateMachine"]
+script = ExtResource("6_tr3xk")
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+position = Vector2(48, 0)
+target_position = Vector2(32, 0)
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("6_h5og3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
+texture_filter = 1
+position = Vector2(8, -16)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_fagf8")
+animation = &"idle"
+frame_progress = 0.0384501
+
+[node name="AggroChecks" type="Node2D" parent="."]
+
+[node name="AggroCheckForward" type="RayCast2D" parent="AggroChecks"]
+position = Vector2(-80, 0)
+target_position = Vector2(320, 0)
+
+[node name="AggroCheckUp" type="RayCast2D" parent="AggroChecks"]
+target_position = Vector2(0, -128)
+
+[node name="PostureRegeneration" type="Timer" parent="."]
+one_shot = true
+
+[node name="PostureRegenerationCooldown" type="Timer" parent="."]
+one_shot = true

@@ -10,6 +10,7 @@ public partial class PlayerRunState : PlayerState
 	}
 
 	public override void PlayStateAnimation() {
+		AnimationController.PlayAnimation(AnimationController.RunAnimationClip);
 		// TODO: Start Idle Animation
 	}
 

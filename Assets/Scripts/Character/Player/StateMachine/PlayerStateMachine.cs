@@ -9,6 +9,7 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerInteractionController InteractionController { get; private set; }
 	public PlayerHealController HealController { get; private set; }
 	public PlayerSpellController SpellController { get; private set; }
+	public PlayerAnimationController AnimationController { get; private set; }
 	
 	private Player _player;
 	public PlayerStats Stats => _player.CurrentPlayerStats;
@@ -37,6 +38,7 @@ public partial class PlayerStateMachine : StateMachine
 		InteractionController = player.InteractionController;
 		HealController = player.HealController;
 		SpellController = player.SpellController;
+		AnimationController = player.AnimationController;
 		// Stats = player.PlayerStatsResource;
 	}
 	

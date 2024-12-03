@@ -3,7 +3,7 @@ using System;
 
 public partial class TestingDummy : Area2D, IHittable
 {
-	public void OnHit(Player player, int damage, int direction) {
+	public void OnHit(Player player, int damage, int direction, int postureDamage) {
 		GD.Print("YEOWCH!");
 	}
 
