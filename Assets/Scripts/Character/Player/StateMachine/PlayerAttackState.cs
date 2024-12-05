@@ -16,7 +16,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 	
 	public override void PlayStateAnimation() {
-		AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
+		AnimationController.PlayAnimation(AnimationController.SlashAnimationClip);
 		// TODO: Start Idle Animation
 	}
 

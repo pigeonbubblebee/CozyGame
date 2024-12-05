@@ -27,6 +27,11 @@ public partial class PlayerIdleState : PlayerState
 
 	protected override bool CheckStates()
 	{
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartBlock();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+			return true;
+		}
 		if(HealController.DesiredHeal && HealController.HealCooldownOff) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
 			return true;

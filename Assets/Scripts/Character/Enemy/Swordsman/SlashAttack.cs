@@ -7,13 +7,28 @@ public partial class SlashAttack : EnemyAttack
 	public bool CanSlash = true;
 	
 	[Export] public int SlashDamage;
+	[Export] public int PostureDamage;
 	[Export] public float SlashCooldown;
 	private bool _canHit;
+	
+	[Export] public int OnFrame;
 	
 	[Export] private NodePath _attackAreaColliderPath;
 	private CollisionShape2D _attackAreaCollider;
 	[Export] private NodePath _attackAreaPath;
 	private Area2D _attackArea;
+	
+	public override void Initialize(Enemy e) {
+		base.Initialize(e);
+		EnemyAI.Sprite.FrameChanged += _checkAnimationEvent;
+	}
+	
+	private void _checkAnimationEvent() {
+		if(EnemyAI.Sprite.Frame == OnFrame && EnemyAI.Sprite.Animation == AnimationName) {
+			_canHit = true;
+			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
+		}
+	}
 	
 	public override void _Ready() {
 		base._Ready();
@@ -40,11 +55,7 @@ public partial class SlashAttack : EnemyAttack
 	}
 	
 	public void Slash() {
-		// SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);
-
-		_canHit = true;
-		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
-		
+		// SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);		
 		GetTree().CreateTimer(AttackLength).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}
@@ -67,12 +78,12 @@ public partial class SlashAttack : EnemyAttack
 	}
 	
 	private void _OnSlashHit(Node2D hit) {
-		GD.Print(hit.Name + " Hit!");
+		// GD.Print(hit.Name + " Hit!");
 		if(!_canHit || !(hit is Player)) {
 			return;
 		}
 		
-		((Player)hit).PlayerHealth.TakeDamage(SlashDamage);
+		((Player)hit).TakeDamage(SlashDamage, PostureDamage, EnemyAI);
 		// HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
 	}
 }

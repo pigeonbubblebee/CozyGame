@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_ylt6r")
-Speed = 600.0
+Speed = 680.0
 Acceleration = 400.0
 DirectionSwitchSpeed = 800.0
 Friction = 500.0
-JumpVelocity = 2300.0
+JumpVelocity = 2350.0
 MaxJumps = 1
 JumpingGravity = 110.0
 CoyoteTime = 0.15
@@ -20,11 +20,11 @@ CanAirDash = true
 MaxAirDash = 1
 DashCooldown = 0.5
 DashBuffer = 0.5
-SlashTime = 0.2
+SlashTime = 0.4
 SlashDamage = 4
 SlashPostureDamage = 20
 SlashRange = 1
-SlashCooldown = 0.4
+SlashCooldown = 0.5
 SlashBuffer = 0.2
 MaxHealth = 5
 MaxHeals = 5
@@ -40,3 +40,6 @@ ShootBuffer = 0.3
 BulletObjectPool = 5
 ShootMaxRecoil = 1600.0
 ShootRecoil = 1600.0
+DeflectWindow = 0.2
+DeflectTimeout = 0.05
+BlockTimeout = 0.1

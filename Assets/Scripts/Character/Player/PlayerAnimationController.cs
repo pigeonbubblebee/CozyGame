@@ -8,6 +8,10 @@ public partial class PlayerAnimationController : Node
 	
 	public AsymmetricalAnimationClip IdleAnimationClip { get; private set; }	
 	public AsymmetricalAnimationClip RunAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip SlashAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip BlockAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip JumpAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip FallAnimationClip { get; private set; }
 
 	public AsymmetricalAnimationClip CurrentAnimation { get; private set; }
 	
@@ -22,10 +26,15 @@ public partial class PlayerAnimationController : Node
 	}
 	
 	public override void _Ready() {
+		
 		_sprite = GetNode<AnimatedSprite2D>(SpritePath);
 		
 		IdleAnimationClip = new AsymmetricalAnimationClip("idle_right", "idle_left");
 		RunAnimationClip = new AsymmetricalAnimationClip("run_right", "run_left");
+		SlashAnimationClip = new AsymmetricalAnimationClip("slash_right", "slash_left");
+		BlockAnimationClip = new AsymmetricalAnimationClip("block_right", "block_left");
+		JumpAnimationClip = new AsymmetricalAnimationClip("jump");
+		FallAnimationClip = new AsymmetricalAnimationClip("fall");
 	}
 	
 	public override void _Process(double delta) {		
@@ -86,10 +95,20 @@ public partial class PlayerAnimationController : Node
 			LeftClip = l;
 			// Right = true;
 		}
+		
+		public AsymmetricalAnimationClip(string n) {
+			RightClip = n + "_right";
+			LeftClip = n + "_left";
+			// Right = true;
+		}
 
 		public void PlayAnimation(AnimatedSprite2D animator, bool facingRight) {
 			// Right = facingRight;
 			animator.Play(facingRight ? RightClip : LeftClip);
 		}
 	}
+	
+	//public struct AsymmetricalTransition : AsymmetricalAnimationClip {
+		
+	//}
 }

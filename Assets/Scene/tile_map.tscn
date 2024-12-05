@@ -187,7 +187,7 @@ physics_layer_0/collision_layer = 3
 sources/0 = SubResource("TileSetAtlasSource_tujtu")
 
 [node name="TileMap" type="TileMap" groups=["Ground"]]
-z_index = -1
+z_index = -4
 position = Vector2(360, -200)
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_uax27")

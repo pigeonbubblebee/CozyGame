@@ -10,6 +10,11 @@ public partial class PlayerJumpState : PlayerState
 
 		MovementController.Jump();
 	}
+	
+	public override void PlayStateAnimation() {
+		AnimationController.PlayAnimation(AnimationController.JumpAnimationClip);
+		// TODO: Start Idle Animation
+	}
 
 	public override void Process(double delta)
 	{
@@ -41,6 +46,11 @@ public partial class PlayerJumpState : PlayerState
 	}
 
 	protected override bool CheckStates() {
+		/*if(DeflectController.DesiredDeflect) {
+			DeflectController.StartBlock();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+			return true;
+		}*/
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash))
 			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);

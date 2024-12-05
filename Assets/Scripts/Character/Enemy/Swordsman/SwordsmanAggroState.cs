@@ -24,16 +24,22 @@ public partial class SwordsmanAggroState : State
 	}
 	
 	private void _enterDefaultState() {
-		GD.Print("DEAGGRO");
+		// GD.Print("DEAGGRO");
 		_swordsmanStateMachine.ChangeState(_swordsmanStateMachine.IdleState);
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
+		if(_swordsmanAI.Staggered) {
+			_swordsmanStateMachine.ChangeState(_swordsmanStateMachine.PostureBreakState);
+			return;
+		}
+		
 		_swordsmanAI.CheckAggro();
 		EnemyAttack e = _swordsmanAI.GetCurrentAttack(_swordsmanAI.TargetPlayer);
 		if(e != null) {
+			ChangeDirection();
 			_swordsmanStateMachine.ChangeState(_swordsmanStateMachine.AttackState);
 			_swordsmanAI.ExecuteAttack(e, _swordsmanAI.TargetPlayer);
 			_swordsmanAI.Decelerate();
@@ -51,12 +57,7 @@ public partial class SwordsmanAggroState : State
 		}
 		*/
 		if (Mathf.Abs(_swordsmanAI.GlobalPosition.X - _swordsmanAI.TargetPlayer.GlobalPosition.X) >= _swordsmanAI.StepRange) { // TODO: switch to step length
-			if(_swordsmanAI.GlobalPosition.X < _swordsmanAI.TargetPlayer.GlobalPosition.X && _swordsmanAI.GetMoveDirection() < 0) {
-				_swordsmanAI.Flip();
-			} else if(_swordsmanAI.GlobalPosition.X > _swordsmanAI.TargetPlayer.GlobalPosition.X && _swordsmanAI.GetMoveDirection() > 0) {
-				_swordsmanAI.Flip();
-				// _swordsmanAI.Scale = new Vector2(-Mathf.Abs(_swordsmanAI.Scale.X), _swordsmanAI.Scale.Y);
-			}
+			ChangeDirection();
 		}
 		
 		if(Mathf.Abs(_swordsmanAI.LastKnownPlayerPosition.X - _swordsmanAI.GlobalPosition.X) <= _swordsmanAI.StepRange) {
@@ -83,5 +84,12 @@ public partial class SwordsmanAggroState : State
 		}
 	}
 	
-	
+	protected void ChangeDirection() {
+		if(_swordsmanAI.GlobalPosition.X < _swordsmanAI.TargetPlayer.GlobalPosition.X && _swordsmanAI.GetMoveDirection() < 0) {
+			_swordsmanAI.Flip();
+		} else if(_swordsmanAI.GlobalPosition.X > _swordsmanAI.TargetPlayer.GlobalPosition.X && _swordsmanAI.GetMoveDirection() > 0) {
+			_swordsmanAI.Flip();
+			// _swordsmanAI.Scale = new Vector2(-Mathf.Abs(_swordsmanAI.Scale.X), _swordsmanAI.Scale.Y);
+		}
+	}
 }

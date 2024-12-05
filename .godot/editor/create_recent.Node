@@ -1,8 +1,9 @@
 Node2D
-Node
+TextureProgressBar
 Timer
-RayCast2D
 AnimatedSprite2D
+Node
+RayCast2D
 CollisionShape2D
 CharacterBody2D
 Sprite2D
@@ -16,7 +17,6 @@ Control
 Panel
 CanvasLayer
 GridContainer
-TextureProgressBar
 RichTextLabel
 ColorRect
 CenterContainer

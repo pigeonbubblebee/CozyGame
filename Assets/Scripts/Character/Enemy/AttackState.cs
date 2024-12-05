@@ -20,12 +20,16 @@ public partial class AttackState : State
 	}
 	
 	private void _enterDefaultState() {
-		((EnemyStateMachine) ParentStateMachine).EnterDefaultState();
+		if(ActiveState)
+			((EnemyStateMachine) ParentStateMachine).EnterDefaultState();
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
-		
+		if(EnemyAI.Staggered) {
+			((EnemyStateMachine) ParentStateMachine).ChangeState(((EnemyStateMachine) ParentStateMachine).PostureBreakState);
+			return;
+		}
 	}
 }

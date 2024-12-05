@@ -10,6 +10,7 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerHealController HealController { get; private set; }
 	public PlayerSpellController SpellController { get; private set; }
 	public PlayerAnimationController AnimationController { get; private set; }
+	public PlayerDeflectController DeflectController { get; private set; }
 	
 	private Player _player;
 	public PlayerStats Stats => _player.CurrentPlayerStats;
@@ -30,6 +31,8 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerHealState HealState { get; private set; }
 	[Export] private NodePath _playerSpellStatePath;
 	public PlayerSpellState SpellState { get; private set; }
+	[Export] private NodePath _playerBlockStatePath;
+	public PlayerBlockState BlockState { get; private set; }
 	
 	public void Initialize(Player player) {
 		_player = player;
@@ -39,6 +42,7 @@ public partial class PlayerStateMachine : StateMachine
 		HealController = player.HealController;
 		SpellController = player.SpellController;
 		AnimationController = player.AnimationController;
+		DeflectController = player.DeflectController;
 		// Stats = player.PlayerStatsResource;
 	}
 	
@@ -61,6 +65,8 @@ public partial class PlayerStateMachine : StateMachine
 		HealState.Initialize(this);
 		SpellState = GetNode<PlayerSpellState>(_playerSpellStatePath);
 		SpellState.Initialize(this);
+		BlockState = GetNode<PlayerBlockState>(_playerBlockStatePath);
+		BlockState.Initialize(this);
 
 		EnterDefaultState();
 	}

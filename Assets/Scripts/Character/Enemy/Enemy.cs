@@ -8,6 +8,9 @@ public partial class Enemy : CharacterBody2D
 	[Export] public NodePath HealthSystemPath { get; private set; }
 	private HealthSystem _health;
 	
+	[Export] private NodePath _healthBarPath;
+	protected TextureProgressBar _healthBar;
+	
 	[Export] public int MaxHealth { get; protected set; }
 	
 	[Export] public int MaxPosture { get; protected set; }
@@ -37,6 +40,16 @@ public partial class Enemy : CharacterBody2D
 	[Export] public NodePath StateMachinePath { get; private set; }
 	protected EnemyStateMachine StateMachine;
 	
+	[Export] private NodePath _postureBarPath;
+	protected TextureProgressBar _postureBar;
+	
+	public event Action<int> TakeDamageEvent;
+	
+	public bool Staggered;
+	public event Action PostureBreakEvent;
+	public event Action StaggerRecoveryEvent;
+	[Export] public float StaggerRecoveryTime;
+	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
@@ -50,6 +63,7 @@ public partial class Enemy : CharacterBody2D
 		
 		_health = GetNode<HealthSystem>(HealthSystemPath);
 		_health.DeathEvent += OnDeath;
+		_health.DamageEvent += TakeDamageEvent;
 		CurrentPosture = MaxPosture;
 		
 		_health.MaxHealthPoints = MaxHealth;
@@ -58,6 +72,9 @@ public partial class Enemy : CharacterBody2D
 		
 		_postureRegenerationCooldownTimer = GetNode<Timer>(_postureRegenerationCooldownTimerPath);
 		_postureRegenerationTimer = GetNode<Timer>(_postureRegenerationTimerPath);
+		
+		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
+		_healthBar = GetNode<TextureProgressBar>(_healthBarPath);
 		
 		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 		
@@ -90,7 +107,7 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	public void RegeneratePosture() {
-		if(!_postureRegenerationTimer.IsStopped()) {
+		if(!_postureRegenerationCooldownTimer.IsStopped()) {
 			return;
 		}
 		
@@ -104,14 +121,44 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	public void TakePostureDamage(int damage) {
+		if(CurrentPosture <= 0) {
+			return;
+		}
+		
 		CurrentPosture -= damage;
+		if(CurrentPosture <= 0) {
+			PostureBreakEvent?.Invoke();
+			GetTree().CreateTimer(StaggerRecoveryTime).Timeout += _RecoverStagger;
+			Staggered = true;
+			CurrentPosture = 0;
+		}
 		_postureRegenerationCooldownTimer.Start(PostureRegenerationCooldownTime);
 		_postureRegenerationTimer.Stop();
+	}
+	
+	private void _RecoverStagger() {
+		Staggered = false;
+		StaggerRecoveryEvent?.Invoke();
+		CurrentPosture = MaxPosture;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		// GD.Print(Name + " " + CurrentPosture);
+		
+		float postureRatio = ((float)CurrentPosture) / ((float)MaxPosture);
+		// GD.Print(Ratio);
+		postureRatio = Mathf.Max(postureRatio, 0);
+		postureRatio = 1 - postureRatio;
+
+		_postureBar.Value = postureRatio * 100;
+		
+		float healthRatio = ((float)_health.CurrentHealthPoints) / ((float)_health.MaxHealthPoints);
+		// GD.Print(Ratio);
+		healthRatio = Mathf.Max(healthRatio, 0);
+
+		_healthBar.Value = healthRatio * 100;
 	}
 	
 	public override void _PhysicsProcess(double delta)

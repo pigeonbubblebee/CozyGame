@@ -25,6 +25,8 @@ public partial class Player : CharacterBody2D
 	public PlayerSpellController SpellController  { get; private set; }
 	[Export] private NodePath _animationControllerPath;
 	public PlayerAnimationController AnimationController  { get; private set; }
+	[Export] private NodePath _deflectControllerPath;
+	public PlayerDeflectController DeflectController  { get; private set; }
 
 	public override void _EnterTree()
 	{
@@ -40,18 +42,20 @@ public partial class Player : CharacterBody2D
 		HealController = GetNode<PlayerHealController>(_healControllerPath);
 		SpellController = GetNode<PlayerSpellController>(_spellControllerPath);
 		AnimationController = GetNode<PlayerAnimationController>(_animationControllerPath);
+		DeflectController = GetNode<PlayerDeflectController>(_deflectControllerPath);
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
 		PlayerHealth.ResetHealth();
 		PlayerHealth.Invincible = false;
 
-		StateMachine.Initialize(this);
+		StateMachine.Initialize(this); // PLEASE ADD A PLAYER COMPONENT CLSS OR SMTH
 		MovementController.Initialize(this);
 		AttackController.Initialize(this);
 		InteractionController.Initialize(this);
 		HealController.Initialize(this);
 		SpellController.Initialize(this);
 		AnimationController.Initialize(this);
+		DeflectController.Initialize(this);
 		
 		SpellController.ResetMana();
 		HealController.ResetHeals();
@@ -61,5 +65,13 @@ public partial class Player : CharacterBody2D
 	
 	public override void _Ready() {
 		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
+	}
+	
+	public void TakeDamage(int damage, int postureDamage, Enemy e) {
+		if(DeflectController.Blocking) {
+			DeflectController.Block(damage, postureDamage, e);
+		} else {
+			PlayerHealth.TakeDamage(damage);
+		}
 	}
 }

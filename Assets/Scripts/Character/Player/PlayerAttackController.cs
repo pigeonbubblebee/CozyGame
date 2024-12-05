@@ -21,13 +21,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	[Export] private NodePath _leftAttackAreaColliderPath;
 	private CollisionShape2D _leftAttackAreaCollider;
 
-	[Export] private NodePath _rightAttackSpritePath;
-	private Sprite2D _rightAttackSprite;
-	[Export] private NodePath _leftAttackSpritePath;
-	private Sprite2D _leftAttackSprite;
+	[Export] private NodePath _attackSpritePath;
+	private AnimatedSprite2D _attackSprite;
 
 	private CollisionShape2D _currentAttackAreaCollider;
-	private Sprite2D _currentAttackSprite;
 	public bool CanSwitchAttackDirection = true;
 
 	private bool _canHit = false;
@@ -47,8 +44,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_rightAttackAreaCollider = GetNode<CollisionShape2D>(_rightAttackAreaColliderPath);
 		_leftAttackAreaCollider = GetNode<CollisionShape2D>(_leftAttackAreaColliderPath);
 
-		_rightAttackSprite = GetNode<Sprite2D>(_rightAttackSpritePath);
-		_leftAttackSprite = GetNode<Sprite2D>(_leftAttackSpritePath);
+		_attackSprite = GetNode<AnimatedSprite2D>(_attackSpritePath);
 
 		_slashBuffer = GetNode<Timer>(_slashBufferPath);
 		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
@@ -130,7 +126,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		
 		// GD.Print(_movementController.Direction);
 
-		_currentAttackSprite = _movementController.Direction == 1 ? _rightAttackSprite : _leftAttackSprite;
+		// _attackSprite = _movementController.Direction == 1 ? _rightAttackSprite : _leftAttackSprite;
 
 		_currentAttackAreaCollider = _movementController.Direction == 1 ? _rightAttackAreaCollider : _leftAttackAreaCollider;
 	}
@@ -144,13 +140,15 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	private void _EnableSlashSprite(int damage, float speed, float range) {
-		_currentAttackSprite.Visible = true;
+		// _attackSprite.Visible = true;
+		_attackSprite.Play(_movementController.Direction == 1 ? "slash_right" : "slash_left");
+		// _attackSprite.ZIndex = _movementController.Direction == 1 ? 1 : -1;
+		// GD.Print(_attackSprite.Animation);
 	}
 
 	private void _DisableSlashSprite() {
 		// _currentAttackSprite.Visible = false;
-		
-		_rightAttackSprite.Visible = false;
-		_leftAttackSprite.Visible = false;
+		_attackSprite.Play("idle");
+		// _attackSprite.Visible = false;
 	}
 }

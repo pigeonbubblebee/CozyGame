@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class InputManager : Node, IInputManager
+public partial class InputManager : Node, IInputManager // Pretty poorly written,  rewrite
 {
 	private Vector2 _movementDirection;
 	private bool _jumping;
@@ -30,6 +30,10 @@ public partial class InputManager : Node, IInputManager
 	private bool _shooting;
 	private bool _shootActuation;
 	private bool _shootReleaseActuation;
+	
+	private bool _deflecting;
+	private bool _deflectActuation;
+	private bool _deflectReleaseActuation;
 
 	// Vars for control bind names on input maps
 	private readonly string MOVE_LEFT = "move_left";
@@ -42,6 +46,7 @@ public partial class InputManager : Node, IInputManager
 	private readonly string INTERACT = "interact";
 	private readonly string HEAL = "heal";
 	private readonly string SHOOT = "shoot";
+	private readonly string DEFLECT = "deflect";
 
 	public override void _Process(double delta) {
 		GetInput();
@@ -80,6 +85,10 @@ public partial class InputManager : Node, IInputManager
 		_shooting = Input.IsActionPressed(SHOOT);
 		_shootActuation = Input.IsActionJustPressed(SHOOT);
 		_shootReleaseActuation = Input.IsActionJustReleased(SHOOT);
+		
+		_deflecting = Input.IsActionPressed(DEFLECT);
+		_deflectActuation = Input.IsActionJustPressed(DEFLECT);
+		_deflectReleaseActuation = Input.IsActionJustReleased(DEFLECT);
 	}
 
 	public Vector2 GetMovementDirection() {
@@ -150,5 +159,15 @@ public partial class InputManager : Node, IInputManager
 	}
 	public bool GetShootReleaseActuation() {
 		return _shootReleaseActuation;
+	}
+	
+	public bool GetDeflect() {
+		return _deflecting;
+	}
+	public bool GetDeflectActuation() {
+		return _deflectActuation;
+	}
+	public bool GetDeflectReleaseActuation() {
+		return _deflectReleaseActuation;
 	}
 }

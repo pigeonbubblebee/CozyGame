@@ -73,3 +73,4 @@ _healthImageHit = ExtResource("5_aaqmb")
 _healthImageUnhit = ExtResource("3_cd71o")
 
 [node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]
+visible = false

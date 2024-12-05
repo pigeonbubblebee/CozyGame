@@ -46,6 +46,10 @@ public partial class PlayerStats : Resource
 	[Export] public int BulletObjectPool { get; private set; }
 	[Export] public float ShootMaxRecoil { get; private set; }
 	[Export] public float ShootRecoil { get; private set; }
+	[ExportCategory("Deflecting")]
+	[Export] public float DeflectWindow { get; private set; }
+	[Export] public float DeflectTimeout { get; private set; }
+	[Export] public float BlockTimeout { get; private set; }
 
 	// Make sure you provide a parameterless constructor.
 	// In C#, a parameterless constructor is different from a

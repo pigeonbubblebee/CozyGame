@@ -3,6 +3,11 @@ using System;
 
 public partial class PlayerFallState : PlayerState
 {
+	public override void PlayStateAnimation() {
+		AnimationController.PlayAnimation(AnimationController.FallAnimationClip);
+		// TODO: Start Idle Animation
+	}
+	
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
 		// TODO: Reset Colliders
@@ -38,6 +43,11 @@ public partial class PlayerFallState : PlayerState
 	}
 
 	protected override bool CheckStates() {
+		/*if(DeflectController.DesiredDeflect) {
+			DeflectController.StartBlock();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+			return true;
+		}*/
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) 
 			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);

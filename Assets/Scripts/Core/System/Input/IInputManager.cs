@@ -32,4 +32,8 @@ public interface IInputManager
 	public abstract bool GetShoot();
 	public abstract bool GetShootActuation();
 	public abstract bool GetShootReleaseActuation();
+	
+	public abstract bool GetDeflect();
+	public abstract bool GetDeflectActuation();
+	public abstract bool GetDeflectReleaseActuation();
 }

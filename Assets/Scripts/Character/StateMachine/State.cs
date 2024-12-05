@@ -4,7 +4,8 @@ using System;
 public abstract partial class State : Node
 {
 	protected StateMachine ParentStateMachine;
-
+	public bool ActiveState = false;
+	
 	public virtual void Initialize(StateMachine stateMachine) {
 		ParentStateMachine = stateMachine;
 	}

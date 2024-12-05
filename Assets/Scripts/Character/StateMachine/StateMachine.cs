@@ -24,10 +24,12 @@ public abstract partial class StateMachine : Node
 
 		if(CurrentState != null) {
 			CurrentState.Exit();
+			CurrentState.ActiveState = false;
 		}
 
 		CurrentState = newState;
 		
 		CurrentState.Enter(previousState);
+		CurrentState.ActiveState = true;
 	}
 }

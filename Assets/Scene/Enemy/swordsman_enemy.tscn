@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=40 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/EnemySwordsmanAI.cs" id="1_pixhq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs" id="2_c064p"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="6_etamu"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="7_s56hu"]
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="7_weinp"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/PostureBreakState.cs" id="9_kxfd3"]
+[ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="12_5k21i"]
+[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/posture_bar.png" id="13_gt27s"]
+[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/health_bar.png" id="14_ha2ay"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
 size = Vector2(78.5, 200)
@@ -18,7 +22,7 @@ size = Vector2(78.5, 200)
 size = Vector2(80, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
-size = Vector2(135.313, 178.5)
+size = Vector2(208, 178.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n66ih"]
 atlas = ExtResource("7_weinp")
@@ -188,6 +192,14 @@ animations = [{
 "loop": true,
 "name": &"slash",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_5k21i")
+}],
+"loop": true,
+"name": &"stagger",
+"speed": 5.0
 }]
 
 [node name="SwordsmanEnemy" type="CharacterBody2D"]
@@ -196,7 +208,7 @@ collision_mask = 2
 script = ExtResource("1_pixhq")
 RayCastAggroForwardPath = NodePath("AggroChecks/AggroCheckForward")
 RayCastAggroUpPath = NodePath("AggroChecks/AggroCheckUp")
-DeAggroTime = 2.0
+DeAggroTime = 4.0
 DeAggroTimerPath = NodePath("DeAggro")
 StepRange = 170.0
 RayCastLedgePath = NodePath("LedgeCheck")
@@ -205,9 +217,10 @@ Speed = 230.0
 WaitTimeBetweenFlips = 1.0
 HitboxPath = NodePath("Hurtbox")
 HealthSystemPath = NodePath("Health")
-MaxHealth = 12
+_healthBarPath = NodePath("Bars/HealthBar")
+MaxHealth = 20
 MaxPosture = 100
-PostureRegenerationCooldownTime = 3.0
+PostureRegenerationCooldownTime = 4.0
 PostureRegenerationTime = 0.5
 PostureRegenerationRate = 30
 _postureRegenerationCooldownTimerPath = NodePath("PostureRegenerationCooldown")
@@ -215,6 +228,8 @@ _postureRegenerationTimerPath = NodePath("PostureRegeneration")
 _attacksParentPath = NodePath("AttackPattern")
 _spritePath = NodePath("AnimatedSprite2D")
 StateMachinePath = NodePath("StateMachine")
+_postureBarPath = NodePath("Bars/PostureBar")
+StaggerRecoveryTime = 0.7
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -235,7 +250,9 @@ shape = SubResource("RectangleShape2D_noim0")
 script = ExtResource("3_6ydxi")
 SlashRange = 170.0
 SlashDamage = 1
+PostureDamage = 50
 SlashCooldown = 1.3
+OnFrame = 5
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 AnimationName = "slash"
@@ -247,7 +264,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="AttackPattern/Slash/SwordHit"]
-position = Vector2(140.344, -17.25)
+position = Vector2(104, -17.25)
 shape = SubResource("RectangleShape2D_v6n7n")
 disabled = true
 
@@ -257,6 +274,7 @@ _aggroStatePath = NodePath("AggroState")
 _patrolStatePath = NodePath("PatrolState")
 _idleStatePath = NodePath("IdleState")
 _attackStatePath = NodePath("AttackState")
+_postureBreakStatePath = NodePath("PostureBreakState")
 _logStates = true
 
 [node name="PatrolState" type="Node2D" parent="StateMachine"]
@@ -270,6 +288,9 @@ script = ExtResource("6_742kd")
 
 [node name="AttackState" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_s56hu")
+
+[node name="PostureBreakState" type="Node2D" parent="StateMachine"]
+script = ExtResource("9_kxfd3")
 
 [node name="LedgeCheck" type="RayCast2D" parent="."]
 position = Vector2(48, 0)
@@ -288,15 +309,13 @@ texture_filter = 1
 position = Vector2(8, -16)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fagf8")
-animation = &"slash"
-frame = 1
-frame_progress = 0.0830249
+animation = &"stagger"
 
 [node name="AggroChecks" type="Node2D" parent="."]
 
 [node name="AggroCheckForward" type="RayCast2D" parent="AggroChecks"]
-position = Vector2(-384, 0)
-target_position = Vector2(1400, 0)
+position = Vector2(-320, 0)
+target_position = Vector2(1550, 0)
 
 [node name="AggroCheckUp" type="RayCast2D" parent="AggroChecks"]
 target_position = Vector2(0, -80)
@@ -309,3 +328,37 @@ one_shot = true
 
 [node name="PostureRegenerationCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Bars" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="PostureBar" type="TextureProgressBar" parent="Bars"]
+offset_left = -104.0
+offset_top = -224.0
+offset_right = -34.0
+offset_bottom = -216.0
+scale = Vector2(3, 3)
+value = 100.0
+fill_mode = 6
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_progress = ExtResource("13_gt27s")
+radial_fill_degrees = 0.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Bars"]
+offset_left = -104.0
+offset_top = -256.0
+offset_right = -34.0
+offset_bottom = -248.0
+scale = Vector2(3, 3)
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_progress = ExtResource("14_ha2ay")
+radial_fill_degrees = 0.0

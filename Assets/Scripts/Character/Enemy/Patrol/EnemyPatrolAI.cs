@@ -74,7 +74,7 @@ public partial class EnemyPatrolAI : Enemy
 	}
 	
 	public void Flip() {
-		GD.Print("Flip!");
+		// GD.Print("Flip!");
 		moveDirection = 0 - moveDirection;	
 		// GD.Print(moveDirection);
 		Scale = new Vector2(Mathf.Abs(Scale.X) * -1, Scale.Y);

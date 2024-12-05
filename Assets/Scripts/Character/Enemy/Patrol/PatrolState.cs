@@ -22,6 +22,11 @@ public partial class PatrolState : State
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
+		if(_patrolAI.Staggered) {
+			_patrolStateMachine.ChangeState(_patrolStateMachine.PostureBreakState);
+			return;
+		}
+		
 		_patrolAI.CheckLedge(true);
 		_patrolAI.Accelerate();
 		_patrolAI.RegeneratePosture();
