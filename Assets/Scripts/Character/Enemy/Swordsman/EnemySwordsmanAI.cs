@@ -17,9 +17,10 @@ public partial class EnemySwordsmanAI : EnemyPatrolAI
 	
 	public Vector2 LastKnownPlayerPosition { get; private set; }
 	
-	public Player TargetPlayer { get; protected set; }
+	public Player TargetPlayer;
 
 	[Export] public float StepRange;
+	[Export] public float RetreatRange;
 	
 	public override void _Ready() {
 		base._Ready();

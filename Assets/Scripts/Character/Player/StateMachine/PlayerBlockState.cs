@@ -17,12 +17,14 @@ public partial class PlayerBlockState : PlayerState
 	}
 	
 	private void _finishBlock(bool deflect, int postureDamage, Enemy e) {
+		if(!deflect)
+			return;
 		_timeoutBlock(deflect);
 		_released = true;
 	}
 	
 	private void _timeoutBlock(bool deflect) {
-		if(_released)
+		if(_released && !ActiveState)
 			return;
 		
 		DeflectController.EndBlock();
@@ -44,6 +46,7 @@ public partial class PlayerBlockState : PlayerState
 	{
 		if(!DeflectController.DesiredDeflect) {
 			_timeoutBlock(false);
+			_released = true;
 			return true;
 		}
 

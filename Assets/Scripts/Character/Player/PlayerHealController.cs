@@ -54,7 +54,7 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 		}
 		
 		CurrentHeals --;
-		_player.PlayerHealth.AddHealth(1, false);
+		_player.PlayerHealth.AddHealth(_playerStats.HealPower, false);
 		HealEvent?.Invoke();
 	}
 	

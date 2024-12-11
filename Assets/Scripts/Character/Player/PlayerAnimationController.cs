@@ -12,6 +12,7 @@ public partial class PlayerAnimationController : Node
 	public AsymmetricalAnimationClip BlockAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip JumpAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip FallAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip CounterAnimationClip { get; private set; }
 
 	public AsymmetricalAnimationClip CurrentAnimation { get; private set; }
 	
@@ -35,6 +36,7 @@ public partial class PlayerAnimationController : Node
 		BlockAnimationClip = new AsymmetricalAnimationClip("block_right", "block_left");
 		JumpAnimationClip = new AsymmetricalAnimationClip("jump");
 		FallAnimationClip = new AsymmetricalAnimationClip("fall");
+		CounterAnimationClip = new AsymmetricalAnimationClip("counter");
 	}
 	
 	public override void _Process(double delta) {		

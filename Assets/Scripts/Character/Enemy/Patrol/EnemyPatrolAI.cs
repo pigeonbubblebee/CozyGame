@@ -3,7 +3,8 @@ using System;
 
 public partial class EnemyPatrolAI : Enemy
 {
-	
+	[Export] public NodePath FlipParentPath { get; private set; }
+	private Node2D _flipParent;
 	
 	[Export] public NodePath RayCastLedgePath { get; private set; }
 	private RayCast2D _rayCastLedge;
@@ -28,6 +29,8 @@ public partial class EnemyPatrolAI : Enemy
 		
 		_rayCastLedge = GetNode<RayCast2D>(RayCastLedgePath);
 		_rayCastWall = GetNode<RayCast2D>(RayCastWallPath);
+		
+		_flipParent = GetNode<Node2D>(FlipParentPath);
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -78,6 +81,7 @@ public partial class EnemyPatrolAI : Enemy
 		moveDirection = 0 - moveDirection;	
 		// GD.Print(moveDirection);
 		Scale = new Vector2(Mathf.Abs(Scale.X) * -1, Scale.Y);
+		// _attacksParent.Scale  = new Vector2(Mathf.Abs(Scale.X) * -1, Scale.Y);
 	}
 	
 	public int GetMoveDirection() {

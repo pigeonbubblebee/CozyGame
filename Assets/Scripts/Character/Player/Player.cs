@@ -27,6 +27,10 @@ public partial class Player : CharacterBody2D
 	public PlayerAnimationController AnimationController  { get; private set; }
 	[Export] private NodePath _deflectControllerPath;
 	public PlayerDeflectController DeflectController  { get; private set; }
+	[Export] private NodePath _postureControllerPath;
+	public PlayerPostureController PostureController  { get; private set; }
+	[Export] private NodePath _cameraPath;
+	public PlayerCamera Camera  { get; private set; }
 
 	public override void _EnterTree()
 	{
@@ -43,6 +47,8 @@ public partial class Player : CharacterBody2D
 		SpellController = GetNode<PlayerSpellController>(_spellControllerPath);
 		AnimationController = GetNode<PlayerAnimationController>(_animationControllerPath);
 		DeflectController = GetNode<PlayerDeflectController>(_deflectControllerPath);
+		PostureController = GetNode<PlayerPostureController>(_postureControllerPath);
+		Camera = GetNode<PlayerCamera>(_cameraPath);
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
 		PlayerHealth.ResetHealth();
@@ -56,9 +62,12 @@ public partial class Player : CharacterBody2D
 		SpellController.Initialize(this);
 		AnimationController.Initialize(this);
 		DeflectController.Initialize(this);
+		PostureController.Initialize(this);
 		
 		SpellController.ResetMana();
 		HealController.ResetHeals();
+		
+		PostureController.ResetPosture();
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 	}
@@ -72,6 +81,7 @@ public partial class Player : CharacterBody2D
 			DeflectController.Block(damage, postureDamage, e);
 		} else {
 			PlayerHealth.TakeDamage(damage);
+			PostureController.TakePostureDamage(postureDamage);
 		}
 	}
 }

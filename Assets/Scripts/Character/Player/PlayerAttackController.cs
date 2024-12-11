@@ -110,12 +110,29 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		if(!_canHit || !(hit is IHittable)) {
 			return;
 		}
+		
+		int damage = _player.DeflectController.Counter ? _playerStats.SlashCounterDamage : _playerStats.SlashDamage;
+		
+		if(hit is EnemyHitbox) {
+			// GD.Print(((Enemy) hit).Staggered);
+			if(((EnemyHitbox) hit).EnemyAIParent.Staggered) {
+				damage = ((EnemyHitbox) hit).EnemyAIParent.DeathBlowDamage;
+			}
+		}
+		
+		_canHit = false;
+		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		
+		GD.Print(damage);
 
-		HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
+		HitEvent?.Invoke((IHittable) hit, damage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
 	}
 
 	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
+		_player.Camera.Shake(0.05f, 3000f);
 		hittable.OnHit(_player, damage, direction, postureDamage); // Maybe flip direction, not sure yet
+		_movementController.ApplyKnockback(direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);
 		// TODO: Slash Particle, Screen Shake
 	}
 
@@ -140,8 +157,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	private void _EnableSlashSprite(int damage, float speed, float range) {
+		// _attackSprite.Play(_movementController.Direction == 1 ? "slash_right" : "slash_left");
+		
 		// _attackSprite.Visible = true;
-		_attackSprite.Play(_movementController.Direction == 1 ? "slash_right" : "slash_left");
+		
 		// _attackSprite.ZIndex = _movementController.Direction == 1 ? 1 : -1;
 		// GD.Print(_attackSprite.Animation);
 	}

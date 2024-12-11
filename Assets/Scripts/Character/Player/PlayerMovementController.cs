@@ -31,6 +31,14 @@ public partial class PlayerMovementController : Node
 	// --------- Dash Variables ---------
 	public bool DesiredDash => _CheckDesiredDash() && CanDash;
 	public event Action FinishDashEvent;
+	
+	// --------- Knockback Variables ---------
+	[Export] private NodePath _knockbackTimePath;
+	private Timer _knockbackTimer;
+	
+	private float _knockbackSpeed;
+	private float _knockbackAcceleration;
+	private int _knockbackDirection;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public readonly float GRAVITY = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -54,10 +62,13 @@ public partial class PlayerMovementController : Node
 		_coyoteTime = GetNode<Timer>(_coyoteTimePath);
 		_jumpBuffer = GetNode<Timer>(_jumpBufferPath);
 		_dashBuffer = GetNode<Timer>(_dashBufferPath);
+		_knockbackTimer = GetNode<Timer>(_knockbackTimePath);
 
 		_coyoteTime.WaitTime = _playerStats.CoyoteTime;
 		_jumpBuffer.WaitTime = _playerStats.JumpBuffer;
 		_dashBuffer.WaitTime = _playerStats.DashBuffer;
+		
+		_knockbackTimer.Timeout += _StopKnockback;
 	}
 
 	public void Initialize(Player body) {
@@ -71,8 +82,11 @@ public partial class PlayerMovementController : Node
 		}
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
+	public override void _PhysicsProcess(double delta) {
+		if(!_knockbackTimer.IsStopped()) {
+			GD.Print("Recoil!");
+			KnockbackRecoil(new Vector2(_knockbackDirection, 0f), _knockbackSpeed, _knockbackAcceleration, delta);
+		} 
 		_PlayerMovement();
 		_DirectionCheck();
 		_ResetJump();
@@ -102,7 +116,28 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void Accelerate(Vector2 direction, double delta) {
+		if(!_knockbackTimer.IsStopped())
+			return;
 		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration * (float)delta * 60f);
+		velocity.Y = Velocity.Y;
+		_playerBody.Velocity = velocity;
+	}
+	
+	public void ApplyKnockback(int direction, float speed, float acceleration, float time) {
+		_knockbackSpeed = speed;
+		_knockbackAcceleration = acceleration;
+		_knockbackDirection = direction;
+		_knockbackTimer.Start(time);
+	}
+	
+	private void _StopKnockback() {
+		GD.Print("Stop Recoil!");
+		Vector2 velocity = new Vector2(0, Velocity.Y);
+		_playerBody.Velocity = velocity;
+	}
+	
+	public void KnockbackRecoil(Vector2 direction, float speed, float acceleration, double delta) {
+		Vector2 velocity = _playerBody.Velocity.MoveToward(speed * direction, acceleration * (float)delta * 60f);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}

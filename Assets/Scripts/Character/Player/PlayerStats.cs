@@ -26,14 +26,20 @@ public partial class PlayerStats : Resource
 	[ExportCategory("Slashing")]
 	[Export] public float SlashTime { get; private set; }
 	[Export] public int SlashDamage { get; private set; }
+	[Export] public int SlashCounterDamage { get; private set; }
+	// [Export] public int DeathBlowDamage { get; private set; }
 	[Export] public int SlashPostureDamage { get; private set; }
 	[Export] public int SlashRange { get; private set; }
 	[Export] public float SlashCooldown { get; private set; }
 	[Export] public float SlashBuffer { get; private set; }
+	[Export] public float SlashKnockback { get; private set; }
+	[Export] public float SlashKnockbackAcceleration { get; private set; }
+	[Export] public float SlashKnockbackTime { get; private set; }
 	[ExportCategory("Health")]
 	[Export] public int MaxHealth { get; private set; }
 	[Export] public int MaxHeals { get; private set; }
 	[Export] public float HealTime { get; private set; }
+	[Export] public int HealPower { get; private set; }
 	[Export] public float HealCooldown { get; private set; }
 	[ExportCategory("Shooting")]
 	[Export] public int MaxMana { get; private set; }
@@ -50,6 +56,12 @@ public partial class PlayerStats : Resource
 	[Export] public float DeflectWindow { get; private set; }
 	[Export] public float DeflectTimeout { get; private set; }
 	[Export] public float BlockTimeout { get; private set; }
+	[Export] public float CounterWindow { get; private set; }
+	[ExportCategory("Posture")]
+	[Export] public int MaxPosture { get; private set; }
+	[Export] public int PostureRegeneration { get; private set; }
+	[Export] public float PostureRegenerationDisengagementTime { get; private set; }
+	[Export] public float PostureRegenerationCooldown { get; private set; }
 
 	// Make sure you provide a parameterless constructor.
 	// In C#, a parameterless constructor is different from a

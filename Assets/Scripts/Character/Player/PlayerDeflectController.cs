@@ -12,6 +12,8 @@ public partial class PlayerDeflectController : Node
 	[Export] private NodePath _deflectWindowTimerPath;
 	private Timer _deflectWindowTimer;
 	
+	public bool Counter = false;
+	
 	private IInputManager _inputManager;
 	public bool Blocking = false;
 	
@@ -37,12 +39,19 @@ public partial class PlayerDeflectController : Node
 			BlockEvent?.Invoke(true, postureDamage, e);
 			GD.Print("Deflect!");
 			e.TakePostureDamage(postureDamage);
+			Counter = true;
+			GetTree().CreateTimer(_playerStats.CounterWindow).Timeout += _FinishCounterWindow;
 			return 0;
 		} else {
 			BlockEvent?.Invoke(false, postureDamage, e);
-			// Add posture damage
+			_player.PlayerHealth.TakeDamage(damage/4);
+			_player.PostureController.TakePostureDamage(postureDamage);
 			return 0;
 		}
+	}
+	
+	private void _FinishCounterWindow() {
+		Counter = false;
 	}
 	
 	public void StartBlock() {

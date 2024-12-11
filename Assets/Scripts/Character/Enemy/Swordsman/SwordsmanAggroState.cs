@@ -60,7 +60,7 @@ public partial class SwordsmanAggroState : State
 			ChangeDirection();
 		}
 		
-		if(Mathf.Abs(_swordsmanAI.LastKnownPlayerPosition.X - _swordsmanAI.GlobalPosition.X) <= _swordsmanAI.StepRange) {
+		if(Mathf.Abs(_swordsmanAI.LastKnownPlayerPosition.X - _swordsmanAI.GlobalPosition.X) <= _swordsmanAI.RetreatRange) {
 			if(Running) {
 				_swordsmanAI.Sprite.Play("idle");
 			}

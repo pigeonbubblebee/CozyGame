@@ -26,6 +26,7 @@ public partial class Enemy : CharacterBody2D
 	private Timer _postureRegenerationTimer;
 	
 	[Export] private NodePath _attacksParentPath;
+	protected Node2D _attacksParent;
 	public EnemyAttack[] Attacks { get; private set; }
 	
 	public EnemyAttack CurrentAttack { get; private set; }
@@ -43,12 +44,14 @@ public partial class Enemy : CharacterBody2D
 	[Export] private NodePath _postureBarPath;
 	protected TextureProgressBar _postureBar;
 	
-	public event Action<int> TakeDamageEvent;
+	public event Action<Player, int, int, int> TakeDamageEvent;
 	
 	public bool Staggered;
 	public event Action PostureBreakEvent;
 	public event Action StaggerRecoveryEvent;
 	[Export] public float StaggerRecoveryTime;
+	
+	[Export] public int DeathBlowDamage;
 	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
@@ -60,10 +63,11 @@ public partial class Enemy : CharacterBody2D
 	{
 		_hitbox = GetNode<EnemyHitbox>(HitboxPath);
 		_hitbox.OnHitEvent += OnHit;
+		_hitbox.Initialize(this);
 		
 		_health = GetNode<HealthSystem>(HealthSystemPath);
 		_health.DeathEvent += OnDeath;
-		_health.DamageEvent += TakeDamageEvent;
+		// _health.DamageEvent += TakeDamageEvent;
 		CurrentPosture = MaxPosture;
 		
 		_health.MaxHealthPoints = MaxHealth;
@@ -78,11 +82,11 @@ public partial class Enemy : CharacterBody2D
 		
 		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 		
-		Node parent = GetNode<Node>(_attacksParentPath);
-		Attacks = new EnemyAttack[parent.GetChildren().Count];
+		_attacksParent = GetNode<Node2D>(_attacksParentPath);
+		Attacks = new EnemyAttack[_attacksParent.GetChildren().Count];
 		int i = 0;
 		
-		foreach(Node n in parent.GetChildren()) {
+		foreach(Node n in _attacksParent.GetChildren()) {
 			Attacks[i] = (EnemyAttack) n;
 			Attacks[i].Initialize(this);
 			if(Attacks[i].NotChainAttack) {
@@ -173,6 +177,7 @@ public partial class Enemy : CharacterBody2D
 	
 	public virtual void OnHit(Player player, int damage, int direction, int postureDamage) {
 		GD.Print("OUCH!");
+		TakeDamageEvent?.Invoke(player, damage, direction, postureDamage);
 		_health.TakeDamage(damage);
 		TakePostureDamage(postureDamage);
 	}

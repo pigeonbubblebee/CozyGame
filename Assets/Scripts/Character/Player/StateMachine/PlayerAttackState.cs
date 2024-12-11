@@ -16,7 +16,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 	
 	public override void PlayStateAnimation() {
-		AnimationController.PlayAnimation(AnimationController.SlashAnimationClip);
+		AnimationController.PlayAnimation(DeflectController.Counter ? AnimationController.CounterAnimationClip : AnimationController.SlashAnimationClip, Stats.SlashTime);
 		// TODO: Start Idle Animation
 	}
 
@@ -143,6 +143,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	private void _EnterDefaultState() {
+		DeflectController.Counter = false;
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
 }
