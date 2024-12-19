@@ -18,4 +18,12 @@ public partial class SwordsmanStateMachine : PatrolStateMachine
 		
 		base._Ready();
 	}
+	
+	public override bool EnterDefaultState(bool fromAttack) {
+		if(fromAttack) {
+			ChangeState(AggroState);
+			return true;
+		}
+		return false;
+	}
 }

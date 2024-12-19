@@ -44,6 +44,11 @@ public partial class PlayerBlockState : PlayerState
 	
 	protected override bool CheckStates()
 	{
+		if(PostureController.CurrentPosture <= 0) {
+			MovementController.CanSwitchDirections = true;
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
+			return true;
+		}
 		if(!DeflectController.DesiredDeflect) {
 			_timeoutBlock(false);
 			_released = true;
@@ -57,7 +62,7 @@ public partial class PlayerBlockState : PlayerState
 		base.Enter(previousState);
 		_released = false;
 		CanFlip = false;
-		
+		MovementController.CanSwitchDirections = false;
 		/*
 		if(previousState is PlayerJumpState) {
 			_subState = JUMPING;
@@ -71,6 +76,18 @@ public partial class PlayerBlockState : PlayerState
 
 	public override void Process(double delta)
 	{
+		if(AttackController.DesiredAttack) {
+			AttackController.StartSlashBuffer();
+		}
+		if(MovementController.DesiredDash) {
+			MovementController.StartDashBuffer();
+		}
+		if(SpellController.DesiredShoot) {
+			SpellController.StartShootBuffer();
+		}
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartDeflectBuffer();
+		}
 		/*
 		_HandleVerticalChanges();
 	
@@ -98,6 +115,9 @@ public partial class PlayerBlockState : PlayerState
 		// _HandleHorizontalMovement(delta);
 		// _HandleVerticalMovement(delta);
 		MovementController.AddFriction(delta);
+		if(!MovementController.Grounded) {
+			MovementController.Fall(delta);
+		}
 	}
 	/*
 	private void _HandleHorizontalMovement(double delta) {
@@ -178,6 +198,9 @@ public partial class PlayerBlockState : PlayerState
 	*/
 
 	private void _EnterDefaultState() {
+		MovementController.CanSwitchDirections = true;
+		if(!ActiveState)
+			return;
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
 }

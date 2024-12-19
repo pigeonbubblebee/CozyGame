@@ -79,6 +79,12 @@ public partial class HUD : Control
 			// Ratio *= 100.0;
 			
 			_postureBar.Value = Ratio * 100;
+			
+			if(Ratio == 0f) {
+				_postureBar.Visible = false;
+			} else {
+				_postureBar.Visible = true;
+			}
 		}
 	}
 }

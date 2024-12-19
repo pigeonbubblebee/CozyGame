@@ -11,6 +11,7 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerSpellController SpellController { get; private set; }
 	public PlayerAnimationController AnimationController { get; private set; }
 	public PlayerDeflectController DeflectController { get; private set; }
+	public PlayerPostureController PostureController { get; private set; }
 	
 	private Player _player;
 	public PlayerStats Stats => _player.CurrentPlayerStats;
@@ -33,6 +34,8 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerSpellState SpellState { get; private set; }
 	[Export] private NodePath _playerBlockStatePath;
 	public PlayerBlockState BlockState { get; private set; }
+	[Export] private NodePath _playerStaggerStatePath;
+	public PlayerStaggerState StaggerState { get; private set; }
 	
 	public void Initialize(Player player) {
 		_player = player;
@@ -43,6 +46,7 @@ public partial class PlayerStateMachine : StateMachine
 		SpellController = player.SpellController;
 		AnimationController = player.AnimationController;
 		DeflectController = player.DeflectController;
+		PostureController = player.PostureController;
 		// Stats = player.PlayerStatsResource;
 	}
 	
@@ -67,6 +71,8 @@ public partial class PlayerStateMachine : StateMachine
 		SpellState.Initialize(this);
 		BlockState = GetNode<PlayerBlockState>(_playerBlockStatePath);
 		BlockState.Initialize(this);
+		StaggerState = GetNode<PlayerStaggerState>(_playerStaggerStatePath);
+		StaggerState.Initialize(this);
 
 		EnterDefaultState();
 	}

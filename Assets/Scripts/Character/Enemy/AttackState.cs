@@ -21,13 +21,15 @@ public partial class AttackState : State
 	
 	private void _enterDefaultState() {
 		if(ActiveState)
-			((EnemyStateMachine) ParentStateMachine).EnterDefaultState();
+			((EnemyStateMachine) ParentStateMachine).EnterDefaultState(true);
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
 		if(EnemyAI.Staggered) {
+			if(EnemyAI.CurrentAttack != null)
+				EnemyAI.CurrentAttack.Interrupt();
 			((EnemyStateMachine) ParentStateMachine).ChangeState(((EnemyStateMachine) ParentStateMachine).PostureBreakState);
 			return;
 		}

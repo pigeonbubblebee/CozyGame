@@ -39,6 +39,9 @@ public partial class PlayerDashState : PlayerState
 		if(SpellController.DesiredShoot) {
 			SpellController.StartShootBuffer();
 		}
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartDeflectBuffer();
+		}
 	}
 
 	public override void PhysicsProcess(double delta) {
@@ -61,6 +64,8 @@ public partial class PlayerDashState : PlayerState
 	}
 
 	private void _EnterDefaultState() {
+		if(!ActiveState)
+			return;
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
 }

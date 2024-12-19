@@ -16,14 +16,36 @@ public partial class PlayerAttackState : PlayerState
 	}
 	
 	public override void PlayStateAnimation() {
-		AnimationController.PlayAnimation(DeflectController.Counter ? AnimationController.CounterAnimationClip : AnimationController.SlashAnimationClip, Stats.SlashTime);
+		GD.Print("Animation Play!");
+		if(AttackController.CanDeathBlow) {
+			AnimationController.PlayAnimation(AnimationController.DeathBlowAnimationClip);
+			return;
+		}
+		
+		if(DeflectController.Counter) {
+			AnimationController.PlayAnimation(AnimationController.CounterAnimationClip, Stats.SlashTime);
+			return;
+		}
+		
+		GD.Print(AttackController.CurrentSlashComboAttack);
+		
+		// AnimationController.PlayAnimation(DeflectController.Counter ? AnimationController.CounterAnimationClip : AnimationController.SlashAnimationClip, Stats.SlashTime);
 		// TODO: Start Idle Animation
+		
+		switch(AttackController.CurrentSlashComboAttack) {
+			case 0:
+				AnimationController.PlayAnimation(AnimationController.SlashAnimationClip, Stats.SlashTime);
+				break;
+			case 1:
+				AnimationController.PlayAnimation(AnimationController.Slash2AnimationClip, Stats.SlashTime);
+				break;
+		}
 	}
 
 	public override void Enter(State previousState) {
-		base.Enter(previousState);
 		
-		CanFlip = false;
+		
+		
 		
 		// TODO: Reset Colliders
 		AttackController.Slash();
@@ -36,6 +58,10 @@ public partial class PlayerAttackState : PlayerState
 		} else {
 			_subState = NEUTRAL;
 		}
+		
+		base.Enter(previousState);
+		
+		CanFlip = false;
 	}
 
 	public override void Process(double delta)
@@ -57,16 +83,25 @@ public partial class PlayerAttackState : PlayerState
 		if(SpellController.DesiredShoot) {
 			SpellController.StartShootBuffer();
 		}
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartDeflectBuffer();
+		}
 	}
 
 	 public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
-		_HandleHorizontalMovement(delta);
+		
+		_HandleHorizontalMovement(delta);	
 		_HandleVerticalMovement(delta);
 	}
 
 	private void _HandleHorizontalMovement(double delta) {
+		if(AttackController.CanDeathBlow) {
+			MovementController.AddFriction(delta);
+			return;
+		}
+		
 		Vector2 inputDir = MovementController.InputVector;
 		
 		if(inputDir != Vector2.Zero) {
@@ -143,6 +178,9 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	private void _EnterDefaultState() {
+		if(!ActiveState) {
+			return;
+		}
 		DeflectController.Counter = false;
 		ParentPlayerStateMachine.EnterDefaultState();
 	}

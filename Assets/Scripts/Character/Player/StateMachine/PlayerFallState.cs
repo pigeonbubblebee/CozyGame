@@ -18,6 +18,9 @@ public partial class PlayerFallState : PlayerState
 		if(MovementController.DesiredJump) {
 			MovementController.StartJumpBuffer();
 		}
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartDeflectBuffer();
+		}
 	}
 
 	 public override void PhysicsProcess(double delta) {
@@ -48,6 +51,10 @@ public partial class PlayerFallState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
 			return true;
 		}*/
+		if(PostureController.CurrentPosture <= 0) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
+			return true;
+		}
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) 
 			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);

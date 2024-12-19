@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boa1bkgr064an"
-path="res://.godot/imported/posture_bar.png-a99a6da7c8dc4c3e8e73d90c7a1638e2.ctex"
+uid="uid://bw6t3wlb2l0en"
+path="res://.godot/imported/blockright.png-5d0daf829df86eef0d8d17b7439fd51c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/posture_bar.png"
-dest_files=["res://.godot/imported/posture_bar.png-a99a6da7c8dc4c3e8e73d90c7a1638e2.ctex"]
+source_file="res://Assets/Art/Character/Player/blockright.png"
+dest_files=["res://.godot/imported/blockright.png-5d0daf829df86eef0d8d17b7439fd51c.ctex"]
 
 [params]
 

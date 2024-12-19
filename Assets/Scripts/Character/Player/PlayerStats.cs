@@ -26,15 +26,23 @@ public partial class PlayerStats : Resource
 	[ExportCategory("Slashing")]
 	[Export] public float SlashTime { get; private set; }
 	[Export] public int SlashDamage { get; private set; }
-	[Export] public int SlashCounterDamage { get; private set; }
-	// [Export] public int DeathBlowDamage { get; private set; }
 	[Export] public int SlashPostureDamage { get; private set; }
 	[Export] public int SlashRange { get; private set; }
 	[Export] public float SlashCooldown { get; private set; }
 	[Export] public float SlashBuffer { get; private set; }
+	[Export] public float SlashComboTime { get; private set; }
 	[Export] public float SlashKnockback { get; private set; }
 	[Export] public float SlashKnockbackAcceleration { get; private set; }
 	[Export] public float SlashKnockbackTime { get; private set; }
+	[Export] public float SlashShakeTime { get; private set; }
+	[Export] public float SlashShakeMagnitude { get; private set; }
+	[Export] public float SlashFreezeTime { get; private set; }
+	[Export] public float SlashFreezeDelay { get; private set; }
+	[Export] public float DeathBlowFreezeTime { get; private set; }
+	[ExportCategory("Counter")]
+	[Export] public int SlashCounterDamage { get; private set; }
+	[Export] public float CounterShakeTime { get; private set; }
+	[Export] public float CounterShakeMagnitude { get; private set; }
 	[ExportCategory("Health")]
 	[Export] public int MaxHealth { get; private set; }
 	[Export] public int MaxHeals { get; private set; }
@@ -57,11 +65,22 @@ public partial class PlayerStats : Resource
 	[Export] public float DeflectTimeout { get; private set; }
 	[Export] public float BlockTimeout { get; private set; }
 	[Export] public float CounterWindow { get; private set; }
+	[Export] public float BlockKnockback { get; private set; }
+	[Export] public float BlockKnockbackAcceleration { get; private set; }
+	[Export] public float BlockKnockbackTime { get; private set; }
+	[Export] public float DeflectKnockback { get; private set; }
+	[Export] public float DeflectKnockbackAcceleration { get; private set; }
+	[Export] public float DeflectKnockbackTime { get; private set; }
+	[Export] public float BlockShakeTime { get; private set; }
+	[Export] public float BlockShakeMagnitude { get; private set; }
+	[Export] public float DeflectShakeTime { get; private set; }
+	[Export] public float DeflectShakeMagnitude { get; private set; }
 	[ExportCategory("Posture")]
 	[Export] public int MaxPosture { get; private set; }
 	[Export] public int PostureRegeneration { get; private set; }
 	[Export] public float PostureRegenerationDisengagementTime { get; private set; }
 	[Export] public float PostureRegenerationCooldown { get; private set; }
+	[Export] public float StaggerRecoveryTime { get; private set; }
 
 	// Make sure you provide a parameterless constructor.
 	// In C#, a parameterless constructor is different from a

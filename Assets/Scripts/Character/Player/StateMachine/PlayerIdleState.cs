@@ -14,11 +14,6 @@ public partial class PlayerIdleState : PlayerState
 		// TODO: Start Idle Animation
 	}
 
-	public override void Process(double delta)
-	{
-		CheckStates();
-	}
-
 	public override void PhysicsProcess(double delta) {
 		base.PhysicsProcess(delta);
 		
@@ -27,7 +22,15 @@ public partial class PlayerIdleState : PlayerState
 
 	protected override bool CheckStates()
 	{
-		if(DeflectController.DeflectActuation) {
+		if(PostureController.CurrentPosture <= 0) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
+			return true;
+		}
+		if(PostureController.CurrentPosture <= 0) {
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
+			return true;
+		}
+		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
 			DeflectController.StartBlock();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
 			return true;

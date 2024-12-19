@@ -1,3 +1,13 @@
-res://Assets/Scene/main.tscn::fce3450e7f8dbeb78df4e9aa289e4293::1721423937::res://.godot/exported/133200997/export-51130ca0843ffd7f2f3b77922e23c0d0-main.scn
-res://Assets/Scene/player.tscn::6e49dd2552caf23e0f8e05e49033c757::1721424006::res://.godot/exported/133200997/export-a53d4df209b5040bcab980d4d36062b3-player.scn
-res://Assets/Scene/testing.tscn::12e2d9fca4ea502d9c95b50d6fbd549b::1721423936::res://.godot/exported/133200997/export-f85c73c91c608b0bcdaae7e4f5de8304-testing.scn
+res://Assets/Scene/main.tscn::d55eb26b5d65937a2b641111f4b88bb4::1734054369::res://.godot/exported/133200997/export-51130ca0843ffd7f2f3b77922e23c0d0-main.scn
+res://Assets/Scene/player.tscn::3d6cec92f18df6b61496bd24d64fd7cf::1734054369::res://.godot/exported/133200997/export-a53d4df209b5040bcab980d4d36062b3-player.scn
+res://Assets/Scene/testing.tscn::3b28c5047dd26ef539045230d7409fdb::1734054369::res://.godot/exported/133200997/export-f85c73c91c608b0bcdaae7e4f5de8304-testing.scn
+res://Assets/Scene/Enemy/patrolling_enemy.tscn::9d71f4b32a3daf4bab4eb3353187df3b::1734054370::res://.godot/exported/133200997/export-0921ffb55a1f47a552b20ca82abe79c6-patrolling_enemy.scn
+res://Assets/Scene/Enemy/swordsman_enemy.tscn::909017ed752f61fcc77ea4ea43b3263c::1734054370::res://.godot/exported/133200997/export-d4728249e2b803505ad427e473bdaf33-swordsman_enemy.scn
+res://Assets/Scene/bullet.tscn::6adfdd80754a6c6b8e1f99cad13f6f13::1734054369::res://.godot/exported/133200997/export-339f00d62be413349bae3b945eb228b6-bullet.scn
+res://Assets/Scene/inventory.tscn::251f6f8ae5ed2673a7eb456bc87fcdbb::1734054369::res://.godot/exported/133200997/export-d49ed307e6a3ab873dfe098010cc9a49-inventory.scn
+res://Assets/Scene/tile_map.tscn::6679b31b6e9b490283398abb43b0cfe8::1734054369::res://.godot/exported/133200997/export-7800a1d9b7a21cfe15017e805a3b7ca7-tile_map.scn
+res://Assets/Scene/ui_manager.tscn::9a5a7e6b3562755a6b83a144fcab1bf2::1734054369::res://.godot/exported/133200997/export-6cde82377ce95d7adde0e630cbd52093-ui_manager.scn
+res://Data/Items/Stick.tres::75ca9ff6703ff0a4ab29a80b66b876dc::1725325345::res://.godot/exported/133200997/export-5a8541671a88b2adbb08ef4a18523890-Stick.res
+res://Data/Items/Sword.tres::2ddba9149aa3008429c1c1a771e7aa92::1725391882::res://.godot/exported/133200997/export-b4ab3792cdf19de8777afe48f409a1f0-Sword.res
+res://Data/Items/TestingItem.tres::944d33b6ed26c5cfa93179f062508daf::1724521768::res://.godot/exported/133200997/export-aac15336abac47482b6275bcd85db096-TestingItem.res
+res://Data/player_stats.tres::fbd228fcd8457077212c984b99b8a51c::1733969931::res://.godot/exported/133200997/export-78c4b8ea78c229a86b7727b78f80a2cd-player_stats.res

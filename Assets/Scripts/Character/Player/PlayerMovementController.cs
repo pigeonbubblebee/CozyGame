@@ -84,7 +84,7 @@ public partial class PlayerMovementController : Node
 
 	public override void _PhysicsProcess(double delta) {
 		if(!_knockbackTimer.IsStopped()) {
-			GD.Print("Recoil!");
+			// GD.Print("Recoil!");
 			KnockbackRecoil(new Vector2(_knockbackDirection, 0f), _knockbackSpeed, _knockbackAcceleration, delta);
 		} 
 		_PlayerMovement();

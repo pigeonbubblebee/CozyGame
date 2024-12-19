@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=44 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/EnemySwordsmanAI.cs" id="1_pixhq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs" id="2_c064p"]
@@ -10,13 +10,14 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="6_etamu"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="7_s56hu"]
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="7_weinp"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/PostureBreakState.cs" id="9_kxfd3"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs" id="11_73tpf"]
 [ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="12_5k21i"]
-[ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/posture_bar_bg.png" id="13_gf3to"]
-[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/posture_bar.png" id="13_gt27s"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyBar.cs" id="14_bjj0w"]
-[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/health_bar.png" id="14_ha2ay"]
-[ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/health_bar_bg.png" id="15_im35n"]
+[ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="14_namlg"]
+[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="15_lqlrn"]
+[ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/UI/health_bar_bg.png" id="16_tlyw6"]
+[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/UI/health_bar.png" id="17_1vvo5"]
+[ext_resource type="Texture2D" uid="uid://bajwcvcu40f18" path="res://Assets/Art/UI/execution_prompt.png" id="18_n6nlx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_noim0"]
 size = Vector2(80, 200)
@@ -200,7 +201,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
-size = Vector2(208, 178.5)
+size = Vector2(200, 178.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
 size = Vector2(78.5, 200)
@@ -218,24 +219,26 @@ RetreatRange = 170.0
 FlipParentPath = NodePath("Flip")
 RayCastLedgePath = NodePath("Flip/LedgeCheck")
 RayCastWallPath = NodePath("Flip/WallCheck")
-Speed = 230.0
+Speed = 250.0
 WaitTimeBetweenFlips = 1.0
 HitboxPath = NodePath("Flip/Hurtbox")
 HealthSystemPath = NodePath("Health")
 _healthBarPath = NodePath("Bars/HealthBar")
-MaxHealth = 20
+MaxHealth = 40
 MaxPosture = 100
-PostureRegenerationCooldownTime = 4.0
+PostureRegenerationCooldownTime = 2.0
 PostureRegenerationTime = 0.5
 PostureRegenerationRate = 30
 _postureRegenerationCooldownTimerPath = NodePath("PostureRegenerationCooldown")
 _postureRegenerationTimerPath = NodePath("PostureRegeneration")
+_deathblowMarkPath = NodePath("Bars/Deathblow")
 _attacksParentPath = NodePath("Flip/AttackPattern")
 _spritePath = NodePath("Flip/AnimatedSprite2D")
 StateMachinePath = NodePath("StateMachine")
 _postureBarPath = NodePath("Bars/PostureBar")
-StaggerRecoveryTime = 0.7
-DeathBlowDamage = 20
+StaggerRecoveryTime = 4.0
+DeathBlowDamage = 40
+_knockbackTimePath = NodePath("KnockbackTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -258,14 +261,13 @@ position = Vector2(8, -16)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fagf8")
 animation = &"slash"
-frame = 7
-frame_progress = 0.987358
+frame_progress = 0.689977
 
 [node name="AggroChecks" type="Node2D" parent="Flip"]
 
 [node name="AggroCheckForward" type="RayCast2D" parent="Flip/AggroChecks"]
-position = Vector2(-320, 0)
-target_position = Vector2(1550, 0)
+position = Vector2(-56, 0)
+target_position = Vector2(1144, 0)
 
 [node name="AggroCheckUp" type="RayCast2D" parent="Flip/AggroChecks"]
 target_position = Vector2(0, -80)
@@ -278,6 +280,9 @@ SlashRange = 170.0
 SlashDamage = 10
 PostureDamage = 50
 SlashCooldown = 1.0
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 6
 OnFrame = 5
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
@@ -290,7 +295,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="Flip/AttackPattern/Slash/SwordHit"]
-position = Vector2(104, -17.25)
+position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_v6n7n")
 disabled = true
 
@@ -324,7 +329,7 @@ script = ExtResource("6_742kd")
 script = ExtResource("7_s56hu")
 
 [node name="PostureBreakState" type="Node2D" parent="StateMachine"]
-script = ExtResource("9_kxfd3")
+script = ExtResource("11_73tpf")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("6_etamu")
@@ -336,6 +341,9 @@ one_shot = true
 one_shot = true
 
 [node name="PostureRegenerationCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Bars" type="Node2D" parent="."]
@@ -357,8 +365,8 @@ stretch_margin_left = 2
 stretch_margin_top = 2
 stretch_margin_right = 2
 stretch_margin_bottom = 2
-texture_under = ExtResource("13_gf3to")
-texture_progress = ExtResource("13_gt27s")
+texture_under = ExtResource("14_namlg")
+texture_progress = ExtResource("15_lqlrn")
 radial_fill_degrees = 0.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="Bars"]
@@ -374,6 +382,14 @@ stretch_margin_left = 4
 stretch_margin_top = 4
 stretch_margin_right = 4
 stretch_margin_bottom = 4
-texture_under = ExtResource("15_im35n")
-texture_progress = ExtResource("14_ha2ay")
+texture_under = ExtResource("16_tlyw6")
+texture_progress = ExtResource("17_1vvo5")
 radial_fill_degrees = 0.0
+
+[node name="Deathblow" type="TextureRect" parent="Bars"]
+visible = false
+offset_left = -64.0
+offset_top = -320.0
+offset_right = 64.0
+offset_bottom = -192.0
+texture = ExtResource("18_n6nlx")

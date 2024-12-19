@@ -42,4 +42,8 @@ public partial class EnemyStateMachine : StateMachine
 	public virtual bool EnterDefaultState() {
 		return false;
 	}
+	
+	public virtual bool EnterDefaultState(bool fromAttack) {
+		return EnterDefaultState();
+	}
 }

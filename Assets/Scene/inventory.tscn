@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InventoryUI.cs" id="1_pvkgr"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="2_1tf1v"]
 [ext_resource type="Resource" uid="uid://cy7j7pcjeceba" path="res://Data/Items/Stick.tres" id="3_31qnq"]
-[ext_resource type="Texture2D" uid="uid://2fte26d3sb46" path="res://Sprite-0002.png" id="3_hy8f1"]
+[ext_resource type="Texture2D" uid="uid://ctcjp4dhg7kn" path="res://Sprite-0002.png" id="3_hy8f1"]
 [ext_resource type="Resource" uid="uid://dh64y30leyvhe" path="res://Data/Items/Sword.tres" id="4_p7336"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]

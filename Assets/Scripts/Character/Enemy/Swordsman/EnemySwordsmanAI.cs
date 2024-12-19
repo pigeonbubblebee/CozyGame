@@ -42,15 +42,23 @@ public partial class EnemySwordsmanAI : EnemyPatrolAI
 			hit = true;
 			LastKnownPlayerPosition = TargetPlayer.GlobalPosition;
 		}
+		// GD.Print(hit);
 		
-		if(!hit && _deAggroTimer.IsStopped()) {
+		if(!hit && _deAggroTimer.Paused) {
 			_deAggroTimer.Start(DeAggroTime);
+			_deAggroTimer.Paused = false;
 		}
 		if(hit) {
-			_deAggroTimer.Stop();
+			_deAggroTimer.Paused = true;
 		}
 		
 		return hit;
+	}
+	
+	public override void _Process(double delta) {
+		base._Process(delta);
+		
+		// GD.Print(_deAggroTimer.TimeLeft);
 	}
 	
 	private bool GetRayCastPlayerHit(RayCast2D rayCast) {
@@ -58,10 +66,9 @@ public partial class EnemySwordsmanAI : EnemyPatrolAI
 		if(rayCast.IsColliding()) {
 			var collision = rayCast.GetCollider();
 			if(collision is Node) {
-				hit = ((Node)collision).IsInGroup("Player");
-				
 				if(collision is Player) {
 					TargetPlayer = (Player)collision;
+					hit = true;
 				}
 			}
 		}

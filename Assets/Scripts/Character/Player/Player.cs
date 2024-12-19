@@ -31,6 +31,8 @@ public partial class Player : CharacterBody2D
 	public PlayerPostureController PostureController  { get; private set; }
 	[Export] private NodePath _cameraPath;
 	public PlayerCamera Camera  { get; private set; }
+	
+	private GameManager _gameManager;
 
 	public override void _EnterTree()
 	{
@@ -74,9 +76,14 @@ public partial class Player : CharacterBody2D
 	
 	public override void _Ready() {
 		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
+		_gameManager = GetNode<GameManager>("/root/GameManager");
 	}
 	
 	public void TakeDamage(int damage, int postureDamage, Enemy e) {
+		Camera.Shake(0.2f, 2000f);
+		_gameManager.FreezeFrame(0.02f, 0.08f);
+		MovementController.ApplyKnockback(e.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 2000, 2000, 0.025f);
+		
 		if(DeflectController.Blocking) {
 			DeflectController.Block(damage, postureDamage, e);
 		} else {

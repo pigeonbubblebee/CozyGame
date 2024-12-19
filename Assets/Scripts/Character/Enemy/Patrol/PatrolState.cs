@@ -34,6 +34,7 @@ public partial class PatrolState : State
 		if(!_patrolAI.CanPatrol) {
 			PatrolStateMachine patrolStateMachine = ((PatrolStateMachine) ParentStateMachine);
 			patrolStateMachine.ChangeState(patrolStateMachine.IdleState);
+			return;
 		}
 	}
 	

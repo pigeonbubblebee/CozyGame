@@ -16,6 +16,8 @@ public partial class EnemyPatrolAI : Enemy
 	[Export] public float WaitTimeBetweenFlips;
 	private int moveDirection = 1;
 	
+	// public event Action FinishWait;
+	
 	public bool CanPatrol = true;
 	[Export] public bool Idle = false;
 	
@@ -64,12 +66,19 @@ public partial class EnemyPatrolAI : Enemy
 	}
 	
 	private void _FinishWait() {
-		Flip();
+		if(((PatrolStateMachine) StateMachine).CurrentState is PatrolIdleState) {
+			Flip();
+		}
+		// FinishWait?.Invoke();
 		CanPatrol = true; 
 	}
 	
 	public void Accelerate() {
 		this.Velocity = new Vector2(Speed * moveDirection, Velocity.Y);
+	}
+	
+	public void Accelerate(float speed) {
+		this.Velocity = new Vector2(speed * moveDirection, Velocity.Y);
 	}
 	
 	public void Decelerate() {

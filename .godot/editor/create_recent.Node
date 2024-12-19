@@ -1,6 +1,7 @@
-Timer
-Node2D
 TextureRect
+Node2D
+Timer
+GPUParticles2D
 Node
 RemoteTransform2D
 TextureProgressBar

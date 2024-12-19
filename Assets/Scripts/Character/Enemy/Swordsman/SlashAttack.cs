@@ -11,12 +11,18 @@ public partial class SlashAttack : EnemyAttack
 	[Export] public float SlashCooldown;
 	private bool _canHit;
 	
+	[Export] public float LungeSpeed;
+	[Export] public float LungeRange;
+	[Export] public int StopLungeFrame;
+	
 	[Export] public int OnFrame;
 	
 	[Export] private NodePath _attackAreaColliderPath;
 	private CollisionShape2D _attackAreaCollider;
 	[Export] private NodePath _attackAreaPath;
 	private Area2D _attackArea;
+	
+	private bool _accelerating;
 	
 	public override void Initialize(Enemy e) {
 		base.Initialize(e);
@@ -25,8 +31,13 @@ public partial class SlashAttack : EnemyAttack
 	
 	private void _checkAnimationEvent() {
 		if(EnemyAI.Sprite.Frame == OnFrame && EnemyAI.Sprite.Animation == AnimationName) {
+			_accelerating = true;
 			_canHit = true;
 			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
+		}
+		
+		if(EnemyAI.Sprite.Frame == StopLungeFrame && EnemyAI.Sprite.Animation == AnimationName) {
+			_accelerating = false;
 		}
 	}
 	
@@ -47,9 +58,35 @@ public partial class SlashAttack : EnemyAttack
 		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanSlash;
 	}
 	
+	public override void _Process(double delta) {
+		base._Process(delta);
+		
+		if(!Active)
+			return;
+		if(_accelerating) {
+			if((Mathf.Abs(((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X - EnemyAI.GlobalPosition.X) > LungeRange)) {
+				bool facingPlayer = false;
+				if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() > 0 && ((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X > EnemyAI.GlobalPosition.X)
+					facingPlayer = true;
+				else if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() < 0 && ((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X < EnemyAI.GlobalPosition.X)
+					facingPlayer = true;
+					
+				if(facingPlayer)
+					((EnemyPatrolAI)EnemyAI).Accelerate(LungeSpeed);
+				else
+					((EnemyPatrolAI)EnemyAI).Decelerate();
+			} else {
+				((EnemyPatrolAI)EnemyAI).Decelerate();
+			}
+		} else {
+			((EnemyPatrolAI)EnemyAI).Decelerate();
+		}
+	}
+	
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
 
+		_accelerating = false;
 		Slash();
 		StartSlashCooldown();
 	}
@@ -61,11 +98,21 @@ public partial class SlashAttack : EnemyAttack
 	}
 
 	private void _FinishSlash() {
+		_accelerating = false;
 		_canHit = false;
 		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		// CanSwitchAttackDirection = true;
 		Finish();
+	}
+	
+	public override void Interrupt() {
+		base.Interrupt();
+		
+		_accelerating = false;
+		_canHit = false;
+		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 	
 	public void StartSlashCooldown() {

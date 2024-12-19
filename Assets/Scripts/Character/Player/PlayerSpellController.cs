@@ -79,6 +79,10 @@ public partial class PlayerSpellController : Node2D
 	}
 	
 	public void UseSpell() {
+		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
+		_player.MovementController.ApplyKnockback(-_player.MovementController.Direction, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
+		// _gameManager.FreezeFrame(0.02f, 0.1f);
+				
 		CurrentMana -= _playerStats.ManaUsage;
 		ManaUseEvent?.Invoke(_playerStats.ManaUsage);
 		// CanSwitchAttackDirection = false;

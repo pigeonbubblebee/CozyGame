@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://77s2x2dymf6j"]
+[gd_scene load_steps=25 format=3 uid="uid://77s2x2dymf6j"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs" id="1_qoybc"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs" id="2_0ksde"]
@@ -9,10 +9,11 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="6_tr3xk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/PostureBreakState.cs" id="7_l3pkq"]
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="7_lulx5"]
-[ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/posture_bar_bg.png" id="10_0sa6g"]
-[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/posture_bar.png" id="10_253dk"]
-[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/health_bar.png" id="11_5euye"]
-[ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/health_bar_bg.png" id="12_28jye"]
+[ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="10_vukd0"]
+[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="11_ikqvg"]
+[ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/UI/health_bar_bg.png" id="12_prrmg"]
+[ext_resource type="Texture2D" uid="uid://bajwcvcu40f18" path="res://Assets/Art/UI/execution_prompt.png" id="12_ylubx"]
+[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/UI/health_bar.png" id="13_7tmg2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27hjv"]
 atlas = ExtResource("7_lulx5")
@@ -101,6 +102,7 @@ PostureRegenerationTime = 0.5
 PostureRegenerationRate = 30
 _postureRegenerationCooldownTimerPath = NodePath("PostureRegenerationCooldown")
 _postureRegenerationTimerPath = NodePath("PostureRegeneration")
+_deathblowMarkPath = NodePath("Deathblow")
 _attacksParentPath = NodePath("Flip/AttackPatterns")
 _spritePath = NodePath("Flip/AnimatedSprite2D")
 StateMachinePath = NodePath("StateMachine")
@@ -191,9 +193,16 @@ stretch_margin_left = 2
 stretch_margin_top = 2
 stretch_margin_right = 2
 stretch_margin_bottom = 2
-texture_under = ExtResource("10_0sa6g")
-texture_progress = ExtResource("10_253dk")
+texture_under = ExtResource("10_vukd0")
+texture_progress = ExtResource("11_ikqvg")
 radial_fill_degrees = 0.0
+
+[node name="Deathblow" type="TextureRect" parent="."]
+offset_left = -296.0
+offset_top = -1216.0
+offset_right = -168.0
+offset_bottom = -1088.0
+texture = ExtResource("12_ylubx")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = -104.0
@@ -207,6 +216,6 @@ stretch_margin_left = 4
 stretch_margin_top = 4
 stretch_margin_right = 4
 stretch_margin_bottom = 4
-texture_under = ExtResource("12_28jye")
-texture_progress = ExtResource("11_5euye")
+texture_under = ExtResource("12_prrmg")
+texture_progress = ExtResource("13_7tmg2")
 radial_fill_degrees = 0.0

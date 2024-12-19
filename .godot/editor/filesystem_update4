@@ -1,13 +1,12 @@
-res://Assets/Scene/main.tscn
+res://Assets/Scene/Enemy/swordsman_enemy.tscn
 res://Assets/Scripts/Character/Player/PlayerStats.cs
-res://Assets/Scene/player.tscn
+res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs
 res://Assets/Scene/ui_manager.tscn
 res://Assets/Scene/inventory.tscn
 res://Assets/Scene/bullet.tscn
 res://Assets/Scene/tile_map.tscn
 res://Assets/Scene/testing.tscn
 res://Assets/Scene/Enemy/patrolling_enemy.tscn
-res://Assets/Scene/Enemy/swordsman_enemy.tscn
 res://Assets/Scripts/Character/Enemy/AttackState.cs
 res://Assets/Scripts/Character/Enemy/Enemy.cs
 res://Assets/Scripts/Character/Enemy/EnemyAttack.cs
@@ -29,6 +28,7 @@ res://Assets/Scripts/Character/Enemy/TestingDummy.cs
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Character/Player/PlayerAnimationController.cs
 res://Assets/Scripts/Character/Player/PlayerAttackController.cs
+res://Assets/Scripts/Character/Player/PlayerCamera.cs
 res://Assets/Scripts/Character/Player/PlayerDeflectController.cs
 res://Assets/Scripts/Character/Player/PlayerHealController.cs
 res://Assets/Scripts/Character/Player/PlayerInteractionController.cs
@@ -65,5 +65,5 @@ res://Assets/Scripts/Core/User Interface/UIManager.cs
 res://Assets/Scripts/Interactables/Interactable.cs
 res://Assets/Scripts/Interactables/TestingItem.cs
 res://Assets/Scripts/Items/Item.cs
+res://Assets/Scene/player.tscn
 res://Data/player_stats.tres
-res://Assets/Scripts/Character/Player/PlayerCamera.cs

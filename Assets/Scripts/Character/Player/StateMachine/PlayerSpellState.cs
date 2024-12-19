@@ -32,6 +32,9 @@ public partial class PlayerSpellState : PlayerState
 	{
 		CheckStates();
 		
+		if(DeflectController.DeflectActuation) {
+			DeflectController.StartDeflectBuffer();
+		}
 		if(AttackController.DesiredAttack) {
 			AttackController.StartSlashBuffer();
 		}
@@ -60,6 +63,8 @@ public partial class PlayerSpellState : PlayerState
 	
 	private void _EnterDefaultState() {
 		MovementController.CanSwitchDirections = true;
+		if(!ActiveState)
+			return;
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
 }

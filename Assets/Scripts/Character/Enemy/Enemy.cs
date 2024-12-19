@@ -24,6 +24,8 @@ public partial class Enemy : CharacterBody2D
 	private Timer _postureRegenerationCooldownTimer;
 	[Export] private NodePath _postureRegenerationTimerPath;
 	private Timer _postureRegenerationTimer;
+	[Export] private NodePath _deathblowMarkPath;
+	private TextureRect _deathblowMark;
 	
 	[Export] private NodePath _attacksParentPath;
 	protected Node2D _attacksParent;
@@ -53,6 +55,14 @@ public partial class Enemy : CharacterBody2D
 	
 	[Export] public int DeathBlowDamage;
 	
+	// --------- Knockback Variables ---------
+	[Export] private NodePath _knockbackTimePath;
+	private Timer _knockbackTimer;
+	
+	private float _knockbackSpeed;
+	private float _knockbackAcceleration;
+	private int _knockbackDirection;
+	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
@@ -79,6 +89,7 @@ public partial class Enemy : CharacterBody2D
 		
 		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
 		_healthBar = GetNode<TextureProgressBar>(_healthBarPath);
+		_deathblowMark = GetNode<TextureRect>(_deathblowMarkPath);
 		
 		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 		
@@ -94,6 +105,9 @@ public partial class Enemy : CharacterBody2D
 			}
 			i ++;
 		}
+		
+		_knockbackTimer = GetNode<Timer>(_knockbackTimePath);
+		_knockbackTimer.Timeout += _StopKnockback;
 	}
 	
 	public void ExecuteAttack(EnemyAttack e, Player p) {
@@ -135,13 +149,20 @@ public partial class Enemy : CharacterBody2D
 			GetTree().CreateTimer(StaggerRecoveryTime).Timeout += _RecoverStagger;
 			Staggered = true;
 			CurrentPosture = 0;
+			_deathblowMark.Visible = true;
+			
+			_postureRegenerationCooldownTimer.Start(StaggerRecoveryTime + PostureRegenerationCooldownTime);
+		} else {
+			_postureRegenerationCooldownTimer.Start(PostureRegenerationCooldownTime);
 		}
-		_postureRegenerationCooldownTimer.Start(PostureRegenerationCooldownTime);
 		_postureRegenerationTimer.Stop();
 	}
 	
 	private void _RecoverStagger() {
+		
+		// _postureRegenerationTimer.Stop();
 		Staggered = false;
+		_deathblowMark.Visible = false;
 		StaggerRecoveryEvent?.Invoke();
 		CurrentPosture = MaxPosture;
 	}
@@ -167,6 +188,11 @@ public partial class Enemy : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		if(!_knockbackTimer.IsStopped()) {
+			// GD.Print("Recoil!");
+			KnockbackRecoil(new Vector2(_knockbackDirection, 0f), _knockbackSpeed, _knockbackAcceleration, delta);
+		} 
+		
 		if(!IsOnFloor()) {
 			Vector2 velocity = Velocity;
 			velocity.Y += GRAVITY * (float) delta * 60f;
@@ -184,5 +210,24 @@ public partial class Enemy : CharacterBody2D
 	
 	protected virtual void OnDeath() {
 		this.QueueFree();
+	}
+	
+	public void ApplyKnockback(int direction, float speed, float acceleration, float time) {
+		_knockbackSpeed = speed;
+		_knockbackAcceleration = acceleration;
+		_knockbackDirection = direction;
+		_knockbackTimer.Start(time);
+	}
+	
+	private void _StopKnockback() {
+		// GD.Print("Stop Recoil!");
+		Vector2 velocity = new Vector2(0, Velocity.Y);
+		this.Velocity = velocity;
+	}
+	
+	public void KnockbackRecoil(Vector2 direction, float speed, float acceleration, double delta) {
+		Vector2 velocity = this.Velocity.MoveToward(speed * direction, acceleration * (float)delta * 60f);
+		velocity.Y = Velocity.Y;
+		this.Velocity = velocity;
 	}
 }
