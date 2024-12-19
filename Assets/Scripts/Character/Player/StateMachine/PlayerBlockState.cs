@@ -4,6 +4,7 @@ using System;
 public partial class PlayerBlockState : PlayerState
 {
 	private bool _released = true;
+	private bool _deflecting = false;
 	/*
 	private readonly int FALLING = -1;
 	private readonly int NEUTRAL = 0;
@@ -13,14 +14,16 @@ public partial class PlayerBlockState : PlayerState
 	public override void Initialize(StateMachine playerStateMachine) {
 		base.Initialize(playerStateMachine);
 
-		DeflectController.BlockEvent += _finishBlock;
+		DeflectController.BlockEvent += _checkDeflect;
 	}
 	
-	private void _finishBlock(bool deflect, int postureDamage, Enemy e) {
-		if(!deflect)
-			return;
-		_timeoutBlock(deflect);
-		_released = true;
+	private void _checkDeflect(bool deflect, int postureDamage, Enemy e) {
+		if(deflect)
+			_deflecting = true;
+		//if(!deflect)
+		// 	return;
+		//_timeoutBlock(deflect);
+		//_released = true;
 	}
 	
 	private void _timeoutBlock(bool deflect) {
@@ -50,7 +53,7 @@ public partial class PlayerBlockState : PlayerState
 			return true;
 		}
 		if(!DeflectController.DesiredDeflect) {
-			_timeoutBlock(false);
+			_timeoutBlock(_deflecting);
 			_released = true;
 			return true;
 		}
@@ -63,6 +66,7 @@ public partial class PlayerBlockState : PlayerState
 		_released = false;
 		CanFlip = false;
 		MovementController.CanSwitchDirections = false;
+		_deflecting = false;
 		/*
 		if(previousState is PlayerJumpState) {
 			_subState = JUMPING;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=157 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -37,6 +37,8 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSpellController.cs" id="17_ixdfb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="17_qt607"]
 [ext_resource type="Texture2D" uid="uid://dyvbwhdiyg0rk" path="res://Assets/Art/Character/Player/slasheffect.png" id="21_amuwv"]
+[ext_resource type="AudioStream" uid="uid://bciq2sqw1biex" path="res://Assets/Sound/SFX/Player/run.mp3" id="22_812t3"]
+[ext_resource type="AudioStream" uid="uid://b2nn7vring8so" path="res://Assets/Sound/SFX/Player/jump.wav" id="23_b73w5"]
 [ext_resource type="Texture2D" uid="uid://de3ftoqgp1604" path="res://Assets/Art/Character/Player/slasheffectleft.png" id="23_desyx"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerBlockState.cs" id="23_quwf0"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStaggerState.cs" id="28_i2mu6"]
@@ -45,7 +47,13 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerCamera.cs" id="31_fqcx7"]
 [ext_resource type="Texture2D" uid="uid://cu5a7fa4vuely" path="res://Assets/Art/VFX/deflecteffect.png" id="33_8cgmq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerPostureController.cs" id="37_ax0h8"]
+[ext_resource type="AudioStream" uid="uid://jvx0jqlthhq6" path="res://Assets/Sound/SFX/Player/slashhit.wav" id="37_f6755"]
+[ext_resource type="AudioStream" uid="uid://qyno48mhhse0" path="res://Assets/Sound/SFX/Player/deathblow.wav" id="38_x8y7v"]
+[ext_resource type="AudioStream" uid="uid://buxc4svmy1yn" path="res://Assets/Sound/SFX/Player/swing.wav" id="39_7tto5"]
 [ext_resource type="Texture2D" uid="uid://d0k3lqjeqetb8" path="res://Assets/Art/VFX/blockeffect.png" id="42_odsml"]
+[ext_resource type="AudioStream" uid="uid://cnpyrijoou5jq" path="res://Assets/Sound/SFX/Player/deflect.wav" id="46_pgerj"]
+[ext_resource type="AudioStream" uid="uid://cifo51815mb0o" path="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3" id="46_ts2if"]
+[ext_resource type="AudioStream" uid="uid://7iujovvp8snv" path="res://Assets/Sound/SFX/Player/hit.wav" id="50_hmeoo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qcb0p"]
 atlas = ExtResource("6_5danh")
@@ -865,6 +873,7 @@ _animationControllerPath = NodePath("PlayerAnimationController")
 _deflectControllerPath = NodePath("PlayerDeflectController")
 _postureControllerPath = NodePath("PlayerPostureController")
 _cameraPath = NodePath("Camera2D")
+_hitSFXPath = NodePath("HitSFX")
 
 [node name="PlayerAnimationController" type="Node2D" parent="."]
 script = ExtResource("3_oo0kg")
@@ -893,6 +902,8 @@ _dashBufferPath = NodePath("DashBuffer")
 _coyoteTimePath = NodePath("CoyoteTime")
 _jumpBufferPath = NodePath("JumpBuffer")
 _knockbackTimePath = NodePath("KnockbackTime")
+_jumpSFXPath = NodePath("Jump")
+_runSFXPath = NodePath("Run")
 
 [node name="CoyoteTime" type="Timer" parent="PlayerMovementController"]
 wait_time = 0.15
@@ -908,6 +919,18 @@ one_shot = true
 
 [node name="KnockbackTime" type="Timer" parent="PlayerMovementController"]
 one_shot = true
+
+[node name="Run" type="AudioStreamPlayer2D" parent="PlayerMovementController"]
+process_mode = 3
+stream = ExtResource("22_812t3")
+volume_db = 10.0
+max_polyphony = 5
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="PlayerMovementController"]
+process_mode = 3
+stream = ExtResource("23_b73w5")
+volume_db = 1.0
+max_polyphony = 5
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_c3qdv")
@@ -964,6 +987,9 @@ _rightDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Right")
 _leftDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Left")
 _attackSpritePath = NodePath("Visuals/Sprite")
 _slashHitParticlePath = NodePath("Visuals/GPUParticles2D")
+_swingSFXPath = NodePath("SwingSFX")
+_slashHitSFXPath = NodePath("SlashHitSFX")
+_deathBlowSFXPath = NodePath("DeathBlowSFX")
 
 [node name="SwordHit" type="Area2D" parent="PlayerAttackController"]
 collision_layer = 2
@@ -1019,6 +1045,25 @@ animation = &"idle"
 wait_time = 0.1
 one_shot = true
 
+[node name="SlashHitSFX" type="AudioStreamPlayer2D" parent="PlayerAttackController"]
+process_mode = 3
+stream = ExtResource("37_f6755")
+volume_db = 4.0
+pitch_scale = 2.0
+max_polyphony = 5
+
+[node name="SwingSFX" type="AudioStreamPlayer2D" parent="PlayerAttackController"]
+process_mode = 3
+stream = ExtResource("39_7tto5")
+volume_db = 4.0
+pitch_scale = 2.0
+max_polyphony = 5
+
+[node name="DeathBlowSFX" type="AudioStreamPlayer2D" parent="PlayerAttackController"]
+process_mode = 3
+stream = ExtResource("38_x8y7v")
+volume_db = 4.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -120)
 zoom = Vector2(0.524, 0.524)
@@ -1072,6 +1117,8 @@ _deflectBufferPath = NodePath("DeflectBuffer")
 _deflectWindowTimerPath = NodePath("DeflectWindow")
 _blockParticlePath = NodePath("GPUParticles2D")
 _deflectParticlePath = NodePath("GPUParticles2D2")
+_deflectSFXPath = NodePath("Deflect")
+_blockSFXPath = NodePath("Block")
 
 [node name="DeflectWindow" type="Timer" parent="PlayerDeflectController"]
 one_shot = true
@@ -1087,9 +1134,9 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
 texture = ExtResource("42_odsml")
-lifetime = 0.24
+lifetime = 0.1
 one_shot = true
-fixed_fps = 40
+fixed_fps = 60
 local_coords = true
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="PlayerDeflectController"]
@@ -1099,10 +1146,27 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
 texture = ExtResource("33_8cgmq")
-lifetime = 0.24
+lifetime = 0.1
 one_shot = true
-fixed_fps = 40
+fixed_fps = 60
 local_coords = true
+
+[node name="Deflect" type="AudioStreamPlayer2D" parent="PlayerDeflectController"]
+process_mode = 3
+stream = ExtResource("46_pgerj")
+max_polyphony = 5
+
+[node name="Block" type="AudioStreamPlayer2D" parent="PlayerDeflectController"]
+process_mode = 3
+stream = ExtResource("46_ts2if")
+volume_db = 16.0
+attenuation = 6.49802
+max_polyphony = 5
 
 [node name="PlayerPostureController" type="Node2D" parent="."]
 script = ExtResource("37_ax0h8")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("50_hmeoo")
+volume_db = 2.0

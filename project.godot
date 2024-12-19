@@ -95,6 +95,10 @@ deflect={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Scripts/Core/Localization/Localizations 1 - Sheet1 (1).en.translation")
+
 [physics]
 
 2d/default_gravity=170.0

@@ -8,6 +8,8 @@ public partial class EnemySwordsmanAI : EnemyPatrolAI
 	[Export] public NodePath RayCastAggroUpPath { get; private set; }
 	private RayCast2D _rayCastAggroUp;
 	
+	[Export] public float PostureRegenerateDistance { get; private set; }
+	
 	public event Action DeAggroEvent;
 	[Export] public float DeAggroTime;
 	[Export] public NodePath DeAggroTimerPath { get; private set; }

@@ -52,6 +52,14 @@ public partial class PlayerMovementController : Node
 	public bool CanDash { get; private set; }
 	
 	private double _currentPhysicsDelta;
+	
+	[Export] private NodePath _jumpSFXPath;
+	private AudioStreamPlayer2D _jumpSFX;
+	
+	[Export] private NodePath _runSFXPath;
+	private AudioStreamPlayer2D _runSFX;
+	
+	public bool RunningSFXPlaying;
 
 	public override void _Ready()
 	{
@@ -69,6 +77,9 @@ public partial class PlayerMovementController : Node
 		_dashBuffer.WaitTime = _playerStats.DashBuffer;
 		
 		_knockbackTimer.Timeout += _StopKnockback;
+		
+		_runSFX = GetNode<AudioStreamPlayer2D>(_runSFXPath);
+		_jumpSFX = GetNode<AudioStreamPlayer2D>(_jumpSFXPath);
 	}
 
 	public void Initialize(Player body) {
@@ -79,6 +90,12 @@ public partial class PlayerMovementController : Node
 	public override void _Process(double delta) {
 		if(_CheckDesiredDash() && !CanDash) {
 			StartDashBuffer();
+		}
+		
+		if(RunningSFXPlaying && !_runSFX.Playing) {
+			_runSFX.Playing = true;
+		} else if(!RunningSFXPlaying) {
+			_runSFX.Playing = false;
 		}
 	}
 
@@ -118,12 +135,14 @@ public partial class PlayerMovementController : Node
 	public void Accelerate(Vector2 direction, double delta) {
 		if(!_knockbackTimer.IsStopped())
 			return;
+		
 		Vector2 velocity = _playerBody.Velocity.MoveToward(_playerStats.Speed * direction, _playerStats.Acceleration * (float)delta * 60f);
 		velocity.Y = Velocity.Y;
 		_playerBody.Velocity = velocity;
 	}
 	
 	public void ApplyKnockback(int direction, float speed, float acceleration, float time) {
+		//_runSFX.Playing = false;
 		_knockbackSpeed = speed;
 		_knockbackAcceleration = acceleration;
 		_knockbackDirection = direction;
@@ -161,6 +180,7 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void AddFriction(double delta) {
+		//_runSFX.Playing = false;
 		Vector2 zero = Vector2.Zero;
 		zero.Y = Velocity.Y;
 		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.Friction  * (float)delta * 60f);
@@ -189,6 +209,8 @@ public partial class PlayerMovementController : Node
 	}
 
 	public void Jump() {
+		_jumpSFX.Play();
+		
 		if(!CanJump) {
 			GD.Print(_currentJump);
 			return;

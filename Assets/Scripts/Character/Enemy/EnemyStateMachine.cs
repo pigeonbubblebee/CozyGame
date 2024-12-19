@@ -17,6 +17,7 @@ public partial class EnemyStateMachine : StateMachine
 	*/
 	
 	public virtual void Initialize(Enemy e) {
+		// GD.Print("ESM Init!");
 		// ase.Initialize(e);
 		EnemyAI = e;
 		Sprite = EnemyAI.Sprite;
@@ -31,7 +32,7 @@ public partial class EnemyStateMachine : StateMachine
 		
 		AttackState.Initialize(this);
 		PostureBreakState.Initialize(this);
-		
+		// GD.Print("ESM Ready!");
 		// EnterDefaultState();
 	}
 	

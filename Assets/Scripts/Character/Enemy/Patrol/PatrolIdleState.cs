@@ -12,6 +12,7 @@ public partial class PatrolIdleState : State
 	}
 	
 	public override void Enter(State prev) {
+		// GD.Print(_patrolAI.Sprite);
 		_patrolAI.Sprite.Play("idle");
 	}
 

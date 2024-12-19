@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=11 format=3 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="2_4jqy4"]
 [ext_resource type="PackedScene" uid="uid://b8lvjpr6aa404" path="res://Assets/Scene/tile_map.tscn" id="4_0j6tk"]
+[ext_resource type="PackedScene" uid="uid://b0fu168ri1a68" path="res://Assets/Scene/Enemy/goblin_bandit.tscn" id="8_n7a58"]
 [ext_resource type="Texture2D" uid="uid://cqpt5g3o66cqt" path="res://Assets/Art/Background/background.png" id="8_q3obe"]
-[ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/swordsman_enemy.tscn" id="8_vqdwe"]
+[ext_resource type="AudioStream" uid="uid://bnqwq0q04gcdo" path="res://Assets/Sound/lofi type beat unfinished.mp3" id="9_ei8k8"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="10_ewqkv"]
 
@@ -33,23 +34,25 @@ texture = ExtResource("2_4jqy4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestingItem"]
 shape = SubResource("CircleShape2D_ewan5")
 
-[node name="SwordsmanEnemy3" parent="." instance=ExtResource("8_vqdwe")]
-position = Vector2(5584, 1984)
-
-[node name="SwordsmanEnemy4" parent="." instance=ExtResource("8_vqdwe")]
-position = Vector2(2536, 712)
-
-[node name="SwordsmanEnemy5" parent="." instance=ExtResource("8_vqdwe")]
-position = Vector2(840, 72)
-
-[node name="SwordsmanEnemy6" parent="." instance=ExtResource("8_vqdwe")]
-position = Vector2(-192, -88)
-
-[node name="SwordsmanEnemy7" parent="." instance=ExtResource("8_vqdwe")]
-position = Vector2(3584, 536)
-
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -20
 position = Vector2(2016, 48)
 scale = Vector2(12, 12)
 texture = ExtResource("8_q3obe")
+
+[node name="goblin_bandit" parent="." instance=ExtResource("8_n7a58")]
+position = Vector2(5536, 1952)
+
+[node name="goblin_bandit2" parent="." instance=ExtResource("8_n7a58")]
+position = Vector2(2704, 608)
+
+[node name="goblin_bandit3" parent="." instance=ExtResource("8_n7a58")]
+position = Vector2(-144, -312)
+
+[node name="goblin_bandit4" parent="." instance=ExtResource("8_n7a58")]
+position = Vector2(760, -232)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_ei8k8")
+autoplay = true

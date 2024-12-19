@@ -1,5 +1,7 @@
-TextureRect
+AudioStreamPlayer
+AudioStreamPlayer2D
 Node2D
+TextureRect
 Timer
 GPUParticles2D
 Node

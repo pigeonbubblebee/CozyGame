@@ -30,6 +30,12 @@ public partial class PlayerDeflectController : Node
 	[Export] private NodePath _deflectParticlePath;
 	private GpuParticles2D _deflectParticle;
 	
+	[Export] private NodePath _deflectSFXPath;
+	private AudioStreamPlayer2D _deflectSFX;
+	
+	[Export] private NodePath _blockSFXPath;
+	private AudioStreamPlayer2D _blockSFX;
+	
 	public void Initialize(Player player) { // TODO: Add punish for block spam
 		_player = player;
 	}
@@ -45,9 +51,13 @@ public partial class PlayerDeflectController : Node
 		
 		_blockParticle = GetNode<GpuParticles2D>(_blockParticlePath);
 		_deflectParticle = GetNode<GpuParticles2D>(_deflectParticlePath);
+		
+		_deflectSFX = GetNode<AudioStreamPlayer2D>(_deflectSFXPath);
+		_blockSFX = GetNode<AudioStreamPlayer2D>(_blockSFXPath);
 	}
 	
 	public override void _Process(double delta) {
+		// GD.Print(_deflectWindowTimer.TimeLeft + " " + _playerStats.DeflectWindow);
 		if(_inputManager.GetDeflectActuation()) {
 			_deflectWindowTimer.Start(_playerStats.DeflectWindow);
 		}
@@ -55,6 +65,7 @@ public partial class PlayerDeflectController : Node
 	
 	public int Block(int damage, int postureDamage, Enemy e) {
 		if(InDeflectWindow()) {
+			_deflectSFX.Play();
 			_emitDeflectParticle();
 			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
 			BlockEvent?.Invoke(true, postureDamage, e);
@@ -67,6 +78,7 @@ public partial class PlayerDeflectController : Node
 			_gameManager.FreezeFrame(0.02f, 0.1f);
 			return 0;
 		} else {
+			_blockSFX.Play();
 			_emitBlockParticle();
 			
 			_player.Camera.Shake(_playerStats.BlockShakeTime, _playerStats.BlockShakeMagnitude);

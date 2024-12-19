@@ -66,6 +66,8 @@ public partial class Enemy : CharacterBody2D
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
+		
+		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 	}
 	
 	// Called when the node enters the scene tree for the first time.
@@ -90,9 +92,7 @@ public partial class Enemy : CharacterBody2D
 		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
 		_healthBar = GetNode<TextureProgressBar>(_healthBarPath);
 		_deathblowMark = GetNode<TextureRect>(_deathblowMarkPath);
-		
-		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
-		
+
 		_attacksParent = GetNode<Node2D>(_attacksParentPath);
 		Attacks = new EnemyAttack[_attacksParent.GetChildren().Count];
 		int i = 0;
@@ -125,6 +125,8 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	public void RegeneratePosture() {
+		//GD.Print(_postureRegenerationCooldownTimer.TimeLeft + "Time");
+		// GD.Print(_postureRegenerationCooldownTimer.TimeLeft);
 		if(!_postureRegenerationCooldownTimer.IsStopped()) {
 			return;
 		}
@@ -154,6 +156,7 @@ public partial class Enemy : CharacterBody2D
 			_postureRegenerationCooldownTimer.Start(StaggerRecoveryTime + PostureRegenerationCooldownTime);
 		} else {
 			_postureRegenerationCooldownTimer.Start(PostureRegenerationCooldownTime);
+			//GD.Print(_postureRegenerationCooldownTimer.TimeLeft + "Time");
 		}
 		_postureRegenerationTimer.Stop();
 	}

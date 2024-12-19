@@ -93,8 +93,8 @@ public partial class InventoryUI : Control
 	}
 	
 	private void _UpdateItemDisplay(Item i) {
-		_ItemDisplayName.Text = "[center]" + i.ID + "[/center]"; // TODO: Add Localizer
-		_ItemDisplayDescription.Text = i.Description;
+		_ItemDisplayName.Text = "[center]" + Tr(i.ID) + "[/center]"; // TODO: Add Localizer
+		_ItemDisplayDescription.Text = Tr(i.Description);
 		_ItemDisplayImage.Texture = i.Image;
 		
 		_ItemDisplayName.Visible = true;

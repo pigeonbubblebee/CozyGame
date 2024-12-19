@@ -32,6 +32,9 @@ public partial class Player : CharacterBody2D
 	[Export] private NodePath _cameraPath;
 	public PlayerCamera Camera  { get; private set; }
 	
+	[Export] private NodePath _hitSFXPath;
+	private AudioStreamPlayer2D _hitSFX;
+	
 	private GameManager _gameManager;
 
 	public override void _EnterTree()
@@ -72,6 +75,8 @@ public partial class Player : CharacterBody2D
 		PostureController.ResetPosture();
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
+		
+		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
 	}
 	
 	public override void _Ready() {
@@ -87,6 +92,7 @@ public partial class Player : CharacterBody2D
 		if(DeflectController.Blocking) {
 			DeflectController.Block(damage, postureDamage, e);
 		} else {
+			_hitSFX.Play();
 			PlayerHealth.TakeDamage(damage);
 			PostureController.TakePostureDamage(postureDamage);
 		}

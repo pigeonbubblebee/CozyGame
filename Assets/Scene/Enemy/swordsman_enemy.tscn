@@ -1,395 +1,74 @@
-[gd_scene load_steps=44 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=4 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/EnemySwordsmanAI.cs" id="1_pixhq"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs" id="2_c064p"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/SlashAttack.cs" id="3_6ydxi"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/SwordsmanStateMachine.cs" id="3_vudb4"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/SwordsmanPatrolState.cs" id="4_ys8ie"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/SwordsmanIdleState.cs" id="5_pkbjf"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Swordsman/SwordsmanAggroState.cs" id="6_742kd"]
-[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="6_etamu"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="7_s56hu"]
-[ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="7_weinp"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs" id="11_73tpf"]
-[ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="12_5k21i"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyBar.cs" id="14_bjj0w"]
-[ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="14_namlg"]
-[ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="15_lqlrn"]
-[ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/UI/health_bar_bg.png" id="16_tlyw6"]
-[ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/UI/health_bar.png" id="17_1vvo5"]
-[ext_resource type="Texture2D" uid="uid://bajwcvcu40f18" path="res://Assets/Art/UI/execution_prompt.png" id="18_n6nlx"]
+[ext_resource type="PackedScene" uid="uid://003fp2vwh75j" path="res://Assets/Scene/Enemy/enemy_template.tscn" id="2_bhe2c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_noim0"]
 size = Vector2(80, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n66ih"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2gip8"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ovrg"]
-atlas = ExtResource("7_weinp")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wnu54"]
-atlas = ExtResource("7_weinp")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ao8jw"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wtyi3"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4fajq"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3kydg"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qnumc"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0amv1"]
-atlas = ExtResource("7_weinp")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_boi6j"]
-atlas = ExtResource("7_weinp")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_73lyn"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6d5f2"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2j7oj"]
-atlas = ExtResource("7_weinp")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lagh5"]
-atlas = ExtResource("7_weinp")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ad1mp"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wroe1"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ogmkp"]
-atlas = ExtResource("7_weinp")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qv2v1"]
-atlas = ExtResource("7_weinp")
-region = Rect2(0, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6t4kn"]
-atlas = ExtResource("7_weinp")
-region = Rect2(128, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vj7n4"]
-atlas = ExtResource("7_weinp")
-region = Rect2(256, 384, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fagf8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n66ih")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2gip8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ovrg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wnu54")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ao8jw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtyi3")
-}],
-"loop": true,
-"name": &"aggro",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4fajq")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3kydg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qnumc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0amv1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_boi6j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_73lyn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6d5f2")
-}],
-"loop": true,
-"name": &"patrol",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2j7oj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lagh5")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_ad1mp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wroe1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ogmkp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qv2v1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6t4kn")
-}, {
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_vj7n4")
-}],
-"loop": true,
-"name": &"slash",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_5k21i")
-}],
-"loop": true,
-"name": &"stagger",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
-size = Vector2(200, 178.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
-size = Vector2(78.5, 200)
 
 [node name="SwordsmanEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_pixhq")
-RayCastAggroForwardPath = NodePath("Flip/AggroChecks/AggroCheckForward")
-RayCastAggroUpPath = NodePath("Flip/AggroChecks/AggroCheckUp")
+RayCastAggroForwardPath = NodePath("AggroChecks/AggroCheckForward")
+RayCastAggroUpPath = NodePath("AggroChecks/AggroCheckUp")
+PostureRegenerateDistance = 300.0
 DeAggroTime = 4.0
 DeAggroTimerPath = NodePath("DeAggro")
 StepRange = 25.0
 RetreatRange = 170.0
-FlipParentPath = NodePath("Flip")
-RayCastLedgePath = NodePath("Flip/LedgeCheck")
-RayCastWallPath = NodePath("Flip/WallCheck")
+FlipParentPath = NodePath("EnemyTemplate")
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
 Speed = 250.0
 WaitTimeBetweenFlips = 1.0
-HitboxPath = NodePath("Flip/Hurtbox")
-HealthSystemPath = NodePath("Health")
-_healthBarPath = NodePath("Bars/HealthBar")
+HitboxPath = NodePath("EnemyTemplate/Hurtbox")
+HealthSystemPath = NodePath("EnemyTemplate/Health")
+_healthBarPath = NodePath("EnemyTemplate/Bars/HealthBar")
 MaxHealth = 40
 MaxPosture = 100
 PostureRegenerationCooldownTime = 2.0
 PostureRegenerationTime = 0.5
 PostureRegenerationRate = 30
-_postureRegenerationCooldownTimerPath = NodePath("PostureRegenerationCooldown")
-_postureRegenerationTimerPath = NodePath("PostureRegeneration")
-_deathblowMarkPath = NodePath("Bars/Deathblow")
-_attacksParentPath = NodePath("Flip/AttackPattern")
-_spritePath = NodePath("Flip/AnimatedSprite2D")
-StateMachinePath = NodePath("StateMachine")
-_postureBarPath = NodePath("Bars/PostureBar")
+_postureRegenerationCooldownTimerPath = NodePath("EnemyTemplate/PostureRegenerationCooldown")
+_postureRegenerationTimerPath = NodePath("EnemyTemplate/PostureRegeneration")
+_deathblowMarkPath = NodePath("EnemyTemplate/Bars/Deathblow")
+_attacksParentPath = NodePath("EnemyTemplate/AttackPattern")
+_spritePath = NodePath("EnemyTemplate/AnimatedSprite2D")
+StateMachinePath = NodePath("EnemyTemplate/StateMachine")
+_postureBarPath = NodePath("EnemyTemplate/Bars/PostureBar")
 StaggerRecoveryTime = 4.0
 DeathBlowDamage = 40
-_knockbackTimePath = NodePath("KnockbackTimer")
+_knockbackTimePath = NodePath("EnemyTemplate/KnockbackTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_noim0")
 
-[node name="Flip" type="Node2D" parent="."]
-
-[node name="LedgeCheck" type="RayCast2D" parent="Flip"]
+[node name="LedgeCheck" type="RayCast2D" parent="."]
 position = Vector2(48, 0)
 target_position = Vector2(0, 144)
 
-[node name="WallCheck" type="RayCast2D" parent="Flip"]
+[node name="WallCheck" type="RayCast2D" parent="."]
 position = Vector2(48, 0)
 target_position = Vector2(32, 0)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flip"]
-z_index = 4
-texture_filter = 1
-position = Vector2(8, -16)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_fagf8")
-animation = &"slash"
-frame_progress = 0.689977
+[node name="AggroChecks" type="Node2D" parent="."]
 
-[node name="AggroChecks" type="Node2D" parent="Flip"]
-
-[node name="AggroCheckForward" type="RayCast2D" parent="Flip/AggroChecks"]
+[node name="AggroCheckForward" type="RayCast2D" parent="AggroChecks"]
 position = Vector2(-56, 0)
 target_position = Vector2(1144, 0)
 
-[node name="AggroCheckUp" type="RayCast2D" parent="Flip/AggroChecks"]
+[node name="AggroCheckUp" type="RayCast2D" parent="AggroChecks"]
 target_position = Vector2(0, -80)
 
-[node name="AttackPattern" type="Node2D" parent="Flip"]
+[node name="EnemyTemplate" parent="." instance=ExtResource("2_bhe2c")]
 
-[node name="Slash" type="Node2D" parent="Flip/AttackPattern"]
-script = ExtResource("3_6ydxi")
-SlashRange = 170.0
-SlashDamage = 10
-PostureDamage = 50
-SlashCooldown = 1.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
-AnimationName = "slash"
-AttackLength = 0.6
-NotChainAttack = true
-
-[node name="SwordHit" type="Area2D" parent="Flip/AttackPattern/Slash"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="Flip/AttackPattern/Slash/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_v6n7n")
-disabled = true
-
-[node name="Hurtbox" type="Area2D" parent="Flip"]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("2_c064p")
-
-[node name="HurtboxCollider" type="CollisionShape2D" parent="Flip/Hurtbox"]
-position = Vector2(0, 4.00005)
-shape = SubResource("RectangleShape2D_igpne")
-
-[node name="StateMachine" type="Node2D" parent="."]
-script = ExtResource("3_vudb4")
-_aggroStatePath = NodePath("AggroState")
-_patrolStatePath = NodePath("PatrolState")
-_idleStatePath = NodePath("IdleState")
-_attackStatePath = NodePath("AttackState")
-_postureBreakStatePath = NodePath("PostureBreakState")
-
-[node name="PatrolState" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_ys8ie")
-
-[node name="IdleState" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_pkbjf")
-
-[node name="AggroState" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_742kd")
-
-[node name="AttackState" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_s56hu")
-
-[node name="PostureBreakState" type="Node2D" parent="StateMachine"]
-script = ExtResource("11_73tpf")
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("6_etamu")
+[node name="AnimatedSprite2D" parent="EnemyTemplate" index="1"]
+animation = &"slash"
+frame_progress = 0.299191
 
 [node name="DeAggro" type="Timer" parent="."]
 one_shot = true
 
-[node name="PostureRegeneration" type="Timer" parent="."]
-one_shot = true
-
-[node name="PostureRegenerationCooldown" type="Timer" parent="."]
-one_shot = true
-
-[node name="KnockbackTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Bars" type="Node2D" parent="."]
-position = Vector2(0, -48)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("14_bjj0w")
-
-[node name="PostureBar" type="TextureProgressBar" parent="Bars"]
-z_index = 10
-offset_left = -104.0
-offset_top = -144.0
-offset_right = -34.0
-offset_bottom = -136.0
-scale = Vector2(3, 3)
-value = 50.0
-fill_mode = 6
-nine_patch_stretch = true
-stretch_margin_left = 2
-stretch_margin_top = 2
-stretch_margin_right = 2
-stretch_margin_bottom = 2
-texture_under = ExtResource("14_namlg")
-texture_progress = ExtResource("15_lqlrn")
-radial_fill_degrees = 0.0
-
-[node name="HealthBar" type="TextureProgressBar" parent="Bars"]
-z_index = 10
-offset_left = -104.0
-offset_top = -176.0
-offset_right = -34.0
-offset_bottom = -168.0
-scale = Vector2(3, 3)
-value = 100.0
-nine_patch_stretch = true
-stretch_margin_left = 4
-stretch_margin_top = 4
-stretch_margin_right = 4
-stretch_margin_bottom = 4
-texture_under = ExtResource("16_tlyw6")
-texture_progress = ExtResource("17_1vvo5")
-radial_fill_degrees = 0.0
-
-[node name="Deathblow" type="TextureRect" parent="Bars"]
-visible = false
-offset_left = -64.0
-offset_top = -320.0
-offset_right = 64.0
-offset_bottom = -192.0
-texture = ExtResource("18_n6nlx")
+[editable path="EnemyTemplate"]

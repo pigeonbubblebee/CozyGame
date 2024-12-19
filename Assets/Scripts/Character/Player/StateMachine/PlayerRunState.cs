@@ -5,6 +5,7 @@ public partial class PlayerRunState : PlayerState
 {
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
+		MovementController.RunningSFXPlaying = true;
 
 		// TODO: Reset Colliders
 	}
@@ -69,5 +70,10 @@ public partial class PlayerRunState : PlayerState
 		}
 
 		return false;
+	}
+	
+	public override void Exit() {
+		base.Exit();
+		MovementController.RunningSFXPlaying = false;
 	}
 }

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cifo51815mb0o"
+path="res://.godot/imported/IMG_3730 (mp3cut.net) (2).mp3-6d36dac7951713e4338b2fc3ab16ba3d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3"
+dest_files=["res://.godot/imported/IMG_3730 (mp3cut.net) (2).mp3-6d36dac7951713e4338b2fc3ab16ba3d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

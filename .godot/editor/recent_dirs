@@ -1,3 +1,6 @@
+res://Assets/Art/Character/Enemy/GoblinBandit
+res://Assets/Scene/Enemy
+res://Assets/Scripts/Core/Localization
 res://Assets/Art/Character/Player
 res://Assets/Art/UI
 res://Assets/Scripts/Character/Enemy
@@ -7,9 +10,7 @@ res://Assets/Art/VFX
 res://Assets/Scripts/Character/Player
 res://Assets/Scripts/Core/User Interface
 res://Assets/Scripts/Character/Enemy/Patrol
-res://Assets/Scene/Enemy
 res://Assets/Scripts/Character/Enemy/Swordsman
-res://Assets/Art/Character/Enemy/GoblinBandit
 res://Assets/Scene
 res://Assets/Art
 res://Data/Items

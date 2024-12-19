@@ -36,6 +36,7 @@ public partial class SwordsmanAggroState : State
 			return;
 		}
 		
+		
 		_swordsmanAI.CheckAggro();
 		EnemyAttack e = _swordsmanAI.GetCurrentAttack(_swordsmanAI.TargetPlayer);
 		if(e != null) {
@@ -71,8 +72,12 @@ public partial class SwordsmanAggroState : State
 				_swordsmanAI.Sprite.Play("aggro");
 			}
 			_swordsmanAI.Accelerate();
+			
 			Running = true;
 		}
+		
+		if(Mathf.Abs(_swordsmanAI.LastKnownPlayerPosition.X - _swordsmanAI.GlobalPosition.X) >= _swordsmanAI.PostureRegenerateDistance)
+			_swordsmanAI.RegeneratePosture();
 		
 		if(_swordsmanAI.CheckLedge(false)) {
 			if(Running) {

@@ -51,6 +51,15 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	public int CurrentSlashComboAttack { get; private set; }
 	
 	public bool CanDeathBlow { get; private set; }
+	
+	[Export] private NodePath _swingSFXPath;
+	private AudioStreamPlayer2D _swingSFX;
+	
+	[Export] private NodePath _slashHitSFXPath;
+	private AudioStreamPlayer2D _slashHitSFX;
+	
+	[Export] private NodePath _deathBlowSFXPath;
+	private AudioStreamPlayer2D _deathBlowSFX;
 
 	public override void _Ready()
 	{
@@ -74,6 +83,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 		_slashBuffer = GetNode<Timer>(_slashBufferPath);
 		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
+		
+		_swingSFX = GetNode<AudioStreamPlayer2D>(_swingSFXPath);
+		_slashHitSFX = GetNode<AudioStreamPlayer2D>(_slashHitSFXPath);
+		_deathBlowSFX = GetNode<AudioStreamPlayer2D>(_deathBlowSFXPath);
 
 		_attackArea.AreaEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.HittableLayer;
@@ -104,7 +117,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			ResetComboCounter();
 		}
 		
-		GD.Print(_slashComboCounter);
+		// GD.Print(_slashComboCounter);
 			
 		_UpdateAttackCollider();
 
@@ -127,6 +140,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 					CanDeathBlow = true;
 				}
 			}
+		}
+		
+		if(!CanDeathBlow) {
+			_swingSFX.Play();
 		}
 		
 		CanSwitchAttackDirection = false;
@@ -201,9 +218,11 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		
 		if(hittable is EnemyHitbox) {
 			if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
+				_slashHitSFX.Play();
 				_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
 				_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
 			} else {
+				_deathBlowSFX.Play();
 				_gameManager.FreezeFrame(_playerStats.DeathBlowFreezeTime, _playerStats.SlashFreezeDelay);
 				_player.Camera.Shake(_playerStats.CounterShakeTime, _playerStats.CounterShakeMagnitude);
 			}
