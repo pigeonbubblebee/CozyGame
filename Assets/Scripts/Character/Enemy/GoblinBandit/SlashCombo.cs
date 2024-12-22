@@ -76,11 +76,11 @@ public partial class SlashCombo : EnemyAttack
 		if(!Active)
 			return;
 		if(_accelerating) {
-			if((Mathf.Abs(((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X - EnemyAI.GlobalPosition.X) > LungeRange)) {
+			if((Mathf.Abs(((EnemyChaserAI)EnemyAI).TargetPlayer.GlobalPosition.X - EnemyAI.GlobalPosition.X) > LungeRange)) {
 				bool facingPlayer = false;
-				if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() > 0 && ((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X > EnemyAI.GlobalPosition.X)
+				if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() > 0 && ((EnemyChaserAI)EnemyAI).TargetPlayer.GlobalPosition.X > EnemyAI.GlobalPosition.X)
 					facingPlayer = true;
-				else if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() < 0 && ((EnemySwordsmanAI)EnemyAI).TargetPlayer.GlobalPosition.X < EnemyAI.GlobalPosition.X)
+				else if(((EnemyPatrolAI)EnemyAI).GetMoveDirection() < 0 && ((EnemyChaserAI)EnemyAI).TargetPlayer.GlobalPosition.X < EnemyAI.GlobalPosition.X)
 					facingPlayer = true;
 					
 				if(facingPlayer)

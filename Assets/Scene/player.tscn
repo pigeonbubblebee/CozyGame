@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
-[ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_wfd7o"]
+[ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_lsgqv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerAnimationController.cs" id="3_oo0kg"]
 [ext_resource type="Texture2D" uid="uid://wun5425o3qem" path="res://Assets/Art/Character/Player/idleleft.png" id="4_6mjm2"]
@@ -865,7 +865,7 @@ _attackControllerPath = NodePath("PlayerAttackController")
 _playerSpritePath = NodePath("Sprite")
 _interactionControllerPath = NodePath("PlayerInteractionController")
 _inventoryManagerPath = NodePath("PlayerInventoryManager")
-PlayerStatsResource = ExtResource("2_wfd7o")
+PlayerStatsResource = ExtResource("2_lsgqv")
 _healthSystemPath = NodePath("HealthSystem")
 _healControllerPath = NodePath("HealController")
 _spellControllerPath = NodePath("PlayerSpellController")
@@ -1159,7 +1159,7 @@ max_polyphony = 5
 [node name="Block" type="AudioStreamPlayer2D" parent="PlayerDeflectController"]
 process_mode = 3
 stream = ExtResource("46_ts2if")
-volume_db = 16.0
+volume_db = 24.0
 attenuation = 6.49802
 max_polyphony = 5
 

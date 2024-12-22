@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnemySwordsmanAI : EnemyPatrolAI
+public partial class EnemyChaserAI : EnemyPatrolAI
 {
 	[Export] public NodePath RayCastAggroForwardPath { get; private set; }
 	private RayCast2D _rayCastAggroForward;

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_71fcw"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InventoryUI.cs" id="1_pvkgr"]
-[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="2_1tf1v"]
+[ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="2_3rrar"]
 [ext_resource type="Resource" uid="uid://cy7j7pcjeceba" path="res://Data/Items/Stick.tres" id="3_31qnq"]
 [ext_resource type="Texture2D" uid="uid://ctcjp4dhg7kn" path="res://Sprite-0002.png" id="3_hy8f1"]
 [ext_resource type="Resource" uid="uid://dh64y30leyvhe" path="res://Data/Items/Sword.tres" id="4_p7336"]
@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pvkgr")
-t = ExtResource("2_1tf1v")
+t = ExtResource("2_3rrar")
 t2 = ExtResource("3_31qnq")
 t3 = ExtResource("4_p7336")
 _gridContainerPath = NodePath("CenterContainer/Panel/ScrollContainer/GridContainer")

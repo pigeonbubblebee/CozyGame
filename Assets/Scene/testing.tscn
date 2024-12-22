@@ -49,9 +49,6 @@ position = Vector2(2704, 608)
 [node name="goblin_bandit3" parent="." instance=ExtResource("8_n7a58")]
 position = Vector2(-144, -312)
 
-[node name="goblin_bandit4" parent="." instance=ExtResource("8_n7a58")]
-position = Vector2(760, -232)
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("9_ei8k8")

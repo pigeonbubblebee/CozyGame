@@ -5,6 +5,8 @@ public partial class EnemyStateMachine : StateMachine
 {
 	[Export] private NodePath _attackStatePath;
 	public AttackState AttackState { get; private set; }
+	[Export] private NodePath _idleStatePath;
+	public EnemyIdleState IdleState { get; private set; }
 	[Export] private NodePath _postureBreakStatePath;
 	public PostureBreakState PostureBreakState { get; private set; }
 	
@@ -28,10 +30,12 @@ public partial class EnemyStateMachine : StateMachine
 		base._Ready();
 		
 		AttackState = GetNode<AttackState>(_attackStatePath);
+		IdleState = GetNode<EnemyIdleState>(_idleStatePath);
 		PostureBreakState = GetNode<PostureBreakState>(_postureBreakStatePath);
 		
 		AttackState.Initialize(this);
 		PostureBreakState.Initialize(this);
+		IdleState.Initialize(this);
 		// GD.Print("ESM Ready!");
 		// EnterDefaultState();
 	}

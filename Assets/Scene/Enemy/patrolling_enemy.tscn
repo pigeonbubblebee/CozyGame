@@ -155,8 +155,8 @@ shape = SubResource("RectangleShape2D_noim0")
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_ri3qa")
 _patrolStatePath = NodePath("PatrolState")
-_idleStatePath = NodePath("IdleState")
 _attackStatePath = NodePath("AttackState")
+_idleStatePath = NodePath("IdleState")
 _postureBreakStatePath = NodePath("PostureBreakState")
 
 [node name="PatrolState" type="Node2D" parent="StateMachine"]

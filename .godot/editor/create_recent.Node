@@ -1,13 +1,13 @@
+Node2D
+AnimatedSprite2D
 AudioStreamPlayer
 AudioStreamPlayer2D
-Node2D
 TextureRect
 Timer
 GPUParticles2D
 Node
 RemoteTransform2D
 TextureProgressBar
-AnimatedSprite2D
 RayCast2D
 CollisionShape2D
 CharacterBody2D

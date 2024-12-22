@@ -1,0 +1,210 @@
+[gd_scene load_steps=24 format=3 uid="uid://bx4xvh2o6pyxf"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs" id="1_cjkk3"]
+[ext_resource type="PackedScene" uid="uid://003fp2vwh75j" path="res://Assets/Scene/Enemy/enemy_template.tscn" id="2_ivrns"]
+[ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="8_5m3ls"]
+[ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="9_177p6"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs" id="11_mmfnb"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs" id="15_5d18m"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs" id="16_v3xuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_noim0"]
+size = Vector2(80, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c51kg"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uedh"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ca7b"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4srva"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oe5t"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5u4n"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvar2"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56gkc"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx0us"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8itwi"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpmqs"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oudm8"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp7r1"]
+atlas = ExtResource("8_5m3ls")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42etd"]
+atlas = ExtResource("9_177p6")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ommm0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c51kg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uedh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ca7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4srva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oe5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5u4n")
+}],
+"loop": true,
+"name": &"aggro",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvar2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56gkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx0us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8itwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpmqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oudm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7r1")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42etd")
+}],
+"loop": true,
+"name": &"stagger",
+"speed": 5.0
+}]
+
+[node name="ChaserEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_cjkk3")
+RayCastAggroForwardPath = NodePath("AggroChecks/AggroCheckForward")
+RayCastAggroUpPath = NodePath("AggroChecks/AggroCheckUp")
+PostureRegenerateDistance = 300.0
+DeAggroTime = 4.0
+DeAggroTimerPath = NodePath("DeAggro")
+StepRange = 25.0
+RetreatRange = 170.0
+FlipParentPath = NodePath("")
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+Speed = 250.0
+WaitTimeBetweenFlips = 1.0
+HitboxPath = NodePath("EnemyTemplate/Hurtbox")
+HealthSystemPath = NodePath("EnemyTemplate/Health")
+_healthBarPath = NodePath("EnemyTemplate/Bars/HealthBar")
+MaxHealth = 40
+MaxPosture = 100
+PostureRegenerationCooldownTime = 2.0
+PostureRegenerationTime = 0.5
+PostureRegenerationRate = 30
+_postureRegenerationCooldownTimerPath = NodePath("EnemyTemplate/PostureRegenerationCooldown")
+_postureRegenerationTimerPath = NodePath("EnemyTemplate/PostureRegeneration")
+_deathblowMarkPath = NodePath("EnemyTemplate/Bars/Deathblow")
+_attacksParentPath = NodePath("EnemyTemplate/AttackPattern")
+_spritePath = NodePath("EnemyTemplate/AnimatedSprite2D")
+StateMachinePath = NodePath("EnemyTemplate/StateMachine")
+_postureBarPath = NodePath("EnemyTemplate/Bars/PostureBar")
+StaggerRecoveryTime = 4.0
+DeathBlowDamage = 40
+_knockbackTimePath = NodePath("EnemyTemplate/KnockbackTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_noim0")
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+position = Vector2(48, 0)
+target_position = Vector2(32, 0)
+
+[node name="AggroChecks" type="Node2D" parent="."]
+
+[node name="AggroCheckForward" type="RayCast2D" parent="AggroChecks"]
+position = Vector2(-56, 0)
+target_position = Vector2(1144, 0)
+
+[node name="AggroCheckUp" type="RayCast2D" parent="AggroChecks"]
+target_position = Vector2(0, -80)
+
+[node name="DeAggro" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemyTemplate" parent="." instance=ExtResource("2_ivrns")]
+
+[node name="AnimatedSprite2D" parent="EnemyTemplate" index="1"]
+sprite_frames = SubResource("SpriteFrames_ommm0")
+
+[node name="StateMachine" parent="EnemyTemplate" index="3"]
+script = ExtResource("11_mmfnb")
+_aggroStatePath = NodePath("AggroState")
+_patrolStatePath = NodePath("PatrolState")
+
+[node name="PatrolState" type="Node2D" parent="EnemyTemplate/StateMachine" index="3"]
+script = ExtResource("16_v3xuk")
+
+[node name="AggroState" type="Node2D" parent="EnemyTemplate/StateMachine" index="4"]
+script = ExtResource("15_5d18m")
+
+[editable path="EnemyTemplate"]

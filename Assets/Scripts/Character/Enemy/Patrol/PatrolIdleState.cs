@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PatrolIdleState : State
+public partial class PatrolIdleState : EnemyIdleState
 {
 	protected PatrolStateMachine _patrolStateMachine => (PatrolStateMachine) ParentStateMachine;
 	protected EnemyPatrolAI _patrolAI;
@@ -11,18 +11,15 @@ public partial class PatrolIdleState : State
 		this._patrolAI = ((PatrolStateMachine) stateMachine).PatrolAI;
 	}
 	
-	public override void Enter(State prev) {
-		// GD.Print(_patrolAI.Sprite);
-		_patrolAI.Sprite.Play("idle");
-	}
+	//public override void Enter(State prev) {
+	//	// GD.Print(_patrolAI.Sprite);
+	//	_patrolAI.Sprite.Play("idle");
+	//}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)
 	{
-		if(_patrolAI.Staggered) {
-			_patrolStateMachine.ChangeState(_patrolStateMachine.PostureBreakState);
-			return;
-		}
+		base.PhysicsProcess(delta);
 		
 		_patrolAI.Decelerate();
 		_patrolAI.RegeneratePosture();

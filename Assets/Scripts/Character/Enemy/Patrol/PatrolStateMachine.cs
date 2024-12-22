@@ -7,8 +7,6 @@ public partial class PatrolStateMachine : EnemyStateMachine
 	
 	[Export] private NodePath _patrolStatePath;
 	public PatrolState PatrolState { get; private set; }
-	[Export] private NodePath _idleStatePath;
-	public PatrolIdleState IdleState { get; private set; }
 	
 	public EnemyPatrolAI PatrolAI => (EnemyPatrolAI) EnemyAI;
 
@@ -30,8 +28,6 @@ public partial class PatrolStateMachine : EnemyStateMachine
 		
 		PatrolState = GetNode<PatrolState>(_patrolStatePath);
 		PatrolState.Initialize(this);
-		IdleState = GetNode<PatrolIdleState>(_idleStatePath);
-		IdleState.Initialize(this);
 		
 		EnterDefaultState();
 	}

@@ -30,13 +30,18 @@ public partial class PlayerBlockState : PlayerState
 		if(_released && !ActiveState)
 			return;
 		
-		DeflectController.EndBlock();
+		
 		if(deflect) {
 			GetTree().CreateTimer(Stats.DeflectTimeout).Timeout += _EnterDefaultState; // Move to stats
 		} else {
 			// if(deflect) {
 			GetTree().CreateTimer(Stats.BlockTimeout).Timeout += _EnterDefaultState; // Move to stats
 		}
+	}
+	
+	public override void Exit() {
+		base.Exit();
+		DeflectController.EndBlock();
 	}
 	
 	public override void PlayStateAnimation() {
@@ -53,6 +58,7 @@ public partial class PlayerBlockState : PlayerState
 			return true;
 		}
 		if(!DeflectController.DesiredDeflect) {
+			DeflectController.EndBlock();
 			_timeoutBlock(_deflecting);
 			_released = true;
 			return true;
