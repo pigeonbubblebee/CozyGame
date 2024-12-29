@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=12 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/UI/health_bar_bg.png" id="3_0sbdu"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/HealthHUD.cs" id="4_cp6gb"]
 [ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/UI/health_bar.png" id="4_ssnc6"]
+[ext_resource type="Texture2D" uid="uid://drgq6avwrwgnv" path="res://Assets/Art/UI/internal_health_bar.png" id="5_7li7p"]
 [ext_resource type="Texture2D" uid="uid://dwfd3h1q50kau" path="res://Assets/Art/UI/ManaEmpty.png" id="6_h24h4"]
 [ext_resource type="Texture2D" uid="uid://c6xkeauk014jr" path="res://Assets/Art/UI/Mana.png" id="8_ama06"]
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="8_diypk"]
@@ -29,6 +30,7 @@ script = ExtResource("2_u5q2o")
 _healBarPath = NodePath("HealBar")
 _manaBarPath = NodePath("HealthBar")
 _postureBarPath = NodePath("PostureBar")
+_internalHealthBarPath = NodePath("InternalHealthBar")
 _healthHUDPath = NodePath("ManaBar")
 
 [node name="HealBar" type="TextureProgressBar" parent="GUI/HUD"]
@@ -40,6 +42,7 @@ offset_bottom = 805.0
 scale = Vector2(3, 3)
 value = 100.0
 fill_mode = 3
+radial_fill_degrees = 0.0
 nine_patch_stretch = true
 stretch_margin_left = 4
 stretch_margin_top = 4
@@ -47,24 +50,40 @@ stretch_margin_right = 4
 stretch_margin_bottom = 4
 texture_under = ExtResource("3_0sbdu")
 texture_progress = ExtResource("4_ssnc6")
-radial_fill_degrees = 0.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUI/HUD"]
+z_index = 1
 layout_mode = 0
 offset_left = 160.0
 offset_top = 776.0
 offset_right = 256.0
 offset_bottom = 784.0
 scale = Vector2(3, 3)
-value = 100.0
+value = 50.0
+radial_fill_degrees = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_progress = ExtResource("4_ssnc6")
+
+[node name="InternalHealthBar" type="TextureProgressBar" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 776.0
+offset_right = 256.0
+offset_bottom = 784.0
+scale = Vector2(3, 3)
+value = 75.0
+radial_fill_degrees = 0.0
 nine_patch_stretch = true
 stretch_margin_left = 4
 stretch_margin_top = 4
 stretch_margin_right = 4
 stretch_margin_bottom = 4
 texture_under = ExtResource("3_0sbdu")
-texture_progress = ExtResource("4_ssnc6")
-radial_fill_degrees = 0.0
+texture_progress = ExtResource("5_7li7p")
 
 [node name="ManaBar" type="GridContainer" parent="GUI/HUD"]
 layout_mode = 0
@@ -87,6 +106,7 @@ offset_right = 705.0
 offset_bottom = 823.0
 scale = Vector2(3, 3)
 fill_mode = 6
+radial_fill_degrees = 0.0
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2
@@ -94,7 +114,6 @@ stretch_margin_right = 2
 stretch_margin_bottom = 2
 texture_under = ExtResource("8_diypk")
 texture_progress = ExtResource("9_vxua4")
-radial_fill_degrees = 0.0
 
 [node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]
 visible = false

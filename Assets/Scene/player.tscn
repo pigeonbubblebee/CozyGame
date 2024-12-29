@@ -716,10 +716,10 @@ size = Vector2(224, 208)
 size = Vector2(224, 208)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82cr8"]
-size = Vector2(288, 208)
+size = Vector2(336, 272)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58y43"]
-size = Vector2(288, 208)
+size = Vector2(336, 272)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r4kkq"]
 particles_animation = true
@@ -731,8 +731,6 @@ particles_anim_loop = false
 particle_flag_disable_z = true
 spread = 0.0
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 scale_min = 2.0
 scale_max = 2.0
 anim_speed_min = 1.0
@@ -1010,12 +1008,12 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Right" type="CollisionShape2D" parent="PlayerAttackController/DeathblowCheck"]
-position = Vector2(80, 16)
+position = Vector2(104, 16)
 shape = SubResource("RectangleShape2D_82cr8")
 disabled = true
 
 [node name="Left" type="CollisionShape2D" parent="PlayerAttackController/DeathblowCheck"]
-position = Vector2(-80, 16)
+position = Vector2(-104, 16)
 shape = SubResource("RectangleShape2D_58y43")
 disabled = true
 
@@ -1095,9 +1093,17 @@ CurrentHealthPoints = 5
 [node name="HealController" type="Node2D" parent="."]
 script = ExtResource("16_gssuq")
 CurrentHeals = 5
+_internalDamageHealDelayTimerPath = NodePath("InternalDamageDelay")
+_internalDamageHealTimerPath = NodePath("InternalDamageCooldown")
 _healTimerPath = NodePath("HealTimer")
 
 [node name="HealTimer" type="Timer" parent="HealController"]
+one_shot = true
+
+[node name="InternalDamageDelay" type="Timer" parent="HealController"]
+one_shot = true
+
+[node name="InternalDamageCooldown" type="Timer" parent="HealController"]
 one_shot = true
 
 [node name="PlayerSpellController" type="Node2D" parent="."]

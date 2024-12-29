@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyAttackData" load_steps=2 format=3 uid="uid://dhbmg6d2g0pbi"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="1_qohki"]
+
+[resource]
+script = ExtResource("1_qohki")
+Damage = 10
+InternalDamage = 5
+PostureDamage = 34
+DeflectPostureDamage = 34
+DeflectKnockbackMultiplier = 1.0

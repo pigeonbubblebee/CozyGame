@@ -24,23 +24,25 @@ public partial class PlayerBlockState : PlayerState
 		// 	return;
 		//_timeoutBlock(deflect);
 		//_released = true;
+		// DeflectController.StartBlockCooldown();
+		GetTree().CreateTimer(0.1f).Timeout += _EnterDefaultState;
 	}
 	
-	private void _timeoutBlock(bool deflect) {
-		if(_released && !ActiveState)
-			return;
+	private void _timeoutBlock() {
+		// GD.Print("Timeout");
+		GetTree().CreateTimer(Stats.BlockTimeout).Timeout += _EnterDefaultState;
 		
-		
-		if(deflect) {
+		/*if(deflect) {
 			GetTree().CreateTimer(Stats.DeflectTimeout).Timeout += _EnterDefaultState; // Move to stats
 		} else {
 			// if(deflect) {
 			GetTree().CreateTimer(Stats.BlockTimeout).Timeout += _EnterDefaultState; // Move to stats
-		}
+		}*/
 	}
 	
 	public override void Exit() {
 		base.Exit();
+		// DeflectController.StartBlockCooldown();
 		DeflectController.EndBlock();
 	}
 	
@@ -57,18 +59,22 @@ public partial class PlayerBlockState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
 			return true;
 		}
+		/*
 		if(!DeflectController.DesiredDeflect) {
 			DeflectController.EndBlock();
 			_timeoutBlock(_deflecting);
 			_released = true;
 			return true;
 		}
-
+		*/
 		return false;
 	}
 
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
+		_timeoutBlock();
+		DeflectController.StartDeflectWindow();
+		
 		_released = false;
 		CanFlip = false;
 		MovementController.CanSwitchDirections = false;
@@ -211,6 +217,7 @@ public partial class PlayerBlockState : PlayerState
 		MovementController.CanSwitchDirections = true;
 		if(!ActiveState)
 			return;
+		DeflectController.StartBlockCooldown();
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
 }

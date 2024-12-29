@@ -1,184 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://dfi6e0ou7w3pm"]
+[gd_scene load_steps=8 format=3 uid="uid://dfi6e0ou7w3pm"]
 
-[ext_resource type="Texture2D" uid="uid://de4dba404sihr" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattackbottom.png" id="1_5evh2"]
-[ext_resource type="Texture2D" uid="uid://c60vukf1023q6" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherwalk.png" id="2_h3sq7"]
+[ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_c2u7c"]
+[ext_resource type="SpriteFrames" uid="uid://dyr7qfod35a2j" path="res://Assets/Scene/Enemy/goblin_archer.tres" id="2_6rdhl"]
 [ext_resource type="Texture2D" uid="uid://obtmaumy1qxe" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattacktop.png" id="2_o43qb"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vjth0"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_61awo"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lvp2s"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iv0cg"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujtlg"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gabki"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ljxgh"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_abigs"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0g0r3"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ypknw"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xl3ug"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nexp7"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_58opo"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jv8xr"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ngwvh"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iot2x"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bggb"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x1ldc"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_732ed"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b124d"]
-atlas = ExtResource("2_h3sq7")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_psfxt"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vjth0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_61awo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lvp2s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iv0cg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujtlg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gabki")
-}],
-"loop": true,
-"name": &"aggro",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_5evh2")
-}],
-"loop": true,
-"name": &"aiming",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ljxgh")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abigs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0g0r3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ypknw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xl3ug")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nexp7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_58opo")
-}],
-"loop": true,
-"name": &"patrol",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jv8xr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ngwvh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iot2x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4bggb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x1ldc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_732ed")
-}],
-"loop": true,
-"name": &"retreat",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b124d")
-}],
-"loop": true,
-"name": &"stagger",
-"speed": 5.0
-}]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs" id="3_5hq3y"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="3_c8mah"]
+[ext_resource type="Resource" uid="uid://6660baswp31q" path="res://Data/Enemy/AttackData/goblin_archer_shoot.tres" id="4_as0kg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o04qd"]
 animations = [{
@@ -193,17 +20,73 @@ animations = [{
 
 [node name="goblin_archer" type="Node2D"]
 
-[node name="body" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_psfxt")
+[node name="ChaserEnemy" parent="." instance=ExtResource("1_c2u7c")]
+RetreatRange = 1400.0
+MaxHealth = 30
+MaxPosture = 40
+DeathBlowDamage = 30
+
+[node name="AggroCheckUp" parent="ChaserEnemy/AggroChecks" index="1"]
+target_position = Vector2(1037, 326)
+
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+sprite_frames = ExtResource("2_6rdhl")
 animation = &"retreat"
-frame = 4
-frame_progress = 0.625506
+frame = 2
+frame_progress = 0.0552375
 
-[node name="Top" type="Node2D" parent="."]
+[node name="Shoot" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("3_5hq3y")
+ShootRange = 1400.0
+ChargeTime = 0.5
+ShootStartRange = 1400.0
+ShootCooldown = 2.0
+_sceneName = "EnemyArrow"
+_objectPoolPath = NodePath("ObjectPool")
+_bodyTopPath = NodePath("Top")
+_objectPoolNumber = 3
+_attackData = ExtResource("4_as0kg")
+AnimationName = "aiming"
+AttackLength = 1.0
+NotChainAttack = true
+
+[node name="ObjectPool" type="Node" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot"]
+
+[node name="Top" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot"]
 visible = false
-position = Vector2(1, -4)
-rotation = 0.229106
+z_index = 4
+position = Vector2(3, -17)
+rotation = 1.09884
+scale = Vector2(4, 4)
 
-[node name="body2" type="AnimatedSprite2D" parent="Top"]
+[node name="body2" type="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot/Top"]
 position = Vector2(1, 3)
 sprite_frames = SubResource("SpriteFrames_o04qd")
+frame_progress = 0.302698
+
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
+script = ExtResource("3_c8mah")
+RetreatRange = 1300.0
+RetreatSpeed = 150.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+AnimationName = "retreat"
+AttackLength = 1.0
+NotChainAttack = true
+
+[node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(-32, 0)
+
+[node name="body" type="AnimatedSprite2D" parent="ChaserEnemy"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_6rdhl")
+animation = &"idle"
+
+[editable path="ChaserEnemy"]
+[editable path="ChaserEnemy/EnemyTemplate"]

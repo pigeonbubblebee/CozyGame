@@ -7,7 +7,7 @@ public partial class PlayerDeflectController : Node
 	private Timer _deflectBuffer;
 	
 	public bool DesiredDeflect => _CheckDesiredDeflect();
-	public bool DeflectActuation => _GetDeflectActuation();
+	public bool DeflectActuation => _GetDeflectActuation() && CanBlock;
 	
 	private Player _player;
 	private PlayerStats _playerStats => _player.CurrentPlayerStats;
@@ -23,6 +23,8 @@ public partial class PlayerDeflectController : Node
 	public event Action<bool, int, Enemy> BlockEvent;
 	
 	private GameManager _gameManager;
+	
+	public bool CanBlock { get; private set; }
 	
 	[Export] private NodePath _blockParticlePath;
 	private GpuParticles2D _blockParticle;
@@ -41,6 +43,8 @@ public partial class PlayerDeflectController : Node
 	}
 	
 	public override void _Ready() {
+		CanBlock = true;
+		
 		_deflectBuffer = GetNode<Timer>(_deflectBufferPath);
 		_deflectBuffer.WaitTime = 0.2f;
 		
@@ -58,22 +62,26 @@ public partial class PlayerDeflectController : Node
 	
 	public override void _Process(double delta) {
 		// GD.Print(_deflectWindowTimer.TimeLeft + " " + _playerStats.DeflectWindow);
-		if(_inputManager.GetDeflectActuation()) {
-			_deflectWindowTimer.Start(_playerStats.DeflectWindow);
-		}
+		
 	}
 	
-	public int Block(int damage, int postureDamage, Enemy e) {
+	public void StartDeflectWindow() {
+		_deflectWindowTimer.Start(_playerStats.DeflectWindow);
+	}
+	
+	public int Block(EnemyAttackData data, Enemy e) {
+		// GD.Print(_deflectWindowTimer.TimeLeft + " deflect");
 		if(InDeflectWindow()) {
 			_deflectSFX.Play();
 			_emitDeflectParticle();
 			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
-			BlockEvent?.Invoke(true, postureDamage, e);
-			// GD.Print("Deflect!");
-			e.TakePostureDamage(postureDamage);
+			BlockEvent?.Invoke(true, data.PostureDamage, e);
+		// 	GD.Print(deflectDamage);
+			e.TakePostureDamage(data.DeflectPostureDamage);
 			Counter = true;
 			GetTree().CreateTimer(_playerStats.CounterWindow).Timeout += _FinishCounterWindow;
-			e.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? -1 : 1, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
+			e.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? -1 : 1, _playerStats.DeflectKnockback * data.DeflectKnockbackMultiplier,
+				_playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 			_gameManager.FreezeFrame(0.02f, 0.1f);
 			return 0;
@@ -82,9 +90,12 @@ public partial class PlayerDeflectController : Node
 			_emitBlockParticle();
 			
 			_player.Camera.Shake(_playerStats.BlockShakeTime, _playerStats.BlockShakeMagnitude);
-			BlockEvent?.Invoke(false, postureDamage, e);
+			BlockEvent?.Invoke(false, data.PostureDamage, e);
 			// _player.PlayerHealth.TakeDamage(damage/4);
-			_player.PostureController.TakePostureDamage(postureDamage);
+			_player.PostureController.TakePostureDamage(data.PostureDamage);
+			_player.PlayerHealth.TakeDamage(data.Damage);
+			_player.HealController.TakeInternalDamage(data.Damage + data.InternalDamage);
+			
 			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.BlockKnockback, _playerStats.BlockKnockbackAcceleration, _playerStats.BlockKnockbackTime);
 			_gameManager.FreezeFrame(0.02f, 0.1f);
 			return 0;
@@ -145,5 +156,16 @@ public partial class PlayerDeflectController : Node
 		}
 
 		_deflectParticle.Emitting = true;
+	}
+	
+	public void StartBlockCooldown() {
+		CanBlock = false;
+		GD.Print("Cooldown Start");
+		GetTree().CreateTimer(_playerStats.BlockCooldown).Timeout += _FinishBlockCooldown;
+	}
+
+	private void _FinishBlockCooldown() {
+		GD.Print("Cooldown Finish");
+		CanBlock = true; 
 	}
 }

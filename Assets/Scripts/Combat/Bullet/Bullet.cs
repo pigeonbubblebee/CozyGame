@@ -5,7 +5,7 @@ public partial class Bullet : Area2D
 {
 	public bool InUse { get; private set; }
 	[Export] public float Lifetime;
-	public float Speed = 1600f;
+	[Export] public float Speed = 1600f;
 	public float MaxLifetime = 2f;
 	
 	[Export] public NodePath SpritePath { get; private set; }
@@ -45,11 +45,6 @@ public partial class Bullet : Area2D
 	 public void Fire() {
 		InUse = true;
 		_lifetime.Start();
-		_sprite.GlobalRotation = Mathf.DegToRad(0);
-		if(Mathf.RadToDeg(this.GlobalRotation) > 90) {
-			_sprite.GlobalRotation = Mathf.DegToRad(180) - this.GlobalRotation;
-			// GD.Print(_sprite.GlobalRotation);
-		}
 	}
 
 	public void ReturnToPool() {

@@ -38,7 +38,7 @@ public partial class PlayerRunState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
 			return true;
 		}
-		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
+		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop() && DeflectController.CanBlock)) {
 			DeflectController.StartBlock();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
 			return true;

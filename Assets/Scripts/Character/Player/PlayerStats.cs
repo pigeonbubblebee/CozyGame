@@ -39,6 +39,7 @@ public partial class PlayerStats : Resource
 	[Export] public float SlashFreezeTime { get; private set; }
 	[Export] public float SlashFreezeDelay { get; private set; }
 	[Export] public float DeathBlowFreezeTime { get; private set; }
+	[Export] public float SlashSpeedMultiplier { get; private set; }
 	[ExportCategory("Counter")]
 	[Export] public int SlashCounterDamage { get; private set; }
 	[Export] public float CounterShakeTime { get; private set; }
@@ -46,6 +47,9 @@ public partial class PlayerStats : Resource
 	[ExportCategory("Health")]
 	[Export] public int MaxHealth { get; private set; }
 	[Export] public int MaxHeals { get; private set; }
+	[Export] public int InternalDamageHealRate { get; private set; }
+	[Export] public float InternalDamageHealCooldown { get; private set; }
+	[Export] public float InternalDamageHealDelay { get; private set; }
 	[Export] public float HealTime { get; private set; }
 	[Export] public int HealPower { get; private set; }
 	[Export] public float HealCooldown { get; private set; }
@@ -62,7 +66,7 @@ public partial class PlayerStats : Resource
 	[Export] public float ShootRecoil { get; private set; }
 	[ExportCategory("Deflecting")]
 	[Export] public float DeflectWindow { get; private set; }
-	[Export] public float DeflectTimeout { get; private set; }
+	[Export] public float BlockCooldown { get; private set; }
 	[Export] public float BlockTimeout { get; private set; }
 	[Export] public float CounterWindow { get; private set; }
 	[Export] public float BlockKnockback { get; private set; }

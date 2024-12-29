@@ -63,6 +63,10 @@ public partial class Enemy : CharacterBody2D
 	private float _knockbackAcceleration;
 	private int _knockbackDirection;
 	
+	[Export] public float IFrameTime = 0.3f;
+	private bool _iFrameOn = false;
+	public bool Invincible => _iFrameOn;
+	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
@@ -106,12 +110,15 @@ public partial class Enemy : CharacterBody2D
 			i ++;
 		}
 		
+		FinishAttackEvent += _FinishAttack;
+		
 		_knockbackTimer = GetNode<Timer>(_knockbackTimePath);
 		_knockbackTimer.Timeout += _StopKnockback;
 	}
 	
 	public void ExecuteAttack(EnemyAttack e, Player p) {
 		e.Execute(p, this);
+		CurrentAttack = e;
 	}
 	
 	public EnemyAttack GetCurrentAttack(Player p) {
@@ -122,6 +129,10 @@ public partial class Enemy : CharacterBody2D
 		}
 		
 		return null;
+	}
+	
+	private void _FinishAttack() {
+		CurrentAttack = null;
 	}
 	
 	public void RegeneratePosture() {
@@ -205,10 +216,18 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	public virtual void OnHit(Player player, int damage, int direction, int postureDamage) {
+		if(_iFrameOn)
+			return;
 		GD.Print("OUCH!");
 		TakeDamageEvent?.Invoke(player, damage, direction, postureDamage);
 		_health.TakeDamage(damage);
 		TakePostureDamage(postureDamage);
+		_iFrameOn = true;
+		GetTree().CreateTimer(IFrameTime).Timeout += _FinishIFrame;
+	}
+	
+	private void _FinishIFrame() {
+		_iFrameOn = false;
 	}
 	
 	protected virtual void OnDeath() {

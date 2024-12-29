@@ -11,6 +11,14 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 	public event Action HealEvent;
 	public event Action AddHealEvent;
 	
+	public event Action<int> InternalHealthChangeEvent;
+	
+	public int InternalDamage { get; private set; }
+	[Export] private NodePath _internalDamageHealDelayTimerPath;
+	private Timer InternalDamageHealDelayTimer;
+	[Export] private NodePath _internalDamageHealTimerPath;
+	private Timer InternalDamageHealTimer;
+	
 	private Player _player;
 	private PlayerStats _playerStats => _player.CurrentPlayerStats;
 	
@@ -31,7 +39,44 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 		_healTimer.WaitTime = _playerStats.HealTime;
 		_healTimer.Timeout += _FinishHeal;
 		
+		// InternalDamage = _playerStats.MaxHealth;
+		InternalDamageHealDelayTimer = GetNode<Timer>(_internalDamageHealDelayTimerPath);
+		InternalDamageHealTimer = GetNode<Timer>(_internalDamageHealTimerPath);
+		_player.PlayerHealth.DamageEvent += ResetInternalDamageHealDelay;
+		
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
+	}
+	
+	public void ConvertInternalDamage() {
+		_player.PlayerHealth.TakeDamage(InternalDamage);
+		InternalDamage = 0;
+	}
+	
+	public void TakeInternalDamage(int n) {
+		InternalDamage += n;
+		ResetInternalDamageHealDelay(n);
+		InternalHealthChangeEvent?.Invoke(n);
+	}
+	
+	public void ResetInternalDamageHealDelay(int dmg) {
+		InternalDamageHealDelayTimer.Start(_playerStats.InternalDamageHealDelay);
+	}
+	
+	public override void _Process(double delta) {
+		if(InternalDamage <= 0) {
+			return;
+		}
+		
+		if(!InternalDamageHealDelayTimer.IsStopped()) {
+			return;
+		}
+		
+		if(InternalDamageHealTimer.IsStopped()) {
+			_player.PlayerHealth.AddHealth(Mathf.Min(InternalDamage, _playerStats.InternalDamageHealRate), false);
+			InternalDamage -= Mathf.Min(InternalDamage, _playerStats.InternalDamageHealRate);
+			InternalHealthChangeEvent?.Invoke(-Mathf.Min(InternalDamage, _playerStats.InternalDamageHealRate));
+			InternalDamageHealTimer.Start(_playerStats.InternalDamageHealCooldown);
+		}
 	}
 	
 	public void Initialize(Player player) {

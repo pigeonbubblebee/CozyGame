@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnn1crn02uq2d"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/Bullet/Bullet.cs" id="1_0wru6"]
+[ext_resource type="Texture2D" uid="uid://brs5lpmgalkmp" path="res://Assets/Art/Character/Enemy/GoblinArcher/arrow.png" id="2_ijmxa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uliog"]
+size = Vector2(128, 32)
+
+[node name="EnemyArrow" type="Area2D"]
+scale = Vector2(1, 0.3)
+script = ExtResource("1_0wru6")
+Lifetime = 1.0
+Speed = 1000.0
+SpritePath = NodePath("Sprite2D")
+LifetimePath = NodePath("Lifetime")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_ijmxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uliog")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

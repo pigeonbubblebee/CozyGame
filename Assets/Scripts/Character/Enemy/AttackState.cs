@@ -28,6 +28,7 @@ public partial class AttackState : State
 	public override void PhysicsProcess(double delta)
 	{
 		if(EnemyAI.Staggered) {
+			// GD.Print(EnemyAI.CurrentAttack);
 			if(EnemyAI.CurrentAttack != null)
 				EnemyAI.CurrentAttack.Interrupt();
 			((EnemyStateMachine) ParentStateMachine).ChangeState(((EnemyStateMachine) ParentStateMachine).PostureBreakState);

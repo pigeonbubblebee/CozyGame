@@ -94,6 +94,7 @@ public partial class PlayerSpellController : Node2D
 				
 				if(_movementController.Direction == -1) {
 					b.Rotation = Mathf.DegToRad(180);
+					b.Scale *= -1;
 				} else {
 					b.Rotation = Mathf.DegToRad(0);
 				}

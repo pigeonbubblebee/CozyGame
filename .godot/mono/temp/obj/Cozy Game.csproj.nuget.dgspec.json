@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {}
+    "C:\\Users\\trex0\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {
+    "C:\\Users\\trex0\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+        "projectUniqueName": "C:\\Users\\trex0\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
         "projectName": "Cozy Game",
-        "projectPath": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
+        "projectPath": "C:\\Users\\trex0\\OneDrive\\Documents\\GitHub\\CozyGame\\Cozy Game.csproj",
         "packagesPath": "C:\\Users\\trex0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\trex0\\Documents\\GitHub\\CozyGame\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\trex0\\OneDrive\\Documents\\GitHub\\CozyGame\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\trex0\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -32,7 +32,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net6.0": {
@@ -40,15 +46,15 @@
           "dependencies": {
             "Godot.SourceGenerators": {
               "target": "Package",
-              "version": "[4.1.2, )"
+              "version": "[4.3.0, )"
             },
             "GodotSharp": {
               "target": "Package",
-              "version": "[4.1.2, )"
+              "version": "[4.3.0, )"
             },
             "GodotSharpEditor": {
               "target": "Package",
-              "version": "[4.1.2, )"
+              "version": "[4.3.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -70,12 +76,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.415\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnemyAttack : Node
+public partial class EnemyAttack : Node2D
 {
 	[Export] public string AnimationName;
 	[Export] public float AttackLength;

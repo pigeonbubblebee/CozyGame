@@ -9,6 +9,8 @@ public partial class HUD : Control
 	private TextureProgressBar _manaBar;
 	[Export] private NodePath _postureBarPath;
 	private TextureProgressBar _postureBar;
+	[Export] private NodePath _internalHealthBarPath;
+	private TextureProgressBar _internalHealthBar;
 	
 	[Export] private NodePath _healthHUDPath;
 	private HealthHUD _healthHUD;
@@ -19,6 +21,7 @@ public partial class HUD : Control
 		_healBar = GetNode<TextureProgressBar>(_healBarPath);
 		_manaBar = GetNode<TextureProgressBar>(_manaBarPath);
 		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
+		_internalHealthBar = GetNode<TextureProgressBar>(_internalHealthBarPath);
 		_healthHUD = GetNode<HealthHUD>(_healthHUDPath);
 	}
 	
@@ -35,12 +38,15 @@ public partial class HUD : Control
 		p.SpellController.AddManaEvent += _UpdateHealthHUD;
 		
 		p.PostureController.PostureChangeEvent += _UpdatePostureBar;
+		
+		p.HealController.InternalHealthChangeEvent += _UpdateInternalHealthBar;
 		// p.SpellController.AddManaEvent += _UpdateHealthHUD;
 		
 		_UpdateHealthHUD(0);
 		_UpdateHealBar();
 		_UpdateManaBar(0);
 		_UpdatePostureBar(0);
+		_UpdateInternalHealthBar(0);
 	}
 	
 	private void _UpdateHealthHUD(int amt) {
@@ -66,6 +72,21 @@ public partial class HUD : Control
 			Ratio = Mathf.Max(Ratio, 0);
 			
 			_manaBar.Value = Ratio * 100;
+			
+			_UpdateInternalHealthBar(0);
+		}
+	}
+	
+	private void _UpdateInternalHealthBar(int amt) {
+		if(_currentScenePlayer != null) {
+			// float Ratio = ((float) _currentScenePlayer.SpellController.CurrentMana) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxMana);
+			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
+			Ratio = Mathf.Max(Ratio, 0);
+			
+			float SecondRatio = ((float) _currentScenePlayer.HealController.InternalDamage) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
+			SecondRatio = Mathf.Max(SecondRatio, 0);
+			
+			_internalHealthBar.Value = (Ratio+SecondRatio) * 100;
 		}
 	}
 	

@@ -201,9 +201,9 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			}
 		}
 		
-		_canHit = false;
-		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		//_canHit = false;
+		//_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		//_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		
 		// GD.Print(damage);
 		
@@ -217,14 +217,18 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		((EnemyHitbox) hittable).EnemyAIParent.ApplyKnockback(-direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);
 		
 		if(hittable is EnemyHitbox) {
-			if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
-				_slashHitSFX.Play();
-				_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
-				_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
-			} else {
-				_deathBlowSFX.Play();
-				_gameManager.FreezeFrame(_playerStats.DeathBlowFreezeTime, _playerStats.SlashFreezeDelay);
-				_player.Camera.Shake(_playerStats.CounterShakeTime, _playerStats.CounterShakeMagnitude);
+			if(!((EnemyHitbox) hittable).EnemyAIParent.Invincible) {
+			
+				if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
+					_slashHitSFX.Play();
+					_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
+					_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
+				} else {
+					_deathBlowSFX.Play();
+					_gameManager.FreezeFrame(_playerStats.DeathBlowFreezeTime, _playerStats.SlashFreezeDelay);
+					_player.Camera.Shake(_playerStats.CounterShakeTime, _playerStats.CounterShakeMagnitude);
+				}
+				
 			}
 		}
 		

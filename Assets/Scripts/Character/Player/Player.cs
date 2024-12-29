@@ -84,17 +84,20 @@ public partial class Player : CharacterBody2D
 		_gameManager = GetNode<GameManager>("/root/GameManager");
 	}
 	
-	public void TakeDamage(int damage, int postureDamage, Enemy e) {
+	public void TakeDamage(EnemyAttackData e, Enemy enemy) {
 		Camera.Shake(0.2f, 2000f);
 		_gameManager.FreezeFrame(0.02f, 0.08f);
-		MovementController.ApplyKnockback(e.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 2000, 2000, 0.025f);
+		// GD.Print(e.Enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1);
+		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 2000, 2000, 0.025f);
 		
 		if(DeflectController.Blocking) {
-			DeflectController.Block(damage, postureDamage, e);
+			DeflectController.Block(e, enemy);
 		} else {
 			_hitSFX.Play();
-			PlayerHealth.TakeDamage(damage);
-			PostureController.TakePostureDamage(postureDamage);
+			HealController.ConvertInternalDamage();
+			PlayerHealth.TakeDamage(e.Damage);
+			HealController.TakeInternalDamage(e.InternalDamage);
+			PostureController.TakePostureDamage(e.PostureDamage);
 		}
 	}
 }

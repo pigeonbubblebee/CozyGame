@@ -106,9 +106,9 @@ public partial class PlayerAttackState : PlayerState
 		
 		if(inputDir != Vector2.Zero) {
 			if((inputDir.X > 0 && MovementController.Velocity.X < 0) || (inputDir.X < 0 && MovementController.Velocity.X > 0)) {
-				MovementController.SwitchDirection(inputDir, delta);
+				MovementController.SwitchDirection(inputDir * Stats.SlashSpeedMultiplier, delta);
 			} else {
-				MovementController.Accelerate(inputDir, delta);
+				MovementController.Accelerate(inputDir * Stats.SlashSpeedMultiplier, delta);
 			}
 		} else {
 			MovementController.AddFriction(delta);

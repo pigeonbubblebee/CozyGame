@@ -5,9 +5,7 @@ public partial class SlashAttack : EnemyAttack
 {
 	[Export] public float SlashRange;
 	public bool CanSlash = true;
-	
-	[Export] public int SlashDamage;
-	[Export] public int PostureDamage;
+
 	[Export] public float SlashCooldown;
 	private bool _canHit;
 	
@@ -23,6 +21,8 @@ public partial class SlashAttack : EnemyAttack
 	private Area2D _attackArea;
 	
 	private bool _accelerating;
+	
+	[Export] private EnemyAttackData _attackData;
 	
 	public override void Initialize(Enemy e) {
 		base.Initialize(e);
@@ -130,7 +130,8 @@ public partial class SlashAttack : EnemyAttack
 			return;
 		}
 		
-		((Player)hit).TakeDamage(SlashDamage, PostureDamage, EnemyAI);
+		// ((Player)hit).TakeDamage(SlashDamage, PostureDamage, EnemyAI, PostureDamage);
+		((Player)hit).TakeDamage(_attackData, EnemyAI);
 		// HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
 	}
 }
