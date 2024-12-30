@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_qohki")
-Damage = 10
-InternalDamage = 5
+Damage = 5
+InternalDamage = 2
 PostureDamage = 34
 DeflectPostureDamage = 34
 DeflectKnockbackMultiplier = 1.0

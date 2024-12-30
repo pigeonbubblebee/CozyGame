@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_tx6y6")
-Damage = 7
-InternalDamage = 3
+Damage = 4
+InternalDamage = 2
 PostureDamage = 17
 DeflectPostureDamage = 0
 DeflectKnockbackMultiplier = 0.0
