@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs" id="16_v3xuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_noim0"]
-size = Vector2(80, 200)
+size = Vector2(96, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c51kg"]
 atlas = ExtResource("8_5m3ls")
@@ -195,6 +195,7 @@ one_shot = true
 
 [node name="AnimatedSprite2D" parent="EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_ommm0")
+animation = &"idle"
 
 [node name="StateMachine" parent="EnemyTemplate" index="3"]
 script = ExtResource("11_mmfnb")

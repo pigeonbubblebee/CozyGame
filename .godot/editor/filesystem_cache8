@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1735177762
+::res://::1735943564
 hit.svg::CompressedTexture2D::2652351686850100636::1735015600::1735016057::1::::<><>::
 icon.svg::CompressedTexture2D::4508193827882657020::1735015600::1735016056::1::::<><>::
 README.md::TextFile::-1::1735015600::0::1::::<><>::
@@ -10,7 +10,7 @@ playerrunnew.png::CompressedTexture2D::4641855574356786750::1735015600::17350160
 ::res://Assets/Art/Background/::1735016056
 background.png::CompressedTexture2D::5928036087658694755::1735015600::1735016056::1::::<><>::
 ::res://Assets/Art/Character/::1735015787
-::res://Assets/Art/Character/Enemy/::1735016057
+::res://Assets/Art/Character/Enemy/::1735853516
 Dummy.png::CompressedTexture2D::3418622319448484265::1735015600::1735016057::1::::<><>::
 ::res://Assets/Art/Character/Enemy/GoblinArcher/::1735176655
 arrow.png::CompressedTexture2D::3618631785289637351::1735176653::1735176654::1::::<><>::
@@ -25,6 +25,9 @@ goblin.png::CompressedTexture2D::94511429209480810::1735015600::1735016057::1:::
 goblin_bandit.png::CompressedTexture2D::5138284326739289049::1735015600::1735016057::1::::<><>::
 goblin_bandit_slash2.png::CompressedTexture2D::898697629687146245::1735015600::1735016057::1::::<><>::
 goblin_stagger.png::CompressedTexture2D::8733923528498924032::1735015600::1735016057::1::::<><>::
+::res://Assets/Art/Character/Enemy/Worg/::1735953327
+worg.png::CompressedTexture2D::6898986760372302819::1735943687::1735943689::1::::<><>::
+worg_pounce.png::CompressedTexture2D::6933323342065353927::1735953418::1735953420::1::::<><>::
 ::res://Assets/Art/Character/Player/::1735016057
 blockleft.png::CompressedTexture2D::4842670275825393195::1735015600::1735016057::1::::<><>::
 blockright.png::CompressedTexture2D::3995775751786096097::1735015600::1735016057::1::::<><>::
@@ -46,9 +49,10 @@ playerslashright2.png::CompressedTexture2D::3146200250853130420::1735015600::173
 playerslashright.png::CompressedTexture2D::603394942371241093::1735015600::1735016056::1::::<><>::
 slasheffect.png::CompressedTexture2D::8887246608379694880::1735015600::1735016056::1::::<><>::
 slasheffectleft.png::CompressedTexture2D::7498158278130620651::1735015600::1735016056::1::::<><>::
-::res://Assets/Art/Tileset/::1735016056
-neoncitytileset.png::CompressedTexture2D::2967491028140787025::1735015600::1735016056::1::::<><>::
-::res://Assets/Art/UI/::1735494191
+::res://Assets/Art/Tileset/::1735625089
+grassytileset.png::CompressedTexture2D::684519851011375555::1735624263::1735624266::1::::<><>::
+neoncitytileset.png::CompressedTexture2D::2967491028140787025::1735625086::1735625089::1::::<><>::
+::res://Assets/Art/UI/::1735494195
 execution_prompt.png::CompressedTexture2D::2406340535936724417::1735015600::1735016056::1::::<><>::
 health_bar.png::CompressedTexture2D::5538362393689459532::1735015600::1735016056::1::::<><>::
 health_bar_bg.png::CompressedTexture2D::7061488692285250120::1735015600::1735016056::1::::<><>::
@@ -62,29 +66,30 @@ posture_broken.png::CompressedTexture2D::5259336532528074753::1735015600::173501
 blockeffect.png::CompressedTexture2D::8936347493581269743::1735015600::1735016056::1::::<><>::
 deflecteffect.png::CompressedTexture2D::6238606982136831918::1735015600::1735016056::1::::<><>::
 SlashHitEffect.png::CompressedTexture2D::3155820238780109825::1735015600::1735016057::1::::<><>::
-::res://Assets/Scene/::1735494078
+::res://Assets/Scene/::1735953135
 bullet.tscn::PackedScene::6148691332221585659::1735492977::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Combat/Bullet/Bullet.cs
 inventory.tscn::PackedScene::7087620603772264199::1735015600::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Core/User Interface/InventoryUI.cs<>uid://dyx8x6h5y8kfq::::res://Data/Items/TestingItem.tres<>uid://cy7j7pcjeceba::::res://Data/Items/Stick.tres<>uid://ctcjp4dhg7kn::::res://Sprite-0002.png<>uid://dh64y30leyvhe::::res://Data/Items/Sword.tres
 main.tscn::PackedScene::1425212289073466234::1735015600::0::1::::<><>::uid://bvpmp8o31rqpk::::res://Assets/Scene/testing.tscn
-player.tscn::PackedScene::311429795790561681::1735494078::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Character/Player/Player.cs<>uid://pffa3f4xmb1o::::res://Data/player_stats.tres<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs<>res://Assets/Scripts/Character/Player/PlayerAnimationController.cs<>uid://wun5425o3qem::::res://Assets/Art/Character/Player/idleleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs<>uid://ca83cpe0do3sx::::res://Assets/Art/Character/Player/blockleft.png<>uid://s287m243ccu5::::res://Assets/Art/Character/Player/playerrunleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs<>uid://cobdi4jnel6ey::::res://Assets/Art/Character/Player/playerrunright.png<>uid://bup8102i7r0gr::::res://Assets/Art/Character/Player/idle.png<>uid://bw6t3wlb2l0en::::res://Assets/Art/Character/Player/blockright.png<>uid://b5ngja2auaftt::::res://Assets/Art/Character/Player/playercounterleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs<>uid://cqwgmhy65i0pv::::res://Assets/Art/Character/Player/playercounterright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs<>uid://gde5231psw2o::::res://Assets/Art/Character/Player/playerjumpright.png<>uid://clltxmtgnn565::::res://Assets/Art/Character/Player/playerjumpleft.png<>uid://2aoff414p74g::::res://Assets/Art/Character/Player/playerslashleft.png<>res://Assets/Scripts/Character/Player/PlayerMovementController.cs<>uid://dimno1u1yuogk::::res://Assets/Art/Character/Player/playerdeathblowleft.png<>uid://iuj3dqqfy8hd::::res://Assets/Art/Character/Player/playerslashright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs<>res://Assets/Scripts/Character/Player/PlayerAttackController.cs<>uid://dgkr4tapki1di::::res://Assets/Art/Character/Player/playerdeathblowright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs<>res://Assets/Scripts/Character/Player/PlayerInteractionController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs<>res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs<>uid://e3a1vl6qudyf::::res://Assets/Art/Character/Player/playerslashleft2.png<>uid://bk3bpt8sspksq::::res://Assets/Art/Character/Player/playerslashright2.png<>res://Assets/Scripts/Character/Player/PlayerHealController.cs<>res://Assets/Scripts/Character/Player/PlayerSpellController.cs<>res://Assets/Scripts/Combat/HealthSystem.cs<>uid://dyvbwhdiyg0rk::::res://Assets/Art/Character/Player/slasheffect.png<>uid://bciq2sqw1biex::::res://Assets/Sound/SFX/Player/run.mp3<>uid://b2nn7vring8so::::res://Assets/Sound/SFX/Player/jump.wav<>uid://de3ftoqgp1604::::res://Assets/Art/Character/Player/slasheffectleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerBlockState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStaggerState.cs<>uid://bk7x5snjkyjtx::::res://Assets/Art/VFX/SlashHitEffect.png<>res://Assets/Scripts/Character/Player/PlayerDeflectController.cs<>res://Assets/Scripts/Character/Player/PlayerCamera.cs<>uid://cu5a7fa4vuely::::res://Assets/Art/VFX/deflecteffect.png<>res://Assets/Scripts/Character/Player/PlayerPostureController.cs<>uid://jvx0jqlthhq6::::res://Assets/Sound/SFX/Player/slashhit.wav<>uid://qyno48mhhse0::::res://Assets/Sound/SFX/Player/deathblow.wav<>uid://buxc4svmy1yn::::res://Assets/Sound/SFX/Player/swing.wav<>uid://d0k3lqjeqetb8::::res://Assets/Art/VFX/blockeffect.png<>uid://cnpyrijoou5jq::::res://Assets/Sound/SFX/Player/deflect.wav<>uid://cifo51815mb0o::::res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3<>uid://7iujovvp8snv::::res://Assets/Sound/SFX/Player/hit.wav
-testing.tscn::PackedScene::3892109213429889136::1735494077::0::1::::<><>::res://Assets/Scripts/Core/Scene/SceneManager.cs<>uid://eo4g5684jr7v::::res://Assets/Scene/player.tscn<>uid://b5h2j8rglt8my::::res://icon.svg<>uid://dxaw23abdcuf7::::res://Assets/Scene/walls.tscn<>uid://b0fu168ri1a68::::res://Assets/Scene/Enemy/goblin_bandit.tscn<>uid://cqpt5g3o66cqt::::res://Assets/Art/Background/background.png<>uid://bnqwq0q04gcdo::::res://Assets/Sound/lofi type beat unfinished.mp3<>res://Assets/Scripts/Interactables/TestingItem.cs<>uid://dyx8x6h5y8kfq::::res://Data/Items/TestingItem.tres<>uid://dfi6e0ou7w3pm::::res://Assets/Scene/Enemy/goblin_archer.tscn
+player.tscn::PackedScene::311429795790561681::1735953135::0::1::::<><>::uid://b5h2j8rglt8my::::res://icon.svg<>res://Assets/Scripts/Character/Player/Player.cs<>uid://pffa3f4xmb1o::::res://Data/player_stats.tres<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs<>res://Assets/Scripts/Character/Player/PlayerAnimationController.cs<>uid://wun5425o3qem::::res://Assets/Art/Character/Player/idleleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs<>uid://ca83cpe0do3sx::::res://Assets/Art/Character/Player/blockleft.png<>uid://s287m243ccu5::::res://Assets/Art/Character/Player/playerrunleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs<>uid://cobdi4jnel6ey::::res://Assets/Art/Character/Player/playerrunright.png<>uid://bup8102i7r0gr::::res://Assets/Art/Character/Player/idle.png<>uid://bw6t3wlb2l0en::::res://Assets/Art/Character/Player/blockright.png<>uid://b5ngja2auaftt::::res://Assets/Art/Character/Player/playercounterleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs<>uid://cqwgmhy65i0pv::::res://Assets/Art/Character/Player/playercounterright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs<>uid://gde5231psw2o::::res://Assets/Art/Character/Player/playerjumpright.png<>uid://clltxmtgnn565::::res://Assets/Art/Character/Player/playerjumpleft.png<>uid://2aoff414p74g::::res://Assets/Art/Character/Player/playerslashleft.png<>res://Assets/Scripts/Character/Player/PlayerMovementController.cs<>uid://dimno1u1yuogk::::res://Assets/Art/Character/Player/playerdeathblowleft.png<>uid://iuj3dqqfy8hd::::res://Assets/Art/Character/Player/playerslashright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs<>res://Assets/Scripts/Character/Player/PlayerAttackController.cs<>uid://dgkr4tapki1di::::res://Assets/Art/Character/Player/playerdeathblowright.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs<>res://Assets/Scripts/Character/Player/PlayerInteractionController.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs<>res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs<>uid://e3a1vl6qudyf::::res://Assets/Art/Character/Player/playerslashleft2.png<>uid://bk3bpt8sspksq::::res://Assets/Art/Character/Player/playerslashright2.png<>res://Assets/Scripts/Character/Player/PlayerHealController.cs<>res://Assets/Scripts/Character/Player/PlayerSpellController.cs<>res://Assets/Scripts/Combat/HealthSystem.cs<>uid://dyvbwhdiyg0rk::::res://Assets/Art/Character/Player/slasheffect.png<>uid://bciq2sqw1biex::::res://Assets/Sound/SFX/Player/run.mp3<>uid://b2nn7vring8so::::res://Assets/Sound/SFX/Player/jump.wav<>uid://de3ftoqgp1604::::res://Assets/Art/Character/Player/slasheffectleft.png<>res://Assets/Scripts/Character/Player/StateMachine/PlayerBlockState.cs<>res://Assets/Scripts/Character/Player/StateMachine/PlayerStaggerState.cs<>uid://bk7x5snjkyjtx::::res://Assets/Art/VFX/SlashHitEffect.png<>res://Assets/Scripts/Character/Player/PlayerDeflectController.cs<>res://Assets/Scripts/Character/Player/PlayerCamera.cs<>uid://cu5a7fa4vuely::::res://Assets/Art/VFX/deflecteffect.png<>res://Assets/Scripts/Character/Player/PlayerPostureController.cs<>uid://jvx0jqlthhq6::::res://Assets/Sound/SFX/Player/slashhit.wav<>uid://qyno48mhhse0::::res://Assets/Sound/SFX/Player/deathblow.wav<>uid://buxc4svmy1yn::::res://Assets/Sound/SFX/Player/swing.wav<>uid://d0k3lqjeqetb8::::res://Assets/Art/VFX/blockeffect.png<>uid://cnpyrijoou5jq::::res://Assets/Sound/SFX/Player/deflect.wav<>uid://cifo51815mb0o::::res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3<>uid://7iujovvp8snv::::res://Assets/Sound/SFX/Player/hit.wav
+testing.tscn::PackedScene::3892109213429889136::1735953134::0::1::::<><>::res://Assets/Scripts/Core/Scene/SceneManager.cs<>uid://eo4g5684jr7v::::res://Assets/Scene/player.tscn<>uid://b5h2j8rglt8my::::res://icon.svg<>uid://dxaw23abdcuf7::::res://Assets/Scene/walls.tscn<>uid://b0fu168ri1a68::::res://Assets/Scene/Enemy/goblin_bandit.tscn<>uid://cqpt5g3o66cqt::::res://Assets/Art/Background/background.png<>uid://bnqwq0q04gcdo::::res://Assets/Sound/lofi type beat unfinished.mp3<>res://Assets/Scripts/Interactables/TestingItem.cs<>uid://dyx8x6h5y8kfq::::res://Data/Items/TestingItem.tres<>uid://dfi6e0ou7w3pm::::res://Assets/Scene/Enemy/goblin_archer.tscn<>uid://bskrg487tax4i::::res://Assets/Scene/Enemy/worg.tscn
 tile_map.tscn::PackedScene::4726652623556526851::1735058923::0::1::::<><>::uid://bijqe5ddtj73b::::res://Assets/Art/Tileset/neoncitytileset.png<>res://Assets/Scripts/Core/Scene/Tilemap.cs
-ui_manager.tscn::PackedScene::4725523649877435567::1735494077::0::1::::<><>::res://Assets/Scripts/Core/User Interface/UIManager.cs<>uid://c78kctwoddfg6::::res://Assets/Scene/inventory.tscn<>res://Assets/Scripts/Core/User Interface/HUD.cs<>uid://c7uvxmionuogu::::res://Assets/Art/UI/health_bar_bg.png<>res://Assets/Scripts/Core/User Interface/HealthHUD.cs<>uid://ck53awq3axik7::::res://Assets/Art/UI/health_bar.png<>uid://dwfd3h1q50kau::::res://Assets/Art/UI/ManaEmpty.png<>uid://c6xkeauk014jr::::res://Assets/Art/UI/Mana.png<>uid://bwfit68g85aub::::res://Assets/Art/UI/posture_bar_bg.png<>uid://boa1bkgr064an::::res://Assets/Art/UI/posture_bar.png
+ui_manager.tscn::PackedScene::4725523649877435567::1735953134::0::1::::<><>::res://Assets/Scripts/Core/User Interface/UIManager.cs<>uid://c78kctwoddfg6::::res://Assets/Scene/inventory.tscn<>res://Assets/Scripts/Core/User Interface/HUD.cs<>uid://c7uvxmionuogu::::res://Assets/Art/UI/health_bar_bg.png<>res://Assets/Scripts/Core/User Interface/HealthHUD.cs<>uid://ck53awq3axik7::::res://Assets/Art/UI/health_bar.png<>uid://drgq6avwrwgnv::::res://Assets/Art/UI/internal_health_bar.png<>uid://dwfd3h1q50kau::::res://Assets/Art/UI/ManaEmpty.png<>uid://c6xkeauk014jr::::res://Assets/Art/UI/Mana.png<>uid://bwfit68g85aub::::res://Assets/Art/UI/posture_bar_bg.png<>uid://boa1bkgr064an::::res://Assets/Art/UI/posture_bar.png
 walls.tscn::PackedScene::8774990915733692794::1735167500::0::1::::<><>::uid://bijqe5ddtj73b::::res://Assets/Art/Tileset/neoncitytileset.png
-::res://Assets/Scene/Enemy/::1735494077
-chaser_enemy.tscn::PackedScene::4062065444792521563::1735168318::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs<>uid://003fp2vwh75j::::res://Assets/Scene/Enemy/enemy_template.tscn<>uid://cfha16yu1jkjx::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png<>uid://dwo1pd2sf7ugu::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs
-enemy_template.tscn::PackedScene::1808040370113117309::1735494077::0::1::::<><>::res://Assets/Scripts/Character/Enemy/EnemyBar.cs<>uid://bwfit68g85aub::::res://Assets/Art/UI/posture_bar_bg.png<>uid://boa1bkgr064an::::res://Assets/Art/UI/posture_bar.png<>uid://c7uvxmionuogu::::res://Assets/Art/UI/health_bar_bg.png<>uid://ck53awq3axik7::::res://Assets/Art/UI/health_bar.png<>uid://bajwcvcu40f18::::res://Assets/Art/UI/execution_prompt.png<>uid://boyahe6edb37b::::res://Assets/Art/Character/Enemy/Dummy.png<>res://Assets/Scripts/Character/Enemy/EnemyStateMachine.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserIdleState.cs<>res://Assets/Scripts/Character/Enemy/AttackState.cs<>res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs<>res://Assets/Scripts/Combat/HealthSystem.cs<>res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs
-goblin_archer.tres::SpriteFrames::8880860521101018031::1735147755::0::1::::<><>::uid://c60vukf1023q6::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherwalk.png<>uid://de4dba404sihr::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattackbottom.png
-goblin_archer.tscn::PackedScene::7528611996916707498::1735494077::0::1::::<><>::uid://bx4xvh2o6pyxf::::res://Assets/Scene/Enemy/chaser_enemy.tscn<>uid://dyr7qfod35a2j::::res://Assets/Scene/Enemy/goblin_archer.tres<>uid://obtmaumy1qxe::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattacktop.png<>res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs<>res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs<>uid://6660baswp31q::::res://Data/Enemy/AttackData/goblin_archer_shoot.tres
-goblin_bandit.tscn::PackedScene::4152726113897582191::1735493829::0::1::::<><>::uid://bx4xvh2o6pyxf::::res://Assets/Scene/Enemy/chaser_enemy.tscn<>res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs<>uid://cfha16yu1jkjx::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png<>uid://m2loh784ssuv::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit_slash2.png<>uid://dwo1pd2sf7ugu::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png<>res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs<>uid://dhbmg6d2g0pbi::::res://Data/Enemy/AttackData/goblin_bandit_slash.tres
+::res://Assets/Scene/Enemy/::1735953372
+chaser_enemy.tscn::PackedScene::4062065444792521563::1735953135::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs<>uid://003fp2vwh75j::::res://Assets/Scene/Enemy/enemy_template.tscn<>uid://cfha16yu1jkjx::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png<>uid://dwo1pd2sf7ugu::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs
+enemy_template.tscn::PackedScene::1808040370113117309::1735953134::0::1::::<><>::res://Assets/Scripts/Character/Enemy/EnemyBar.cs<>uid://bwfit68g85aub::::res://Assets/Art/UI/posture_bar_bg.png<>uid://boa1bkgr064an::::res://Assets/Art/UI/posture_bar.png<>uid://c7uvxmionuogu::::res://Assets/Art/UI/health_bar_bg.png<>uid://ck53awq3axik7::::res://Assets/Art/UI/health_bar.png<>uid://bajwcvcu40f18::::res://Assets/Art/UI/execution_prompt.png<>uid://boyahe6edb37b::::res://Assets/Art/Character/Enemy/Dummy.png<>res://Assets/Scripts/Character/Enemy/EnemyStateMachine.cs<>res://Assets/Scripts/Character/Enemy/Chaser/ChaserIdleState.cs<>res://Assets/Scripts/Character/Enemy/AttackState.cs<>res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs<>res://Assets/Scripts/Combat/HealthSystem.cs<>res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs
+goblin_archer.tres::SpriteFrames::8880860521101018031::1735943714::0::1::::<><>::uid://c60vukf1023q6::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherwalk.png<>uid://de4dba404sihr::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattackbottom.png
+goblin_archer.tscn::PackedScene::7528611996916707498::1735953134::0::1::::<><>::uid://bx4xvh2o6pyxf::::res://Assets/Scene/Enemy/chaser_enemy.tscn<>uid://dyr7qfod35a2j::::res://Assets/Scene/Enemy/goblin_archer.tres<>uid://obtmaumy1qxe::::res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattacktop.png<>res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs<>res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs<>uid://6660baswp31q::::res://Data/Enemy/AttackData/goblin_archer_shoot.tres
+goblin_bandit.tscn::PackedScene::4152726113897582191::1735953135::0::1::::<><>::uid://bx4xvh2o6pyxf::::res://Assets/Scene/Enemy/chaser_enemy.tscn<>res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs<>uid://cfha16yu1jkjx::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png<>uid://m2loh784ssuv::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit_slash2.png<>uid://dwo1pd2sf7ugu::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png<>res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs<>uid://dhbmg6d2g0pbi::::res://Data/Enemy/AttackData/goblin_bandit_slash.tres
 patrolling_enemy.tscn::PackedScene::2313245456767807035::1735167499::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs<>res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs<>res://Assets/Scripts/Character/Enemy/Patrol/PatrolStateMachine.cs<>res://Assets/Scripts/Character/Enemy/Patrol/PatrolState.cs<>res://Assets/Scripts/Character/Enemy/Patrol/PatrolIdleState.cs<>res://Assets/Scripts/Combat/HealthSystem.cs<>res://Assets/Scripts/Character/Enemy/AttackState.cs<>res://Assets/Scripts/Character/Enemy/PostureBreakState.cs<>uid://cfha16yu1jkjx::::res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png<>uid://bwfit68g85aub::::res://Assets/Art/UI/posture_bar_bg.png<>uid://boa1bkgr064an::::res://Assets/Art/UI/posture_bar.png<>uid://c7uvxmionuogu::::res://Assets/Art/UI/health_bar_bg.png<>uid://bajwcvcu40f18::::res://Assets/Art/UI/execution_prompt.png<>uid://ck53awq3axik7::::res://Assets/Art/UI/health_bar.png
-::res://Assets/Scene/Enemy/Projectile/::1735494077
-EnemyArrow.tscn::PackedScene::3327295689342219017::1735494077::0::1::::<><>::res://Assets/Scripts/Combat/Bullet/Bullet.cs<>uid://brs5lpmgalkmp::::res://Assets/Art/Character/Enemy/GoblinArcher/arrow.png
+worg.tscn::PackedScene::3671508125993792430::1735953372::0::1::::<><>::uid://bx4xvh2o6pyxf::::res://Assets/Scene/Enemy/chaser_enemy.tscn<>res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs<>uid://c51s271p0iuyx::::res://Assets/Art/Character/Enemy/Worg/worg_pounce.png<>uid://c5j6kln8d24d8::::res://Assets/Art/Character/Enemy/Worg/worg.png<>res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
+::res://Assets/Scene/Enemy/Projectile/::1735953134
+EnemyArrow.tscn::PackedScene::3327295689342219017::1735953134::0::1::::<><>::res://Assets/Scripts/Combat/Bullet/Bullet.cs<>uid://brs5lpmgalkmp::::res://Assets/Art/Character/Enemy/GoblinArcher/arrow.png
 ::res://Assets/Scripts/::1735015786
 ::res://Assets/Scripts/Character/::1735015787
-::res://Assets/Scripts/Character/Enemy/::1735239610
+::res://Assets/Scripts/Character/Enemy/::1735950613
 AttackState.cs::CSharpScript::-1::1735184899::0::1::::<>Node<>::
-Enemy.cs::CSharpScript::-1::1735239610::0::1::::<>CharacterBody2D<>::
+Enemy.cs::CSharpScript::-1::1735950613::0::1::::<>CharacterBody2D<>::
 EnemyAttack.cs::CSharpScript::-1::1735167487::0::1::::<>Node2D<>::
 EnemyBar.cs::CSharpScript::-1::1735015600::0::1::::<>Node2D<>::
 EnemyHitbox.cs::CSharpScript::-1::1735015600::0::1::::<>Area2D<>::
@@ -93,11 +98,12 @@ EnemyStateMachine.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PostureBreakState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 TestingDummy.cs::CSharpScript::-1::1735015600::0::1::::<>Area2D<>::
 VunerableAttack.cs::CSharpScript::-1::1735015600::0::1::::<>Node2D<>::
-::res://Assets/Scripts/Character/Enemy/Attacks/::1735491816
+::res://Assets/Scripts/Character/Enemy/Attacks/::1735953109
 EnemyAttackData.cs::CSharpScript::-1::1735491816::0::1::::EnemyAttackData<>Resource<>::
+PounceAttack.cs::CSharpScript::-1::1735953109::0::1::::<>Node2D<>::
 Retreat.cs::CSharpScript::-1::1735184658::0::1::::<>Node2D<>::
 ShootAttack.cs::CSharpScript::-1::1735491041::0::1::::<>Node2D<>::
-SlashAttack.cs::CSharpScript::-1::1735490984::0::1::::<>Node2D<>::
+SlashAttack.cs::CSharpScript::-1::1735953076::0::1::::<>Node2D<>::
 SlashCombo.cs::CSharpScript::-1::1735490976::0::1::::<>Node2D<>::
 ::res://Assets/Scripts/Character/Enemy/Chaser/::1735015787
 ChaserAggroState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
@@ -112,28 +118,28 @@ PatrolIdleState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PatrolStaggerState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PatrolState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PatrolStateMachine.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-::res://Assets/Scripts/Character/Player/::1735494012
-Player.cs::CSharpScript::-1::1735493924::0::1::::<>CharacterBody2D<>::
+::res://Assets/Scripts/Character/Player/::1735943714
+Player.cs::CSharpScript::-1::1735501251::0::1::::<>CharacterBody2D<>::
 PlayerAnimationController.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-PlayerAttackController.cs::CSharpScript::-1::1735239346::0::1::::<>Node2D<>::
+PlayerAttackController.cs::CSharpScript::-1::1735502393::0::1::::<>Node2D<>::
 PlayerCamera.cs::CSharpScript::-1::1735015600::0::1::::<>Camera2D<>::
-PlayerDeflectController.cs::CSharpScript::-1::1735492897::0::1::::<>Node<>::
-PlayerHealController.cs::CSharpScript::-1::1735494012::0::1::::<>Node<>::
+PlayerDeflectController.cs::CSharpScript::-1::1735501797::0::1::::<>Node<>::
+PlayerHealController.cs::CSharpScript::-1::1735501197::0::1::::<>Node<>::
 PlayerInteractionController.cs::CSharpScript::-1::1735015600::0::1::::<>Area2D<>::
 PlayerInventoryManager.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerMovementController.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerPostureController.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerSpellController.cs::CSharpScript::-1::1735181902::0::1::::<>Node2D<>::
-PlayerStats.cs::CSharpScript::-1::1735493102::0::1::::PlayerStats<>Resource<>::
-::res://Assets/Scripts/Character/Player/StateMachine/::1735492960
+PlayerStats.cs::CSharpScript::-1::1735943714::0::1::::PlayerStats<>Resource<>::
+::res://Assets/Scripts/Character/Player/StateMachine/::1735529074
 PlayerAttackState.cs::CSharpScript::-1::1735185443::0::1::::<>Node<>::
-PlayerBlockState.cs::CSharpScript::-1::1735492960::0::1::::<>Node<>::
+PlayerBlockState.cs::CSharpScript::-1::1735529074::0::1::::<>Node<>::
 PlayerDashState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerFallState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerHealState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-PlayerIdleState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
+PlayerIdleState.cs::CSharpScript::-1::1735501947::0::1::::<>Node<>::
 PlayerJumpState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-PlayerRunState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
+PlayerRunState.cs::CSharpScript::-1::1735501960::0::1::::<>Node<>::
 PlayerSpellState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerStaggerState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
 PlayerState.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
@@ -161,9 +167,9 @@ Tilemap.cs::CSharpScript::-1::1735015600::0::1::::<>TileMap<>::
 ::res://Assets/Scripts/Core/System/Input/::1735015787
 IInputManager.cs::CSharpScript::-1::1735015600::0::1::::<><>::
 InputManager.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-::res://Assets/Scripts/Core/User Interface/::1735015787
+::res://Assets/Scripts/Core/User Interface/::1735494637
 HealthHUD.cs::CSharpScript::-1::1735015600::0::1::::<>Node<>::
-HUD.cs::CSharpScript::-1::1735015600::0::1::::<>Control<>::
+HUD.cs::CSharpScript::-1::1735494637::0::1::::<>Control<>::
 InventorySlot.cs::CSharpScript::-1::1735015600::0::1::::<>Panel<>::
 InventoryUI.cs::CSharpScript::-1::1735015600::0::1::::<>Control<>::
 UIManager.cs::CSharpScript::-1::1735015600::0::1::::<>Node2D<>::
@@ -190,12 +196,12 @@ jump.wav::AudioStreamWAV::4309203968666831670::1735015600::1735016057::1::::<><>
 run.mp3::AudioStreamMP3::2544334052492885671::1735015600::1735016056::1::::<><>::
 slashhit.wav::AudioStreamWAV::676493159211283619::1735015600::1735016057::1::::<><>::
 swing.wav::AudioStreamWAV::112878013095454149::1735015600::1735016057::1::::<><>::
-::res://Data/::1735494075
-player_stats.tres::Resource/PlayerStats::1063459608031279798::1735494075::0::1::::<><>::res://Assets/Scripts/Character/Player/PlayerStats.cs
+::res://Data/::1735502012
+player_stats.tres::Resource/PlayerStats::1063459608031279798::1735502012::0::1::::<><>::res://Assets/Scripts/Character/Player/PlayerStats.cs
 ::res://Data/Enemy/::1735490531
-::res://Data/Enemy/AttackData/::1735494062
-goblin_archer_shoot.tres::Resource/EnemyAttackData::2241776788149449740::1735494059::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
-goblin_bandit_slash.tres::Resource/EnemyAttackData::7653389287070258734::1735494062::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
+::res://Data/Enemy/AttackData/::1735502918
+goblin_archer_shoot.tres::Resource/EnemyAttackData::2241776788149449740::1735502918::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
+goblin_bandit_slash.tres::Resource/EnemyAttackData::7653389287070258734::1735502911::0::1::::<><>::res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
 ::res://Data/Items/::1735015786
 Stick.tres::Resource/Item::6524038092522955426::1735015600::0::1::::<><>::res://Assets/Scripts/Items/Item.cs<>uid://2fte26d3sb46::::res://Sprite-0002.png
 Sword.tres::Resource/Item::7716384828545345126::1735015600::0::1::::<><>::res://Assets/Scripts/Items/Item.cs<>uid://bd123ys2hihk3::::res://hit.svg

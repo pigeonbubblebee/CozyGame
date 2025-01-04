@@ -1,0 +1,159 @@
+[gd_scene load_steps=16 format=3 uid="uid://bskrg487tax4i"]
+
+[ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_dy2dn"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs" id="3_06o73"]
+[ext_resource type="Texture2D" uid="uid://c51s271p0iuyx" path="res://Assets/Art/Character/Enemy/Worg/worg_pounce.png" id="3_flb7c"]
+[ext_resource type="Texture2D" uid="uid://c5j6kln8d24d8" path="res://Assets/Art/Character/Enemy/Worg/worg.png" id="3_vvw8c"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="4_7ii1y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1tcd"]
+size = Vector2(120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fril4"]
+atlas = ExtResource("3_flb7c")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2i4v"]
+atlas = ExtResource("3_flb7c")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwvap"]
+atlas = ExtResource("3_flb7c")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnb8k"]
+atlas = ExtResource("3_flb7c")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f26fk"]
+atlas = ExtResource("3_flb7c")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fwwuj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vvw8c")
+}],
+"loop": true,
+"name": &"aggro",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vvw8c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vvw8c")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fril4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2i4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwvap")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_bnb8k")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f26fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vvw8c")
+}],
+"loop": true,
+"name": &"pounce",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vvw8c")
+}],
+"loop": true,
+"name": &"stagger",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_ldu8y"]
+script = ExtResource("4_7ii1y")
+Damage = 5
+InternalDamage = 3
+PostureDamage = 34
+DeflectPostureDamage = 25
+DeflectKnockbackMultiplier = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7w4a"]
+size = Vector2(224, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rnvw"]
+size = Vector2(224, 96)
+
+[node name="Worg" type="Node2D"]
+
+[node name="ChaserEnemy" parent="." instance=ExtResource("1_dy2dn")]
+RetreatRange = 250.0
+Speed = 400.0
+MaxHealth = 20
+MaxPosture = 50
+
+[node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
+position = Vector2(4, 56)
+shape = SubResource("RectangleShape2D_c1tcd")
+
+[node name="LedgeCheck" parent="ChaserEnemy" index="1"]
+position = Vector2(112, 0)
+
+[node name="AggroCheckForward" parent="ChaserEnemy/AggroChecks" index="0"]
+target_position = Vector2(2000, 0)
+
+[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="0"]
+position = Vector2(0, 40)
+
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+sprite_frames = SubResource("SpriteFrames_fwwuj")
+
+[node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("3_06o73")
+VerticalLungeSpeed = 1400.0
+SlashRange = 300.0
+SlashCooldown = 3.0
+LungeSpeed = 1000.0
+LungeRange = 600.0
+StopLungeFrame = 5
+OnFrame = 4
+_attackAreaColliderPath = NodePath("Hit/Hitbox")
+_attackAreaPath = NodePath("Hit")
+_attackData = SubResource("Resource_ldu8y")
+AnimationName = "pounce"
+AttackLength = 1.0
+NotChainAttack = true
+
+[node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
+position = Vector2(-72, 64)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce/Hit"]
+position = Vector2(80, -8)
+shape = SubResource("RectangleShape2D_y7w4a")
+disabled = true
+
+[node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
+position = Vector2(10, 56)
+shape = SubResource("RectangleShape2D_5rnvw")
+
+[editable path="ChaserEnemy"]
+[editable path="ChaserEnemy/EnemyTemplate"]

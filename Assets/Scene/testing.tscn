@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=13 format=3 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="10_ewqkv"]
 [ext_resource type="PackedScene" uid="uid://dfi6e0ou7w3pm" path="res://Assets/Scene/Enemy/goblin_archer.tscn" id="10_wn0a1"]
+[ext_resource type="PackedScene" uid="uid://bskrg487tax4i" path="res://Assets/Scene/Enemy/worg.tscn" id="11_uxyl4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewan5"]
 radius = 216.148
@@ -58,4 +59,10 @@ autoplay = true
 position = Vector2(976, 64)
 
 [node name="goblin_archer2" parent="." instance=ExtResource("10_wn0a1")]
-position = Vector2(3784, 504)
+position = Vector2(3792, 472)
+
+[node name="Worg" parent="." instance=ExtResource("11_uxyl4")]
+position = Vector2(3496, 480)
+
+[node name="Worg2" parent="." instance=ExtResource("11_uxyl4")]
+position = Vector2(2680, 696)

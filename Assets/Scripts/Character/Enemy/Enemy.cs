@@ -63,6 +63,8 @@ public partial class Enemy : CharacterBody2D
 	private float _knockbackAcceleration;
 	private int _knockbackDirection;
 	
+	public bool KnockbackEnabled = true;
+	
 	[Export] public float IFrameTime = 0.3f;
 	private bool _iFrameOn = false;
 	public bool Invincible => _iFrameOn;
@@ -202,7 +204,7 @@ public partial class Enemy : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!_knockbackTimer.IsStopped()) {
+		if(!_knockbackTimer.IsStopped() && KnockbackEnabled) {
 			// GD.Print("Recoil!");
 			KnockbackRecoil(new Vector2(_knockbackDirection, 0f), _knockbackSpeed, _knockbackAcceleration, delta);
 		} 

@@ -34,7 +34,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igpne"]
-size = Vector2(78.5, 200)
+size = Vector2(96, 192)
 
 [node name="EnemyTemplate" type="Node2D"]
 
@@ -129,5 +129,5 @@ collision_mask = 2
 script = ExtResource("17_2jgis")
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 4.00005)
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_igpne")

@@ -303,11 +303,12 @@ size = Vector2(200, 178.5)
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_amwn4")]
 
+[node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
+position = Vector2(0, 8)
+
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_e1os1")
-animation = &"slash2"
-frame = 10
-frame_progress = 0.945096
+animation = &"slash"
 
 [node name="SlashCombo" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 script = ExtResource("5_s2rwl")
@@ -344,7 +345,7 @@ SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0
 StopLungeFrame = 6
-OnFrame = 5
+OnFrame = 4
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 _attackData = ExtResource("6_gx2vo")
@@ -360,6 +361,9 @@ collision_mask = 2
 position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_sb5fh")
 disabled = true
+
+[node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
+position = Vector2(0, 8)
 
 [editable path="ChaserEnemy"]
 [editable path="ChaserEnemy/EnemyTemplate"]

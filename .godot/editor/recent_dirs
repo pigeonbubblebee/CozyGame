@@ -1,3 +1,4 @@
+res://Assets/Art/Character/Enemy/Worg
 res://Assets/Art/UI
 res://Data/Enemy/AttackData
 res://Assets/Scripts/Combat/Bullet
@@ -19,4 +20,3 @@ res://Data/Items
 res://Assets
 res://Data
 res://Assets/Scripts/Interactables
-res://Assets/Scripts/Character/Player/StateMachine

@@ -20,7 +20,7 @@ public partial class SlashAttack : EnemyAttack
 	[Export] private NodePath _attackAreaPath;
 	private Area2D _attackArea;
 	
-	private bool _accelerating;
+	protected bool _accelerating;
 	
 	[Export] private EnemyAttackData _attackData;
 	
@@ -29,7 +29,7 @@ public partial class SlashAttack : EnemyAttack
 		EnemyAI.Sprite.FrameChanged += _checkAnimationEvent;
 	}
 	
-	private void _checkAnimationEvent() {
+	protected virtual void _checkAnimationEvent() {
 		if(EnemyAI.Sprite.Frame == OnFrame && EnemyAI.Sprite.Animation == AnimationName) {
 			_accelerating = true;
 			_canHit = true;
@@ -124,12 +124,12 @@ public partial class SlashAttack : EnemyAttack
 		CanSlash = true; 
 	}
 	
-	private void _OnSlashHit(Node2D hit) {
+	protected virtual void _OnSlashHit(Node2D hit) {
 		// GD.Print(hit.Name + " Hit!");
 		if(!_canHit || !(hit is Player)) {
 			return;
 		}
-		
+		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		// ((Player)hit).TakeDamage(SlashDamage, PostureDamage, EnemyAI, PostureDamage);
 		((Player)hit).TakeDamage(_attackData, EnemyAI);
 		// HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
