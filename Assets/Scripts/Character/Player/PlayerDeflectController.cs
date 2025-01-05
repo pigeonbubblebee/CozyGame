@@ -15,6 +15,9 @@ public partial class PlayerDeflectController : Node
 	[Export] private NodePath _deflectWindowTimerPath;
 	private Timer _deflectWindowTimer;
 	
+	[Export] private NodePath _deflectCancelTimerPath;
+	private Timer _deflectCancelTimer;
+	
 	public bool Counter = false;
 	
 	private IInputManager _inputManager;
@@ -46,12 +49,13 @@ public partial class PlayerDeflectController : Node
 		CanBlock = true;
 		
 		_deflectBuffer = GetNode<Timer>(_deflectBufferPath);
-		_deflectBuffer.WaitTime = 0.2f;
+		_deflectBuffer.WaitTime = 0.1f;
 		
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 		_gameManager = GetNode<GameManager>("/root/GameManager");
 		
 		_deflectWindowTimer = GetNode<Timer>(_deflectWindowTimerPath);
+		_deflectCancelTimer = GetNode<Timer>(_deflectCancelTimerPath);
 		
 		_blockParticle = GetNode<GpuParticles2D>(_blockParticlePath);
 		_deflectParticle = GetNode<GpuParticles2D>(_deflectParticlePath);
@@ -67,6 +71,7 @@ public partial class PlayerDeflectController : Node
 	
 	public void StartDeflectWindow() {
 		_deflectWindowTimer.Start(_playerStats.DeflectWindow);
+		_deflectCancelTimer.Start(_playerStats.BlockMinimumTime);
 	}
 	
 	public int Block(EnemyAttackData data, Enemy e) {
@@ -115,10 +120,12 @@ public partial class PlayerDeflectController : Node
 	}
 	
 	public void StartBlock() {
+		GD.Print("Start Block");
 		Blocking = true;
 	}
 	
 	public void EndBlock() {
+		GD.Print("End Block");
 		Blocking = false;
 	}
 	
@@ -158,8 +165,12 @@ public partial class PlayerDeflectController : Node
 		_deflectParticle.Emitting = true;
 	}
 	
+	public bool BlockCancellable() {
+		return _deflectCancelTimer.IsStopped();
+	}
+	
 	public void StartBlockCooldown() {
-		CanBlock = false;
+		// CanBlock = false;
 		GD.Print("Cooldown Start");
 		GetTree().CreateTimer(_playerStats.BlockCooldown).Timeout += _FinishBlockCooldown;
 	}

@@ -970,6 +970,10 @@ script = ExtResource("13_41u0j")
 
 [node name="Block" type="Node2D" parent="StateMachine"]
 script = ExtResource("23_quwf0")
+_deflectTimerPath = NodePath("DeflectTimeout")
+
+[node name="DeflectTimeout" type="Timer" parent="StateMachine/Block"]
+one_shot = true
 
 [node name="Stagger" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_i2mu6")
@@ -1121,6 +1125,7 @@ one_shot = true
 script = ExtResource("31_evuhc")
 _deflectBufferPath = NodePath("DeflectBuffer")
 _deflectWindowTimerPath = NodePath("DeflectWindow")
+_deflectCancelTimerPath = NodePath("DeflectCancel")
 _blockParticlePath = NodePath("GPUParticles2D")
 _deflectParticlePath = NodePath("GPUParticles2D2")
 _deflectSFXPath = NodePath("Deflect")
@@ -1168,6 +1173,9 @@ stream = ExtResource("46_ts2if")
 volume_db = 24.0
 attenuation = 6.49802
 max_polyphony = 5
+
+[node name="DeflectCancel" type="Timer" parent="PlayerDeflectController"]
+one_shot = true
 
 [node name="PlayerPostureController" type="Node2D" parent="."]
 script = ExtResource("37_ax0h8")

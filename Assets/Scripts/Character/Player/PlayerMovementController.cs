@@ -185,6 +185,13 @@ public partial class PlayerMovementController : Node
 		zero.Y = Velocity.Y;
 		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.Friction  * (float)delta * 60f);
 	}
+	
+	public void AddDeflectFriction(double delta) {
+		//_runSFX.Playing = false;
+		Vector2 zero = Vector2.Zero;
+		zero.Y = Velocity.Y;
+		_playerBody.Velocity = _playerBody.Velocity.MoveToward(zero, _playerStats.DeflectFriction  * (float)delta * 60f);
+	}
 
 	public void AddDashFriction(double delta) {
 		Vector2 zero = Vector2.Zero;

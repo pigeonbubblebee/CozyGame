@@ -68,7 +68,7 @@ animations = [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_bnb8k")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_f26fk")
 }, {
 "duration": 1.0,
@@ -104,7 +104,7 @@ size = Vector2(224, 96)
 [node name="Worg" type="Node2D"]
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_dy2dn")]
-RetreatRange = 250.0
+RetreatRange = 475.0
 Speed = 400.0
 MaxHealth = 20
 MaxPosture = 50
@@ -124,21 +124,22 @@ position = Vector2(0, 40)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_fwwuj")
+animation = &"pounce"
 
 [node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_06o73")
-VerticalLungeSpeed = 1400.0
-SlashRange = 300.0
+VerticalLungeSpeed = 1600.0
+SlashRange = 500.0
 SlashCooldown = 3.0
 LungeSpeed = 1000.0
-LungeRange = 600.0
+LungeRange = 1000.0
 StopLungeFrame = 5
 OnFrame = 4
 _attackAreaColliderPath = NodePath("Hit/Hitbox")
 _attackAreaPath = NodePath("Hit")
 _attackData = SubResource("Resource_ldu8y")
 AnimationName = "pounce"
-AttackLength = 1.0
+AttackLength = 1.125
 NotChainAttack = true
 
 [node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]

@@ -66,6 +66,8 @@ public partial class PlayerStats : Resource
 	[Export] public float ShootRecoil { get; private set; }
 	[ExportCategory("Deflecting")]
 	[Export] public float DeflectWindow { get; private set; }
+	[Export] public float DeflectFriction { get; private set; }
+	[Export] public float BlockMinimumTime { get; private set; }
 	[Export] public float BlockCooldown { get; private set; }
 	[Export] public float BlockTimeout { get; private set; }
 	[Export] public float CounterWindow { get; private set; }

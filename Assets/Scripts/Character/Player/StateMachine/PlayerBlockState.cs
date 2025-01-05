@@ -11,10 +11,17 @@ public partial class PlayerBlockState : PlayerState
 	private readonly int JUMPING = 1;
 	private int _subState;
 	*/
+		
+	[Export] private NodePath _deflectTimerPath;
+	private Timer _deflectTimer;
+	
 	public override void Initialize(StateMachine playerStateMachine) {
 		base.Initialize(playerStateMachine);
-
+		
+		_deflectTimer = GetNode<Timer>(_deflectTimerPath);
 		DeflectController.BlockEvent += _checkDeflect;
+		
+		_deflectTimer.Timeout += _EnterDefaultState;
 	}
 	
 	private void _checkDeflect(bool deflect, int postureDamage, Enemy e) {
@@ -30,7 +37,7 @@ public partial class PlayerBlockState : PlayerState
 	
 	private void _timeoutBlock() {
 		// GD.Print("Timeout");
-		GetTree().CreateTimer(Stats.BlockTimeout).Timeout += _EnterDefaultState;
+		_deflectTimer.Start(Stats.BlockTimeout);
 		
 		/*if(deflect) {
 			GetTree().CreateTimer(Stats.DeflectTimeout).Timeout += _EnterDefaultState; // Move to stats
@@ -58,6 +65,15 @@ public partial class PlayerBlockState : PlayerState
 			MovementController.CanSwitchDirections = true;
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
 			return true;
+		}
+		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
+			if(DeflectController.BlockCancellable()) {
+				GD.Print("BlockCancellable");
+				_deflectTimer.Stop();
+				DeflectController.StartBlock();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+				return true;
+			}
 		}
 		/*
 		if(!DeflectController.DesiredDeflect) {
@@ -140,10 +156,10 @@ public partial class PlayerBlockState : PlayerState
 		Vector2 inputDir = MovementController.InputVector;
 		
 		if(inputDir != Vector2.Zero) {
-			if((inputDir.X > 0 && MovementController.Velocity.X < 0) || (inputDir.X < 0 && MovementController.Velocity.X > 0)) {
-				MovementController.SwitchDirection(inputDir * Stats.SlashSpeedMultiplier, delta);
+			if(!((inputDir.X > 0 && MovementController.Velocity.X < 0) || (inputDir.X < 0 && MovementController.Velocity.X > 0))) {
+				MovementController.AddDeflectFriction(delta);
 			} else {
-				MovementController.Accelerate(inputDir * Stats.SlashSpeedMultiplier, delta);
+				MovementController.AddFriction(delta);
 			}
 		} else {
 			MovementController.AddFriction(delta);
@@ -154,6 +170,7 @@ public partial class PlayerBlockState : PlayerState
 		MovementController.CanSwitchDirections = true;
 		if(!ActiveState)
 			return;
+		_deflectTimer.Stop();
 		DeflectController.StartBlockCooldown();
 		ParentPlayerStateMachine.EnterDefaultState();
 	}
