@@ -42,7 +42,7 @@ scale = Vector2(12, 12)
 texture = ExtResource("8_q3obe")
 
 [node name="goblin_bandit" parent="." instance=ExtResource("8_n7a58")]
-position = Vector2(5536, 1952)
+position = Vector2(3392, 448)
 
 [node name="goblin_bandit2" parent="." instance=ExtResource("8_n7a58")]
 position = Vector2(2704, 608)
@@ -55,14 +55,11 @@ process_mode = 3
 stream = ExtResource("9_ei8k8")
 autoplay = true
 
-[node name="goblin_archer" parent="." instance=ExtResource("10_wn0a1")]
-position = Vector2(976, 64)
-
 [node name="goblin_archer2" parent="." instance=ExtResource("10_wn0a1")]
-position = Vector2(3792, 472)
+position = Vector2(776, 592)
 
 [node name="Worg" parent="." instance=ExtResource("11_uxyl4")]
-position = Vector2(3496, 480)
+position = Vector2(-1080, -360)
 
 [node name="Worg2" parent="." instance=ExtResource("11_uxyl4")]
 position = Vector2(2680, 696)

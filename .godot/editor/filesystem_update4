@@ -76,3 +76,4 @@ res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
 res://Assets/Scripts/Character/Player/PlayerCamera.cs
 res://Assets/Scripts/Interactables/TestingItem.cs
 res://Data/player_stats.tres
+res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs

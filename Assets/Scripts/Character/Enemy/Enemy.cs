@@ -106,9 +106,9 @@ public partial class Enemy : CharacterBody2D
 		foreach(Node n in _attacksParent.GetChildren()) {
 			Attacks[i] = (EnemyAttack) n;
 			Attacks[i].Initialize(this);
-			if(Attacks[i].NotChainAttack) {
-				Attacks[i].FinishAttackEvent += FinishAttackEvent;
-			}
+			// if(Attacks[i].NotChainAttack) {
+				Attacks[i].GetNextChainAttack().FinishAttackEvent += FinishAttackEvent;
+			// }
 			i ++;
 		}
 		

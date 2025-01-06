@@ -57,6 +57,8 @@ public partial class ShootAttack : EnemyAttack
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
 		
+		GD.Print("executing!");
+		
 		_playerPosition = p.GlobalPosition;
 		_aimedPlayer = p;
 		// _accelerating = false;
@@ -65,6 +67,7 @@ public partial class ShootAttack : EnemyAttack
 		_bodyTop.Visible = true;
 		_bodyTop.LookAt(_playerPosition);
 		StartShootCooldown();
+		((EnemyPatrolAI)e).Decelerate();
 	}
 	
 	public override void _Process(double delta) {

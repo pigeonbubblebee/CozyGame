@@ -958,6 +958,10 @@ script = ExtResource("7_tcmgt")
 
 [node name="Attack" type="Node2D" parent="StateMachine"]
 script = ExtResource("9_h5pyd")
+_attackMoveTimerPath = NodePath("AttackMove")
+
+[node name="AttackMove" type="Timer" parent="StateMachine/Attack"]
+one_shot = true
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("10_use1l")

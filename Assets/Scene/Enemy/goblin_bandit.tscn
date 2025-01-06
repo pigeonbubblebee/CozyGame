@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b0fu168ri1a68"]
+[gd_scene load_steps=48 format=3 uid="uid://b0fu168ri1a68"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_amwn4"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="2_qa4p0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="4_6ci2a"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs" id="5_s2rwl"]
 [ext_resource type="Resource" uid="uid://dhbmg6d2g0pbi" path="res://Data/Enemy/AttackData/goblin_bandit_slash.tres" id="6_gx2vo"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs" id="7_og785"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sho2d"]
 atlas = ExtResource("2_xek8w")
@@ -293,10 +294,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb5fh"]
 size = Vector2(200, 178.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb5fh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
 size = Vector2(200, 178.5)
 
 [node name="goblin_bandit" type="Node2D"]
@@ -308,37 +309,9 @@ position = Vector2(0, 8)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_e1os1")
-animation = &"slash"
+animation = &"slash2"
 
-[node name="SlashCombo" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
-script = ExtResource("5_s2rwl")
-SlashRange = 170.0
-SlashCooldown = 5.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 7
-StopLungeFrame2 = 12
-OnFrame = 6
-OnFrame2 = 11
-OffFrame = 7
-OffFrame2 = 13
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
-_attackData = ExtResource("6_gx2vo")
-AnimationName = "slash2"
-AttackLength = 1.133
-NotChainAttack = true
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/SlashCombo"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/SlashCombo/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_v6n7n")
-disabled = true
-
-[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 script = ExtResource("2_qa4p0")
 SlashRange = 170.0
 SlashCooldown = 1.0
@@ -353,11 +326,92 @@ AnimationName = "slash"
 AttackLength = 0.6
 NotChainAttack = true
 
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Slash"]
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/Slash"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Slash/SwordHit"]
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/Slash/SwordHit"]
+position = Vector2(100, -17.25)
+shape = SubResource("RectangleShape2D_sb5fh")
+disabled = true
+
+[node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("7_og785")
+AttackPaths = Array[NodePath]([NodePath("SlashCombo"), NodePath("Slash2"), NodePath("Slash3")])
+NotChainAttack = true
+
+[node name="SlashCombo" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
+script = ExtResource("5_s2rwl")
+SlashRange = 170.0
+SlashCooldown = 1.5
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 7
+StopLungeFrame2 = 12
+OnFrame = 4
+OnFrame2 = 10
+OffFrame = 7
+OffFrame2 = 13
+_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
+_attackAreaPath = NodePath("SwordHit")
+_attackData = ExtResource("6_gx2vo")
+AnimationName = "slash2"
+AttackLength = 1.133
+NotChainAttack = true
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashCombo"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashCombo/SwordHit"]
+position = Vector2(100, -17.25)
+shape = SubResource("RectangleShape2D_v6n7n")
+disabled = true
+
+[node name="Slash2" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
+script = ExtResource("2_qa4p0")
+SlashRange = 170.0
+SlashCooldown = 1.0
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 6
+OnFrame = 4
+_attackAreaColliderPath = NodePath("../../../Slash/SwordHit/Hitbox")
+_attackAreaPath = NodePath("../../../Slash/SwordHit")
+_attackData = ExtResource("6_gx2vo")
+AnimationName = "slash"
+AttackLength = 0.6
+NotChainAttack = true
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash2/SwordHit"]
+position = Vector2(100, -17.25)
+shape = SubResource("RectangleShape2D_sb5fh")
+disabled = true
+
+[node name="Slash3" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
+script = ExtResource("2_qa4p0")
+SlashRange = 170.0
+SlashCooldown = 1.0
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 6
+OnFrame = 4
+_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
+_attackAreaPath = NodePath("SwordHit")
+_attackData = ExtResource("6_gx2vo")
+AnimationName = "slash"
+AttackLength = 0.6
+NotChainAttack = true
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash3/SwordHit"]
 position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_sb5fh")
 disabled = true

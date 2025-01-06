@@ -21,7 +21,7 @@ public partial class PlayerDeflectController : Node
 	public bool Counter = false;
 	
 	private IInputManager _inputManager;
-	public bool Blocking = false;
+	public bool Blocking { get; private set; }
 	
 	public event Action<bool, int, Enemy> BlockEvent;
 	
@@ -47,6 +47,7 @@ public partial class PlayerDeflectController : Node
 	
 	public override void _Ready() {
 		CanBlock = true;
+		Blocking = false;
 		
 		_deflectBuffer = GetNode<Timer>(_deflectBufferPath);
 		_deflectBuffer.WaitTime = 0.1f;

@@ -35,12 +35,21 @@ animation = &"retreat"
 frame = 2
 frame_progress = 0.0552375
 
-[node name="Shoot" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("3_c8mah")
+RetreatRange = 1300.0
+RetreatSpeed = 150.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+AnimationName = "retreat"
+AttackLength = 1.0
+_chainedAttackPath = NodePath("Shoot")
+
+[node name="Shoot" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
 script = ExtResource("3_5hq3y")
 ShootRange = 1400.0
 ChargeTime = 0.5
 ShootStartRange = 1400.0
-ShootCooldown = 2.0
 _sceneName = "EnemyArrow"
 _objectPoolPath = NodePath("ObjectPool")
 _bodyTopPath = NodePath("Top")
@@ -50,29 +59,19 @@ AnimationName = "aiming"
 AttackLength = 1.0
 NotChainAttack = true
 
-[node name="ObjectPool" type="Node" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot"]
+[node name="ObjectPool" type="Node" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Shoot"]
 
-[node name="Top" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot"]
+[node name="Top" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Shoot"]
 visible = false
 z_index = 4
 position = Vector2(3, -17)
 rotation = 1.09884
 scale = Vector2(4, 4)
 
-[node name="body2" type="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Shoot/Top"]
+[node name="body2" type="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Shoot/Top"]
 position = Vector2(1, 3)
 sprite_frames = SubResource("SpriteFrames_o04qd")
 frame_progress = 0.302698
-
-[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
-script = ExtResource("3_c8mah")
-RetreatRange = 1300.0
-RetreatSpeed = 150.0
-RayCastLedgePath = NodePath("LedgeCheck")
-RayCastWallPath = NodePath("WallCheck")
-AnimationName = "retreat"
-AttackLength = 1.0
-NotChainAttack = true
 
 [node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
 position = Vector2(-48, 0)

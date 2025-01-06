@@ -8,9 +8,14 @@ public partial class PlayerAttackState : PlayerState
 	private readonly int NEUTRAL = 0;
 	private readonly int JUMPING = 1;
 	private int _subState;
+	
+	[Export] private NodePath _attackMoveTimerPath;
+	private Timer _attackMoveTimer;
 
 	public override void Initialize(StateMachine playerStateMachine) {
 		base.Initialize(playerStateMachine);
+		
+		_attackMoveTimer = GetNode<Timer>(_attackMoveTimerPath);
 
 		AttackController.FinishSlashEvent += _EnterDefaultState;
 	}
@@ -43,8 +48,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	public override void Enter(State previousState) {
-		
-		
+		_attackMoveTimer.Start(0.1f);
 		
 		
 		// TODO: Reset Colliders
@@ -97,6 +101,11 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	private void _HandleHorizontalMovement(double delta) {
+		if(!_attackMoveTimer.IsStopped())
+			MovementController.Accelerate(new Vector2(MovementController.Direction * Stats.SlashSpeedMultiplier, MovementController.Velocity.Y), delta);
+		else
+			MovementController.AddFriction(delta);
+		/*
 		if(AttackController.CanDeathBlow) {
 			MovementController.AddFriction(delta);
 			return;
@@ -113,6 +122,7 @@ public partial class PlayerAttackState : PlayerState
 		} else {
 			MovementController.AddFriction(delta);
 		}
+		*/
 	}
 
 	private void _HandleVerticalMovement(double delta) {

@@ -32,7 +32,7 @@ public partial class PlayerBlockState : PlayerState
 		//_timeoutBlock(deflect);
 		//_released = true;
 		// DeflectController.StartBlockCooldown();
-		GetTree().CreateTimer(0.1f).Timeout += _EnterDefaultState;
+		GetTree().CreateTimer(0.05f).Timeout += _EnterDefaultState;
 	}
 	
 	private void _timeoutBlock() {
@@ -66,12 +66,42 @@ public partial class PlayerBlockState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
 			return true;
 		}
-		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
-			if(DeflectController.BlockCancellable()) {
-				GD.Print("BlockCancellable");
+		if(DeflectController.BlockCancellable()) {
+			if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
+				// GD.Print("BlockCancellable");
 				_deflectTimer.Stop();
-				DeflectController.StartBlock();
 				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+				DeflectController.StartBlock();
+				return true;
+			}
+			if(HealController.DesiredHeal && HealController.HealCooldownOff) {
+				MovementController.CanSwitchDirections = true;
+				_deflectTimer.Stop();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
+				return true;
+			}
+			if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {
+				MovementController.CanSwitchDirections = true;
+				_deflectTimer.Stop();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+				return true;
+			}
+			if(SpellController.DesiredShoot || (!SpellController.GetShootBufferStop() && SpellController.CanShoot)) {
+				MovementController.CanSwitchDirections = true;
+				_deflectTimer.Stop();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.SpellState);
+				return true;
+			}
+			if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {
+				MovementController.CanSwitchDirections = true;
+				_deflectTimer.Stop();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.AttackState);
+				return true;
+			}
+			if(MovementController.DesiredJump || !MovementController.GetJumpBufferStop()) {
+				MovementController.CanSwitchDirections = true;
+				_deflectTimer.Stop();
+				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.JumpState);
 				return true;
 			}
 		}
