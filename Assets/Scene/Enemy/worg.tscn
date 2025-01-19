@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://bskrg487tax4i"]
+[gd_scene load_steps=18 format=3 uid="uid://bskrg487tax4i"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_dy2dn"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs" id="3_06o73"]
 [ext_resource type="Texture2D" uid="uid://c51s271p0iuyx" path="res://Assets/Art/Character/Enemy/Worg/worg_pounce.png" id="3_flb7c"]
 [ext_resource type="Texture2D" uid="uid://c5j6kln8d24d8" path="res://Assets/Art/Character/Enemy/Worg/worg.png" id="3_vvw8c"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="4_7ii1y"]
+[ext_resource type="AudioStream" uid="uid://bsk1v2xlrvkw2" path="res://Assets/Sound/SFX/Enemy/Goblin/wolfwalk.wav" id="6_f0n80"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="6_mcfje"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1tcd"]
 size = Vector2(120, 80)
@@ -92,7 +94,7 @@ script = ExtResource("4_7ii1y")
 Damage = 5
 InternalDamage = 3
 PostureDamage = 34
-DeflectPostureDamage = 25
+DeflectPostureDamage = 50
 DeflectKnockbackMultiplier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7w4a"]
@@ -135,9 +137,11 @@ LungeSpeed = 1000.0
 LungeRange = 1000.0
 StopLungeFrame = 5
 OnFrame = 4
+OffFrame = 5
 _attackAreaColliderPath = NodePath("Hit/Hitbox")
 _attackAreaPath = NodePath("Hit")
 _attackData = SubResource("Resource_ldu8y")
+AttackCooldown = 1.75
 AnimationName = "pounce"
 AttackLength = 1.125
 NotChainAttack = true
@@ -151,6 +155,14 @@ collision_mask = 2
 position = Vector2(80, -8)
 shape = SubResource("RectangleShape2D_y7w4a")
 disabled = true
+
+[node name="PatrolState" parent="ChaserEnemy/EnemyTemplate/StateMachine" index="3"]
+_patrolSFXPath = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
+stream = ExtResource("6_f0n80")
+volume_db = 4.0
+script = ExtResource("6_mcfje")
 
 [node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
 position = Vector2(10, 56)

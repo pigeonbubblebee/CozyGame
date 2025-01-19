@@ -10,9 +10,6 @@ public partial class ShootAttack : EnemyAttack
 	[Export] public float ChargeTime;
 	[Export] public float ShootStartRange;
 	
-	public bool CanShoot = true;
-	[Export] public float ShootCooldown;
-	
 	private PackedScene _bulletScene;
 	[Export] private string _sceneName;
 	
@@ -38,7 +35,6 @@ public partial class ShootAttack : EnemyAttack
 	
 	public override void _Ready() {
 		base._Ready();
-		CanShoot = true;
 		
 		ObjectPool = GetNode<Node>(_objectPoolPath);
 		_bulletScene = GD.Load<PackedScene>(_bulletPath);
@@ -51,7 +47,7 @@ public partial class ShootAttack : EnemyAttack
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= ShootStartRange) && CanShoot;
+		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= ShootStartRange) && CanAttack;
 	}
 	
 	public override void Execute(Player p, Enemy e) {
@@ -66,7 +62,6 @@ public partial class ShootAttack : EnemyAttack
 		_charging = true;
 		_bodyTop.Visible = true;
 		_bodyTop.LookAt(_playerPosition);
-		StartShootCooldown();
 		((EnemyPatrolAI)e).Decelerate();
 	}
 	
@@ -118,20 +113,12 @@ public partial class ShootAttack : EnemyAttack
 	private void _FinishShoot() {
 		Finish();
 		_bodyTop.Visible = false;
+		GD.Print("Shoot Finish!");
 	}
 	
 	public override void Interrupt() {
 		_bodyTop.Visible = false;
 		base.Interrupt();
-	}
-	
-	public void StartShootCooldown() {
-		CanShoot = false;
-		GetTree().CreateTimer(ShootCooldown).Timeout += _FinishShootCooldown;
-	}
-
-	private void _FinishShootCooldown() {
-		CanShoot = true; 
 	}
 	
 	private void InstantiateBullet() {

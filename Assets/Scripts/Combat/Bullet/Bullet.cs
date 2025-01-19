@@ -52,7 +52,7 @@ public partial class Bullet : Area2D
 	}
 	
 	private void _AreaEntered(Node2D node) {
-		GD.Print(node.Name);
+		// GD.Print(node.Name);
 		if(InUse) {
 			InUseAreaEntered.Invoke(node, this);
 		}

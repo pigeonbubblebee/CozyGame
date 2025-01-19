@@ -24,6 +24,8 @@ public partial class ChaserAggroState : State
 	}
 	
 	private void _enterDefaultState() {
+		if(!ActiveState)
+			return;
 		// GD.Print("DEAGGRO");
 		_chaserStateMachine.ChangeState(_chaserStateMachine.IdleState);
 	}

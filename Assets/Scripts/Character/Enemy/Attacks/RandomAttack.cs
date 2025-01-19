@@ -50,6 +50,6 @@ public partial class RandomAttack : EnemyAttack
 			if(!a.GetCondition(p, e))
 				res = false;
 		}
-		return res;
+		return res && CanAttack;
 	}
 }

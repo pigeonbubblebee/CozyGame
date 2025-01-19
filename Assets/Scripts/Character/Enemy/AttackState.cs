@@ -20,8 +20,10 @@ public partial class AttackState : State
 	}
 	
 	private void _enterDefaultState() {
-		if(ActiveState)
+		if(ActiveState) {
 			((EnemyStateMachine) ParentStateMachine).EnterDefaultState(true);
+			// GD.Print("entering default from attack!");
+		}
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

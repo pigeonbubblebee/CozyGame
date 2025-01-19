@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfi6e0ou7w3pm"]
+[gd_scene load_steps=10 format=3 uid="uid://dfi6e0ou7w3pm"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_c2u7c"]
 [ext_resource type="SpriteFrames" uid="uid://dyr7qfod35a2j" path="res://Assets/Scene/Enemy/goblin_archer.tres" id="2_6rdhl"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs" id="3_5hq3y"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="3_c8mah"]
 [ext_resource type="Resource" uid="uid://6660baswp31q" path="res://Data/Enemy/AttackData/goblin_archer_shoot.tres" id="4_as0kg"]
+[ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="7_idm5l"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="8_r8b40"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o04qd"]
 animations = [{
@@ -38,11 +40,12 @@ frame_progress = 0.0552375
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_c8mah")
 RetreatRange = 1300.0
-RetreatSpeed = 150.0
+RetreatSpeed = 500.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")
+AttackCooldown = 1.0
 AnimationName = "retreat"
-AttackLength = 1.0
+AttackLength = 0.45
 _chainedAttackPath = NodePath("Shoot")
 
 [node name="Shoot" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
@@ -55,6 +58,7 @@ _objectPoolPath = NodePath("ObjectPool")
 _bodyTopPath = NodePath("Top")
 _objectPoolNumber = 3
 _attackData = ExtResource("4_as0kg")
+AttackCooldown = 1.0
 AnimationName = "aiming"
 AttackLength = 1.0
 NotChainAttack = true
@@ -80,6 +84,14 @@ target_position = Vector2(0, 144)
 [node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
 position = Vector2(-48, 0)
 target_position = Vector2(-32, 0)
+
+[node name="PatrolState" parent="ChaserEnemy/EnemyTemplate/StateMachine" index="3"]
+_patrolSFXPath = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
+stream = ExtResource("7_idm5l")
+volume_db = 4.0
+script = ExtResource("8_r8b40")
 
 [node name="body" type="AnimatedSprite2D" parent="ChaserEnemy"]
 visible = false

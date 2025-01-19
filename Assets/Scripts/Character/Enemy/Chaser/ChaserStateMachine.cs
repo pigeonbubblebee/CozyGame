@@ -21,6 +21,7 @@ public partial class ChaserStateMachine : PatrolStateMachine
 	
 	public override bool EnterDefaultState(bool fromAttack) {
 		if(fromAttack) {
+			// GD.Print("from attack switch");
 			ChangeState(AggroState);
 			return true;
 		}

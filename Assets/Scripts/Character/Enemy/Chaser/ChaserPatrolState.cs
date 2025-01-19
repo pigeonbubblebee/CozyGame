@@ -25,6 +25,7 @@ public partial class ChaserPatrolState : PatrolState
 		base.PhysicsProcess(delta);
 		
 		if(_chaserAI.CheckAggro()) {
+			// GD.Print("patrol switch");
 			//_chaserAI.CanAggro = false;
 			_chaserStateMachine.ChangeState(_chaserStateMachine.AggroState);
 		}

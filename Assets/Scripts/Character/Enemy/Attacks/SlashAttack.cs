@@ -14,6 +14,7 @@ public partial class SlashAttack : EnemyAttack
 	[Export] public int StopLungeFrame;
 	
 	[Export] public int OnFrame;
+	[Export] public int OffFrame;
 	
 	[Export] private NodePath _attackAreaColliderPath;
 	private CollisionShape2D _attackAreaCollider;
@@ -32,8 +33,16 @@ public partial class SlashAttack : EnemyAttack
 	protected virtual void _checkAnimationEvent() {
 		if(EnemyAI.Sprite.Frame == OnFrame && EnemyAI.Sprite.Animation == AnimationName) {
 			_accelerating = true;
-			_canHit = true;
+			// _canHit = true;
 			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
+		}
+		
+		if(EnemyAI.Sprite.Frame == OffFrame && EnemyAI.Sprite.Animation == AnimationName) {
+			_accelerating = false;
+			// _canHit = false;
+			_canHit = false;
+			// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		}
 		
 		if(EnemyAI.Sprite.Frame == StopLungeFrame && EnemyAI.Sprite.Animation == AnimationName) {
@@ -50,16 +59,16 @@ public partial class SlashAttack : EnemyAttack
 		_attackArea.BodyEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.PlayerLayer;
 		_attackArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
-		
-		CanSlash = true;
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanSlash;
+		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanAttack;
 	}
 	
 	public override void _Process(double delta) {
 		base._Process(delta);
+		
+		// GD.Print("canHit?: " + _canHitSlash);
 		
 		if(!Active)
 			return;
@@ -85,10 +94,9 @@ public partial class SlashAttack : EnemyAttack
 	
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
-
+		_canHit = true;
 		_accelerating = false;
 		Slash();
-		StartSlashCooldown();
 	}
 	
 	public void Slash() {
@@ -99,7 +107,8 @@ public partial class SlashAttack : EnemyAttack
 
 	private void _FinishSlash() {
 		_accelerating = false;
-		_canHit = false;
+		// _canHit = false;
+		_canHit= false;
 		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		// CanSwitchAttackDirection = true;
@@ -110,28 +119,25 @@ public partial class SlashAttack : EnemyAttack
 		base.Interrupt();
 		
 		_accelerating = false;
-		_canHit = false;
+		_canHit= false;
+		// _canHit = false;
 		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 	
-	public void StartSlashCooldown() {
-		CanSlash = false;
-		GetTree().CreateTimer(SlashCooldown).Timeout += _FinishSlashCooldown;
-	}
-
-	private void _FinishSlashCooldown() {
-		CanSlash = true; 
-	}
-	
 	protected virtual void _OnSlashHit(Node2D hit) {
-		// GD.Print(hit.Name + " Hit!");
+		// GD.Print(hit.Name + " Hit! " + _canHit);
 		if(!_canHit || !(hit is Player)) {
 			return;
 		}
+		// _canHit = false;
+		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		// ((Player)hit).TakeDamage(SlashDamage, PostureDamage, EnemyAI, PostureDamage);
+		_canHit = false;
 		((Player)hit).TakeDamage(_attackData, EnemyAI);
+		
+		GD.Print("SlashHIt!");
 		// HitEvent?.Invoke((IHittable) hit, _playerStats.SlashDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
 	}
 }

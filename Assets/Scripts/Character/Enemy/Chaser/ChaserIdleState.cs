@@ -26,6 +26,7 @@ public partial class ChaserIdleState : PatrolIdleState
 		
 		if(_chaserAI.CheckAggro()) {
 			//_chaserAI.CanAggro = false;
+			
 			_chaserStateMachine.ChangeState(_chaserStateMachine.AggroState);
 		}
 	}

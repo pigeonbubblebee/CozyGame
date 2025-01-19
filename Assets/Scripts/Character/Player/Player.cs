@@ -88,7 +88,7 @@ public partial class Player : CharacterBody2D
 		Camera.Shake(0.2f, 2000f);
 		_gameManager.FreezeFrame(0.02f, 0.08f);
 		// GD.Print(e.Enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1);
-		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 2000, 2000, 0.025f);
+		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 1000, 500f, 0.1f);
 		
 		if(DeflectController.Blocking) {
 			DeflectController.Block(e, enemy);

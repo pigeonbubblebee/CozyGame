@@ -1,10 +1,10 @@
+AudioStreamPlayer2D
 Node2D
 Timer
 Node
 Area2D
 AnimatedSprite2D
 AudioStreamPlayer
-AudioStreamPlayer2D
 TextureRect
 GPUParticles2D
 RemoteTransform2D

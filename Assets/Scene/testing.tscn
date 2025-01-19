@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=11 format=3 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Scene/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="1_s66b3"]
@@ -9,8 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://bnqwq0q04gcdo" path="res://Assets/Sound/lofi type beat unfinished.mp3" id="9_ei8k8"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="10_ewqkv"]
-[ext_resource type="PackedScene" uid="uid://dfi6e0ou7w3pm" path="res://Assets/Scene/Enemy/goblin_archer.tscn" id="10_wn0a1"]
-[ext_resource type="PackedScene" uid="uid://bskrg487tax4i" path="res://Assets/Scene/Enemy/worg.tscn" id="11_uxyl4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewan5"]
 radius = 216.148
@@ -41,25 +39,11 @@ position = Vector2(2016, 48)
 scale = Vector2(12, 12)
 texture = ExtResource("8_q3obe")
 
-[node name="goblin_bandit" parent="." instance=ExtResource("8_n7a58")]
-position = Vector2(3392, 448)
-
-[node name="goblin_bandit2" parent="." instance=ExtResource("8_n7a58")]
-position = Vector2(2704, 608)
-
-[node name="goblin_bandit3" parent="." instance=ExtResource("8_n7a58")]
-position = Vector2(-144, -312)
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("9_ei8k8")
+volume_db = -7.0
 autoplay = true
 
-[node name="goblin_archer2" parent="." instance=ExtResource("10_wn0a1")]
-position = Vector2(776, 592)
-
-[node name="Worg" parent="." instance=ExtResource("11_uxyl4")]
-position = Vector2(-1080, -360)
-
-[node name="Worg2" parent="." instance=ExtResource("11_uxyl4")]
-position = Vector2(2680, 696)
+[node name="goblin_bandit" parent="." instance=ExtResource("8_n7a58")]
+position = Vector2(5432, 1928)

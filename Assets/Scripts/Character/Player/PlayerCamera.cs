@@ -13,22 +13,30 @@ public partial class PlayerCamera : Camera2D
 	private RandomNumberGenerator _rng;
 	
 	private FastNoiseLite _noise;
+	private float _noiseI;
 
 	public override void _Ready() {
 		_noise = new();
+		_noise.Seed = (int)GD.Randf();
+		// _noise.Frequency = 0.01f;
+		// _noise.Period = 2;
+		//_noise.NoiseType = FastNoiseLite.TYPESIMPLEX;
 		_rng = new();
 	}
 
 	public void Shake(float time, float magnitude) {
+		_noise.Seed = (int)GD.Randf();
 		_camBasePosition = this.GlobalPosition;
 		_shakeTimer = time;
-		_shakeMagnitude = magnitude;
+		_shakeMagnitude = magnitude * 0.12f;
 	}
 
 	public override void _Process(double delta) {
+		_shakeMagnitude = Mathf.Lerp(_shakeMagnitude, 0f, 5f * (float)delta);
+		
 		if (_shakeTimer > 0f) {
 			this.Offset = new Vector2(0, -120f)
-				+ new Vector2(_GetNoise(0), _GetNoise(1));
+				+ _GetNoise(delta);
 			_shakeTimer -= delta;
 		}
 		if(_shakeTimer <= 0f) {
@@ -37,11 +45,13 @@ public partial class PlayerCamera : Camera2D
 		}
 	}
 
-	private float _GetNoise(int seed) {
-		_noise.Seed = seed;
+	private Vector2 _GetNoise(double delta) {
+		_noiseI += (float)delta * 60f;
 		//GD.Print(_noise.GetNoise1D(
 			// GD.Randf() * (float)_shakeTimer) * _shakeMagnitude);
-		return _noise.GetNoise1D(
-			GD.Randf()) * _shakeMagnitude * _rng.RandfRange(-2, 2);
+		return new Vector2(
+			_noise.GetNoise2D(1, _noiseI) * _shakeMagnitude, 
+			_noise.GetNoise2D(100, _noiseI) * _shakeMagnitude
+		);
 	}
 }

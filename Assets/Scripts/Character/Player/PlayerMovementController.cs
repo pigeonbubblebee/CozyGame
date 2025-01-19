@@ -150,7 +150,7 @@ public partial class PlayerMovementController : Node
 	}
 	
 	private void _StopKnockback() {
-		GD.Print("Stop Recoil!");
+		// GD.Print("Stop Recoil!");
 		Vector2 velocity = new Vector2(0, Velocity.Y);
 		_playerBody.Velocity = velocity;
 	}

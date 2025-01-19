@@ -4,9 +4,6 @@ using System;
 public partial class SlashCombo : EnemyAttack
 {
 	[Export] public float SlashRange;
-	public bool CanSlash = true;
-	
-	[Export] public float SlashCooldown;
 	private bool _canHit;
 	
 	[Export] public float LungeSpeed;
@@ -37,7 +34,6 @@ public partial class SlashCombo : EnemyAttack
 	private void _checkAnimationEvent() {
 		if((EnemyAI.Sprite.Frame == OnFrame || EnemyAI.Sprite.Frame == OnFrame2) && EnemyAI.Sprite.Animation == AnimationName) {
 			_accelerating = true;
-			_canHit = true;
 			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
 		}
 		
@@ -62,12 +58,10 @@ public partial class SlashCombo : EnemyAttack
 		_attackArea.BodyEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.PlayerLayer;
 		_attackArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
-		
-		CanSlash = true;
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanSlash;
+		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanAttack;
 	}
 	
 	public override void _Process(double delta) {
@@ -97,10 +91,9 @@ public partial class SlashCombo : EnemyAttack
 	
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
-
+		_canHit = true;
 		_accelerating = false;
 		Slash();
-		StartSlashCooldown();
 	}
 	
 	public void Slash() {
@@ -125,15 +118,6 @@ public partial class SlashCombo : EnemyAttack
 		_canHit = false;
 		// _rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-	}
-	
-	public void StartSlashCooldown() {
-		CanSlash = false;
-		GetTree().CreateTimer(SlashCooldown).Timeout += _FinishSlashCooldown;
-	}
-
-	private void _FinishSlashCooldown() {
-		CanSlash = true; 
 	}
 	
 	private void _OnSlashHit(Node2D hit) {

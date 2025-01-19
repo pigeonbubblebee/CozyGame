@@ -3,6 +3,9 @@ using System;
 
 public partial class EnemyAttack : Node2D
 {
+	public bool CanAttack = true;
+	[Export] public float AttackCooldown;
+	
 	[Export] public string AnimationName;
 	[Export] public float AttackLength;
 	
@@ -28,17 +31,30 @@ public partial class EnemyAttack : Node2D
 	
 	public override void _Ready() {
 		this.EnemyGameManager = GetNode<GameManager>("/root/GameManager");
+		CanAttack = true;
 	}
 	
 	public virtual bool GetCondition(Player p, Enemy e) {
-		return false;
+		return CanAttack;
 	}
 	
 	public virtual void Execute(Player p, Enemy e) {
 		EnemyAI.Sprite.Play(AnimationName);
+		StartAttackCooldown();
 		TargetPlayer = p;
-		GD.Print("executing!");
+		// GD.Print("executing!");
 		Active = true;
+		
+		
+	}
+	
+	public void StartAttackCooldown() {
+		CanAttack = false;
+		GetTree().CreateTimer(AttackCooldown).Timeout += _FinishAttackCooldown;
+	}
+
+	private void _FinishAttackCooldown() {
+		CanAttack = true; 
 	}
 	
 	public virtual void Initialize(Enemy e) {
@@ -52,11 +68,14 @@ public partial class EnemyAttack : Node2D
 	
 	protected virtual void Finish() {
 		Active = false;
-		FinishAttackEvent?.Invoke();
+		
+		if(NotChainAttack)
+			FinishAttackEvent?.Invoke();
 		
 		if(!NotChainAttack) {
-			GD.Print("Chaining!");
-			_chainedAttack.Execute(TargetPlayer, EnemyAI);
+			// GD.Print("Chaining!");
+			// _chainedAttack.Execute(TargetPlayer, EnemyAI);
+			EnemyAI.ExecuteAttack(_chainedAttack, TargetPlayer);
 		} else {
 			
 		}

@@ -81,15 +81,19 @@ public partial class PlayerDeflectController : Node
 			_deflectSFX.Play();
 			_emitDeflectParticle();
 			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
+			_gameManager.FreezeFrame(0.02f, 0.1f);
+			
 			BlockEvent?.Invoke(true, data.PostureDamage, e);
-		// 	GD.Print(deflectDamage);
 			e.TakePostureDamage(data.DeflectPostureDamage);
+			GD.Print("TakePosture!");
 			Counter = true;
+			
 			GetTree().CreateTimer(_playerStats.CounterWindow).Timeout += _FinishCounterWindow;
+			
 			e.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? -1 : 1, _playerStats.DeflectKnockback * data.DeflectKnockbackMultiplier,
 				_playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
-			_gameManager.FreezeFrame(0.02f, 0.1f);
+			
 			return 0;
 		} else {
 			_blockSFX.Play();
@@ -121,12 +125,12 @@ public partial class PlayerDeflectController : Node
 	}
 	
 	public void StartBlock() {
-		GD.Print("Start Block");
+		// GD.Print("Start Block");
 		Blocking = true;
 	}
 	
 	public void EndBlock() {
-		GD.Print("End Block");
+		// GD.Print("End Block");
 		Blocking = false;
 	}
 	

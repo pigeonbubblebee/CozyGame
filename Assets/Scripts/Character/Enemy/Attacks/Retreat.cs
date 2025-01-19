@@ -22,7 +22,7 @@ public partial class Retreat : EnemyAttack
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= RetreatRange);
+		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= RetreatRange) && CanAttack;
 	}
 	
 	public override void Execute(Player p, Enemy e) {
