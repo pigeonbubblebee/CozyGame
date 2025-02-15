@@ -9,7 +9,7 @@ size = Vector2(128, 32)
 [node name="EnemyArrow" type="Area2D"]
 scale = Vector2(1, 0.3)
 script = ExtResource("1_0wru6")
-Lifetime = 1.0
+Lifetime = 3.0
 Speed = 1000.0
 SpritePath = NodePath("Sprite2D")
 LifetimePath = NodePath("Lifetime")

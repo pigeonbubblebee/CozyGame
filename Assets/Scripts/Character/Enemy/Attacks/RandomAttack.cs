@@ -30,7 +30,7 @@ public partial class RandomAttack : EnemyAttack
 		base.Execute(p, e);
 		
 		_attack.Execute(p, e);
-		_attack.FinishAttackEvent += Finish;
+		_attack.GetNextChainAttack().FinishAttackEvent += Finish;
 	}
 	
 	protected override void Finish() {

@@ -8,5 +8,6 @@ public partial class  EnemyAttackData : Resource
 	[Export] public int InternalDamage;
 	[Export] public int PostureDamage;
 	[Export] public int DeflectPostureDamage;
+	[Export] public bool Unstoppable = false;
 	[Export] public float DeflectKnockbackMultiplier = 1;
 }

@@ -30,6 +30,9 @@ public partial class ShootAttack : EnemyAttack
 	
 	private bool _charging;
 	
+	[Export] private NodePath _shootSFXPath;
+	private AudioStreamPlayer2D _shootSFX;
+	
 	[Export] private EnemyAttackData _attackData;
 	
 	
@@ -44,6 +47,8 @@ public partial class ShootAttack : EnemyAttack
 		}
 		
 		_bodyTop = GetNode<Node2D>(_bodyTopPath);
+		
+		_shootSFX = GetNode<AudioStreamPlayer2D>(_shootSFXPath);
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
@@ -83,6 +88,7 @@ public partial class ShootAttack : EnemyAttack
 	}
 	
 	public void Shoot() {
+		_shootSFX.Play();
 		// SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);		
 		GetTree().CreateTimer(AttackLength).Timeout += _FinishShoot;
 		GetTree().CreateTimer(ChargeTime).Timeout += _UseShot;

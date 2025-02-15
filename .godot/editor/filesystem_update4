@@ -1,10 +1,18 @@
-res://Assets/Scene/ui_manager.tscn
+res://Assets/Scene/Enemy/goblin_pike.tscn
 res://Assets/Scripts/Character/Player/PlayerStats.cs
+res://Data/Tileset/testing.tres
+res://Data/Enemy/goblin_bandit.tres
+res://Data/Enemy/goblin_archer.tres
+res://Data/Enemy/goblin_hatchet.tres
 res://Assets/Scene/testing.tscn
-res://Assets/Scene/Enemy/enemy_template.tscn
+res://Assets/Scene/ui_manager.tscn
 res://Assets/Scene/Enemy/Projectile/EnemyArrow.tscn
 res://Assets/Scene/player.tscn
 res://Assets/Scene/Enemy/goblin_bandit.tscn
+res://Assets/Scene/walls.tscn
+res://Assets/Scene/Enemy/goblin_archer.tscn
+res://Assets/Scene/Enemy/worg.tscn
+res://Assets/Scene/Enemy/goblin_hatchet.tscn
 res://Assets/Scripts/Core/User Interface/HealthHUD.cs
 res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs
 res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs

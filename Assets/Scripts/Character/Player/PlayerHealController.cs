@@ -43,17 +43,20 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 		InternalDamageHealDelayTimer = GetNode<Timer>(_internalDamageHealDelayTimerPath);
 		InternalDamageHealTimer = GetNode<Timer>(_internalDamageHealTimerPath);
 		_player.PlayerHealth.DamageEvent += ResetInternalDamageHealDelay;
+		_player.AttackController.DeathBlowEvent += FullHealInternal;
 		
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 	}
 	
 	public void ConvertInternalDamage() {
-		_player.PlayerHealth.TakeDamage(InternalDamage);
 		InternalDamage = 0;
+		
+		InternalHealthChangeEvent?.Invoke(-InternalDamage);
 	}
 	
 	public void TakeInternalDamage(int n) {
 		InternalDamage += n;
+		// GD.Print(InternalDamage + " " + n);
 		ResetInternalDamageHealDelay(n);
 		InternalHealthChangeEvent?.Invoke(n);
 	}
@@ -63,6 +66,7 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 	}
 	
 	public override void _Process(double delta) {
+		
 		if(InternalDamage <= 0) {
 			return;
 		}
@@ -128,5 +132,12 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 
 	private void _FinishHealCooldown() {
 		HealCooldownOff = true; 
+	}
+	
+	public void FullHealInternal() {
+		_player.PlayerHealth.AddHealth(InternalDamage, false);
+		InternalDamage = 0;
+		InternalHealthChangeEvent?.Invoke(InternalDamage);
+		InternalDamageHealTimer.Start(_playerStats.InternalDamageHealCooldown);
 	}
 }

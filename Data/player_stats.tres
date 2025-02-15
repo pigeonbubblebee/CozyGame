@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://pffa3f4xmb1o"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerStats.cs" id="1_ylt6r"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerStats.cs" id="1_13bpv"]
 
 [resource]
-script = ExtResource("1_ylt6r")
+script = ExtResource("1_13bpv")
 Speed = 680.0
 Acceleration = 400.0
 DirectionSwitchSpeed = 800.0
@@ -35,7 +35,7 @@ SlashShakeMagnitude = 1300.0
 SlashFreezeTime = 0.075
 SlashFreezeDelay = 0.05
 DeathBlowFreezeTime = 0.1
-SlashSpeedMultiplier = 0.8
+SlashSpeedMultiplier = 0.7
 SlashCounterDamage = 8
 CounterShakeTime = 0.1
 CounterShakeMagnitude = 3000.0
@@ -45,7 +45,7 @@ InternalDamageHealRate = 3
 InternalDamageHealCooldown = 0.5
 InternalDamageHealDelay = 5.0
 HealTime = 1.25
-HealPower = 10
+HealPower = 25
 HealCooldown = 1.75
 MaxMana = 5
 ManaUsage = 1
@@ -58,8 +58,8 @@ BulletObjectPool = 5
 ShootMaxRecoil = 1600.0
 ShootRecoil = 1600.0
 DeflectWindow = 0.134
-DeflectFriction = 100.0
-BlockMinimumTime = 0.3
+DeflectFriction = 75.0
+BlockMinimumTime = 0.275
 BlockCooldown = 0.05
 BlockTimeout = 0.4
 CounterWindow = 0.5

@@ -1,8 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=26 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs" id="1_cjkk3"]
 [ext_resource type="PackedScene" uid="uid://003fp2vwh75j" path="res://Assets/Scene/Enemy/enemy_template.tscn" id="2_ivrns"]
+[ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="7_t1h5y"]
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="8_5m3ls"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="8_ucmwq"]
 [ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="9_177p6"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs" id="11_mmfnb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs" id="15_5d18m"]
@@ -153,9 +155,9 @@ HealthSystemPath = NodePath("EnemyTemplate/Health")
 _healthBarPath = NodePath("EnemyTemplate/Bars/HealthBar")
 MaxHealth = 40
 MaxPosture = 100
-PostureRegenerationCooldownTime = 2.0
+PostureRegenerationCooldownTime = 0.5
 PostureRegenerationTime = 0.5
-PostureRegenerationRate = 30
+PostureRegenerationRate = 10
 _postureRegenerationCooldownTimerPath = NodePath("EnemyTemplate/PostureRegenerationCooldown")
 _postureRegenerationTimerPath = NodePath("EnemyTemplate/PostureRegeneration")
 _deathblowMarkPath = NodePath("EnemyTemplate/Bars/Deathblow")
@@ -193,6 +195,9 @@ one_shot = true
 
 [node name="EnemyTemplate" parent="." instance=ExtResource("2_ivrns")]
 
+[node name="Bars" parent="EnemyTemplate" index="0"]
+position = Vector2(0, -96)
+
 [node name="AnimatedSprite2D" parent="EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_ommm0")
 animation = &"idle"
@@ -204,6 +209,12 @@ _patrolStatePath = NodePath("PatrolState")
 
 [node name="PatrolState" type="Node2D" parent="EnemyTemplate/StateMachine" index="3"]
 script = ExtResource("16_v3xuk")
+_patrolSFXPath = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyTemplate/StateMachine/PatrolState"]
+stream = ExtResource("7_t1h5y")
+volume_db = 4.0
+script = ExtResource("8_ucmwq")
 
 [node name="AggroState" type="Node2D" parent="EnemyTemplate/StateMachine" index="4"]
 script = ExtResource("15_5d18m")

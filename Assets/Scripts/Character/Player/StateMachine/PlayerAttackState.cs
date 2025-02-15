@@ -48,7 +48,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	public override void Enter(State previousState) {
-		_attackMoveTimer.Start(0.1f);
+		_attackMoveTimer.Start(0.15f);
 		
 		
 		// TODO: Reset Colliders
@@ -87,8 +87,12 @@ public partial class PlayerAttackState : PlayerState
 		if(SpellController.DesiredShoot) {
 			SpellController.StartShootBuffer();
 		}
-		if(DeflectController.DeflectActuation) {
-			DeflectController.StartDeflectBuffer();
+		if(DeflectController.DeflectActuation) { // Cancellable Attack
+			DeflectController.StartBlock();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
+			AttackController.CancelSlash();
+			// return true;
+			// DeflectController.StartDeflectBuffer();
 		}
 	}
 
@@ -101,10 +105,13 @@ public partial class PlayerAttackState : PlayerState
 	}
 
 	private void _HandleHorizontalMovement(double delta) {
+		if(_subState == JUMPING || _subState == FALLING) 
+			return;
+			
 		if(!_attackMoveTimer.IsStopped())
 			MovementController.Accelerate(new Vector2(MovementController.Direction * Stats.SlashSpeedMultiplier, MovementController.Velocity.Y), delta);
 		else
-			MovementController.AddFriction(delta);
+			MovementController.AddDeflectFriction(delta);
 		/*
 		if(AttackController.CanDeathBlow) {
 			MovementController.AddFriction(delta);
@@ -170,7 +177,7 @@ public partial class PlayerAttackState : PlayerState
 		}
 
 		if(MovementController.Velocity.Y > 0) {
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.FallState);
+			// ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.FallState);
 			_subState = FALLING;
 			return;
 		}

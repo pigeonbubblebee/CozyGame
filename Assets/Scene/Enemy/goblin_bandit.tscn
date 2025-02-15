@@ -1,300 +1,15 @@
-[gd_scene load_steps=50 format=3 uid="uid://b0fu168ri1a68"]
+[gd_scene load_steps=13 format=3 uid="uid://b0fu168ri1a68"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_amwn4"]
+[ext_resource type="SpriteFrames" uid="uid://dm2ecroeniprw" path="res://Data/Enemy/goblin_bandit.tres" id="2_dqyxp"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="2_qa4p0"]
-[ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="2_xek8w"]
-[ext_resource type="Texture2D" uid="uid://m2loh784ssuv" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit_slash2.png" id="3_fubgq"]
-[ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="4_6ci2a"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs" id="5_s2rwl"]
 [ext_resource type="Resource" uid="uid://dhbmg6d2g0pbi" path="res://Data/Enemy/AttackData/goblin_bandit_slash.tres" id="6_gx2vo"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs" id="7_og785"]
+[ext_resource type="AudioStream" uid="uid://dvdrf0hjb4bny" path="res://Assets/Sound/SFX/Enemy/Goblin/goblinSlash.wav" id="9_n3sgf"]
 [ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="9_vft5g"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="10_h3tc0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sho2d"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_13i6o"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_054ax"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_17lfh"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3ihd"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0kg3l"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_28k0i"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phwoi"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjstg"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_capse"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dxa70"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6s5u"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_omwep"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6ebn"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yek6x"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r53e3"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tdpnd"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vis6u"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w45qu"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(0, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_br2jj"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fvkbx"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_epcrg"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dim13"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w160a"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3njdm"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li1if"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1u56i"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tw1x4"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sxds3"]
-atlas = ExtResource("3_fubgq")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_78q3u"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n3uto"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sgr66"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwvmc"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(0, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5i7g2"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(128, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bwhnd"]
-atlas = ExtResource("2_xek8w")
-region = Rect2(256, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ij1b3"]
-atlas = ExtResource("4_6ci2a")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_e1os1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sho2d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_13i6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_054ax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_17lfh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3ihd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0kg3l")
-}],
-"loop": true,
-"name": &"aggro",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_28k0i")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phwoi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjstg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_capse")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dxa70")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h6s5u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_omwep")
-}],
-"loop": true,
-"name": &"patrol",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s6ebn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yek6x")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_r53e3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tdpnd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vis6u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w45qu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_br2jj")
-}, {
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_fvkbx")
-}],
-"loop": true,
-"name": &"slash",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_epcrg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dim13")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_w160a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3njdm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_li1if")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1u56i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tw1x4")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_sxds3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_78q3u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n3uto")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sgr66")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwvmc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5i7g2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bwhnd")
-}],
-"loop": true,
-"name": &"slash2",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ij1b3")
-}],
-"loop": true,
-"name": &"stagger",
-"speed": 5.0
-}]
+[ext_resource type="AudioStream" uid="uid://cqg6n1nks5oq8" path="res://Assets/Sound/SFX/Enemy/Goblin/goblinslash2.wav" id="11_5escv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb5fh"]
 size = Vector2(200, 178.5)
@@ -310,9 +25,8 @@ size = Vector2(200, 178.5)
 position = Vector2(0, 8)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
-sprite_frames = SubResource("SpriteFrames_e1os1")
-animation = &"patrol"
-frame_progress = 0.825663
+sprite_frames = ExtResource("2_dqyxp")
+frame_progress = 0.25
 
 [node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 script = ExtResource("2_qa4p0")
@@ -325,6 +39,7 @@ OnFrame = 5
 OffFrame = 6
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
 _attackData = ExtResource("6_gx2vo")
 AttackCooldown = 1.0
 AnimationName = "slash"
@@ -340,9 +55,13 @@ position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_sb5fh")
 disabled = true
 
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/Slash"]
+stream = ExtResource("9_n3sgf")
+script = ExtResource("10_h3tc0")
+
 [node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("7_og785")
-AttackPaths = Array[NodePath]([NodePath("SlashCombo"), NodePath("Slash2"), NodePath("Slash3")])
+AttackPaths = Array[NodePath]([NodePath("SlashComboChain"), NodePath("Slash2"), NodePath("Slash3")])
 AttackCooldown = 1.0
 NotChainAttack = true
 
@@ -357,8 +76,11 @@ OnFrame = 5
 OnFrame2 = 11
 OffFrame = 6
 OffFrame2 = 12
+StartSoundFrame2 = 7
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
+_slashSFXPath = NodePath("Slash2SFX")
+_slash2SFXPath = NodePath("SlashSFX")
 _attackData = ExtResource("6_gx2vo")
 AttackCooldown = 1.5
 AnimationName = "slash2"
@@ -374,6 +96,14 @@ position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_v6n7n")
 disabled = true
 
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashCombo"]
+stream = ExtResource("9_n3sgf")
+script = ExtResource("10_h3tc0")
+
+[node name="Slash2SFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashCombo"]
+stream = ExtResource("11_5escv")
+script = ExtResource("10_h3tc0")
+
 [node name="Slash2" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
 script = ExtResource("2_qa4p0")
 SlashRange = 170.0
@@ -381,15 +111,20 @@ SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0
 StopLungeFrame = 6
-OnFrame = 5
+OnFrame = 4
 OffFrame = 7
 _attackAreaColliderPath = NodePath("../../../Slash/SwordHit/Hitbox")
 _attackAreaPath = NodePath("../../../Slash/SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
 _attackData = ExtResource("6_gx2vo")
 AttackCooldown = 1.0
 AnimationName = "slash"
-AttackLength = 0.6
+AttackLength = 0.9
 NotChainAttack = true
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash2"]
+stream = ExtResource("9_n3sgf")
+script = ExtResource("10_h3tc0")
 
 [node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash2"]
 collision_layer = 2
@@ -407,15 +142,20 @@ SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0
 StopLungeFrame = 6
-OnFrame = 5
+OnFrame = 4
 OffFrame = 7
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
+_attackAreaColliderPath = NodePath("../../../Slash/SwordHit/Hitbox")
+_attackAreaPath = NodePath("../../../Slash/SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
 _attackData = ExtResource("6_gx2vo")
 AttackCooldown = 1.0
 AnimationName = "slash"
-AttackLength = 0.6
+AttackLength = 0.9
 NotChainAttack = true
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash3"]
+stream = ExtResource("9_n3sgf")
+script = ExtResource("10_h3tc0")
 
 [node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/Slash3"]
 collision_layer = 2
@@ -426,10 +166,69 @@ position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_sb5fh")
 disabled = true
 
-[node name="PatrolState" parent="ChaserEnemy/EnemyTemplate/StateMachine" index="3"]
-_patrolSFXPath = NodePath("AudioStreamPlayer2D")
+[node name="SlashComboChain" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
+script = ExtResource("2_qa4p0")
+SlashRange = 170.0
+SlashCooldown = 1.0
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 6
+OnFrame = 4
+OffFrame = 7
+_attackAreaColliderPath = NodePath("../../../Slash/SwordHit/Hitbox")
+_attackAreaPath = NodePath("../../../Slash/SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
+_attackData = ExtResource("6_gx2vo")
+AttackCooldown = 1.0
+AnimationName = "slash2"
+AttackLength = 0.9
+_chainedAttackPath = NodePath("Slash")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain"]
+stream = ExtResource("11_5escv")
+script = ExtResource("10_h3tc0")
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain/SwordHit"]
+position = Vector2(100, -17.25)
+shape = SubResource("RectangleShape2D_sb5fh")
+disabled = true
+
+[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain"]
+script = ExtResource("2_qa4p0")
+SlashRange = 170.0
+SlashCooldown = 1.0
+LungeSpeed = 2800.0
+LungeRange = 230.0
+StopLungeFrame = 6
+OnFrame = 4
+OffFrame = 7
+_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
+_attackAreaPath = NodePath("SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
+_attackData = ExtResource("6_gx2vo")
+AttackCooldown = 1.0
+AnimationName = "slash"
+AttackLength = 0.9
+NotChainAttack = true
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain/Slash"]
+stream = ExtResource("9_n3sgf")
+script = ExtResource("10_h3tc0")
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain/Slash"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash/SlashComboChain/Slash/SwordHit"]
+position = Vector2(100, -17.25)
+shape = SubResource("RectangleShape2D_sb5fh")
+disabled = true
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
 stream = ExtResource("9_vft5g")
 volume_db = 4.0
 script = ExtResource("10_h3tc0")

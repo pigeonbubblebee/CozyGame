@@ -145,7 +145,13 @@ public partial class Enemy : CharacterBody2D
 		}
 		
 		if(_postureRegenerationTimer.IsStopped()) {
-			CurrentPosture += PostureRegenerationRate;
+			float healthRatio = ((float)_health.CurrentHealthPoints / (float)_health.MaxHealthPoints);
+			if(healthRatio <= 0.75f) // If not at full, posture regenerates slower
+				healthRatio *= 0.8f;
+			if(healthRatio <= 0.5f) // If under half, posture regenerates even slower (at around 60%)
+				healthRatio *= 0.8f;
+			// GD.Print(PostureRegenerationRate * (_health.CurrentHealthPoints / _health.MaxHealthPoints));
+			CurrentPosture += (int)(PostureRegenerationRate * healthRatio);
 			if(CurrentPosture > MaxPosture) {
 				CurrentPosture = MaxPosture;
 			}

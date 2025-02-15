@@ -29,11 +29,11 @@ public partial class PlayerDeflectController : Node
 	
 	public bool CanBlock { get; private set; }
 	
-	[Export] private NodePath _blockParticlePath;
-	private GpuParticles2D _blockParticle;
+	[Export] private NodePath _blockParticlePoolPath;
+	public Node2D BlockParticlePool { get; private set; }
 	
-	[Export] private NodePath _deflectParticlePath;
-	private GpuParticles2D _deflectParticle;
+	[Export] private NodePath _deflectParticlePoolPath;
+	public Node2D DeflectParticlePool { get; private set; }
 	
 	[Export] private NodePath _deflectSFXPath;
 	private AudioStreamPlayer2D _deflectSFX;
@@ -58,8 +58,8 @@ public partial class PlayerDeflectController : Node
 		_deflectWindowTimer = GetNode<Timer>(_deflectWindowTimerPath);
 		_deflectCancelTimer = GetNode<Timer>(_deflectCancelTimerPath);
 		
-		_blockParticle = GetNode<GpuParticles2D>(_blockParticlePath);
-		_deflectParticle = GetNode<GpuParticles2D>(_deflectParticlePath);
+		BlockParticlePool = GetNode<Node2D>(_blockParticlePoolPath);
+		DeflectParticlePool = GetNode<Node2D>(_deflectParticlePoolPath);
 		
 		_deflectSFX = GetNode<AudioStreamPlayer2D>(_deflectSFXPath);
 		_blockSFX = GetNode<AudioStreamPlayer2D>(_blockSFXPath);
@@ -104,7 +104,7 @@ public partial class PlayerDeflectController : Node
 			// _player.PlayerHealth.TakeDamage(damage/4);
 			_player.PostureController.TakePostureDamage(data.PostureDamage);
 			_player.PlayerHealth.TakeDamage(data.Damage);
-			_player.HealController.TakeInternalDamage(data.Damage + data.InternalDamage);
+			_player.HealController.TakeInternalDamage(data.Damage);
 			
 			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.BlockKnockback, _playerStats.BlockKnockbackAcceleration, _playerStats.BlockKnockbackTime);
 			_gameManager.FreezeFrame(0.02f, 0.1f);
@@ -148,40 +148,61 @@ public partial class PlayerDeflectController : Node
 	
 	private void _emitBlockParticle() {
 		if(_player.MovementController.Direction < 0) {
-			_blockParticle.GlobalRotation = Mathf.DegToRad(-90f);
-			_blockParticle.Position = new Vector2(-96, -32f);
+			BlockParticlePool.GlobalRotation = Mathf.DegToRad(-180f);
+			// _blockParticle.Position = new Vector2(-96, -32f);
 		} else {
-			_blockParticle.GlobalRotation = Mathf.DegToRad(0f);
-			_blockParticle.Position = new Vector2(96, -32f);
+			BlockParticlePool.GlobalRotation = Mathf.DegToRad(0f);
+			//_blockParticle.Position = new Vector2(96, -32f);
 		}
 
-		_blockParticle.Emitting = true;
+		foreach(Node p in BlockParticlePool.GetChildren()) {
+			if(p is GpuParticles2D) {
+				if(!((GpuParticles2D)p).Emitting) {
+					((GpuParticles2D)p).Restart();
+					return;
+				}
+			}
+		}
 	}
 	
 	private void _emitDeflectParticle() {
 		if(_player.MovementController.Direction < 0) {
-			_deflectParticle.GlobalRotation = Mathf.DegToRad(-90f);
-			_deflectParticle.Position = new Vector2(-96, -32f);
+			DeflectParticlePool.GlobalRotation = Mathf.DegToRad(-180f); // -90f
+			// _deflectParticle.Position = new Vector2(-96, -32f);
 		} else {
-			_deflectParticle.GlobalRotation = Mathf.DegToRad(0f);
-			_deflectParticle.Position = new Vector2(96, -32f);
+			DeflectParticlePool.GlobalRotation = Mathf.DegToRad(0f);
+			// _deflectParticle.Position = new Vector2(96, -32f);
 		}
+		
+		// GD.Print("DeflectParticles!");
 
-		_deflectParticle.Emitting = true;
+		foreach(Node p in DeflectParticlePool.GetChildren()) {
+			if(p is GpuParticles2D) {
+				GD.Print(p.Name + " " + !((GpuParticles2D)p).Emitting);
+				if(!((GpuParticles2D)p).Emitting) {
+					((GpuParticles2D)p).Restart();
+					return;
+				}
+			}
+		}
 	}
 	
 	public bool BlockCancellable() {
 		return _deflectCancelTimer.IsStopped();
 	}
 	
+	public float BlockCancelTime() {
+		return (float)_deflectCancelTimer.TimeLeft;
+	}
+	
 	public void StartBlockCooldown() {
 		// CanBlock = false;
-		GD.Print("Cooldown Start");
+		//GD.Print("Cooldown Start");
 		GetTree().CreateTimer(_playerStats.BlockCooldown).Timeout += _FinishBlockCooldown;
 	}
 
 	private void _FinishBlockCooldown() {
-		GD.Print("Cooldown Finish");
+		//GD.Print("Cooldown Finish");
 		CanBlock = true; 
 	}
 }

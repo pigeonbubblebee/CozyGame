@@ -5,6 +5,8 @@ public partial class PlayerBlockState : PlayerState
 {
 	private bool _released = true;
 	private bool _deflecting = false;
+	
+	public bool HitTransition = false;
 	/*
 	private readonly int FALLING = -1;
 	private readonly int NEUTRAL = 0;
@@ -32,7 +34,8 @@ public partial class PlayerBlockState : PlayerState
 		//_timeoutBlock(deflect);
 		//_released = true;
 		// DeflectController.StartBlockCooldown();
-		GetTree().CreateTimer(0.05f).Timeout += _EnterDefaultState;
+		HitTransition = true;
+		GetTree().CreateTimer(DeflectController.BlockCancelTime()).Timeout += _EnterDefaultState;
 	}
 	
 	private void _timeoutBlock() {
@@ -72,6 +75,7 @@ public partial class PlayerBlockState : PlayerState
 				_deflectTimer.Stop();
 				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
 				DeflectController.StartBlock();
+				AnimationController.PlayAnimation(AnimationController.BlockAnimationClip);
 				return true;
 			}
 			if(HealController.DesiredHeal && HealController.HealCooldownOff) {
@@ -94,6 +98,7 @@ public partial class PlayerBlockState : PlayerState
 			}
 			if(AttackController.DesiredAttack || (!AttackController.GetSlashBufferStop() && AttackController.CanSlash)) {
 				MovementController.CanSwitchDirections = true;
+				//GD.Print("Block Cancelled!");
 				_deflectTimer.Stop();
 				ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.AttackState);
 				return true;
@@ -120,6 +125,8 @@ public partial class PlayerBlockState : PlayerState
 		base.Enter(previousState);
 		_timeoutBlock();
 		DeflectController.StartDeflectWindow();
+		
+		HitTransition = false;
 		
 		_released = false;
 		CanFlip = false;

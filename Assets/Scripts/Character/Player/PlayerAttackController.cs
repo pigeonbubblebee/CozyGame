@@ -60,6 +60,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	
 	[Export] private NodePath _deathBlowSFXPath;
 	private AudioStreamPlayer2D _deathBlowSFX;
+	
+	public event Action DeathBlowEvent;
 
 	public override void _Ready()
 	{
@@ -177,6 +179,17 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		FinishSlashEvent?.Invoke();
 		CanDeathBlow = false;
 	}
+	
+	public void CancelSlash() {
+		_increaseSlashCombo();
+		
+		_canHit = false;
+		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		CanSwitchAttackDirection = true;
+		// FinishSlashEvent?.Invoke();
+		CanDeathBlow = false;
+	}
 
 	public void StartSlashCooldown() {
 		CanSlash = false;
@@ -198,6 +211,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			// GD.Print(((Enemy) hit).Staggered);
 			if(((EnemyHitbox) hit).EnemyAIParent.Staggered) {
 				damage = ((EnemyHitbox) hit).EnemyAIParent.DeathBlowDamage;
+				DeathBlowEvent?.Invoke();
 			}
 		}
 		

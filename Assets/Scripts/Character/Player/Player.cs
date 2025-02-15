@@ -90,7 +90,7 @@ public partial class Player : CharacterBody2D
 		// GD.Print(e.Enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1);
 		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 1000, 500f, 0.1f);
 		
-		if(DeflectController.Blocking) {
+		if(DeflectController.Blocking && !e.Unstoppable) {
 			DeflectController.Block(e, enemy);
 		} else {
 			_hitSFX.Play();

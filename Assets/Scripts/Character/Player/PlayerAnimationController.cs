@@ -15,6 +15,8 @@ public partial class PlayerAnimationController : Node
 	public AsymmetricalAnimationClip FallAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip CounterAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip DeathBlowAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip BlockTransAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip BlockHitTransAnimationClip { get; private set; }
 
 	public AsymmetricalAnimationClip CurrentAnimation { get; private set; }
 	
@@ -43,6 +45,8 @@ public partial class PlayerAnimationController : Node
 		FallAnimationClip = new AsymmetricalAnimationClip("fall");
 		CounterAnimationClip = new AsymmetricalAnimationClip("counter");
 		DeathBlowAnimationClip = new AsymmetricalAnimationClip("deathblow");
+		BlockTransAnimationClip = new AsymmetricalAnimationClip("block_transition");
+		BlockHitTransAnimationClip = new AsymmetricalAnimationClip("block_hit_transition");
 	}
 	
 	public override void _Process(double delta) {		
@@ -118,6 +122,7 @@ public partial class PlayerAnimationController : Node
 
 		public virtual void PlayAnimation(AnimatedSprite2D animator, bool facingRight) {
 			// Right = facingRight;
+			animator.Frame = 0;
 			animator.Play(facingRight ? RightClip : LeftClip);
 		}
 	}

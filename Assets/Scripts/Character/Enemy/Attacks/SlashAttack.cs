@@ -4,10 +4,11 @@ using System;
 public partial class SlashAttack : EnemyAttack
 {
 	[Export] public float SlashRange;
+	[Export] public float SlashMinRange = 0f;
 	public bool CanSlash = true;
 
 	[Export] public float SlashCooldown;
-	private bool _canHit;
+	protected bool _canHit;
 	
 	[Export] public float LungeSpeed;
 	[Export] public float LungeRange;
@@ -17,13 +18,16 @@ public partial class SlashAttack : EnemyAttack
 	[Export] public int OffFrame;
 	
 	[Export] private NodePath _attackAreaColliderPath;
-	private CollisionShape2D _attackAreaCollider;
+	protected CollisionShape2D _attackAreaCollider;
 	[Export] private NodePath _attackAreaPath;
-	private Area2D _attackArea;
+	protected Area2D _attackArea;
 	
 	protected bool _accelerating;
 	
-	[Export] private EnemyAttackData _attackData;
+	[Export] private NodePath _slashSFXPath;
+	private AudioStreamPlayer2D _slashSFX;
+	
+	[Export] protected EnemyAttackData _attackData;
 	
 	public override void Initialize(Enemy e) {
 		base.Initialize(e);
@@ -55,6 +59,7 @@ public partial class SlashAttack : EnemyAttack
 		
 		_attackAreaCollider = GetNode<CollisionShape2D>(_attackAreaColliderPath);
 		_attackArea = GetNode<Area2D>(_attackAreaPath);
+		_slashSFX = GetNode<AudioStreamPlayer2D>(_slashSFXPath);
 		
 		_attackArea.BodyEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.PlayerLayer;
@@ -62,7 +67,8 @@ public partial class SlashAttack : EnemyAttack
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanAttack;
+		return (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) <= SlashRange) && CanAttack
+			&& (Mathf.Abs(p.GlobalPosition.X - e.GlobalPosition.X) >= SlashMinRange);
 	}
 	
 	public override void _Process(double delta) {
@@ -94,18 +100,22 @@ public partial class SlashAttack : EnemyAttack
 	
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
+		
 		_canHit = true;
 		_accelerating = false;
 		Slash();
 	}
 	
 	public void Slash() {
+		_slashSFX.Play();
+		// GD.Print(AttackLength);
 		// SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);		
 		GetTree().CreateTimer(AttackLength).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}
 
 	private void _FinishSlash() {
+		GD.Print("Finish!");
 		_accelerating = false;
 		// _canHit = false;
 		_canHit= false;

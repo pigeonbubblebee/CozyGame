@@ -39,6 +39,7 @@ public partial class EnemyAttack : Node2D
 	}
 	
 	public virtual void Execute(Player p, Enemy e) {
+		GD.Print(this.Name);
 		EnemyAI.Sprite.Play(AnimationName);
 		StartAttackCooldown();
 		TargetPlayer = p;
@@ -67,10 +68,15 @@ public partial class EnemyAttack : Node2D
 	}
 	
 	protected virtual void Finish() {
+		if(!Active)
+			return;
+		
 		Active = false;
 		
 		if(NotChainAttack)
 			FinishAttackEvent?.Invoke();
+			
+		GD.Print("Finished!");
 		
 		if(!NotChainAttack) {
 			// GD.Print("Chaining!");

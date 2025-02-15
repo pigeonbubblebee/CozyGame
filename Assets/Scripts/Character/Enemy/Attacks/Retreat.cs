@@ -88,7 +88,7 @@ public partial class Retreat : EnemyAttack
 	
 	public override void Interrupt() {
 		_retreating = false;
-		GD.Print("Interrupt");
+		// GD.Print("Interrupt");
 		base.Interrupt();
 	}
 	

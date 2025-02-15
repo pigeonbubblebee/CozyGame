@@ -32,7 +32,11 @@ public partial class EnemyPatrolAI : Enemy
 		_rayCastLedge = GetNode<RayCast2D>(RayCastLedgePath);
 		_rayCastWall = GetNode<RayCast2D>(RayCastWallPath);
 		
-		_flipParent = GetNode<Node2D>(FlipParentPath);
+		// _flipParent = GetNode<Node2D>(FlipParentPath);
+	}
+	
+	public bool GetRayCastLedge() {
+		return _rayCastLedge.IsColliding();
 	}
 	
 	public override void _PhysicsProcess(double delta)

@@ -17,12 +17,19 @@ public partial class SlashCombo : EnemyAttack
 	[Export] public int OffFrame;
 	[Export] public int OffFrame2;
 	
+	[Export] public int StartSoundFrame2;
+	
 	[Export] private NodePath _attackAreaColliderPath;
 	private CollisionShape2D _attackAreaCollider;
 	[Export] private NodePath _attackAreaPath;
 	private Area2D _attackArea;
 	
 	private bool _accelerating;
+	
+	[Export] private NodePath _slashSFXPath;
+	private AudioStreamPlayer2D _slashSFX;
+	[Export] private NodePath _slash2SFXPath;
+	private AudioStreamPlayer2D _slash2SFX;
 	
 	[Export] private EnemyAttackData _attackData;
 	
@@ -34,7 +41,12 @@ public partial class SlashCombo : EnemyAttack
 	private void _checkAnimationEvent() {
 		if((EnemyAI.Sprite.Frame == OnFrame || EnemyAI.Sprite.Frame == OnFrame2) && EnemyAI.Sprite.Animation == AnimationName) {
 			_accelerating = true;
-			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
+			_canHit = true;
+			_attackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);	
+		}
+		
+		if((EnemyAI.Sprite.Frame == StartSoundFrame2) && EnemyAI.Sprite.Animation == AnimationName) {
+			_slash2SFX.Play();
 		}
 		
 		if((EnemyAI.Sprite.Frame == StopLungeFrame || EnemyAI.Sprite.Frame == StopLungeFrame2) && EnemyAI.Sprite.Animation == AnimationName) {
@@ -54,6 +66,9 @@ public partial class SlashCombo : EnemyAttack
 		
 		_attackAreaCollider = GetNode<CollisionShape2D>(_attackAreaColliderPath);
 		_attackArea = GetNode<Area2D>(_attackAreaPath);
+		
+		_slashSFX = GetNode<AudioStreamPlayer2D>(_slashSFXPath);
+		_slash2SFX = GetNode<AudioStreamPlayer2D>(_slash2SFXPath);
 		
 		_attackArea.BodyEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.PlayerLayer;
@@ -97,6 +112,7 @@ public partial class SlashCombo : EnemyAttack
 	}
 	
 	public void Slash() {
+		_slashSFX.Play();
 		// SlashEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);		
 		GetTree().CreateTimer(AttackLength).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);

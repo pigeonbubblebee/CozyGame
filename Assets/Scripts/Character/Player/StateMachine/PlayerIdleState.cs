@@ -3,15 +3,36 @@ using System;
 
 public partial class PlayerIdleState : PlayerState
 {
+	private bool _deflectTransition = false;
+	private bool _hitTransition = false;
+	
 	public override void Enter(State previousState) {
+		_deflectTransition = previousState is PlayerBlockState;
+		_hitTransition = false;
+		if(previousState is PlayerBlockState) {
+			if(((PlayerBlockState)previousState).HitTransition) {
+				_hitTransition = true;
+			}
+		}
+		
 		base.Enter(previousState);
 
 		// TODO: Reset Colliders
 	}
 
 	public override void PlayStateAnimation() {
-		AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
+		if(_deflectTransition){
+			AnimationController.PlayAnimation(AnimationController.BlockTransAnimationClip);
+			GetTree().CreateTimer(0.3528f).Timeout += _PlayIdleAnimation;
+		} else {
+			AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
+		}
 		// TODO: Start Idle Animation
+	}
+	
+	private void _PlayIdleAnimation() {
+		if(ActiveState)
+			AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
 	}
 
 	public override void PhysicsProcess(double delta) {
