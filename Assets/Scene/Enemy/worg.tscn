@@ -97,6 +97,7 @@ InternalDamage = 3
 PostureDamage = 34
 DeflectPostureDamage = 50
 Unstoppable = false
+Type = 0
 DeflectKnockbackMultiplier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7w4a"]
@@ -143,11 +144,11 @@ OffFrame = 5
 _attackAreaColliderPath = NodePath("Hit/Hitbox")
 _attackAreaPath = NodePath("Hit")
 _slashSFXPath = NodePath("slashSFX")
-_attackData = SubResource("Resource_ldu8y")
 AttackCooldown = 1.75
 AnimationName = "pounce"
 AttackLength = 1.125
 NotChainAttack = true
+_attackData = SubResource("Resource_ldu8y")
 
 [node name="slashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
 stream = ExtResource("6_nbxxr")

@@ -47,10 +47,6 @@ public partial class PlayerIdleState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
 			return true;
 		}
-		if(PostureController.CurrentPosture <= 0) {
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop() && DeflectController.CanBlock)) {
 			DeflectController.StartBlock();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
@@ -58,6 +54,13 @@ public partial class PlayerIdleState : PlayerState
 		}
 		if(HealController.DesiredHeal && HealController.HealCooldownOff) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
+			return true;
+		}
+		// GD.Print(MovementController.DesiredDashRaw + " " + DeflectController.CanCleaveCounter);
+		if(MovementController.DesiredDashRaw && DeflectController.CanCleaveCounter) {
+			GD.Print("Cleave Coutner!");
+			DeflectController.CounterCleave();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.GrabState);
 			return true;
 		}
 		if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {

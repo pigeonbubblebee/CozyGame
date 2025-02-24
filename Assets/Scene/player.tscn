@@ -1,4 +1,4 @@
-[gd_scene load_steps=202 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=221 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -33,11 +33,13 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs" id="12_lnqox"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerSpellState.cs" id="13_41u0j"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs" id="13_f1mh6"]
+[ext_resource type="Texture2D" uid="uid://bbm7v6gplvacf" path="res://Assets/Art/Character/Player/grabbed.png" id="14_qvekg"]
 [ext_resource type="Texture2D" uid="uid://e3a1vl6qudyf" path="res://Assets/Art/Character/Player/playerslashleft2.png" id="14_uxnao"]
 [ext_resource type="Texture2D" uid="uid://bk3bpt8sspksq" path="res://Assets/Art/Character/Player/playerslashright2.png" id="15_1jf54"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerHealController.cs" id="16_gssuq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSpellController.cs" id="17_ixdfb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="17_qt607"]
+[ext_resource type="Texture2D" uid="uid://ha6j8bm3unt4" path="res://Assets/Art/Character/Player/playerdownslash.png" id="20_lc048"]
 [ext_resource type="Texture2D" uid="uid://dyvbwhdiyg0rk" path="res://Assets/Art/Character/Player/slasheffect.png" id="21_amuwv"]
 [ext_resource type="AudioStream" uid="uid://bciq2sqw1biex" path="res://Assets/Sound/SFX/Player/run.mp3" id="22_812t3"]
 [ext_resource type="AudioStream" uid="uid://b2nn7vring8so" path="res://Assets/Sound/SFX/Player/jump.wav" id="23_b73w5"]
@@ -52,6 +54,7 @@
 [ext_resource type="AudioStream" uid="uid://jvx0jqlthhq6" path="res://Assets/Sound/SFX/Player/slashhit.wav" id="37_f6755"]
 [ext_resource type="AudioStream" uid="uid://qyno48mhhse0" path="res://Assets/Sound/SFX/Player/deathblow.wav" id="38_x8y7v"]
 [ext_resource type="AudioStream" uid="uid://buxc4svmy1yn" path="res://Assets/Sound/SFX/Player/swing.wav" id="39_7tto5"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerGrabState.cs" id="40_sd268"]
 [ext_resource type="AudioStream" uid="uid://cnpyrijoou5jq" path="res://Assets/Sound/SFX/Player/deflect.wav" id="46_pgerj"]
 [ext_resource type="AudioStream" uid="uid://cifo51815mb0o" path="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3" id="46_ts2if"]
 [ext_resource type="AudioStream" uid="uid://7iujovvp8snv" path="res://Assets/Sound/SFX/Player/hit.wav" id="50_hmeoo"]
@@ -346,6 +349,14 @@ region = Rect2(128, 128, 128, 128)
 atlas = ExtResource("8_4xn53")
 region = Rect2(128, 128, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh7iw"]
+atlas = ExtResource("14_qvekg")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhq5a"]
+atlas = ExtResource("14_qvekg")
+region = Rect2(32, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rh215"]
 atlas = ExtResource("8_5bsg6")
 region = Rect2(0, 0, 128, 128)
@@ -496,6 +507,54 @@ region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1l1m4"]
 atlas = ExtResource("15_1jf54")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urae0"]
+atlas = ExtResource("20_lc048")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oekax"]
+atlas = ExtResource("20_lc048")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t31um"]
+atlas = ExtResource("20_lc048")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qidt4"]
+atlas = ExtResource("20_lc048")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e7fo"]
+atlas = ExtResource("20_lc048")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sobah"]
+atlas = ExtResource("20_lc048")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud8iw"]
+atlas = ExtResource("20_lc048")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js3uf"]
+atlas = ExtResource("20_lc048")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rusq"]
+atlas = ExtResource("20_lc048")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk5s7"]
+atlas = ExtResource("20_lc048")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at1kx"]
+atlas = ExtResource("20_lc048")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4gfp"]
+atlas = ExtResource("20_lc048")
 region = Rect2(256, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1byxo"]
@@ -824,6 +883,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mh7iw")
+}],
+"loop": true,
+"name": &"grab_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhq5a")
+}],
+"loop": true,
+"name": &"grab_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_6mjm2")
 }],
 "loop": true,
@@ -984,6 +1059,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_urae0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oekax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t31um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qidt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3e7fo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sobah")
+}],
+"loop": true,
+"name": &"slash_down_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ud8iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js3uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rusq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk5s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at1kx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4gfp")
+}],
+"loop": true,
+"name": &"slash_down_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1byxo")
 }, {
 "duration": 1.0,
@@ -1031,6 +1152,9 @@ size = Vector2(224, 208)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0y8dk"]
 size = Vector2(224, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hme1k"]
+size = Vector2(448, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82cr8"]
 size = Vector2(336, 272)
@@ -1171,6 +1295,9 @@ particles_anim_h_frames = 3
 particles_anim_v_frames = 2
 particles_anim_loop = false
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvxv2"]
+size = Vector2(128, 216)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 script = ExtResource("1_l6ek3")
@@ -1200,7 +1327,7 @@ texture_filter = 1
 position = Vector2(0, 8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rojmk")
-animation = &"block_hit_transition_right"
+animation = &"grab_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)
@@ -1262,6 +1389,7 @@ _playerHealStatePath = NodePath("Heal")
 _playerSpellStatePath = NodePath("Spell")
 _playerBlockStatePath = NodePath("Block")
 _playerStaggerStatePath = NodePath("Stagger")
+_playerGrabStatePath = NodePath("Grab")
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_37u3h")
@@ -1301,12 +1429,16 @@ one_shot = true
 [node name="Stagger" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_i2mu6")
 
+[node name="Grab" type="Node2D" parent="StateMachine"]
+script = ExtResource("40_sd268")
+
 [node name="PlayerAttackController" type="Node2D" parent="."]
 script = ExtResource("9_kewep")
 _slashBufferPath = NodePath("SlashBuffer")
 _attackAreaPath = NodePath("SwordHit")
 _rightAttackAreaColliderPath = NodePath("SwordHit/Right")
 _leftAttackAreaColliderPath = NodePath("SwordHit/Left")
+_downAttackAreaColliderPath = NodePath("SwordHit/Down")
 _deathblowCheckAreaPath = NodePath("DeathblowCheck")
 _rightDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Right")
 _leftDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Left")
@@ -1330,6 +1462,11 @@ position = Vector2(-112, 16)
 shape = SubResource("RectangleShape2D_0y8dk")
 disabled = true
 
+[node name="Down" type="CollisionShape2D" parent="PlayerAttackController/SwordHit"]
+position = Vector2(0, 88)
+shape = SubResource("RectangleShape2D_hme1k")
+disabled = true
+
 [node name="DeathblowCheck" type="Area2D" parent="PlayerAttackController"]
 collision_layer = 2
 collision_mask = 2
@@ -1348,8 +1485,8 @@ disabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerAttackController/Visuals"]
 material = SubResource("CanvasItemMaterial_r4kkq")
-position = Vector2(-224, 32)
-rotation = 4.27606
+position = Vector2(0, 280)
+rotation = -0.785398
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
@@ -1456,6 +1593,7 @@ _blockParticlePoolPath = NodePath("BlockParticles")
 _deflectParticlePoolPath = NodePath("DeflectParticles")
 _deflectSFXPath = NodePath("Deflect")
 _blockSFXPath = NodePath("Block")
+_cleaveCounterCheckAreaPath = NodePath("CleaveCounterArea")
 
 [node name="DeflectWindow" type="Timer" parent="PlayerDeflectController"]
 one_shot = true
@@ -1559,6 +1697,14 @@ lifetime = 0.25
 one_shot = true
 fixed_fps = 60
 local_coords = true
+
+[node name="CleaveCounterArea" type="Area2D" parent="PlayerDeflectController"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeflectController/CleaveCounterArea"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_gvxv2")
 
 [node name="PlayerPostureController" type="Node2D" parent="."]
 script = ExtResource("37_ax0h8")

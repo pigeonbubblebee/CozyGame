@@ -35,6 +35,8 @@ public partial class Player : CharacterBody2D
 	[Export] private NodePath _hitSFXPath;
 	private AudioStreamPlayer2D _hitSFX;
 	
+	public event Action ExitGrabEvent;
+	
 	private GameManager _gameManager;
 
 	public override void _EnterTree()
@@ -90,14 +92,26 @@ public partial class Player : CharacterBody2D
 		// GD.Print(e.Enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1);
 		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 1000, 500f, 0.1f);
 		
-		if(DeflectController.Blocking && !e.Unstoppable) {
+		if(DeflectController.Blocking) {
+			if(e.Unstoppable && (e.Type == EnemyAttackData.AttackType.Sweep || e.Type == EnemyAttackData.AttackType.Cleave)) {
+				TakeTrueDamage(e, enemy);
+				return;
+			}
 			DeflectController.Block(e, enemy);
 		} else {
-			_hitSFX.Play();
-			HealController.ConvertInternalDamage();
-			PlayerHealth.TakeDamage(e.Damage);
-			HealController.TakeInternalDamage(e.InternalDamage);
-			PostureController.TakePostureDamage(e.PostureDamage);
+			TakeTrueDamage(e, enemy);
 		}
+	}
+	
+	public void TakeTrueDamage(EnemyAttackData e, Enemy enemy) {
+		_hitSFX.Play();
+		HealController.ConvertInternalDamage();
+		PlayerHealth.TakeDamage(e.Damage);
+		HealController.TakeInternalDamage(e.InternalDamage);
+		PostureController.TakePostureDamage(e.PostureDamage);
+	}
+	
+	public void ExitGrab() {
+		ExitGrabEvent?.Invoke();
 	}
 }

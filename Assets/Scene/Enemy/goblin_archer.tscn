@@ -59,11 +59,11 @@ _objectPoolPath = NodePath("ObjectPool")
 _bodyTopPath = NodePath("Top")
 _objectPoolNumber = 3
 _shootSFXPath = NodePath("ShootSFX")
-_attackData = ExtResource("4_as0kg")
 AttackCooldown = 1.0
 AnimationName = "aiming"
 AttackLength = 1.0
 NotChainAttack = true
+_attackData = ExtResource("4_as0kg")
 
 [node name="ObjectPool" type="Node" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Shoot"]
 

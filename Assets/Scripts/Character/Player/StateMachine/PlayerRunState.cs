@@ -47,6 +47,11 @@ public partial class PlayerRunState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.HealState);
 			return true;
 		}
+		if(MovementController.DesiredDashRaw && DeflectController.CanCleaveCounter) {
+			DeflectController.CounterCleave();
+			// ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
+			return true;
+		}
 		if(MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash)) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
 			return true;

@@ -13,8 +13,8 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerDeflectController DeflectController { get; private set; }
 	public PlayerPostureController PostureController { get; private set; }
 	
-	private Player _player;
-	public PlayerStats Stats => _player.CurrentPlayerStats;
+	public Player Player;
+	public PlayerStats Stats => Player.CurrentPlayerStats;
 	
 	[Export] private NodePath _playerIdleStatePath;
 	public PlayerIdleState IdleState { get; private set; }
@@ -36,9 +36,11 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerBlockState BlockState { get; private set; }
 	[Export] private NodePath _playerStaggerStatePath;
 	public PlayerStaggerState StaggerState { get; private set; }
+	[Export] private NodePath _playerGrabStatePath;
+	public PlayerGrabState GrabState { get; private set; }
 	
 	public void Initialize(Player player) {
-		_player = player;
+		Player = player;
 		MovementController = player.MovementController;
 		AttackController = player.AttackController;
 		InteractionController = player.InteractionController;
@@ -73,6 +75,8 @@ public partial class PlayerStateMachine : StateMachine
 		BlockState.Initialize(this);
 		StaggerState = GetNode<PlayerStaggerState>(_playerStaggerStatePath);
 		StaggerState.Initialize(this);
+		GrabState = GetNode<PlayerGrabState>(_playerGrabStatePath);
+		GrabState.Initialize(this);
 
 		EnterDefaultState();
 	}

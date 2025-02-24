@@ -19,6 +19,8 @@ public partial class EnemyAttack : Node2D
 	private EnemyAttack _chainedAttack;
 	[Export] public bool NotChainAttack { get; private set; }
 	
+	[Export] protected EnemyAttackData _attackData;
+	
 	protected bool Active;
 	
 	public EnemyAttack GetNextChainAttack() {
@@ -56,6 +58,10 @@ public partial class EnemyAttack : Node2D
 
 	private void _FinishAttackCooldown() {
 		CanAttack = true; 
+	}
+	
+	public EnemyAttackData GetAttackData() {
+		return _attackData;
 	}
 	
 	public virtual void Initialize(Enemy e) {

@@ -33,8 +33,6 @@ public partial class ShootAttack : EnemyAttack
 	[Export] private NodePath _shootSFXPath;
 	private AudioStreamPlayer2D _shootSFX;
 	
-	[Export] private EnemyAttackData _attackData;
-	
 	
 	public override void _Ready() {
 		base._Ready();

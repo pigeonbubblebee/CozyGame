@@ -9,6 +9,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash;
 	private IInputManager _inputManager;
+	
+	public bool DesiredDown => _inputManager.GetDown() && !_movementController.Grounded;
 
 	private GameManager _gameManager;
 
@@ -22,6 +24,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	private CollisionShape2D _rightAttackAreaCollider;
 	[Export] private NodePath _leftAttackAreaColliderPath;
 	private CollisionShape2D _leftAttackAreaCollider;
+	[Export] private NodePath _downAttackAreaColliderPath;
+	private CollisionShape2D _downAttackAreaCollider;
 	
 	[Export] private NodePath _deathblowCheckAreaPath;
 	private Area2D _deathblowCheckArea;
@@ -75,6 +79,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_attackArea = GetNode<Area2D>(_attackAreaPath);
 		_rightAttackAreaCollider = GetNode<CollisionShape2D>(_rightAttackAreaColliderPath);
 		_leftAttackAreaCollider = GetNode<CollisionShape2D>(_leftAttackAreaColliderPath);
+		_downAttackAreaCollider = GetNode<CollisionShape2D>(_downAttackAreaColliderPath);
 		
 		_deathblowCheckArea = GetNode<Area2D>(_deathblowCheckAreaPath);
 		_rightDeathblowCheckAreaCollider = GetNode<CollisionShape2D>(_rightDeathblowCheckAreaColliderPath);
@@ -175,6 +180,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_canHit = false;
 		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_downAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		CanSwitchAttackDirection = true;
 		FinishSlashEvent?.Invoke();
 		CanDeathBlow = false;
@@ -186,6 +192,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_canHit = false;
 		_rightAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_downAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		CanSwitchAttackDirection = true;
 		// FinishSlashEvent?.Invoke();
 		CanDeathBlow = false;
@@ -232,15 +239,25 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		
 		if(hittable is EnemyHitbox) {
 			if(!((EnemyHitbox) hittable).EnemyAIParent.Invincible) {
-			
-				if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
+				if(!DesiredDown) {
+					if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
+						_slashHitSFX.Play();
+						_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
+						_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
+					} else {
+						_deathBlowSFX.Play();
+						_gameManager.FreezeFrame(_playerStats.DeathBlowFreezeTime, _playerStats.SlashFreezeDelay);
+						_player.Camera.Shake(_playerStats.CounterShakeTime, _playerStats.CounterShakeMagnitude);
+					}
+				} else {
 					_slashHitSFX.Play();
 					_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
 					_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
-				} else {
-					_deathBlowSFX.Play();
-					_gameManager.FreezeFrame(_playerStats.DeathBlowFreezeTime, _playerStats.SlashFreezeDelay);
-					_player.Camera.Shake(_playerStats.CounterShakeTime, _playerStats.CounterShakeMagnitude);
+					if(((EnemyHitbox) hittable).EnemyAIParent.CurrentAttack != null) {
+						if(((EnemyHitbox) hittable).EnemyAIParent.CurrentAttack.GetAttackData().Type == EnemyAttackData.AttackType.Sweep) {
+							((EnemyHitbox) hittable).EnemyAIParent.TakePostureDamage(((EnemyHitbox) hittable).EnemyAIParent.CurrentAttack.GetAttackData().DeflectPostureDamage);
+						}
+					}
 				}
 				
 			}
@@ -264,6 +281,11 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			_slashHitParticle.GlobalRotation += (_movementController.Direction == 1) ? Mathf.DegToRad(75f) : Mathf.DegToRad(-75f);
 		}
 		
+		if(DesiredDown) {
+			_slashHitParticle.GlobalRotation = Mathf.DegToRad(-45f);
+			_slashHitParticle.Position = new Vector2(0, 280f);
+		}
+		
 		_slashHitParticle.Emitting = true;
 	}
 
@@ -275,8 +297,11 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		// GD.Print(_movementController.Direction);
 
 		// _attackSprite = _movementController.Direction == 1 ? _rightAttackSprite : _leftAttackSprite;
-
 		_currentAttackAreaCollider = _movementController.Direction == 1 ? _rightAttackAreaCollider : _leftAttackAreaCollider;
+		if(DesiredDown) {
+			_currentAttackAreaCollider = _downAttackAreaCollider;
+		}
+		// GD.Print(_currentAttackAreaCollider.Name);
 		if(_movementController.Direction == 1) {
 			_rightDeathblowCheckAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
 			_leftDeathblowCheckAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);

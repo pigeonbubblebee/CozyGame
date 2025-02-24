@@ -1,9 +1,10 @@
+Node2D
+CollisionShape2D
+Area2D
 Parallax2D
 AudioStreamPlayer2D
-Node2D
 Node
 Timer
-Area2D
 AnimatedSprite2D
 AudioStreamPlayer
 TextureRect
@@ -11,5 +12,3 @@ GPUParticles2D
 RemoteTransform2D
 TextureProgressBar
 RayCast2D
-CollisionShape2D
-CharacterBody2D

@@ -7,6 +7,8 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private bool _jumping;
 	private bool _jumpActuation;
 	private bool _jumpReleaseActuation;
+	
+	private bool _down;
 
 	private bool _attacking;
 	private bool _attackActuation;
@@ -38,6 +40,7 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	// Vars for control bind names on input maps
 	private readonly string MOVE_LEFT = "move_left";
 	private readonly string MOVE_RIGHT = "move_right";
+	private readonly string DOWN = "down";
 	private readonly string JUMP = "jump";
 	private readonly string ATTACK = "attack";
 	private readonly string DASH = "dash";
@@ -58,6 +61,8 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 		inputDirection.X = Input.GetAxis(MOVE_LEFT, MOVE_RIGHT);
 
 		_movementDirection = inputDirection;
+		
+		_down = Input.IsActionPressed(DOWN);
 
 		_jumping = Input.IsActionPressed(JUMP);
 		_jumpActuation = Input.IsActionJustPressed(JUMP);
@@ -93,6 +98,9 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 
 	public Vector2 GetMovementDirection() {
 		return _movementDirection;
+	}
+	public bool GetDown() {
+		return _down;
 	}
 	public bool GetJumping() {
 		return _jumping;

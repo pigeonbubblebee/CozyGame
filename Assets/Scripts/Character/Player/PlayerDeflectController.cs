@@ -41,6 +41,12 @@ public partial class PlayerDeflectController : Node
 	[Export] private NodePath _blockSFXPath;
 	private AudioStreamPlayer2D _blockSFX;
 	
+	[Export] private NodePath _cleaveCounterCheckAreaPath;
+	private Area2D _cleaveCounterCheckArea;
+	
+	public bool CanCleaveCounter = false;
+	public CleaveAttack CurrentCleaveCounter = null;
+	
 	public void Initialize(Player player) { // TODO: Add punish for block spam
 		_player = player;
 	}
@@ -63,11 +69,40 @@ public partial class PlayerDeflectController : Node
 		
 		_deflectSFX = GetNode<AudioStreamPlayer2D>(_deflectSFXPath);
 		_blockSFX = GetNode<AudioStreamPlayer2D>(_blockSFXPath);
+		
+		_cleaveCounterCheckArea = GetNode<Area2D>(_cleaveCounterCheckAreaPath);
 	}
 	
 	public override void _Process(double delta) {
 		// GD.Print(_deflectWindowTimer.TimeLeft + " " + _playerStats.DeflectWindow);
+		bool hasHit = false;
 		
+		// GD.Print(CanCleaveCounter);
+		
+		foreach(Area2D hit in _cleaveCounterCheckArea.GetOverlappingAreas()) {
+			// GD.Print(hit.Name);
+			if(hit is CleaveCounterArea) {
+				// GD.Print(((CleaveCounterArea)hit).CleaveAttack);
+				if(((CleaveCounterArea)hit).CleaveAttack.Counterable) {
+					CurrentCleaveCounter = ((CleaveCounterArea)hit).CleaveAttack;
+					CanCleaveCounter = true;
+					hasHit = true;
+					return;
+				}
+			}
+		}
+		
+		if(!hasHit) {
+			CurrentCleaveCounter = null;
+			CanCleaveCounter = false;
+		}
+	}
+	
+	public void CounterCleave() {
+		if(CanCleaveCounter) {
+			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
+			CurrentCleaveCounter.Counter(_player);
+		}
 	}
 	
 	public void StartDeflectWindow() {
@@ -96,6 +131,15 @@ public partial class PlayerDeflectController : Node
 			
 			return 0;
 		} else {
+			if(data.Unstoppable && data.Type == EnemyAttackData.AttackType.Thrust) {
+				_player.TakeTrueDamage(data, e);
+				// _blockSFX.Play();
+				_emitBlockParticle();
+				BlockEvent?.Invoke(false, data.PostureDamage, e);
+				return 0;
+			}
+
+			
 			_blockSFX.Play();
 			_emitBlockParticle();
 			

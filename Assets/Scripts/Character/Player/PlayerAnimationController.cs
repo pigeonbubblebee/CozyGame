@@ -10,6 +10,7 @@ public partial class PlayerAnimationController : Node
 	public AsymmetricalAnimationClip RunAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip SlashAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip Slash2AnimationClip { get; private set; }
+	public AsymmetricalAnimationClip SlashDownAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip BlockAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip JumpAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip FallAnimationClip { get; private set; }
@@ -17,6 +18,7 @@ public partial class PlayerAnimationController : Node
 	public AsymmetricalAnimationClip DeathBlowAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip BlockTransAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip BlockHitTransAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip GrabAnimationClip { get; private set; }
 
 	public AsymmetricalAnimationClip CurrentAnimation { get; private set; }
 	
@@ -40,6 +42,7 @@ public partial class PlayerAnimationController : Node
 		RunAnimationClip = new AsymmetricalAnimationClip("run");
 		SlashAnimationClip = new AsymmetricalAnimationClip("slash");
 		Slash2AnimationClip = new AsymmetricalAnimationClip("slash2");
+		SlashDownAnimationClip = new AsymmetricalAnimationClip("slash_down");
 		BlockAnimationClip = new AsymmetricalAnimationClip("block");
 		JumpAnimationClip = new AsymmetricalAnimationClip("jump");
 		FallAnimationClip = new AsymmetricalAnimationClip("fall");
@@ -47,6 +50,7 @@ public partial class PlayerAnimationController : Node
 		DeathBlowAnimationClip = new AsymmetricalAnimationClip("deathblow");
 		BlockTransAnimationClip = new AsymmetricalAnimationClip("block_transition");
 		BlockHitTransAnimationClip = new AsymmetricalAnimationClip("block_hit_transition");
+		GrabAnimationClip = new AsymmetricalAnimationClip("grab");
 	}
 	
 	public override void _Process(double delta) {		

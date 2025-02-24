@@ -5,6 +5,8 @@ public interface IInputManager
 {
 	public abstract void GetInput();
 	public abstract Vector2 GetMovementDirection();
+	
+	public abstract bool GetDown();
 
 	public abstract bool GetJumping();
 	public abstract bool GetJumpActuation();

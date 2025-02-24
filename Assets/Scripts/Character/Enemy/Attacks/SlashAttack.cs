@@ -27,7 +27,7 @@ public partial class SlashAttack : EnemyAttack
 	[Export] private NodePath _slashSFXPath;
 	private AudioStreamPlayer2D _slashSFX;
 	
-	[Export] protected EnemyAttackData _attackData;
+	
 	
 	public override void Initialize(Enemy e) {
 		base.Initialize(e);
@@ -114,7 +114,7 @@ public partial class SlashAttack : EnemyAttack
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}
 
-	private void _FinishSlash() {
+	protected virtual void _FinishSlash() {
 		GD.Print("Finish!");
 		_accelerating = false;
 		// _canHit = false;

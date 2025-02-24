@@ -22,6 +22,10 @@ public partial class PlayerAttackState : PlayerState
 	
 	public override void PlayStateAnimation() {
 		GD.Print("Animation Play!");
+		if(AttackController.DesiredDown) {
+			AnimationController.PlayAnimation(AnimationController.SlashDownAnimationClip, Stats.SlashTime);
+			return;
+		}
 		if(AttackController.CanDeathBlow) {
 			AnimationController.PlayAnimation(AnimationController.DeathBlowAnimationClip);
 			return;
