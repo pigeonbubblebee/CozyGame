@@ -84,3 +84,5 @@ res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs
 res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs
 res://Assets/Scripts/Character/Enemy/VunerableAttack.cs
 res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs
+res://Assets/Scene/Enemy/goblin_warrior.tscn
+res://Data/Enemy/AttackData/goblin_bandit_slash.tres
