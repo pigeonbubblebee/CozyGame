@@ -624,7 +624,7 @@ DeflectKnockbackMultiplier = 1.0
 size = Vector2(360, 178.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rxly"]
-size = Vector2(416, 38.5)
+size = Vector2(408, 38.5)
 
 [node name="goblin_warrior" type="Node2D"]
 
@@ -662,13 +662,14 @@ offset_right = -64.0
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_eyvvn")
-animation = &"cleave"
-frame_progress = 0.0399358
+animation = &"cleave_countered"
+frame = 9
+frame_progress = 1.0
 
 [node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("5_g5g23")
-AttackPaths = Array[NodePath]([NodePath("Slash"), NodePath("SlashComboChain"), NodePath("ThrustCombo")])
-AttackCooldown = 1.0
+AttackPaths = Array[NodePath]([NodePath("Slash"), NodePath("SlashComboChain"), NodePath("ThrustCombo"), NodePath("Slash"), NodePath("SlashComboChain"), NodePath("Slash"), NodePath("SlashComboChain")])
+AttackCooldown = 1.5
 NotChainAttack = true
 
 [node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/RandomSlash"]
@@ -831,12 +832,12 @@ script = ExtResource("15_3gohr")
 _counterCheckAreaPath = NodePath("CounterCleaveArea")
 _counterExitPath = NodePath("CounterExit")
 _cleaveCounteredSFXPath = NodePath("CounterSFX")
-CounterableFrame = 5
+CounterableFrame = 4
 CounterableOffFrame = 7
 CounterLength = 1.63
 ExitGrabLength = 1.0
 SlashRange = 300.0
-SlashMinRange = 200.0
+SlashMinRange = 250.0
 SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0
@@ -846,7 +847,7 @@ OffFrame = 8
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 _slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 4.0
+AttackCooldown = 10.0
 AnimationName = "cleave"
 AttackLength = 1.2
 NotChainAttack = true
@@ -865,7 +866,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Cleave/SwordHit"]
-position = Vector2(316, -17.25)
+position = Vector2(208, 16)
 shape = SubResource("RectangleShape2D_i8w11")
 disabled = true
 
@@ -876,11 +877,11 @@ script = ExtResource("18_i7t3u")
 _cleaveAttackPath = NodePath("..")
 
 [node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Cleave/CounterCleaveArea"]
-position = Vector2(184, 83.25)
+position = Vector2(180, 83.25)
 shape = SubResource("RectangleShape2D_5rxly")
 
 [node name="CounterExit" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Cleave"]
-position = Vector2(392, 0)
+position = Vector2(264, 0)
 
 [node name="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
 stream = ExtResource("20_7178g")
