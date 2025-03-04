@@ -361,8 +361,7 @@ RetreatRange = 200.0
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
-animation = &"sweep"
-frame_progress = 0.698225
+animation = &"thrust"
 
 [node name="Thrust" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("5_ua45f")

@@ -98,6 +98,8 @@ public partial class Enemy : CharacterBody2D
 		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
 		_healthBar = GetNode<TextureProgressBar>(_healthBarPath);
 		_deathblowMark = GetNode<TextureRect>(_deathblowMarkPath);
+		
+		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 
 		_attacksParent = GetNode<Node2D>(_attacksParentPath);
 		Attacks = new EnemyAttack[_attacksParent.GetChildren().Count];

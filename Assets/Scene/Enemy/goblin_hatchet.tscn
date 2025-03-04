@@ -36,7 +36,7 @@ Type = 1
 DeflectKnockbackMultiplier = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qobt6"]
-size = Vector2(376, 222.5)
+size = Vector2(376, 46.5)
 
 [node name="goblin_hatchet" type="Node2D"]
 
@@ -46,8 +46,6 @@ size = Vector2(376, 222.5)
 position = Vector2(9, -16)
 sprite_frames = ExtResource("2_wxot2")
 animation = &"cleave_countered"
-frame = 9
-frame_progress = 0.620576
 
 [node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("5_x5k57")
@@ -129,7 +127,7 @@ script = ExtResource("7_svjc6")
 _cleaveAttackPath = NodePath("..")
 
 [node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Cleave/CounterCleaveArea"]
-position = Vector2(164, -8.75)
+position = Vector2(164, 79.25)
 shape = SubResource("RectangleShape2D_qobt6")
 
 [node name="CounterExit" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Cleave"]
