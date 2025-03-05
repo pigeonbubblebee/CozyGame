@@ -87,3 +87,8 @@ res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs
 res://Assets/Scene/Enemy/goblin_warrior.tscn
 res://Data/Enemy/AttackData/goblin_bandit_slash.tres
 res://Assets/Scene/main.tscn
+res://Shader/PaletteSwap.gdshader
+res://Data/player_stats.tres
+res://Assets/Scene/Enemy/chaser_enemy.tscn
+res://Assets/Scripts/Core/User Interface/BossBarsUI.cs
+res://Assets/Scene/Enemy/goblin_warrior_easier.tscn

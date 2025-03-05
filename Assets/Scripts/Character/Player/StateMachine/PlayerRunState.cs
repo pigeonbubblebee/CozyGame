@@ -49,6 +49,7 @@ public partial class PlayerRunState : PlayerState
 		}
 		if(MovementController.DesiredDashRaw && DeflectController.CanCleaveCounter) {
 			DeflectController.CounterCleave();
+			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.GrabState);
 			// ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);
 			return true;
 		}

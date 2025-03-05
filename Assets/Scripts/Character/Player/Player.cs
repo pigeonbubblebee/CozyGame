@@ -59,6 +59,7 @@ public partial class Player : CharacterBody2D
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
 		PlayerHealth.ResetHealth();
+		PlayerHealth.DeathEvent += Quit;
 		PlayerHealth.Invincible = false;
 
 		StateMachine.Initialize(this); // PLEASE ADD A PLAYER COMPONENT CLSS OR SMTH
@@ -79,6 +80,10 @@ public partial class Player : CharacterBody2D
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
+	}
+	
+	private void Quit() { // Temp
+		GetTree().Quit();
 	}
 	
 	public override void _Ready() {

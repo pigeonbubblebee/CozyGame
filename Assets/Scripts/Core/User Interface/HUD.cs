@@ -58,10 +58,12 @@ public partial class HUD : Control
 	
 	private void _UpdateHealBar() {
 		if(_currentScenePlayer != null) {
+			
 			float Ratio = ((float) _currentScenePlayer.HealController.CurrentHeals) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHeals);
 			Ratio = Mathf.Max(Ratio, 0);
-			
-			_healBar.Value = Ratio * 100;
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(_healBar, "value", Ratio * 100, 0.075f);
+			// o_healBar.Value = Ratio * 100;
 		}
 	}
 	
@@ -71,7 +73,10 @@ public partial class HUD : Control
 			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
 			Ratio = Mathf.Max(Ratio, 0);
 			
-			_manaBar.Value = Ratio * 100;
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(_manaBar, "value", Ratio * 100, 0.075f);
+			
+			// _manaBar.Value = Ratio * 100;
 			
 			_UpdateInternalHealthBar(0);
 		}
@@ -86,6 +91,8 @@ public partial class HUD : Control
 			float SecondRatio = ((float) _currentScenePlayer.HealController.InternalDamage) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
 			SecondRatio = Mathf.Max(SecondRatio, 0);
 			
+			// Tween tween = GetTree().CreateTween();
+			// tween.TweenProperty(_internalHealthBar, "value", (Ratio+SecondRatio) * 100, 0.075f);
 			_internalHealthBar.Value = (Ratio+SecondRatio) * 100;
 		}
 	}
@@ -99,7 +106,9 @@ public partial class HUD : Control
 			Ratio = 1.0 - Ratio;
 			// Ratio *= 100.0;
 			
-			_postureBar.Value = Ratio * 100;
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(_postureBar, "value", (Ratio) * 100, 0.075f);
+			// _postureBar.Value = Ratio * 100;
 			
 			if(Ratio == 0f) {
 				_postureBar.Visible = false;

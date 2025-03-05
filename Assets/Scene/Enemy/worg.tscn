@@ -112,7 +112,8 @@ size = Vector2(224, 96)
 RetreatRange = 475.0
 Speed = 400.0
 MaxHealth = 20
-MaxPosture = 50
+MaxPosture = 10
+EnemyNameLocalizationKey = "worg"
 
 [node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
 position = Vector2(4, 56)

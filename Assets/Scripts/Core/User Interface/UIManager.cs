@@ -7,6 +7,8 @@ public partial class UIManager : Node2D
 	private InventoryUI _inventory;
 	[Export] private NodePath _hudPath;
 	private HUD _HUD;
+	[Export] private NodePath _bossBarsPath;
+	private BossBarsUI _bossBars;
 	
 	private IInputManager _inputManager;
 	
@@ -18,9 +20,12 @@ public partial class UIManager : Node2D
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 		_inventory = GetNode<InventoryUI>(_inventoryPath);
 		_HUD = GetNode<HUD>(_hudPath);
+		_bossBars = GetNode<BossBarsUI>(_bossBarsPath);
 
 		_inventory.Visible = false;
 		_HUD.Visible = true;
+		
+		_bossBars.Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,5 +49,17 @@ public partial class UIManager : Node2D
 		_currentScenePlayer = p;
 		_HUD.SetCurrentPlayerInstance(p);
 		_inventory.SetCurrentPlayerInstance(p);
+	}
+	
+	public void EnableBossBar(Enemy e) {
+		_bossBars.Visible = true;
+		_bossBars.SetBoss(e);
+	}
+	
+	public void DisableBossBar(Enemy e) {
+		if(_bossBars.Boss == e) {
+			_bossBars.Visible = false;
+			_bossBars.Boss = null;
+		}
 	}
 }

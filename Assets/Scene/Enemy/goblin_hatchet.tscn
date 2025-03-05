@@ -41,10 +41,14 @@ size = Vector2(376, 46.5)
 [node name="goblin_hatchet" type="Node2D"]
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_bdr5l")]
+EnemyNameLocalizationKey = "goblin_hatchet"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(9, -16)
 sprite_frames = ExtResource("2_wxot2")
+animation = &"cleave"
+frame = 9
+frame_progress = 1.0
 
 [node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("5_x5k57")
@@ -58,9 +62,9 @@ OffFrame = 9
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 _slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.5
+AttackCooldown = 2.0
 AnimationName = "slash"
-AttackLength = 0.76
+AttackLength = 1.2
 NotChainAttack = true
 _attackData = SubResource("Resource_yolxi")
 
@@ -88,7 +92,6 @@ CounterLength = 1.63
 ExitGrabLength = 1.0
 SlashRange = 170.0
 SlashCooldown = 1.0
-LungeSpeed = 2800.0
 LungeRange = 230.0
 StopLungeFrame = 9
 OnFrame = 6
@@ -98,7 +101,7 @@ _attackAreaPath = NodePath("SwordHit")
 _slashSFXPath = NodePath("SlashSFX")
 AttackCooldown = 3.0
 AnimationName = "cleave"
-AttackLength = 1.3
+AttackLength = 1.7
 NotChainAttack = true
 _attackData = SubResource("Resource_32v28")
 

@@ -31,6 +31,7 @@ public partial class EnemyChaserAI : EnemyPatrolAI
 		_rayCastAggroUp = GetNode<RayCast2D>(RayCastAggroUpPath);
 		_deAggroTimer = GetNode<Timer>(DeAggroTimerPath);
 		_deAggroTimer.Timeout += DeAggroEvent;
+		_deAggroTimer.Timeout += DisableBossBar;
 	}
 	
 	public bool CheckAggro() {

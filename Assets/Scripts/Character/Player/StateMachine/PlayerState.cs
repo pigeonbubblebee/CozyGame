@@ -13,6 +13,7 @@ public abstract partial class PlayerState : State
 	protected PlayerAnimationController AnimationController => ParentPlayerStateMachine.AnimationController;
 	protected PlayerDeflectController DeflectController => ParentPlayerStateMachine.DeflectController;
 	protected PlayerPostureController PostureController => ParentPlayerStateMachine.PostureController;
+	protected PlayerCamera Camera => ParentPlayerStateMachine.Player.Camera;
 	protected PlayerStats Stats => ParentPlayerStateMachine.Stats;
 	
 	// protected Player _player => ParentPlayerStateMachine.Player;

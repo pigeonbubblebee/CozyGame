@@ -21,6 +21,10 @@ public partial class ChaserAggroState : State
 	public override void Enter(State prev) {
 		_chaserAI.Sprite.Play("aggro");
 		Running = true;
+		
+		if(_chaserAI.HasBossBar) {
+			GetNode<UIManager>("/root/UIManager").EnableBossBar(_chaserAI);
+		}
 	}
 	
 	private void _enterDefaultState() {

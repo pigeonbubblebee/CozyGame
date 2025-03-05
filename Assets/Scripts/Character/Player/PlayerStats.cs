@@ -87,6 +87,8 @@ public partial class PlayerStats : Resource
 	[Export] public float PostureRegenerationDisengagementTime { get; private set; }
 	[Export] public float PostureRegenerationCooldown { get; private set; }
 	[Export] public float StaggerRecoveryTime { get; private set; }
+	[ExportCategory("Powerups")]
+	[Export] public bool CanCounterCleave { get; private set; }
 
 	// Make sure you provide a parameterless constructor.
 	// In C#, a parameterless constructor is different from a

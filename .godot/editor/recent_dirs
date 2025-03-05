@@ -1,5 +1,9 @@
-res://Assets/Art/Character/Enemy/GoblinWarrior
+res://Assets/Scripts/Core/Localization
+res://Assets/Scripts/Core/User Interface
+res://Assets/Art/UI
 res://Assets/Scene/Enemy
+res://Assets/Art/Character/Enemy/GoblinBandit
+res://Assets/Art/Character/Enemy/GoblinWarrior
 res://Assets/Art/Character/Enemy/GoblinHatchet
 res://Assets/Art/Character/Player
 res://Data/Enemy/AttackData
@@ -9,14 +13,10 @@ C:/Users/trex0/OneDrive/Documents/Builds/mac zip bomb (dont unzip)
 C:/Users/trex0/OneDrive/Documents/Builds
 res://Data/Tileset
 res://Assets/Art/Character/Enemy/Worg
-res://Assets/Art/UI
 res://Assets/Scripts/Combat/Bullet
 res://Assets/Scene
-res://Assets/Art/Character/Enemy/GoblinBandit
 res://Assets/Art/Character/Enemy/GoblinArcher
-res://Assets/Scripts/Core/Localization
 res://Assets/Scripts/Character/Enemy
 C:/Users/trex0/Downloads
 res://Assets/Scripts/Core/Game
 res://Assets/Art/VFX
-res://Assets/Scripts/Character/Player

@@ -69,6 +69,9 @@ public partial class Enemy : CharacterBody2D
 	private bool _iFrameOn = false;
 	public bool Invincible => _iFrameOn;
 	
+	[Export] public bool HasBossBar { get; private set; } = false;
+	[Export] public string EnemyNameLocalizationKey;
+	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
@@ -85,6 +88,7 @@ public partial class Enemy : CharacterBody2D
 		
 		_health = GetNode<HealthSystem>(HealthSystemPath);
 		_health.DeathEvent += OnDeath;
+		_health.DeathEvent += DisableBossBar;
 		// _health.DamageEvent += TakeDamageEvent;
 		CurrentPosture = MaxPosture;
 		
@@ -200,14 +204,30 @@ public partial class Enemy : CharacterBody2D
 		// GD.Print(Ratio);
 		postureRatio = Mathf.Max(postureRatio, 0);
 		postureRatio = 1 - postureRatio;
-
-		_postureBar.Value = postureRatio * 100;
+		
+		// _postureBar.Value = postureRatio * 100;
+		
+		float Ratio = postureRatio * 100;
+		
+		if(Ratio != _postureBar.Value) {
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(_postureBar, "value", Ratio, 0.075f);
+			// tweeningValuePosture = Ratio;
+		}
 		
 		float healthRatio = ((float)_health.CurrentHealthPoints) / ((float)_health.MaxHealthPoints);
 		// GD.Print(Ratio);
 		healthRatio = Mathf.Max(healthRatio, 0);
 
-		_healthBar.Value = healthRatio * 100;
+		// _healthBar.Value = healthRatio * 100;
+		
+		Ratio = healthRatio * 100;
+		
+		if(Ratio != _healthBar.Value) {
+			Tween tween = GetTree().CreateTween();
+			tween.TweenProperty(_healthBar, "value", Ratio, 0.075f);
+			// tweeningValuePosture = Ratio;
+		}
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -236,6 +256,10 @@ public partial class Enemy : CharacterBody2D
 		GetTree().CreateTimer(IFrameTime).Timeout += _FinishIFrame;
 	}
 	
+	public int GetCurrentHealth() {
+		return _health.CurrentHealthPoints;
+	}
+	
 	private void _FinishIFrame() {
 		_iFrameOn = false;
 	}
@@ -261,5 +285,11 @@ public partial class Enemy : CharacterBody2D
 		Vector2 velocity = this.Velocity.MoveToward(speed * direction, acceleration * (float)delta * 60f);
 		velocity.Y = Velocity.Y;
 		this.Velocity = velocity;
+	}
+	
+	public void DisableBossBar() {
+		if(HasBossBar) {
+			GetNode<UIManager>("/root/UIManager").DisableBossBar(this);
+		}
 	}
 }

@@ -48,6 +48,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	private Player _player;
 	private PlayerStats _playerStats => _player.CurrentPlayerStats;
+	
+	// private HashSet<Enemy> _invincibleEnemies = new HashSet<Enemy>();
 
 	private PlayerMovementController _movementController;
 
@@ -258,6 +260,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 							((EnemyHitbox) hittable).EnemyAIParent.TakePostureDamage(((EnemyHitbox) hittable).EnemyAIParent.CurrentAttack.GetAttackData().DeflectPostureDamage);
 						}
 					}
+					
 				}
 				
 			}

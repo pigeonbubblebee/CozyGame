@@ -121,7 +121,7 @@ public partial class PlayerDeflectController : Node
 			BlockEvent?.Invoke(true, data.PostureDamage, e);
 			e.TakePostureDamage(data.DeflectPostureDamage);
 			GD.Print("TakePosture!");
-			Counter = true;
+			// Counter = true;
 			
 			GetTree().CreateTimer(_playerStats.CounterWindow).Timeout += _FinishCounterWindow;
 			

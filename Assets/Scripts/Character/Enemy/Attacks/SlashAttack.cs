@@ -101,6 +101,13 @@ public partial class SlashAttack : EnemyAttack
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
 		
+		if(e.GlobalPosition.X < ((EnemyChaserAI)e).TargetPlayer.GlobalPosition.X && ((EnemyChaserAI)e).GetMoveDirection() < 0) {
+			((EnemyChaserAI)e).Flip();
+		} else if(e.GlobalPosition.X > ((EnemyChaserAI)e).TargetPlayer.GlobalPosition.X && ((EnemyChaserAI)e).GetMoveDirection() > 0) {
+			((EnemyChaserAI)e).Flip();
+			// _swordsmanAI.Scale = new Vector2(-Mathf.Abs(_swordsmanAI.Scale.X), _swordsmanAI.Scale.Y);
+		}
+		
 		_canHit = true;
 		_accelerating = false;
 		Slash();

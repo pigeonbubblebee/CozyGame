@@ -241,7 +241,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsjf6")
 }],
-"loop": true,
+"loop": false,
 "name": &"cleave",
 "speed": 10.0
 }, {
@@ -342,10 +342,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xdb1n")
 }, {
-"duration": 10.0,
+"duration": 20.0,
 "texture": SubResource("AtlasTexture_lk5jg")
 }],
-"loop": true,
+"loop": false,
 "name": &"slash",
 "speed": 25.0
 }, {

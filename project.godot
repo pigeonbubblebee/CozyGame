@@ -103,7 +103,7 @@ down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Assets/Scripts/Core/Localization/Localizations 1 - Sheet1 (1).en.translation")
+locale/translations=PackedStringArray("res://Assets/Scripts/Core/Localization/Localizations 1 - Sheet1.en.translation")
 
 [physics]
 

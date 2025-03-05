@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=13 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -11,11 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://c6xkeauk014jr" path="res://Assets/Art/UI/Mana.png" id="8_ama06"]
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="8_diypk"]
 [ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="9_vxua4"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/BossBarsUI.cs" id="11_e04r8"]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource("1_fitbl")
 _inventoryPath = NodePath("GUI/Inventory")
 _hudPath = NodePath("GUI/HUD")
+_bossBarsPath = NodePath("GUI/BossBars")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -114,6 +116,62 @@ stretch_margin_right = 2
 stretch_margin_bottom = 2
 texture_under = ExtResource("8_diypk")
 texture_progress = ExtResource("9_vxua4")
+
+[node name="BossBars" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_e04r8")
+_postureBarPath = NodePath("BossBarPosture")
+_healthBarPath = NodePath("BossBar")
+_bossNamePath = NodePath("BossName")
+
+[node name="BossBar" type="TextureProgressBar" parent="GUI/BossBars"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 156.0
+offset_right = 683.0
+offset_bottom = 160.0
+scale = Vector2(3, 5)
+value = 100.0
+radial_fill_degrees = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("3_0sbdu")
+texture_progress = ExtResource("4_ssnc6")
+
+[node name="BossBarPosture" type="TextureProgressBar" parent="GUI/BossBars"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 121.0
+offset_right = 683.0
+offset_bottom = 125.0
+scale = Vector2(3, 5)
+fill_mode = 6
+radial_fill_degrees = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+texture_under = ExtResource("8_diypk")
+texture_progress = ExtResource("9_vxua4")
+
+[node name="BossName" type="RichTextLabel" parent="GUI/BossBars"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 70.0
+offset_right = 800.0
+offset_bottom = 94.0
+scale = Vector2(2, 2)
+bbcode_enabled = true
+text = "[center] Boss Name [/center]"
 
 [node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]
 visible = false

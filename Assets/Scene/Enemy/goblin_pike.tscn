@@ -326,7 +326,7 @@ Type = 2
 DeflectKnockbackMultiplier = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cenhr"]
-size = Vector2(420, 64)
+size = Vector2(316, 64)
 
 [sub_resource type="Resource" id="Resource_3bojv"]
 script = ExtResource("4_wq7el")
@@ -358,6 +358,7 @@ size = Vector2(224, 96)
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_wqvk3")]
 RetreatRange = 200.0
+EnemyNameLocalizationKey = "goblin_pike"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
@@ -389,7 +390,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Thrust/SwordHit"]
-position = Vector2(-6, 0)
+position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_cenhr")
 disabled = true
 

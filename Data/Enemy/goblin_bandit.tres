@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=40 format=3 uid="uid://dm2ecroeniprw"]
+[gd_resource type="SpriteFrames" load_steps=41 format=3 uid="uid://dm2ecroeniprw"]
 
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="1_x2rdt"]
 [ext_resource type="Texture2D" uid="uid://m2loh784ssuv" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit_slash2.png" id="2_c37nq"]
@@ -87,6 +87,10 @@ region = Rect2(128, 384, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvkbx"]
 atlas = ExtResource("1_x2rdt")
 region = Rect2(256, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycsev"]
+atlas = ExtResource("1_x2rdt")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epcrg"]
 atlas = ExtResource("2_c37nq")
@@ -226,10 +230,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_br2jj")
 }, {
-"duration": 10.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_fvkbx")
+}, {
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_ycsev")
 }],
-"loop": true,
+"loop": false,
 "name": &"slash",
 "speed": 10.0
 }, {

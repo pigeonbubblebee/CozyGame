@@ -26,8 +26,9 @@ animations = [{
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_c2u7c")]
 RetreatRange = 1400.0
 MaxHealth = 30
-MaxPosture = 20
+MaxPosture = 10
 DeathBlowDamage = 30
+EnemyNameLocalizationKey = "goblin_archer"
 
 [node name="AggroCheckUp" parent="ChaserEnemy/AggroChecks" index="1"]
 target_position = Vector2(1037, 326)

@@ -30,7 +30,7 @@ public partial class PlayerMovementController : Node
 
 	// --------- Dash Variables ---------
 	public bool DesiredDash => _CheckDesiredDash() && CanDash;
-	public bool DesiredDashRaw => _CheckDesiredDash(); // For Cleave Counter Check
+	public bool DesiredDashRaw => _CheckDesiredDash() && _playerStats.CanCounterCleave; // For Cleave Counter Check
 	public event Action FinishDashEvent;
 	
 	// --------- Knockback Variables ---------

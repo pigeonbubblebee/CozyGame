@@ -61,6 +61,8 @@ public partial class CleaveAttack : SlashAttack
 		_countered = true;
 		_currentCounterPlayer = p;
 		
+		_currentCounterPlayer.GlobalPosition = GlobalPosition;
+		
 		GetTree().CreateTimer(CounterLength).Timeout += _FinishCounter;
 		GetTree().CreateTimer(ExitGrabLength).Timeout += _PlayerExitGrab;
 	}
