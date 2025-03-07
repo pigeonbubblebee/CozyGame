@@ -1,9 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://d4i4p0i3s7eu8"]
+[gd_scene load_steps=57 format=3 uid="uid://d4i4p0i3s7eu8"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_wqvk3"]
 [ext_resource type="Texture2D" uid="uid://c560bgdu1oe2n" path="res://Assets/Art/Character/Enemy/GoblinPike/goblin_pike_sweep.png" id="3_31biy"]
 [ext_resource type="Texture2D" uid="uid://byparfs6bg8yn" path="res://Assets/Art/Character/Enemy/GoblinPike/goblin_pike.png" id="3_js28e"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs" id="3_sjcd8"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="4_0nfbp"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="4_wq7el"]
 [ext_resource type="AudioStream" uid="uid://b7p3iyfw8fefd" path="res://Assets/Sound/SFX/Enemy/GoblinPike/thrust.wav" id="5_36jdc"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="5_ua45f"]
@@ -364,7 +365,27 @@ EnemyNameLocalizationKey = "goblin_pike"
 sprite_frames = SubResource("SpriteFrames_l1qsa")
 animation = &"thrust"
 
-[node name="Thrust" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("4_0nfbp")
+RetreatRange = 200.0
+RetreatSpeed = 500.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+FinishEarly = true
+AttackCooldown = 0.6
+AnimationName = "patrol"
+AttackLength = 0.45
+NotChainAttack = true
+
+[node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(-32, 0)
+
+[node name="Thrust" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("5_ua45f")
 SlashRange = 200.0
 SlashCooldown = 1.0
@@ -394,7 +415,7 @@ position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_cenhr")
 disabled = true
 
-[node name="Sweep" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
+[node name="Sweep" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="2"]
 script = ExtResource("5_ua45f")
 SlashRange = 200.0
 SlashCooldown = 1.0
@@ -424,7 +445,7 @@ position = Vector2(30, -32)
 shape = SubResource("RectangleShape2D_jpx4g")
 disabled = true
 
-[node name="Charge" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="2"]
+[node name="Charge" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="3"]
 script = ExtResource("3_sjcd8")
 _checkLedge = true
 _stopAccelOnInterrupt = true

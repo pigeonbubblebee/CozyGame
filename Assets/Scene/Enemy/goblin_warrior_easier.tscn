@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://dvmfdkq5niknb"]
+[gd_scene load_steps=106 format=3 uid="uid://dvmfdkq5niknb"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_gp3s4"]
 [ext_resource type="Shader" path="res://Shader/Godot-Palette-Swap-Shader-master/Godot-Palette-Swap-Shader-master/PaletteSwap.gdshader" id="2_rwhwh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://btkah23d4cb4e" path="res://Assets/Art/Character/Enemy/GoblinWarrior/goblin_warrior_slash1.png" id="7_hxa4p"]
 [ext_resource type="Texture2D" uid="uid://dlb60mjotk3l1" path="res://Assets/Art/Character/Enemy/GoblinWarrior/goblin_warrior_slash2.png" id="8_yx86g"]
 [ext_resource type="Texture2D" uid="uid://c5lb81xj2xgmw" path="res://Assets/Art/Character/Enemy/GoblinWarrior/goblin_warrior_thrust.png" id="9_mof7w"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="10_3alm1"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs" id="10_6wu0w"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="11_c4v7f"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="12_74yp0"]
@@ -677,7 +678,27 @@ position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_cx26y")
 animation = &"cleave"
 
-[node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("10_3alm1")
+RetreatRange = 300.0
+RetreatSpeed = 200.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+FinishEarly = true
+AttackCooldown = 0.6
+AnimationName = "patrol"
+AttackLength = 0.45
+NotChainAttack = true
+
+[node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-96, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(-96, 0)
+
+[node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("10_6wu0w")
 AttackPaths = Array[NodePath]([NodePath("Slash"), NodePath("SlashComboChain"), NodePath("Cleave"), NodePath("Slash"), NodePath("SlashComboChain")])
 AttackCooldown = 1.5
@@ -750,7 +771,7 @@ script = ExtResource("11_c4v7f")
 SlashRange = 300.0
 SlashCooldown = 1.0
 LungeSpeed = 2800.0
-LungeRange = 230.0
+LungeRange = 350.0
 StopLungeFrame = 3
 OnFrame = 2
 OffFrame = 3
@@ -849,7 +870,7 @@ CounterLength = 1.63
 ExitGrabLength = 1.0
 SlashRange = 300.0
 SlashCooldown = 1.0
-LungeRange = 230.0
+LungeRange = 350.0
 StopLungeFrame = 8
 OnFrame = 7
 OffFrame = 8

@@ -1327,7 +1327,7 @@ texture_filter = 1
 position = Vector2(0, 8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rojmk")
-animation = &"grab_right"
+animation = &"idle_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)

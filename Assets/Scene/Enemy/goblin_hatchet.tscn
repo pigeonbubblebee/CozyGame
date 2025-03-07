@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bh6371v0h7qfw"]
+[gd_scene load_steps=17 format=3 uid="uid://bh6371v0h7qfw"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_bdr5l"]
 [ext_resource type="SpriteFrames" uid="uid://bwgj1dvmmpm8y" path="res://Data/Enemy/goblin_hatchet.tres" id="2_wxot2"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="3_k48wh"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="4_epu1p"]
 [ext_resource type="AudioStream" uid="uid://8qwmw13x0ujd" path="res://Assets/Sound/SFX/Enemy/GoblinHatchet/goblin_axe_swing.wav" id="5_3klwj"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="5_x5k57"]
@@ -50,7 +51,27 @@ animation = &"cleave"
 frame = 9
 frame_progress = 1.0
 
-[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("3_k48wh")
+RetreatRange = 170.0
+RetreatSpeed = 500.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+FinishEarly = true
+AttackCooldown = 0.6
+AnimationName = "patrol"
+AttackLength = 0.45
+NotChainAttack = true
+
+[node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(-32, 0)
+
+[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("5_x5k57")
 SlashRange = 170.0
 SlashCooldown = 1.0
@@ -81,7 +102,7 @@ position = Vector2(100, -17.25)
 shape = SubResource("RectangleShape2D_v7men")
 disabled = true
 
-[node name="Cleave" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
+[node name="Cleave" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="2"]
 script = ExtResource("7_o3olo")
 _counterCheckAreaPath = NodePath("CounterCleaveArea")
 _counterExitPath = NodePath("CounterExit")

@@ -15,6 +15,8 @@ public partial class Retreat : EnemyAttack
 	[Export] public NodePath RayCastWallPath { get; private set; }
 	private RayCast2D _rayCastWall;
 	
+	[Export] public bool FinishEarly { get; private set; } = false;
+	
 	public override void _Ready() {
 		base._Ready();
 		_rayCastLedge = GetNode<RayCast2D>(RayCastLedgePath);
@@ -52,6 +54,9 @@ public partial class Retreat : EnemyAttack
 					((EnemyPatrolAI)EnemyAI).Decelerate();
 				}
 			} else {
+				if(FinishEarly) {
+					_FinishRetreat();
+				}
 				_playAnimation(false);
 				((EnemyPatrolAI)EnemyAI).Decelerate();
 			}

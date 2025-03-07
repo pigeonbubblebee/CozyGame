@@ -26,6 +26,7 @@ public partial class PlayerSpellState : PlayerState
 
 	public override void PlayStateAnimation() {
 		// TODO: Start Idle Animation
+		AnimationController.PlayAnimation(AnimationController.CounterAnimationClip, Stats.ShootTime);
 	}
 
 	public override void Process(double delta)

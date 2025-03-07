@@ -79,7 +79,7 @@ public partial class PlayerSpellController : Node2D
 	}
 	
 	public void UseSpell() {
-		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
+		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude * 2f);
 		_player.MovementController.ApplyKnockback(-_player.MovementController.Direction, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 		// _gameManager.FreezeFrame(0.02f, 0.1f);
 				
@@ -94,9 +94,10 @@ public partial class PlayerSpellController : Node2D
 				
 				if(_movementController.Direction == -1) {
 					b.Rotation = Mathf.DegToRad(180);
-					b.Scale *= -1;
+					b.Scale = new Vector2(1f, -1f);
 				} else {
 					b.Rotation = Mathf.DegToRad(0);
+					b.Scale = new Vector2(1f, 1f);
 				}
 				
 				b.Fire();
@@ -145,7 +146,7 @@ public partial class PlayerSpellController : Node2D
 	}
 	
 	private void _OnBulletHit(Node2D hit, Bullet b) {
-		if(hit is IHittable || hit.IsInGroup("Ground")) {
+		if(/*hit is IHittable || */hit.IsInGroup("Ground")) {
 			b.ReturnToPool();
 		}
 		

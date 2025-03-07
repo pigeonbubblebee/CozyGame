@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bskrg487tax4i"]
+[gd_scene load_steps=20 format=3 uid="uid://bskrg487tax4i"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_dy2dn"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs" id="3_06o73"]
 [ext_resource type="Texture2D" uid="uid://c51s271p0iuyx" path="res://Assets/Art/Character/Enemy/Worg/worg_pounce.png" id="3_flb7c"]
 [ext_resource type="Texture2D" uid="uid://c5j6kln8d24d8" path="res://Assets/Art/Character/Enemy/Worg/worg.png" id="3_vvw8c"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="4_7ii1y"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="4_paiqi"]
 [ext_resource type="AudioStream" uid="uid://bsk1v2xlrvkw2" path="res://Assets/Sound/SFX/Enemy/Goblin/wolfwalk.wav" id="6_f0n80"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="6_mcfje"]
 [ext_resource type="AudioStream" uid="uid://dc8ek0nyw2oc1" path="res://Assets/Sound/SFX/Enemy/Worg/worg_pounce.wav" id="6_nbxxr"]
@@ -132,7 +133,27 @@ position = Vector2(0, 40)
 sprite_frames = SubResource("SpriteFrames_fwwuj")
 animation = &"pounce"
 
-[node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+[node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
+script = ExtResource("4_paiqi")
+RetreatRange = 500.0
+RetreatSpeed = 600.0
+RayCastLedgePath = NodePath("LedgeCheck")
+RayCastWallPath = NodePath("WallCheck")
+FinishEarly = true
+AttackCooldown = 0.6
+AnimationName = "patrol"
+AttackLength = 0.45
+_chainedAttackPath = NodePath("Pounce")
+
+[node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(0, 144)
+
+[node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+position = Vector2(-48, 0)
+target_position = Vector2(-32, 0)
+
+[node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
 script = ExtResource("3_06o73")
 VerticalLungeSpeed = 1700.0
 SlashRange = 500.0
@@ -145,21 +166,21 @@ OffFrame = 5
 _attackAreaColliderPath = NodePath("Hit/Hitbox")
 _attackAreaPath = NodePath("Hit")
 _slashSFXPath = NodePath("slashSFX")
-AttackCooldown = 1.75
+AttackCooldown = 1.125
 AnimationName = "pounce"
 AttackLength = 1.125
 NotChainAttack = true
 _attackData = SubResource("Resource_ldu8y")
 
-[node name="slashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
+[node name="slashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce"]
 stream = ExtResource("6_nbxxr")
 
-[node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
+[node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce"]
 position = Vector2(-72, 64)
 collision_layer = 2
 collision_mask = 2
 
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce/Hit"]
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce/Hit"]
 position = Vector2(80, -8)
 shape = SubResource("RectangleShape2D_y7w4a")
 disabled = true

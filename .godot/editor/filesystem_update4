@@ -92,3 +92,7 @@ res://Data/player_stats.tres
 res://Assets/Scene/Enemy/chaser_enemy.tscn
 res://Assets/Scripts/Core/User Interface/BossBarsUI.cs
 res://Assets/Scene/Enemy/goblin_warrior_easier.tscn
+res://Assets/Scene/Environment/respawn_point.tscn
+res://Assets/Scene/bullet.tscn
+res://Assets/Scripts/Core/Save/SaveLoader.cs
+res://Shader/outline.gdshader
