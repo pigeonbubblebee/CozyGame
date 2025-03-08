@@ -21,6 +21,8 @@ public partial class EnemyAttack : Node2D
 	
 	[Export] protected EnemyAttackData _attackData;
 	
+	private bool _initialized = false;
+	
 	protected bool Active;
 	
 	public EnemyAttack GetNextChainAttack() {
@@ -65,8 +67,10 @@ public partial class EnemyAttack : Node2D
 	}
 	
 	public virtual void Initialize(Enemy e) {
+		if(_initialized)
+			return;
 		EnemyAI = e;
-		
+		_initialized = true;
 		if(_chainedAttackPath != null) {
 			_chainedAttack = GetNode<EnemyAttack>(_chainedAttackPath);
 			_chainedAttack.Initialize(EnemyAI);

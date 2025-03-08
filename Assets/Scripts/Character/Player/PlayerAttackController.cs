@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 {
@@ -49,7 +50,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	private Player _player;
 	private PlayerStats _playerStats => _player.CurrentPlayerStats;
 	
-	// private HashSet<Enemy> _invincibleEnemies = new HashSet<Enemy>();
+	private HashSet<IHittable> _invincibleHittables = new HashSet<IHittable>();
 
 	private PlayerMovementController _movementController;
 
@@ -141,6 +142,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public void Slash() {
 		GD.Print("Slashing !");
+		_invincibleHittables.Clear();
 		foreach(Area2D hit in _deathblowCheckArea.GetOverlappingAreas()) {
 			GD.Print(hit.Name);
 			if(hit is EnemyHitbox) {
@@ -234,10 +236,15 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
-		_emitSlashParticle();
 		// GD.Print(_slashHitParticle.Emitting);
 		
+		if(_invincibleHittables.Contains(hittable))
+			return;
+			
+		_emitSlashParticle();
+		
 		((EnemyHitbox) hittable).EnemyAIParent.ApplyKnockback(-direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);
+		bool iFrame = false;
 		
 		if(hittable is EnemyHitbox) {
 			if(!((EnemyHitbox) hittable).EnemyAIParent.Invincible) {
@@ -262,8 +269,13 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 					}
 					
 				}
-				
+			} else {
+				iFrame = true;
 			}
+		}
+		
+		if(!iFrame) {
+			_invincibleHittables.Add(hittable);
 		}
 		
 		hittable.OnHit(_player, damage, direction, postureDamage); // Maybe flip direction, not sure yet

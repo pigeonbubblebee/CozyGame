@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=14 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -13,11 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="9_vxua4"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/BossBarsUI.cs" id="11_e04r8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="UIManager" type="Node2D"]
 script = ExtResource("1_fitbl")
 _inventoryPath = NodePath("GUI/Inventory")
 _hudPath = NodePath("GUI/HUD")
 _bossBarsPath = NodePath("GUI/BossBars")
+_loadingScreenPath = NodePath("Loading/Loading")
+_loadingProgressLabelPath = NodePath("")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -175,3 +180,34 @@ text = "[center] Boss Name [/center]"
 
 [node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]
 visible = false
+
+[node name="Loading" type="CanvasLayer" parent="."]
+
+[node name="Loading" type="Control" parent="Loading"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Loading/Loading"]
+z_index = 2
+layout_mode = 2
+offset_left = 416.0
+offset_top = 336.0
+offset_right = 608.0
+offset_bottom = 360.0
+scale = Vector2(4, 4)
+bbcode_enabled = true
+text = "[center] LOADING [/center]"
+
+[node name="CenterContainer" type="CenterContainer" parent="Loading/Loading"]
+layout_mode = 1
+offset_right = 1600.0
+offset_bottom = 900.0
+
+[node name="Panel" type="Panel" parent="Loading/Loading/CenterContainer"]
+custom_minimum_size = Vector2(1600, 900)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")

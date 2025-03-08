@@ -16,7 +16,9 @@ public partial class HealthSystem : Node
 	// TODO: implement health changes
 
 	public void ResetHealth() {
+		int temp = CurrentHealthPoints;
 		CurrentHealthPoints = MaxHealthPoints;
+		HealEvent?.Invoke(MaxHealthPoints - temp);
 	}
 
 	public void AddHealth(int health, bool overflow) {

@@ -1,3 +1,5 @@
+res://Assets/Scripts/Core/Game
+res://Assets/Scene
 res://Assets/Art/VFX
 res://Shader
 res://Assets/Scene/Environment
@@ -17,7 +19,5 @@ C:/Users/trex0/OneDrive/Documents/Builds
 res://Data/Tileset
 res://Assets/Art/Character/Enemy/Worg
 res://Assets/Scripts/Combat/Bullet
-res://Assets/Scene
 res://Assets/Art/Character/Enemy/GoblinArcher
-res://Assets/Scripts/Character/Enemy
 C:/Users/trex0/Downloads

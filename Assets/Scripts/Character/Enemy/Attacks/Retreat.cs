@@ -87,6 +87,7 @@ public partial class Retreat : EnemyAttack
 	}
 	
 	public void _FinishRetreat() {
+		((EnemyPatrolAI)EnemyAI).Decelerate();
 		_retreating = false;
 		Finish();
 	}

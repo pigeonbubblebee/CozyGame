@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 InputManager="*res://Assets/Scripts/Core/System/Input/InputManager.cs"
 UIManager="*res://Assets/Scene/ui_manager.tscn"
 GameManager="*res://Assets/Scripts/Core/Game/GameManager.cs"
+Player="*res://Assets/Scene/player.tscn"
 
 [display]
 

@@ -135,7 +135,7 @@ animation = &"pounce"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_paiqi")
-RetreatRange = 500.0
+RetreatRange = 300.0
 RetreatSpeed = 600.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")
@@ -146,11 +146,11 @@ AttackLength = 0.45
 _chainedAttackPath = NodePath("Pounce")
 
 [node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
-position = Vector2(-48, 0)
+position = Vector2(-104, 0)
 target_position = Vector2(0, 144)
 
 [node name="WallCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
-position = Vector2(-48, 0)
+position = Vector2(-112, 0)
 target_position = Vector2(-32, 0)
 
 [node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]

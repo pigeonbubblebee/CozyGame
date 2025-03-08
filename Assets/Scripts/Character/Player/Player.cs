@@ -58,8 +58,8 @@ public partial class Player : CharacterBody2D
 		Camera = GetNode<PlayerCamera>(_cameraPath);
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
-		PlayerHealth.ResetHealth();
-		PlayerHealth.DeathEvent += Quit;
+		
+		// PlayerHealth.DeathEvent += Quit;
 		PlayerHealth.Invincible = false;
 
 		StateMachine.Initialize(this); // PLEASE ADD A PLAYER COMPONENT CLSS OR SMTH
@@ -72,14 +72,19 @@ public partial class Player : CharacterBody2D
 		DeflectController.Initialize(this);
 		PostureController.Initialize(this);
 		
-		SpellController.ResetMana();
-		HealController.ResetHeals();
-		
-		PostureController.ResetPosture();
+		Respawn();
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
+	}
+	
+	public void Respawn() {
+		PlayerHealth.ResetHealth();
+		SpellController.ResetMana();
+		HealController.ResetHeals();
+		
+		PostureController.ResetPosture();
 	}
 	
 	private void Quit() { // Temp

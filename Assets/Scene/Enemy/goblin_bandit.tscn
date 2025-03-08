@@ -1,21 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0fu168ri1a68"]
+[gd_scene load_steps=10 format=3 uid="uid://b0fu168ri1a68"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_amwn4"]
 [ext_resource type="SpriteFrames" uid="uid://dm2ecroeniprw" path="res://Data/Enemy/goblin_bandit.tres" id="2_dqyxp"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs" id="2_qa4p0"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs" id="5_s2rwl"]
 [ext_resource type="Resource" uid="uid://dhbmg6d2g0pbi" path="res://Data/Enemy/AttackData/goblin_bandit_slash.tres" id="6_gx2vo"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs" id="7_og785"]
 [ext_resource type="AudioStream" uid="uid://dvdrf0hjb4bny" path="res://Assets/Sound/SFX/Enemy/Goblin/goblinSlash.wav" id="9_n3sgf"]
 [ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="9_vft5g"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="10_h3tc0"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="10_ima5s"]
-[ext_resource type="AudioStream" uid="uid://cqg6n1nks5oq8" path="res://Assets/Sound/SFX/Enemy/Goblin/goblinslash2.wav" id="11_5escv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb5fh"]
-size = Vector2(200, 178.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6n7n"]
 size = Vector2(200, 178.5)
 
 [node name="goblin_bandit" type="Node2D"]
@@ -32,179 +26,9 @@ animation = &"slash"
 frame = 8
 frame_progress = 1.0
 
-[node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
-script = ExtResource("2_qa4p0")
-SlashRange = 170.0
-SlashCooldown = 1.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-OffFrame = 6
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
-_slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.0
-AnimationName = "slash"
-AttackLength = 1.0
-NotChainAttack = true
-_attackData = ExtResource("6_gx2vo")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/Slash"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/Slash/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_sb5fh")
-disabled = true
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/Slash"]
-stream = ExtResource("9_n3sgf")
-script = ExtResource("10_h3tc0")
-
-[node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="3"]
-script = ExtResource("7_og785")
-AttackPaths = Array[NodePath]([NodePath("SlashComboChain"), NodePath("Slash2"), NodePath("Slash3")])
-AttackCooldown = 1.0
-NotChainAttack = true
-
-[node name="SlashCombo" type="Node2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash"]
-script = ExtResource("5_s2rwl")
-SlashRange = 170.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 7
-StopLungeFrame2 = 12
-OnFrame = 6
-OnFrame2 = 11
-OffFrame = 7
-OffFrame2 = 12
-StartSoundFrame2 = 7
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
-_slashSFXPath = NodePath("Slash2SFX")
-_slash2SFXPath = NodePath("SlashSFX")
-_attackData = ExtResource("6_gx2vo")
-AttackCooldown = 1.5
-AnimationName = "slash2"
-AttackLength = 1.133
-NotChainAttack = true
-_attackData = ExtResource("6_gx2vo")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashCombo"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashCombo/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_v6n7n")
-disabled = true
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashCombo"]
-stream = ExtResource("9_n3sgf")
-script = ExtResource("10_h3tc0")
-
-[node name="Slash2SFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashCombo"]
-stream = ExtResource("11_5escv")
-script = ExtResource("10_h3tc0")
-
-[node name="Slash2" type="Node2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash"]
-script = ExtResource("2_qa4p0")
-SlashRange = 170.0
-SlashCooldown = 1.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-OffFrame = 7
-_attackAreaColliderPath = NodePath("../../Slash/SwordHit/Hitbox")
-_attackAreaPath = NodePath("../../Slash/SwordHit")
-_slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.0
-AnimationName = "slash"
-AttackLength = 1.0
-NotChainAttack = true
-_attackData = ExtResource("6_gx2vo")
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash2"]
-stream = ExtResource("9_n3sgf")
-script = ExtResource("10_h3tc0")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash2"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash2/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_sb5fh")
-disabled = true
-
-[node name="Slash3" type="Node2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash"]
-script = ExtResource("2_qa4p0")
-SlashRange = 170.0
-SlashCooldown = 1.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-OffFrame = 7
-_attackAreaColliderPath = NodePath("../../Slash/SwordHit/Hitbox")
-_attackAreaPath = NodePath("../../Slash/SwordHit")
-_slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.0
-AnimationName = "slash"
-AttackLength = 1.0
-NotChainAttack = true
-_attackData = ExtResource("6_gx2vo")
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash3"]
-stream = ExtResource("9_n3sgf")
-script = ExtResource("10_h3tc0")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash3"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/Slash3/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_sb5fh")
-disabled = true
-
-[node name="SlashComboChain" type="Node2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash"]
-script = ExtResource("2_qa4p0")
-SlashRange = 170.0
-SlashCooldown = 1.0
-LungeSpeed = 2800.0
-LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-OffFrame = 7
-_attackAreaColliderPath = NodePath("../../Slash/SwordHit/Hitbox")
-_attackAreaPath = NodePath("../../Slash/SwordHit")
-_slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.0
-AnimationName = "slash2"
-AttackLength = 1.0
-_chainedAttackPath = NodePath("../../AttackPattern/Slash")
-_attackData = ExtResource("6_gx2vo")
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashComboChain"]
-stream = ExtResource("11_5escv")
-script = ExtResource("10_h3tc0")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashComboChain"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/RandomSlash/SlashComboChain/SwordHit"]
-position = Vector2(100, -17.25)
-shape = SubResource("RectangleShape2D_sb5fh")
-disabled = true
-
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_ima5s")
-RetreatRange = 170.0
+RetreatRange = 160.0
 RetreatSpeed = 500.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")

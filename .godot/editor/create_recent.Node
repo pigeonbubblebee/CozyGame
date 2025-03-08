@@ -1,8 +1,8 @@
+RichTextLabel
+Node2D
 GPUParticles2D
 CollisionShape2D
 Area2D
-RichTextLabel
-Node2D
 Parallax2D
 AudioStreamPlayer2D
 Node

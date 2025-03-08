@@ -53,7 +53,7 @@ frame_progress = 1.0
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_k48wh")
-RetreatRange = 170.0
+RetreatRange = 160.0
 RetreatSpeed = 500.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")

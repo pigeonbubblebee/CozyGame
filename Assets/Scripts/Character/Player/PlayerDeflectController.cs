@@ -125,9 +125,9 @@ public partial class PlayerDeflectController : Node
 			
 			GetTree().CreateTimer(_playerStats.CounterWindow).Timeout += _FinishCounterWindow;
 			
-			e.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? -1 : 1, _playerStats.DeflectKnockback * data.DeflectKnockbackMultiplier,
-				_playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
-			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
+			// e.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? -1 : 1, _playerStats.DeflectKnockback * data.DeflectKnockbackMultiplier,
+				// _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
+			// _player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 			
 			return 0;
 		} else {
@@ -150,7 +150,7 @@ public partial class PlayerDeflectController : Node
 			_player.PlayerHealth.TakeDamage(data.Damage);
 			_player.HealController.TakeInternalDamage(data.Damage);
 			
-			_player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.BlockKnockback, _playerStats.BlockKnockbackAcceleration, _playerStats.BlockKnockbackTime);
+			// _player.MovementController.ApplyKnockback(_player.GlobalPosition.X > e.GlobalPosition.X ? 1 : -1, _playerStats.BlockKnockback, _playerStats.BlockKnockbackAcceleration, _playerStats.BlockKnockbackTime);
 			_gameManager.FreezeFrame(0.02f, 0.1f);
 			return 0;
 		}

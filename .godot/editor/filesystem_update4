@@ -96,3 +96,8 @@ res://Assets/Scene/Environment/respawn_point.tscn
 res://Assets/Scene/bullet.tscn
 res://Assets/Scripts/Core/Save/SaveLoader.cs
 res://Shader/outline.gdshader
+res://Assets/Scripts/Core/Game/MainHandler.cs
+res://Assets/Scripts/Core/Game/SceneManager.cs
+res://Assets/Scene/Levels/testing.tscn
+res://Assets/Scene/Levels/TutorialArea/testing.tscn
+res://Assets/Scene/inventory.tscn
