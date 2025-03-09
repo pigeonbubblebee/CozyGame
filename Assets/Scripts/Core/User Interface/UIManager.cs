@@ -28,6 +28,10 @@ public partial class UIManager : Node2D
 		
 		_loadingScreen.Visible = false;
 		
+		ResetUI();
+	}
+	
+	public void ResetUI() {
 		_inventory.Visible = false;
 		_HUD.Visible = true;
 		

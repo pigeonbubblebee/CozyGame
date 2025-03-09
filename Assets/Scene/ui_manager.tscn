@@ -22,7 +22,6 @@ _inventoryPath = NodePath("GUI/Inventory")
 _hudPath = NodePath("GUI/HUD")
 _bossBarsPath = NodePath("GUI/BossBars")
 _loadingScreenPath = NodePath("Loading/Loading")
-_loadingProgressLabelPath = NodePath("")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

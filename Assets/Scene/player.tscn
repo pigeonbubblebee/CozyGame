@@ -1390,6 +1390,7 @@ _playerSpellStatePath = NodePath("Spell")
 _playerBlockStatePath = NodePath("Block")
 _playerStaggerStatePath = NodePath("Stagger")
 _playerGrabStatePath = NodePath("Grab")
+_logStates = true
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_37u3h")

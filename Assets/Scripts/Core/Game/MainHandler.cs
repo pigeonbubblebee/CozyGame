@@ -29,6 +29,7 @@ public partial class MainHandler : Node
 		// LoadLevel(_respawnLocationArea, _respawnLocationLevel, _respawnLocationLocation); // Change to only w fresh save
 		RespawnPlayer();
 		_player.PlayerHealth.DeathEvent += RespawnPlayer;
+		
 	}
 	
 	public override void _Process(double delta) {
@@ -50,6 +51,7 @@ public partial class MainHandler : Node
 			
 			_currentScene = newScene;
 			_player.GlobalPosition = _currentScene.GetSpawnPoint(_loadSpawnPosition);
+			_uiManager.ResetUI();
 			GetTree().CreateTimer(0.5f).Timeout += _DisableLoadingScreen;	
 		}
 	}

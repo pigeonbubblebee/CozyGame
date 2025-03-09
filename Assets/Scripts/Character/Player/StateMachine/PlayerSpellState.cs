@@ -12,6 +12,11 @@ public partial class PlayerSpellState : PlayerState
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
 		
+		if(!(SpellController.CurrentMana >= Stats.ManaUsage)) {
+			ParentPlayerStateMachine.EnterDefaultState();
+			return;
+		}
+		
 		CanFlip = false;
 		
 		SpellController.UseSpell();

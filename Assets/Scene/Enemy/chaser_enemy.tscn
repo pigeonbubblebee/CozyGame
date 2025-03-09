@@ -184,8 +184,8 @@ target_position = Vector2(32, 0)
 [node name="AggroChecks" type="Node2D" parent="."]
 
 [node name="AggroCheckForward" type="RayCast2D" parent="AggroChecks"]
-position = Vector2(-56, 0)
-target_position = Vector2(1144, 0)
+position = Vector2(-208, 0)
+target_position = Vector2(1560, 0)
 
 [node name="AggroCheckUp" type="RayCast2D" parent="AggroChecks"]
 target_position = Vector2(0, -80)
