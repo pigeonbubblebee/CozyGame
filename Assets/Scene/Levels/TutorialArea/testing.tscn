@@ -28,6 +28,7 @@ radius = 216.148
 [node name="Testing" type="Node2D"]
 script = ExtResource("1_ibhl6")
 _respawnPointsParentPath = NodePath("RespawnLocations")
+_enemiesParentPath = NodePath("Enemies")
 
 [node name="Walls" type="TileMapLayer" parent="." groups=["Ground"]]
 use_parent_material = true

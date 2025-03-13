@@ -146,7 +146,7 @@ public partial class PlayerDeflectController : Node
 			_player.Camera.Shake(_playerStats.BlockShakeTime, _playerStats.BlockShakeMagnitude);
 			BlockEvent?.Invoke(false, data.PostureDamage, e);
 			// _player.PlayerHealth.TakeDamage(damage/4);
-			_player.PostureController.TakePostureDamage(data.PostureDamage);
+			// _player.PostureController.TakePostureDamage(data.PostureDamage);
 			_player.PlayerHealth.TakeDamage(data.Damage);
 			_player.HealController.TakeInternalDamage(data.Damage);
 			

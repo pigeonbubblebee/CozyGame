@@ -12,6 +12,7 @@ public partial class Enemy : CharacterBody2D
 	protected TextureProgressBar _healthBar;
 	
 	[Export] public int MaxHealth { get; protected set; }
+	public event Action<Enemy> DeathEvent;
 	
 	[Export] public int MaxPosture { get; protected set; }
 	[Export] public float PostureRegenerationCooldownTime { get; protected set; }
@@ -265,6 +266,7 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	protected virtual void OnDeath() {
+		DeathEvent?.Invoke(this);
 		this.QueueFree();
 	}
 	

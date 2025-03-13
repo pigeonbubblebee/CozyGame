@@ -105,6 +105,7 @@ _healthImageHit = ExtResource("6_h24h4")
 _healthImageUnhit = ExtResource("8_ama06")
 
 [node name="PostureBar" type="TextureProgressBar" parent="GUI/HUD"]
+visible = false
 layout_mode = 0
 offset_left = 512.0
 offset_top = 816.0

@@ -75,3 +75,4 @@ C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\ref
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.pdb
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\Cozy Game.genruntimeconfig.cache
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\Debug\ref\Cozy Game.dll
+C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\Debug\Newtonsoft.Json.dll

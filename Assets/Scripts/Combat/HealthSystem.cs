@@ -21,6 +21,11 @@ public partial class HealthSystem : Node
 		HealEvent?.Invoke(MaxHealthPoints - temp);
 	}
 
+	public void SetHealth(int health) {
+		DamageEvent?.Invoke(CurrentHealthPoints - health);
+		CurrentHealthPoints = health;
+	}
+
 	public void AddHealth(int health, bool overflow) {
 		CurrentHealthPoints += health;
 		HealEvent?.Invoke(health);

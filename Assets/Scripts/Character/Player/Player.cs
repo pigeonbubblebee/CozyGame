@@ -71,8 +71,6 @@ public partial class Player : CharacterBody2D
 		AnimationController.Initialize(this);
 		DeflectController.Initialize(this);
 		PostureController.Initialize(this);
-		
-		Respawn();
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
@@ -80,11 +78,17 @@ public partial class Player : CharacterBody2D
 	}
 	
 	public void Respawn() {
-		PlayerHealth.ResetHealth();
+		
+		GD.Print("respawn");
+		// GD.Print(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]);
+		PlayerHealth.SetHealth(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]));
+		// PlayerHealth.ResetHealth();
 		SpellController.ResetMana();
 		HealController.ResetHeals();
 		
 		PostureController.ResetPosture();
+
+		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
 	}
 	
 	private void Quit() { // Temp
@@ -92,7 +96,7 @@ public partial class Player : CharacterBody2D
 	}
 	
 	public override void _Ready() {
-		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
+		//GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
 		_gameManager = GetNode<GameManager>("/root/GameManager");
 	}
 	
@@ -118,7 +122,7 @@ public partial class Player : CharacterBody2D
 		HealController.ConvertInternalDamage();
 		PlayerHealth.TakeDamage(e.Damage);
 		HealController.TakeInternalDamage(e.InternalDamage);
-		PostureController.TakePostureDamage(e.PostureDamage);
+		// PostureController.TakePostureDamage(e.PostureDamage);
 	}
 	
 	public void ExitGrab() {
