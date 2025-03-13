@@ -41,8 +41,6 @@ public partial class SaveLoader : Node
 
 		// GD.Print(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
 
-		HandleNewRoomData(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
-
 		saveFile.PlayerHealth = GetNode<Player>("/root/Player").PlayerHealth.CurrentHealthPoints;
 		saveFile.RespawnID = GetNode<MainHandler>("/root/MainHandler").GetRespawnID();
 		saveFile.RoomDatas = _roomDatas;
@@ -61,14 +59,22 @@ public partial class SaveLoader : Node
 		// GD.Print("QUITTING" + sceneManager.Name);
 		RoomData[] temp = _roomDatas.ToArray();
 		for(int i = 0; i < temp.Length; i++) {
-			if(temp[i].RoomID == sceneManager.Name) {
+			if(temp[i].RoomID == sceneManager.SceneID) {
 				_roomDatas.Add(_UpdateRoomData(temp[i].RoomID, sceneManager));
 				_roomDatas.Remove(temp[i]);
 				return;
 			}
 		}
 
-		_roomDatas.Add(_UpdateRoomData(sceneManager.Name, sceneManager));
+		_roomDatas.Add(_UpdateRoomData(sceneManager.SceneID, sceneManager));
+	}
+
+	public void ResetRoomData() {
+		foreach(RoomData r in _roomDatas) {
+			for(int i = 0; i < r.EnemiesAlive.Length; i++) {
+				r.EnemiesAlive[i] = true;
+			}
+		}
 	}
 	
 	public RoomData GetRoomData(string ID) {
@@ -78,7 +84,7 @@ public partial class SaveLoader : Node
 				return r;
 		}
 
-		return new RoomData();
+		return null;
 	}
 
 	private RoomData _UpdateRoomData(string ID, SceneManager sceneManager) {

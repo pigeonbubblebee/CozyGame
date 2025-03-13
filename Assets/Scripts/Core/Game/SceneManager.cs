@@ -15,6 +15,7 @@ public partial class SceneManager : Node2D
 	
 	private bool _initialized = false;
 
+	[Export]
 	public string SceneID;
 	
 	public override void _Ready() {
@@ -40,8 +41,8 @@ public partial class SceneManager : Node2D
 		_enemies = new Enemy[_enemiesParent.GetChildren().Count];
 		i = 0;
 
-		SaveFile.RoomData loadedRoomDataFromSave = (GetNode<SaveLoader>("/root/SaveLoader").GetRoomData(this.Name));
-		GD.Print(this.Name);
+		SaveFile.RoomData loadedRoomDataFromSave = (GetNode<SaveLoader>("/root/SaveLoader").GetRoomData(this.SceneID));
+		GD.Print(this.SceneID);
 
 		foreach(Node n in _enemiesParent.GetChildren()) {
 			if(!(n is Enemy)) {
@@ -52,7 +53,7 @@ public partial class SceneManager : Node2D
 			} else {
 				_enemies[i] = (Enemy) n;
 			}
-			GD.Print(loadedRoomDataFromSave.RoomID + " from scene manager");
+			// GD.Print(loadedRoomDataFromSave.RoomID + " from scene manager");
 			if(loadedRoomDataFromSave == null) {
 				_enemies[i].DeathEvent += _CleanupEnemy;
 			} else {

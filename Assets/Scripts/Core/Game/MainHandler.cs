@@ -18,6 +18,8 @@ public partial class MainHandler : Node
 	private string _loadSpawnPosition;
 
 	private SaveLoader _saveLoader;
+
+	private bool _respawnRequest = false;
 	
 	public override void _Ready() {
 		GD.Randomize();
@@ -64,11 +66,18 @@ public partial class MainHandler : Node
 		}
 
 		_saveLoader.Load();
+
+		if(_respawnRequest) {
+			_saveLoader.ResetRoomData();
+			_saveLoader.CurrentSaveFile["PlayerHealth"] = _player.PlayerHealth.MaxHealthPoints;
+
+			_respawnRequest = false;
+		}
 		
 		PackedScene level = (PackedScene)ResourceLoader.LoadThreadedGet(_currentLoadScenePath);
 		
 		SceneManager newScene = (SceneManager)level.Instantiate();
-		GD.Print(newScene.Name + ": loaded");
+		// GD.Print(newScene.SceneID + ": loaded");
 		AddChild(newScene);
 		newScene.GlobalPosition = Vector2.Zero;
 		newScene.Visible = true;
@@ -77,6 +86,8 @@ public partial class MainHandler : Node
 
 		newScene.Init();
 
+		_player.Respawn();
+
 		_player.GlobalPosition = _currentScene.GetSpawnPoint(_loadSpawnPosition);
 		_uiManager.ResetUI();
 		GetTree().CreateTimer(0.5f).Timeout += _DisableLoadingScreen;	
@@ -84,14 +95,14 @@ public partial class MainHandler : Node
 	
 	public void SpawnPlayer() {
 		CallDeferred(MethodName.LoadLevel, _respawnLocationArea, _respawnLocationLevel, _respawnLocationLocation);
-		_player.Respawn();
 	}
 
 	public void RespawnPlayer() {
 		// _saveLoader.Save();
-		_saveLoader.CurrentSaveFile["PlayerHealth"] = _player.PlayerHealth.MaxHealthPoints;
-
+		_respawnRequest = true;
+		// _saveLoader.CurrentSaveFile["PlayerHealth"] = 20
 		SpawnPlayer();
+		
 	}
 	
 	public void LoadLevel(string area, string levelName) {
@@ -99,7 +110,7 @@ public partial class MainHandler : Node
 		_currentLoadScenePath = "res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn";
 
 		if(_currentScene != null) {
-			_saveLoader.Save();
+			_saveLoader.HandleNewRoomData(GetCurrentScene());
 		}
 
 		// PackedScene level = GD.Load<PackedScene>("res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn");
