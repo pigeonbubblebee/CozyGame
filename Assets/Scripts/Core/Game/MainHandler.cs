@@ -109,6 +109,8 @@ public partial class MainHandler : Node
 		_uiManager.EnableLoadingScreen();
 		_currentLoadScenePath = "res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn";
 
+		_uiManager.ResetUI();
+
 		if(_currentScene != null) {
 			_saveLoader.HandleNewRoomData(GetCurrentScene());
 		}

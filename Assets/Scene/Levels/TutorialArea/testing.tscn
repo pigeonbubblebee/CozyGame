@@ -200,7 +200,7 @@ position = Vector2(-2952, 312)
 position = Vector2(1920, 752)
 
 [node name="goblin_archer" parent="Enemies" instance=ExtResource("10_rh2xm")]
-position = Vector2(1616, 552)
+position = Vector2(1640, 576)
 
 [node name="goblin_archer2" parent="Enemies" instance=ExtResource("10_rh2xm")]
 position = Vector2(1152, 1104)

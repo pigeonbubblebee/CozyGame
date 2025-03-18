@@ -41,6 +41,8 @@ public partial class SaveLoader : Node
 
 		// GD.Print(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
 
+		HandleNewRoomData(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
+
 		saveFile.PlayerHealth = GetNode<Player>("/root/Player").PlayerHealth.CurrentHealthPoints;
 		saveFile.RespawnID = GetNode<MainHandler>("/root/MainHandler").GetRespawnID();
 		saveFile.RoomDatas = _roomDatas;
@@ -79,7 +81,7 @@ public partial class SaveLoader : Node
 	
 	public RoomData GetRoomData(string ID) {
 		foreach(RoomData r in _roomDatas) {
-			GD.Print("Searching for Room Data: " + r.RoomID);
+			// GD.Print("Searching for Room Data: " + r.RoomID);
 			if(r.RoomID == (ID))
 				return r;
 		}

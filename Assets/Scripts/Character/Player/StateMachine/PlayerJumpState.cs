@@ -54,10 +54,6 @@ public partial class PlayerJumpState : PlayerState
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);
 			return true;
 		}*/
-		if(PostureController.CurrentPosture <= 0) {
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if((MovementController.DesiredDash || (!MovementController.GetDashBufferStop() && MovementController.CanDash))
 			&& Stats.CanAirDash && MovementController.UseAirDash()) {
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.DashState);

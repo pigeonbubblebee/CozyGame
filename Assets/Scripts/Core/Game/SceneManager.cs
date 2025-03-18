@@ -42,7 +42,7 @@ public partial class SceneManager : Node2D
 		i = 0;
 
 		SaveFile.RoomData loadedRoomDataFromSave = (GetNode<SaveLoader>("/root/SaveLoader").GetRoomData(this.SceneID));
-		GD.Print(this.SceneID);
+		// GD.Print(this.SceneID);
 
 		foreach(Node n in _enemiesParent.GetChildren()) {
 			if(!(n is Enemy)) {
@@ -88,7 +88,7 @@ public partial class SceneManager : Node2D
 		foreach(Enemy x in _enemies) {
 			if(e == x) {
 				_enemies[i] = null;
-				GD.Print("DeadEnemy!");
+				// GD.Print("DeadEnemy!");
 			}
 			i++;
 		}

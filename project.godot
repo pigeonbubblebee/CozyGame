@@ -28,7 +28,7 @@ MainHandler="*res://Assets/Scripts/Core/Game/MainHandler.cs"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -111,6 +111,10 @@ locale/translations=PackedStringArray("res://Assets/Scripts/Core/Localization/Lo
 [physics]
 
 2d/default_gravity=170.0
+2d/size/viewport_height=900
+2d/size/viewport_width=1600
+2d/size/resizable=true
+2d/stretch/mode="viewport"
 
 [rendering]
 

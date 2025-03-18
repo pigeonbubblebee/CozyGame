@@ -34,10 +34,6 @@ public partial class PlayerRunState : PlayerState
 	}
 
 	protected override bool CheckStates() {
-		if(PostureController.CurrentPosture <= 0) {
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop() && DeflectController.CanBlock)) {
 			DeflectController.StartBlock();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);

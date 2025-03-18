@@ -1,20 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfi6e0ou7w3pm"]
+[gd_scene load_steps=12 format=3 uid="uid://dfi6e0ou7w3pm"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_c2u7c"]
 [ext_resource type="SpriteFrames" uid="uid://dyr7qfod35a2j" path="res://Data/Enemy/goblin_archer.tres" id="2_6rdhl"]
-[ext_resource type="Texture2D" uid="uid://obtmaumy1qxe" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblinarcherattacktop.png" id="2_o43qb"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs" id="3_5hq3y"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs" id="3_c8mah"]
 [ext_resource type="Resource" uid="uid://6660baswp31q" path="res://Data/Enemy/AttackData/goblin_archer_shoot.tres" id="4_as0kg"]
 [ext_resource type="AudioStream" uid="uid://dyti4xa6a6867" path="res://Assets/Sound/SFX/Enemy/GoblinArcher/shoot.wav" id="6_uys5v"]
 [ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="7_idm5l"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="8_r8b40"]
+[ext_resource type="Texture2D" uid="uid://dblom0v7xbe33" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblin_archer.png" id="8_xic31"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrdp6"]
+atlas = ExtResource("8_xic31")
+region = Rect2(256, 256, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o04qd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_o43qb")
+"texture": SubResource("AtlasTexture_mrdp6")
 }],
 "loop": true,
 "name": &"default",
@@ -35,9 +39,7 @@ target_position = Vector2(1037, 326)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = ExtResource("2_6rdhl")
-animation = &"retreat"
-frame = 2
-frame_progress = 0.0552375
+animation = &"stagger"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_c8mah")

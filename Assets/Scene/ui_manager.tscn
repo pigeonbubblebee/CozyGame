@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=15 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c6xkeauk014jr" path="res://Assets/Art/UI/Mana.png" id="8_ama06"]
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="8_diypk"]
 [ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="9_vxua4"]
+[ext_resource type="Texture2D" uid="uid://c0sb5sml5du7i" path="res://Assets/Art/UI/curse_bar.png" id="10_3meys"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/BossBarsUI.cs" id="11_e04r8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
@@ -35,7 +36,7 @@ grow_vertical = 2
 script = ExtResource("2_u5q2o")
 _healBarPath = NodePath("HealBar")
 _manaBarPath = NodePath("HealthBar")
-_postureBarPath = NodePath("PostureBar")
+_postureBarPath = NodePath("CurseBar")
 _internalHealthBarPath = NodePath("InternalHealthBar")
 _healthHUDPath = NodePath("ManaBar")
 
@@ -92,6 +93,7 @@ texture_under = ExtResource("3_0sbdu")
 texture_progress = ExtResource("5_7li7p")
 
 [node name="ManaBar" type="GridContainer" parent="GUI/HUD"]
+visible = false
 layout_mode = 0
 offset_left = 160.0
 offset_top = 816.0
@@ -104,23 +106,21 @@ script = ExtResource("4_cp6gb")
 _healthImageHit = ExtResource("6_h24h4")
 _healthImageUnhit = ExtResource("8_ama06")
 
-[node name="PostureBar" type="TextureProgressBar" parent="GUI/HUD"]
-visible = false
+[node name="CurseBar" type="TextureProgressBar" parent="GUI/HUD"]
 layout_mode = 0
-offset_left = 512.0
+offset_left = 160.0
 offset_top = 816.0
-offset_right = 705.0
-offset_bottom = 823.0
+offset_right = 309.0
+offset_bottom = 824.0
 scale = Vector2(3, 3)
-fill_mode = 6
 radial_fill_degrees = 0.0
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2
 stretch_margin_right = 2
 stretch_margin_bottom = 2
-texture_under = ExtResource("8_diypk")
-texture_progress = ExtResource("9_vxua4")
+texture_under = ExtResource("3_0sbdu")
+texture_progress = ExtResource("10_3meys")
 
 [node name="BossBars" type="Control" parent="GUI"]
 layout_mode = 3

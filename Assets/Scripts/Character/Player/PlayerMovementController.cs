@@ -129,6 +129,11 @@ public partial class PlayerMovementController : Node
 		}
 	}
 
+	public void ResetVerticalSpeed() {
+		Vector2 velocity = new Vector2(_playerBody.Velocity.X, 0);
+		_playerBody.Velocity = velocity;
+	}
+
 	private Vector2 _GetInputVector() {
 		return _inputManager.GetMovementDirection();
 	}

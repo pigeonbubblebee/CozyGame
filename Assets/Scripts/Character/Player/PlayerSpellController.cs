@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public partial class PlayerSpellController : Node2D
 {	
-	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot && CurrentMana >= _playerStats.ManaUsage;
+	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot && _player.PostureController.CurrentPosture <= 
+		_playerStats.MaxCurse - _playerStats.CurseUsePerSpell/*&& CurrentMana >= _playerStats.ManaUsage*/;
 	
 	private int _maxMana => _playerStats.MaxMana;
 	[Export] public int CurrentMana { get; private set; }
@@ -83,9 +84,11 @@ public partial class PlayerSpellController : Node2D
 		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude * 2f);
 		_player.MovementController.ApplyKnockback(-_player.MovementController.Direction, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 		// _gameManager.FreezeFrame(0.02f, 0.1f);
-				
-		CurrentMana -= _playerStats.ManaUsage;
-		ManaUseEvent?.Invoke(_playerStats.ManaUsage);
+		_player.PostureController.ReduceCurse(_playerStats.CurseUsePerSpell);
+		// CurrentMana -= _playerStats.ManaUsage;
+		// ManaUseEvent?.Invoke(_playerStats.ManaUsage);
+
+
 		// CanSwitchAttackDirection = false;
 		// ShootEvent?.Invoke(_playerStats.SlashDamage, _playerStats.SlashTime, _playerStats.SlashRange);
 		// GD.Print("PEW");

@@ -12,7 +12,7 @@ public partial class PlayerStaggerState : PlayerState
 	public override void Enter(State previousState) {
 		base.Enter(previousState);
 		
-		PostureController.StartPostureRecovery();
+		// PostureController.StartPostureRecovery();
 		CanFlip = false;
 
 		// TODO: Reset Colliders

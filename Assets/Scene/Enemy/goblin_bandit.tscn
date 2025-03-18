@@ -22,9 +22,7 @@ position = Vector2(0, 8)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = ExtResource("2_dqyxp")
-animation = &"slash"
-frame = 8
-frame_progress = 1.0
+animation = &"stagger"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_ima5s")
@@ -48,7 +46,7 @@ target_position = Vector2(-32, 0)
 
 [node name="Slash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("2_qa4p0")
-SlashRange = 170.0
+SlashRange = 180.0
 SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0

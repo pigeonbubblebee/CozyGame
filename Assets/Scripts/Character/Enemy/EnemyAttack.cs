@@ -43,7 +43,7 @@ public partial class EnemyAttack : Node2D
 	}
 	
 	public virtual void Execute(Player p, Enemy e) {
-		GD.Print(this.Name);
+		// GD.Print(this.Name);
 		EnemyAI.Sprite.Play(AnimationName);
 		StartAttackCooldown();
 		TargetPlayer = p;
@@ -86,7 +86,7 @@ public partial class EnemyAttack : Node2D
 		if(NotChainAttack)
 			FinishAttackEvent?.Invoke();
 			
-		GD.Print("Finished!");
+		// GD.Print("Finished!");
 		
 		if(!NotChainAttack) {
 			// GD.Print("Chaining!");

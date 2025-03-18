@@ -4,11 +4,15 @@ using System;
 public partial class PlayerIdleState : PlayerState
 {
 	private bool _deflectTransition = false;
+	private bool _fallTransition = false;
 	private bool _hitTransition = false;
 	
 	public override void Enter(State previousState) {
 		_deflectTransition = previousState is PlayerBlockState;
 		_hitTransition = false;
+
+		_fallTransition = previousState is PlayerFallState;
+
 		if(previousState is PlayerBlockState) {
 			if(((PlayerBlockState)previousState).HitTransition) {
 				_hitTransition = true;
@@ -24,6 +28,9 @@ public partial class PlayerIdleState : PlayerState
 		if(_deflectTransition){
 			AnimationController.PlayAnimation(AnimationController.BlockTransAnimationClip);
 			GetTree().CreateTimer(0.3528f).Timeout += _PlayIdleAnimation;
+		} else if(_fallTransition) {
+			AnimationController.PlayAnimation(AnimationController.FallTransAnimationClip);
+			GetTree().CreateTimer(0.3).Timeout += _PlayIdleAnimation;
 		} else {
 			AnimationController.PlayAnimation(AnimationController.IdleAnimationClip);
 		}
@@ -43,10 +50,6 @@ public partial class PlayerIdleState : PlayerState
 
 	protected override bool CheckStates()
 	{
-		if(PostureController.CurrentPosture <= 0) {
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop() && DeflectController.CanBlock)) {
 			DeflectController.StartBlock();
 			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.BlockState);

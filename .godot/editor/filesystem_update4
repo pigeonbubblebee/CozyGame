@@ -5,9 +5,6 @@ res://Shader/outline.gdshader
 res://Data/Enemy/goblin_bandit.tres
 res://Data/Enemy/goblin_archer.tres
 res://Data/Enemy/goblin_hatchet.tres
-res://Assets/Scripts/Core/Game/SceneManager.cs
-res://Assets/Scripts/Core/Save/SaveLoader.cs
-res://Assets/Scene/Enemy/goblin_archer.tscn
 res://Assets/Scene/Levels/TutorialArea/testing.tscn
 res://Assets/Scene/main.tscn
 res://Assets/Scene/bullet.tscn
@@ -16,6 +13,8 @@ res://Assets/Scene/Enemy/goblin_warrior_easier.tscn
 res://Assets/Scene/ui_manager.tscn
 res://Assets/Scene/inventory.tscn
 res://Assets/Scene/Enemy/chaser_enemy.tscn
+res://Assets/Scene/Enemy/goblin_archer.tscn
+res://Assets/Scene/Enemy/worg.tscn
 res://Assets/Scripts/Core/User Interface/HealthHUD.cs
 res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs
@@ -29,6 +28,7 @@ res://Assets/Scripts/Character/Enemy/Attacks/CleaveCounterArea.cs
 res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs
 res://Assets/Scripts/Combat/HealthSystem.cs
 res://Assets/Scripts/Character/Player/PlayerCamera.cs
+res://Assets/Scripts/Core/Save/SaveLoader.cs
 res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs
 res://Assets/Scripts/Character/Enemy/Enemy.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs
@@ -72,6 +72,7 @@ res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs
 res://Assets/Scripts/Character/Player/PlayerDeflectController.cs
 res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs
 res://Assets/Scripts/Core/Game/GameManager.cs
+res://Assets/Scripts/Core/Game/SceneManager.cs
 res://Assets/Scripts/Character/Enemy/TestingDummy.cs
 res://Assets/Scripts/Core/Sound/AdjustableSound.cs
 res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs
@@ -88,3 +89,6 @@ res://Assets/Scripts/Character/Enemy/Patrol/PatrolIdleState.cs
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Core/Game/MainHandler.cs
 res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs
+res://Assets/Scene/tile_map.tscn
+res://Assets/Scene/Environment/respawn_point.tscn
+res://Data/player_stats.tres

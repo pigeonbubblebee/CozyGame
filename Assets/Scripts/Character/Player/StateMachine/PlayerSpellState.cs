@@ -22,8 +22,9 @@ public partial class PlayerSpellState : PlayerState
 		SpellController.UseSpell();
 		SpellController.StartShootCooldown();
 		// GetTree().CreateTimer(Stats.ShootTime).Timeout += _EnterDefaultState;
-		
+		MovementController.ResetVerticalSpeed();
 		MovementController.Recoil(Stats.ShootMaxRecoil); // Link to Pstats
+		
 		// TODO: Reset Colliders
 		
 		MovementController.CanSwitchDirections = false;
@@ -31,7 +32,7 @@ public partial class PlayerSpellState : PlayerState
 
 	public override void PlayStateAnimation() {
 		// TODO: Start Idle Animation
-		AnimationController.PlayAnimation(AnimationController.CounterAnimationClip, Stats.ShootTime);
+		AnimationController.PlayAnimation(AnimationController.SpellAnimationClip, Stats.ShootTime);
 	}
 
 	public override void Process(double delta)

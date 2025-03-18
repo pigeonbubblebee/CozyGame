@@ -81,12 +81,14 @@ public partial class PlayerStats : Resource
 	[Export] public float BlockShakeMagnitude { get; private set; }
 	[Export] public float DeflectShakeTime { get; private set; }
 	[Export] public float DeflectShakeMagnitude { get; private set; }
-	[ExportCategory("Posture")]
-	[Export] public int MaxPosture { get; private set; }
-	[Export] public int PostureRegeneration { get; private set; }
-	[Export] public float PostureRegenerationDisengagementTime { get; private set; }
-	[Export] public float PostureRegenerationCooldown { get; private set; }
-	[Export] public float StaggerRecoveryTime { get; private set; }
+	[ExportCategory("Curse")]
+	[Export] public int MaxCurse { get; private set; }
+	[Export] public int CurseBuildRate { get; private set; }
+	[Export] public int CurseUsePerSpell { get; private set; }
+	// [Export] public int PostureRegeneration { get; private set; }
+	// [Export] public float PostureRegenerationDisengagementTime { get; private set; }
+	// [Export] public float PostureRegenerationCooldown { get; private set; }
+	// [Export] public float StaggerRecoveryTime { get; private set; }
 	[ExportCategory("Powerups")]
 	[Export] public bool CanCounterCleave { get; private set; }
 

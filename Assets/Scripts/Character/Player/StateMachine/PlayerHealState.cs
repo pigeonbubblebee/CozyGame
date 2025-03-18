@@ -28,11 +28,6 @@ public partial class PlayerHealState : PlayerState
 	
 	protected override bool CheckStates()
 	{
-		if(PostureController.CurrentPosture <= 0) {
-			HealController.InterruptHeal();
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if(!HealController.DesiredHeal) {
 			HealController.InterruptHeal();
 			ParentPlayerStateMachine.EnterDefaultState();

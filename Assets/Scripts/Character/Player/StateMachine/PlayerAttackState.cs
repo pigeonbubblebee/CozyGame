@@ -31,11 +31,6 @@ public partial class PlayerAttackState : PlayerState
 			return;
 		}
 		
-		if(DeflectController.Counter) {
-			AnimationController.PlayAnimation(AnimationController.CounterAnimationClip, Stats.SlashTime);
-			return;
-		}
-		
 		GD.Print(AttackController.CurrentSlashComboAttack);
 		
 		// AnimationController.PlayAnimation(DeflectController.Counter ? AnimationController.CounterAnimationClip : AnimationController.SlashAnimationClip, Stats.SlashTime);

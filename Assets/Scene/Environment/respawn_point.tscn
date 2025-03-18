@@ -3,16 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dn8h24xsb4ui1" path="res://Assets/Art/Environment/RespawnLocation.png" id="1_ter2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvr7g"]
-size = Vector2(224, 298)
+size = Vector2(72, 109)
 
 [node name="RespawnPoint" type="Area2D"]
 
 [node name="RespawnLocation" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(0, -136)
-scale = Vector2(4, 4)
+position = Vector2(8, 8)
 texture = ExtResource("1_ter2r")
 
 [node name="InteractArea" type="CollisionShape2D" parent="."]
-position = Vector2(-24, -139)
 shape = SubResource("RectangleShape2D_gvr7g")

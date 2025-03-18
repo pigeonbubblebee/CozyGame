@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bskrg487tax4i"]
+[gd_scene load_steps=35 format=3 uid="uid://bskrg487tax4i"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_dy2dn"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs" id="3_06o73"]
@@ -12,6 +12,58 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1tcd"]
 size = Vector2(120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y0jo"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykgey"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7aos"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3ydq"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0jgx"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w0hs"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8pwo"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oofmm"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hayme"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1dqf"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4wxq"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffxpt"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouyou"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fril4"]
 atlas = ExtResource("3_flb7c")
@@ -33,19 +85,42 @@ region = Rect2(0, 128, 128, 128)
 atlas = ExtResource("3_flb7c")
 region = Rect2(128, 128, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8o4v"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkf0n"]
+atlas = ExtResource("3_vvw8c")
+region = Rect2(0, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fwwuj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_vvw8c")
+"texture": SubResource("AtlasTexture_5y0jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykgey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7aos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3ydq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0jgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w0hs")
 }],
 "loop": true,
 "name": &"aggro",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_vvw8c")
+"texture": SubResource("AtlasTexture_v8pwo")
 }],
 "loop": true,
 "name": &"idle",
@@ -53,11 +128,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_vvw8c")
+"texture": SubResource("AtlasTexture_oofmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hayme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1dqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4wxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffxpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouyou")
 }],
 "loop": true,
 "name": &"patrol",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -76,7 +166,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_f26fk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_vvw8c")
+"texture": SubResource("AtlasTexture_a8o4v")
 }],
 "loop": true,
 "name": &"pounce",
@@ -84,7 +174,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_vvw8c")
+"texture": SubResource("AtlasTexture_hkf0n")
 }],
 "loop": true,
 "name": &"stagger",
@@ -132,6 +222,7 @@ position = Vector2(0, 40)
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_fwwuj")
 animation = &"pounce"
+frame_progress = 0.791319
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_paiqi")
@@ -143,7 +234,7 @@ FinishEarly = true
 AttackCooldown = 0.6
 AnimationName = "patrol"
 AttackLength = 0.45
-_chainedAttackPath = NodePath("Pounce")
+_chainedAttackPath = NodePath("../Pounce")
 
 [node name="LedgeCheck" type="RayCast2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
 position = Vector2(-104, 0)
@@ -153,7 +244,7 @@ target_position = Vector2(0, 144)
 position = Vector2(-112, 0)
 target_position = Vector2(-32, 0)
 
-[node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat"]
+[node name="Pounce" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("3_06o73")
 VerticalLungeSpeed = 1700.0
 SlashRange = 500.0
@@ -166,21 +257,21 @@ OffFrame = 5
 _attackAreaColliderPath = NodePath("Hit/Hitbox")
 _attackAreaPath = NodePath("Hit")
 _slashSFXPath = NodePath("slashSFX")
-AttackCooldown = 1.125
+AttackCooldown = 2.0
 AnimationName = "pounce"
 AttackLength = 1.125
 NotChainAttack = true
 _attackData = SubResource("Resource_ldu8y")
 
-[node name="slashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce"]
+[node name="slashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
 stream = ExtResource("6_nbxxr")
 
-[node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce"]
+[node name="Hit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce"]
 position = Vector2(-72, 64)
 collision_layer = 2
 collision_mask = 2
 
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Retreat/Pounce/Hit"]
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Pounce/Hit"]
 position = Vector2(80, -8)
 shape = SubResource("RectangleShape2D_y7w4a")
 disabled = true
@@ -189,6 +280,9 @@ disabled = true
 stream = ExtResource("6_f0n80")
 volume_db = 4.0
 script = ExtResource("6_mcfje")
+
+[node name="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="1"]
+stream = ExtResource("6_f0n80")
 
 [node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
 position = Vector2(10, 56)

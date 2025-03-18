@@ -36,6 +36,7 @@ public partial class UIManager : Node2D
 		_HUD.Visible = true;
 		
 		_bossBars.Visible = false;
+		_bossBars.Boss = null;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

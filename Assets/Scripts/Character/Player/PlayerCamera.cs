@@ -35,13 +35,13 @@ public partial class PlayerCamera : Camera2D
 		_shakeMagnitude = Mathf.Lerp(_shakeMagnitude, 0f, 5f * (float)delta);
 		
 		if (_shakeTimer > 0f) {
-			this.Offset = new Vector2(0, -120f)
+			this.Offset = new Vector2(0, -220f)
 				+ _GetNoise(delta);
 			_shakeTimer -= delta;
 		}
 		if(_shakeTimer <= 0f) {
 			// this.Position = new Vector2(0f, 0f);
-			this.Offset = new Vector2(0, -120f);
+			this.Offset = new Vector2(0, -220f);
 		}
 	}
 

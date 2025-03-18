@@ -111,6 +111,7 @@ public partial class Player : CharacterBody2D
 				TakeTrueDamage(e, enemy);
 				return;
 			}
+			PostureController.TakePostureDamage(CurrentPlayerStats.CurseBuildRate);
 			DeflectController.Block(e, enemy);
 		} else {
 			TakeTrueDamage(e, enemy);
@@ -122,7 +123,13 @@ public partial class Player : CharacterBody2D
 		HealController.ConvertInternalDamage();
 		PlayerHealth.TakeDamage(e.Damage);
 		HealController.TakeInternalDamage(e.InternalDamage);
+		PostureController.ResetPosture();
 		// PostureController.TakePostureDamage(e.PostureDamage);
+	}
+
+	public void TakeCurseDamage(int damage, int internalDamage) {
+		PlayerHealth.TakeDamage(damage);
+		HealController.TakeInternalDamage(internalDamage);
 	}
 	
 	public void ExitGrab() {

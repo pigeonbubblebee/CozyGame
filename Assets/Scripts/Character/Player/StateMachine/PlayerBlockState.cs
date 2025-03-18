@@ -64,11 +64,6 @@ public partial class PlayerBlockState : PlayerState
 	
 	protected override bool CheckStates()
 	{
-		if(PostureController.CurrentPosture <= 0) {
-			MovementController.CanSwitchDirections = true;
-			ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.StaggerState);
-			return true;
-		}
 		if(DeflectController.BlockCancellable()) {
 			if(DeflectController.DeflectActuation || (!DeflectController.GetDeflectBufferStop())) {
 				// GD.Print("BlockCancellable");

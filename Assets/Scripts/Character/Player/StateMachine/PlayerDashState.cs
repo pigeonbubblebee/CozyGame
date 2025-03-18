@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public partial class PlayerDashState : PlayerState
 {
+	private bool _canCancelDash = false;
 	public override void Initialize(StateMachine playerStateMachine) {
 		base.Initialize(playerStateMachine);
 
@@ -19,10 +20,18 @@ public partial class PlayerDashState : PlayerState
 
 		MovementController.Dash();
 		MovementController.StartDashCooldown();
+
+		_canCancelDash = false;
+		GetTree().CreateTimer(0.1f).Timeout += _setDashCancel;
+	}
+
+	private void _setDashCancel() {
+		_canCancelDash = true;
 	}
 
 	public override void PlayStateAnimation() {
 		// TODO: Start Idle Animation
+		AnimationController.PlayAnimation(AnimationController.DashAnimationClip);
 	}
 
 	public override void Process(double delta)
@@ -61,6 +70,15 @@ public partial class PlayerDashState : PlayerState
 		// } else {
 		// 	ParentPlayerStateMachine.ChangeState(ParentPlayerStateMachine.IdleState);
 		// }
+	}
+
+	protected override bool CheckStates()
+	{
+		if(MovementController.Velocity.X == 0 && _canCancelDash) {
+			_EnterDefaultState();
+			return true;
+		}
+		return false;
 	}
 
 	private void _EnterDefaultState() {

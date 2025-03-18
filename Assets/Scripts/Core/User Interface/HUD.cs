@@ -100,7 +100,7 @@ public partial class HUD : Control
 	private void _UpdatePostureBar(int amt) {
 		if(_currentScenePlayer != null) {
 			// float Ratio = ((float) _currentScenePlayer.SpellController.CurrentMana) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxMana);
-			double Ratio = ((((double) _currentScenePlayer.PostureController.CurrentPosture))) / (((double) _currentScenePlayer.CurrentPlayerStats.MaxPosture));
+			double Ratio = ((((double) _currentScenePlayer.PostureController.CurrentPosture))) / (((double) _currentScenePlayer.CurrentPlayerStats.MaxCurse));
 			GD.Print(Ratio);
 			// Ratio = Mathf.Max(Ratio, 0);
 			Ratio = 1.0 - Ratio;
@@ -109,12 +109,6 @@ public partial class HUD : Control
 			Tween tween = GetTree().CreateTween();
 			tween.TweenProperty(_postureBar, "value", (Ratio) * 100, 0.075f);
 			// _postureBar.Value = Ratio * 100;
-			
-			if(Ratio == 0f) {
-				_postureBar.Visible = false;
-			} else {
-				_postureBar.Visible = true;
-			}
 		}
 	}
 }

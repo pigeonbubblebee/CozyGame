@@ -14,11 +14,13 @@ public partial class PlayerAnimationController : Node
 	public AsymmetricalAnimationClip BlockAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip JumpAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip FallAnimationClip { get; private set; }
-	public AsymmetricalAnimationClip CounterAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip FallTransAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip SpellAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip DeathBlowAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip BlockTransAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip BlockHitTransAnimationClip { get; private set; }
 	public AsymmetricalAnimationClip GrabAnimationClip { get; private set; }
+	public AsymmetricalAnimationClip DashAnimationClip { get; private set; }
 
 	public AsymmetricalAnimationClip CurrentAnimation { get; private set; }
 	
@@ -46,11 +48,13 @@ public partial class PlayerAnimationController : Node
 		BlockAnimationClip = new AsymmetricalAnimationClip("block");
 		JumpAnimationClip = new AsymmetricalAnimationClip("jump");
 		FallAnimationClip = new AsymmetricalAnimationClip("fall");
-		CounterAnimationClip = new AsymmetricalAnimationClip("counter");
+		SpellAnimationClip = new AsymmetricalAnimationClip("spell");
 		DeathBlowAnimationClip = new AsymmetricalAnimationClip("deathblow");
 		BlockTransAnimationClip = new AsymmetricalAnimationClip("block_transition");
 		BlockHitTransAnimationClip = new AsymmetricalAnimationClip("block_hit_transition");
 		GrabAnimationClip = new AsymmetricalAnimationClip("grab");
+		FallTransAnimationClip = new AsymmetricalAnimationClip("fall_transition");
+		DashAnimationClip = new AsymmetricalAnimationClip("dash");
 	}
 	
 	public override void _Process(double delta) {		
