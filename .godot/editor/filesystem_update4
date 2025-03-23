@@ -1,11 +1,10 @@
-res://Assets/Scene/player.tscn
+res://Assets/Scene/Levels/TutorialArea/testing.tscn
 res://Assets/Scripts/Character/Player/PlayerStats.cs
 res://Data/Tileset/testing.tres
 res://Shader/outline.gdshader
 res://Data/Enemy/goblin_bandit.tres
 res://Data/Enemy/goblin_archer.tres
 res://Data/Enemy/goblin_hatchet.tres
-res://Assets/Scene/Levels/TutorialArea/testing.tscn
 res://Assets/Scene/main.tscn
 res://Assets/Scene/bullet.tscn
 res://Assets/Scene/Enemy/goblin_bandit.tscn
@@ -14,7 +13,10 @@ res://Assets/Scene/ui_manager.tscn
 res://Assets/Scene/inventory.tscn
 res://Assets/Scene/Enemy/chaser_enemy.tscn
 res://Assets/Scene/Enemy/goblin_archer.tscn
+res://Assets/Scene/player.tscn
 res://Assets/Scene/Enemy/worg.tscn
+res://Assets/Scene/tile_map.tscn
+res://Assets/Scene/Environment/respawn_point.tscn
 res://Assets/Scripts/Core/User Interface/HealthHUD.cs
 res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs
@@ -89,6 +91,11 @@ res://Assets/Scripts/Character/Enemy/Patrol/PatrolIdleState.cs
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Core/Game/MainHandler.cs
 res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs
-res://Assets/Scene/tile_map.tscn
-res://Assets/Scene/Environment/respawn_point.tscn
+res://Assets/Scene/Enemy/goblin_hatchet.tscn
+res://Assets/Scene/Enemy/goblin_pike.tscn
+res://Assets/Scripts/Environmental/RestPoint.cs
+res://Assets/Scene/Enemy/enemy_template.tscn
+res://Shader/Godot-Palette-Swap-Shader-master/Godot-Palette-Swap-Shader-master/PaletteSwap.gdshader
+res://Assets/Scene/interact_prompt.tscn
+res://Assets/Scripts/Core/User Interface/InteractPrompt.cs
 res://Data/player_stats.tres

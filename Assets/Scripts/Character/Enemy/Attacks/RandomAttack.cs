@@ -21,20 +21,73 @@ public partial class RandomAttack : EnemyAttack
 	}
 	
 	public override void Execute(Player p, Enemy e) {
+		bool[] canExecute = new bool[_enemyAttacks.Length];
+
+		int executables = 0;
+
+		for(int i = 0; i < canExecute.Length; i++) {
+			canExecute[i] = _enemyAttacks[i].GetCondition(p, e);
+			executables ++;
+		}
+
 		Random random = new Random();
-		int attackIndex = random.Next(0, _enemyAttacks.Length);
-		_attack = _enemyAttacks[attackIndex];
+		int amount = random.Next(0, executables);
+		int attackIndex;
+
+		int j = 0;
+
+		foreach(bool b in canExecute) {
+			// GD.Print("Amount Left: "+ amount + " " + b);
+			if(amount == 0) {
+				attackIndex = j;
+
+				_attack = _enemyAttacks[attackIndex];
 		
-		AnimationName = _attack.AnimationName;
-		AttackLength = _attack.AttackLength;
-		base.Execute(p, e);
-		
-		_attack.Execute(p, e);
-		_attack.GetNextChainAttack().FinishAttackEvent += Finish;
+				AnimationName = _attack.AnimationName;
+				AttackLength = _attack.AttackLength;
+				base.Execute(p, e);
+				
+				_attack.Execute(p, e);
+				_attack.GetNextChainAttack().FinishAttackEvent += Finish;
+
+				return;
+			}
+
+			if(b) {
+				amount --;
+			}	
+			j++;
+		}
+
+		if(amount == 0) {
+			attackIndex = j;
+
+			if(attackIndex > _enemyAttacks.Length - 1)
+				attackIndex = _enemyAttacks.Length - 1;
+			if(attackIndex < 0)
+				attackIndex = 0;
+
+			_attack = _enemyAttacks[attackIndex];
+	
+			AnimationName = _attack.AnimationName;
+			AttackLength = _attack.AttackLength;
+			base.Execute(p, e);
+			
+			_attack.Execute(p, e);
+			_attack.GetNextChainAttack().FinishAttackEvent += Finish;
+		} else {
+			Active = true;
+			Finish();
+		}
 	}
+
+	
 	
 	protected override void Finish() {
-		_attack.FinishAttackEvent -= Finish;
+		// GD.Print("Finished");
+		if(_attack!=null) {
+			_attack.FinishAttackEvent -= Finish;
+		}
 		base.Finish();
 	}
 	
@@ -45,10 +98,16 @@ public partial class RandomAttack : EnemyAttack
 	}
 	
 	public override bool GetCondition(Player p, Enemy e) {
-		bool res = true;
+		// bool res = true;
+		// foreach(EnemyAttack a in _enemyAttacks) {
+		// 	if(!a.GetCondition(p, e))
+		// 		res = false;
+		// }
+
+		bool res = false;
 		foreach(EnemyAttack a in _enemyAttacks) {
-			if(!a.GetCondition(p, e))
-				res = false;
+			if(a.GetCondition(p, e))
+				res = true;
 		}
 		return res && CanAttack;
 	}

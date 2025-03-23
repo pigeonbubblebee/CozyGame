@@ -25,6 +25,7 @@ public partial class ChaserStateMachine : PatrolStateMachine
 			ChangeState(AggroState);
 			return true;
 		}
+		ChangeState(IdleState);
 		return false;
 	}
 }

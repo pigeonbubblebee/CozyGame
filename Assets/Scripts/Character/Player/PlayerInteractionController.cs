@@ -27,12 +27,19 @@ public partial class PlayerInteractionController : Area2D
 
 	private void _OnItemOverlap(Node2D hit) {
 		if(hit is IInteractable) {
+			if(ObjectCurrentlyInteracting != null) {
+				ObjectCurrentlyInteracting.OnExit(_player);
+			}
 			ObjectCurrentlyInteracting = (IInteractable) hit;
+			ObjectCurrentlyInteracting.OnEnter(_player);
 		}
 	}
 
 	private void _OnItemExit(Node2D hit) {
 		if(hit is IInteractable) {
+			if(ObjectCurrentlyInteracting != null) {
+				ObjectCurrentlyInteracting.OnExit(_player);
+			}
 			ObjectCurrentlyInteracting = null;
 		}
 	}

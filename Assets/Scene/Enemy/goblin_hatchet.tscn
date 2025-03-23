@@ -47,9 +47,7 @@ EnemyNameLocalizationKey = "goblin_hatchet"
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(9, -16)
 sprite_frames = ExtResource("2_wxot2")
-animation = &"cleave"
-frame = 9
-frame_progress = 1.0
+animation = &"cleave_countered"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_k48wh")

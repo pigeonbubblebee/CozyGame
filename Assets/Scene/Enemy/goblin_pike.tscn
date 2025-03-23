@@ -363,7 +363,7 @@ EnemyNameLocalizationKey = "goblin_pike"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
-animation = &"thrust"
+animation = &"sweep"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_0nfbp")

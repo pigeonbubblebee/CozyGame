@@ -123,7 +123,7 @@ public partial class Player : CharacterBody2D
 		HealController.ConvertInternalDamage();
 		PlayerHealth.TakeDamage(e.Damage);
 		HealController.TakeInternalDamage(e.InternalDamage);
-		PostureController.ResetPosture();
+		// PostureController.ResetPosture();
 		// PostureController.TakePostureDamage(e.PostureDamage);
 	}
 

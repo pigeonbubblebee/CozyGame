@@ -17,8 +17,10 @@ public abstract partial class StateMachine : Node
 	}
 
 	public void ChangeState(State newState) {
-		if(_logStates)
+		if(_logStates) {
 			GD.Print(newState.Name);
+			// GD.Print("StateChanged!");
+		}
 
 		State previousState = CurrentState;
 

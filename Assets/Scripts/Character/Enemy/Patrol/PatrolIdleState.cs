@@ -11,10 +11,7 @@ public partial class PatrolIdleState : EnemyIdleState
 		this._patrolAI = ((PatrolStateMachine) stateMachine).PatrolAI;
 	}
 	
-	//public override void Enter(State prev) {
-	//	// GD.Print(_patrolAI.Sprite);
-	//	_patrolAI.Sprite.Play("idle");
-	//}
+	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsProcess(double delta)

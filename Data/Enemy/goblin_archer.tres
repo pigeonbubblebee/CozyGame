@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=26 format=3 uid="uid://dyr7qfod35a2j"]
+[gd_resource type="SpriteFrames" load_steps=23 format=3 uid="uid://dyr7qfod35a2j"]
 
 [ext_resource type="Texture2D" uid="uid://dblom0v7xbe33" path="res://Assets/Art/Character/Enemy/GoblinArcher/goblin_archer.png" id="2_xpu6b"]
 
@@ -25,18 +25,6 @@ region = Rect2(0, 128, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5owic"]
 atlas = ExtResource("2_xpu6b")
 region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o4rr1"]
-atlas = ExtResource("2_xpu6b")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hnxsg"]
-atlas = ExtResource("2_xpu6b")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ahc8o"]
-atlas = ExtResource("2_xpu6b")
-region = Rect2(0, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jeyae"]
 atlas = ExtResource("2_xpu6b")
@@ -124,15 +112,6 @@ animations = [{
 "speed": 15.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o4rr1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hnxsg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ahc8o")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jeyae")
 }],

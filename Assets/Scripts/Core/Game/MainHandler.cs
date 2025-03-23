@@ -19,6 +19,9 @@ public partial class MainHandler : Node
 
 	private SaveLoader _saveLoader;
 
+	private string _currentArea;
+	private string _currentLevel;
+
 	private bool _respawnRequest = false;
 	
 	public override void _Ready() {
@@ -46,6 +49,12 @@ public partial class MainHandler : Node
 
 	public SceneManager GetCurrentScene() {
 		return _currentScene;
+	}
+
+	public void SetRespawnID(string location) {
+		_respawnLocationArea = _currentArea;
+		_respawnLocationLevel = _currentLevel;
+		_respawnLocationLocation = location;
 	}
 
 	public string GetRespawnID() {
@@ -108,6 +117,9 @@ public partial class MainHandler : Node
 	public void LoadLevel(string area, string levelName) {
 		_uiManager.EnableLoadingScreen();
 		_currentLoadScenePath = "res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn";
+
+		_currentArea = area;
+		_currentLevel = levelName;
 
 		_uiManager.ResetUI();
 

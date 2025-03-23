@@ -39,7 +39,7 @@ target_position = Vector2(1037, 326)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
 sprite_frames = ExtResource("2_6rdhl")
-animation = &"stagger"
+animation = &"aiming"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_c8mah")

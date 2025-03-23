@@ -16,6 +16,11 @@ public partial class PlayerHealState : PlayerState
 		HealController.FinishHealChargeEvent += _EnterDefaultState;
 	}
 
+	public override void PlayStateAnimation() {
+		AnimationController.PlayAnimation(AnimationController.HealAnimationClip, Stats.HealTime);
+	}
+
+
 	public override void Process(double delta)
 	{
 		MovementController.AddFriction(delta);
