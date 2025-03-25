@@ -37,6 +37,8 @@ public partial class SaveLoader : Node
 	}
 
     public void Save() {
+
+		GD.Print("save");
 		SaveFile saveFile = new SaveFile();
 
 		// GD.Print(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
@@ -47,17 +49,22 @@ public partial class SaveLoader : Node
 		saveFile.RespawnID = GetNode<MainHandler>("/root/MainHandler").GetRespawnID();
 		saveFile.RoomDatas = _roomDatas;
 
+		saveFile.inventory = GetNode<Player>("/root/Player").InventoryManager.SerializeInventory();
+
 		SaveToFile(PATH, fileName, JsonConvert.SerializeObject(saveFile.Save()));
 	}
 
 	public void Load() {
 		GD.Print("LOADING FROM:" + PATH);
+		GD.PrintErr("test");
 		CurrentSaveFile = LoadFromFile(PATH, fileName);
 		ProcessCurrentSaveFile();
 		LoadEvent?.Invoke();
 	}
 
 	public void HandleNewRoomData(SceneManager sceneManager) {
+		if(sceneManager == null)
+			return;
 		// GD.Print("QUITTING" + sceneManager.Name);
 		RoomData[] temp = _roomDatas.ToArray();
 		for(int i = 0; i < temp.Length; i++) {
@@ -94,6 +101,8 @@ public partial class SaveLoader : Node
 
 		newRoomData.RoomID = ID;
 		newRoomData.EnemiesAlive = sceneManager.GetEnemiesAlive();
+		GD.Print("Updating data" + sceneManager.GetBreakablesAlive()[1]);
+		newRoomData.BreakablesAlive = sceneManager.GetBreakablesAlive();
 
 		return newRoomData;
 	}
@@ -109,7 +118,7 @@ public partial class SaveLoader : Node
 					roomData =  JsonConvert.DeserializeObject<RoomData>(CurrentSaveFile[key].ToString());
 					_roomDatas.Add(roomData);
 
-					GD.Print(roomData.RoomID + " " + roomData.EnemiesAlive[4]);
+					GD.Print(roomData.RoomID + " " + roomData.BreakablesAlive[1]);
 				}
 			}
 		}

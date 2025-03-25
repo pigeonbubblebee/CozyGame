@@ -1,5 +1,6 @@
-RichTextLabel
 Node2D
+StaticBody2D
+RichTextLabel
 GPUParticles2D
 CollisionShape2D
 Area2D
@@ -11,4 +12,3 @@ AnimatedSprite2D
 AudioStreamPlayer
 TextureRect
 RemoteTransform2D
-TextureProgressBar

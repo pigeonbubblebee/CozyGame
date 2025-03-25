@@ -17,6 +17,8 @@ public partial class UIManager : Node2D
 	
 	private Player _currentScenePlayer;
 
+	public bool InventoryOpen => _inventory.Visible;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

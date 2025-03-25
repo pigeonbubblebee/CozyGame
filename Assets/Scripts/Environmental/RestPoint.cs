@@ -15,7 +15,7 @@ public partial class RestPoint : Interactable
 		// GD.Print(_itemResource);
 		// player.InventoryManager.AddItemToInventory(_itemResource);
 		// this.QueueFree();
-
+		GD.Print("rested");
 		GetNode<MainHandler>("/root/MainHandler").SetRespawnID(this.Name);
 		GetNode<MainHandler>("/root/MainHandler").RespawnPlayer();
 	}

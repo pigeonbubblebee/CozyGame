@@ -212,6 +212,7 @@ script = ExtResource("16_v3xuk")
 _patrolSFXPath = NodePath("AudioStreamPlayer2D")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyTemplate/StateMachine/PatrolState"]
+process_mode = 3
 stream = ExtResource("7_t1h5y")
 volume_db = 4.0
 script = ExtResource("8_ucmwq")

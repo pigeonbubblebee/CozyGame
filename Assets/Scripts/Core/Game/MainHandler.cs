@@ -64,10 +64,13 @@ public partial class MainHandler : Node
 	public override void _Process(double delta) {
 		ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(_currentLoadScenePath, _loadProgess);
 		
-		if(status == ResourceLoader.ThreadLoadStatus.Loaded) {
+		if(status == ResourceLoader.ThreadLoadStatus.Loaded && !_finishedLoad) {
+			_finishedLoad = true;
 			_FinishLoadSceneRequest();
 		}
 	}
+
+	private bool _finishedLoad = false;
 
 	private void _FinishLoadSceneRequest() {
 		if(_currentScene != null) {
@@ -107,7 +110,8 @@ public partial class MainHandler : Node
 	}
 
 	public void RespawnPlayer() {
-		// _saveLoader.Save();
+		GD.Print("respawn Req");
+		_saveLoader.Save();
 		_respawnRequest = true;
 		// _saveLoader.CurrentSaveFile["PlayerHealth"] = 20
 		SpawnPlayer();
@@ -115,6 +119,7 @@ public partial class MainHandler : Node
 	}
 	
 	public void LoadLevel(string area, string levelName) {
+		_finishedLoad = false;
 		_uiManager.EnableLoadingScreen();
 		_currentLoadScenePath = "res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn";
 

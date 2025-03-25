@@ -12,6 +12,11 @@ public partial class SceneManager : Node2D
 	private NodePath _enemiesParentPath;
 	private Node2D _enemiesParent;
 	private Enemy[] _enemies;
+
+	[Export]
+	private NodePath _breakablesPath;
+	private Node2D _breakablesParent;
+	private Node2D[] _breakables;
 	
 	private bool _initialized = false;
 
@@ -41,6 +46,9 @@ public partial class SceneManager : Node2D
 		_enemies = new Enemy[_enemiesParent.GetChildren().Count];
 		i = 0;
 
+		_breakablesParent = GetNode<Node2D>(_breakablesPath);
+		_breakables = new Node2D[_breakablesParent.GetChildren().Count];
+
 		SaveFile.RoomData loadedRoomDataFromSave = (GetNode<SaveLoader>("/root/SaveLoader").GetRoomData(this.SceneID));
 		// GD.Print(this.SceneID);
 
@@ -66,6 +74,36 @@ public partial class SceneManager : Node2D
 			}
 			i ++;
 		}
+
+		i = 0;
+
+		foreach(Node n in _breakablesParent.GetChildren()) {
+			_breakables[i] = (Node2D) n;
+			// GD.Print("breakable" + _breakables[i] +" " + _breakables.Length);
+			// GD.Print(loadedRoomDataFromSave.RoomID + " from scene manager");
+			if(loadedRoomDataFromSave == null) {
+				// _breakables[i].TreeExited += _CleanupBreakables;
+			} else {
+				if(loadedRoomDataFromSave.BreakablesAlive[i]) {
+					// _breakables[i].TreeExited += _CleanupBreakables;
+				} else {
+					_breakables[i].QueueFree();
+					_breakables[i] = null;
+				}
+			}
+			i ++;
+		}
+	}
+
+	public bool[] GetBreakablesAlive() {
+		bool[] res = new bool[_breakables.Length];
+
+		for(int i = 0; i < res.Length; i++) {
+			res[i] = !(_breakables[i] is null);
+			// GD.Print(res[i]);
+		}
+
+		return res;
 	}
 
 	public bool[] GetEnemiesAlive() {
@@ -81,8 +119,19 @@ public partial class SceneManager : Node2D
 
 	public override void _Process(double delta) {
 		// _CleanupEnemy();
+		_CleanupBreakables();
 	}
 	
+	private void _CleanupBreakables() {
+		int i = 0;
+		foreach(Node2D x in _breakables) {
+			if(!IsInstanceValid(x)) {
+				_breakables[i] = null;
+			}
+			i++;
+		}
+	}
+
 	private void _CleanupEnemy(Enemy e) {
 		int i = 0;
 		foreach(Enemy x in _enemies) {

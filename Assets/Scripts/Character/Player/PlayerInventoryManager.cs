@@ -41,4 +41,35 @@ public partial class PlayerInventoryManager : Node
 		}
 		InventoryRemoveItemEvent?.Invoke(i);
 	}
+
+	public List<string> SerializeInventory() {
+		List<string> res = new List<string>();
+		foreach(Item i in _playerInventory.Keys) {
+			res.Add(i.ID);
+		}
+		return res;
+	}
+
+	public void ReadInventory(List<string> inventory) {
+		_playerInventory.Clear();
+		
+		foreach(string s in inventory) {
+			GD.Print(s);
+			AddItemToInventory((Item)_LoadItemResource(s));
+		}
+	}
+
+	private Resource _LoadItemResource(string targetFile) {
+		foreach(string file_name in DirAccess.GetFilesAt("res://Data/Items/")) {
+			GD.Print(file_name);
+			string new_file_name = "";
+			if (file_name.GetExtension() == "import") {
+				new_file_name = file_name.Replace(".import", "");
+			}
+			if(new_file_name.Equals(targetFile))
+				return ResourceLoader.Load("res://Data/Items/"+new_file_name);
+		}
+
+		return null;
+	}
 }

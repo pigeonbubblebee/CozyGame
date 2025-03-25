@@ -1,5 +1,7 @@
 using Godot;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
@@ -79,7 +81,7 @@ public partial class Player : CharacterBody2D
 	
 	public void Respawn() {
 		
-		GD.Print("respawn");
+		//GD.Print("respawn");
 		// GD.Print(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]);
 		PlayerHealth.SetHealth(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]));
 		// PlayerHealth.ResetHealth();
@@ -87,8 +89,11 @@ public partial class Player : CharacterBody2D
 		HealController.ResetHeals();
 		
 		PostureController.ResetPosture();
+		
 
 		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
+		GD.Print("count: " + JsonConvert.DeserializeObject<List<string>>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()).Count);
+		InventoryManager.ReadInventory(JsonConvert.DeserializeObject<List<string>>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()));
 	}
 	
 	private void Quit() { // Temp

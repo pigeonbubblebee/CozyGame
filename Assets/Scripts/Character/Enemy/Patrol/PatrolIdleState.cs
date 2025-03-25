@@ -10,11 +10,22 @@ public partial class PatrolIdleState : EnemyIdleState
 		base.Initialize(stateMachine);
 		this._patrolAI = ((PatrolStateMachine) stateMachine).PatrolAI;
 	}
-	
-	
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void PhysicsProcess(double delta)
+    public override void Enter(State prev)
+    {
+        base.Enter(prev);
+
+		// _patrolStateMachine.PatrolState.GetPatrolSFX().StreamPaused = false;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+		// _patrolStateMachine.PatrolState.GetPatrolSFX().StreamPaused = true;
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void PhysicsProcess(double delta)
 	{
 		base.PhysicsProcess(delta);
 		

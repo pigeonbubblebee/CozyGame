@@ -8,6 +8,6 @@ script = ExtResource("1_a8ukp")
 ID = "testing_item"
 Description = "description_testing_item"
 ItemTier = 0.0
-SortingID = 0
+SortingID = 1
 Image = ExtResource("1_dmlm5")
 Type = 0

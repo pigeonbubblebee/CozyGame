@@ -940,7 +940,6 @@ position = Vector2(264, 0)
 
 [node name="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
 stream = ExtResource("22_3l7d6")
-stream_paused = true
 
 [node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
 position = Vector2(-16, -36)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://kl1nyrpnxbuo"]
+[gd_scene load_steps=4 format=3 uid="uid://kl1nyrpnxbuo"]
 
 [ext_resource type="Texture2D" uid="uid://biofdu5txex54" path="res://Assets/Art/UI/interactbar.png" id="1_po521"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InteractPrompt.cs" id="1_qp4ov"]
+[ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="3_id33p"]
 
 [node name="InteractPrompt" type="Node2D"]
 scale = Vector2(0.25, 0.25)
@@ -9,21 +10,29 @@ script = ExtResource("1_qp4ov")
 _textPath = NodePath("Prompt")
 
 [node name="Interactbar" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("1_po521")
 
 [node name="Key" type="RichTextLabel" parent="."]
-offset_left = -68.0
-offset_top = -14.0
-offset_right = -40.0
-offset_bottom = 10.0
+offset_left = -86.0
+offset_top = -16.0
+offset_right = -58.0
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("3_id33p")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]F"
 
 [node name="Prompt" type="RichTextLabel" parent="."]
-offset_left = -32.0
-offset_top = -14.0
-offset_right = 64.0
-offset_bottom = 10.0
+offset_left = -36.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 6.0
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("3_id33p")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]Rest"

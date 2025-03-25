@@ -1,20 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://c78kctwoddfg6"]
+[gd_scene load_steps=17 format=3 uid="uid://c78kctwoddfg6"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_71fcw"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InventoryUI.cs" id="1_pvkgr"]
 [ext_resource type="Resource" uid="uid://dyx8x6h5y8kfq" path="res://Data/Items/TestingItem.tres" id="2_3rrar"]
 [ext_resource type="Resource" uid="uid://cy7j7pcjeceba" path="res://Data/Items/Stick.tres" id="3_31qnq"]
 [ext_resource type="Texture2D" uid="uid://ctcjp4dhg7kn" path="res://Sprite-0002.png" id="3_hy8f1"]
-[ext_resource type="Resource" uid="uid://dh64y30leyvhe" path="res://Data/Items/Sword.tres" id="4_p7336"]
+[ext_resource type="Resource" uid="uid://dh64y30leyvhe" path="res://Data/Items/sword.tres" id="4_p7336"]
+[ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="5_lw1ii"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
+bg_color = Color(0.380392, 0.231373, 0.164706, 1)
 
-[sub_resource type="ImageTexture" id="ImageTexture_c5hoj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk0um"]
+bg_color = Color(0.796078, 0.701961, 0.415686, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxnpu"]
+[sub_resource type="ImageTexture" id="ImageTexture_ovum7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyphw"]
 bg_color = Color(0.0588235, 0.14902, 0.223529, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27ncr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jawju"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -26,7 +31,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8lnv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyyi1"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -38,7 +43,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ex4kv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aiby4"]
 content_margin_left = 4.0
 content_margin_top = 0.0
 content_margin_right = 4.0
@@ -50,7 +55,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwa84"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c06wm"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -72,17 +77,17 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="Theme" id="Theme_pev6t"]
-VScrollBar/icons/decrement = SubResource("ImageTexture_c5hoj")
-VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_c5hoj")
-VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_c5hoj")
-VScrollBar/icons/increment = SubResource("ImageTexture_c5hoj")
-VScrollBar/icons/increment_highlight = SubResource("ImageTexture_c5hoj")
-VScrollBar/icons/increment_pressed = SubResource("ImageTexture_c5hoj")
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_vxnpu")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_27ncr")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_a8lnv")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ex4kv")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_kwa84")
+VScrollBar/icons/decrement = SubResource("ImageTexture_ovum7")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_ovum7")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_ovum7")
+VScrollBar/icons/increment = SubResource("ImageTexture_ovum7")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_ovum7")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_ovum7")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_uyphw")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_jawju")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_yyyi1")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_aiby4")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_c06wm")
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -96,7 +101,7 @@ t = ExtResource("2_3rrar")
 t2 = ExtResource("3_31qnq")
 t3 = ExtResource("4_p7336")
 _gridContainerPath = NodePath("CenterContainer/Panel/ScrollContainer/GridContainer")
-_ItemDisplayNamePath = NodePath("CenterContainer/Panel/ItemDisplay/ItemName")
+_ItemDisplayNamePath = NodePath("CenterContainer/Panel/ItemDisplay/ItemName2")
 _ItemDisplayDescriptionPath = NodePath("CenterContainer/Panel/ItemDisplay/ScrollContainer/ItemDesc")
 _ItemDisplayImagePath = NodePath("CenterContainer/Panel/ItemDisplay/Image")
 
@@ -110,17 +115,69 @@ custom_minimum_size = Vector2(1500, 800)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")
 
+[node name="Panel3" type="Panel" parent="CenterContainer/Panel"]
+z_index = -1
+custom_minimum_size = Vector2(25, 825)
+layout_mode = 2
+offset_left = -25.0
+offset_top = -18.0
+offset_bottom = 807.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel4" type="Panel" parent="CenterContainer/Panel"]
+z_index = -1
+custom_minimum_size = Vector2(25, 825)
+layout_mode = 2
+offset_left = 1500.0
+offset_top = -18.0
+offset_right = 1525.0
+offset_bottom = 807.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel7" type="Panel" parent="CenterContainer/Panel"]
+z_index = 1
+custom_minimum_size = Vector2(25, 825)
+layout_mode = 2
+offset_left = 918.0
+offset_top = -2.0
+offset_right = 943.0
+offset_bottom = 823.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel5" type="Panel" parent="CenterContainer/Panel"]
+z_index = -1
+custom_minimum_size = Vector2(1500, 25)
+layout_mode = 2
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 1525.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel6" type="Panel" parent="CenterContainer/Panel"]
+z_index = -1
+custom_minimum_size = Vector2(1500, 25)
+layout_mode = 2
+offset_left = -25.0
+offset_top = 800.0
+offset_right = 1525.0
+offset_bottom = 825.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
 [node name="InvLabel" type="RichTextLabel" parent="CenterContainer/Panel"]
 visibility_layer = 512
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = -100.0
-offset_top = 20.0
-offset_right = 100.0
-offset_bottom = 120.0
+offset_left = -2.0
+offset_top = 6.0
+offset_right = -1272.0
+offset_bottom = 29.0
 grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center] INVENTORY [/center]"
 scroll_active = false
@@ -130,18 +187,20 @@ anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 800.0
 
-[node name="ItemName" type="RichTextLabel" parent="CenterContainer/Panel/ItemDisplay"]
+[node name="ItemName2" type="RichTextLabel" parent="CenterContainer/Panel/ItemDisplay"]
 visibility_layer = 512
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 1006.0
-offset_top = 102.0
-offset_right = -341.0
-offset_bottom = 140.0
+offset_left = 974.0
+offset_top = 118.0
+offset_right = -361.0
+offset_bottom = 142.0
 grow_horizontal = 2
-scale = Vector2(2.5, 2.5)
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+scale = Vector2(3, 3)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center] ITEM [/center]"
 scroll_active = false
@@ -149,26 +208,30 @@ scroll_active = false
 [node name="Image" type="TextureRect" parent="CenterContainer/Panel/ItemDisplay"]
 custom_minimum_size = Vector2(77, 77)
 layout_mode = 0
-offset_left = 1102.0
-offset_top = 200.0
-offset_right = 1294.5
-offset_bottom = 392.5
+offset_left = 1126.0
+offset_top = 190.0
+offset_right = 1318.5
+offset_bottom = 382.5
 texture = ExtResource("1_71fcw")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Panel/ItemDisplay"]
 layout_mode = 0
-offset_left = 1070.0
-offset_top = 422.0
-offset_right = 1326.0
-offset_bottom = 582.0
+offset_left = 966.0
+offset_top = 398.0
+offset_right = 1222.0
+offset_bottom = 558.0
+scale = Vector2(2, 2)
 
 [node name="ItemDesc" type="RichTextLabel" parent="CenterContainer/Panel/ItemDisplay/ScrollContainer"]
 visibility_layer = 512
 custom_minimum_size = Vector2(245, 160)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "ITEM DESC Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
+text = "ITEM DESC Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
 fit_content = true
 scroll_active = false
 

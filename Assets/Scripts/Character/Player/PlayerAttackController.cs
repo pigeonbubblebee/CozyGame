@@ -8,7 +8,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	[Export] private NodePath _slashBufferPath;
 	private Timer _slashBuffer;
 
-	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash;
+	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash && !_uiManager.InventoryOpen;
 	private IInputManager _inputManager;
 	
 	public bool DesiredDown => _inputManager.GetDown() && !_movementController.Grounded;
@@ -70,6 +70,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	
 	public event Action DeathBlowEvent;
 
+	private UIManager _uiManager;
+
 	public override void _Ready()
 	{
 		CanSlash = true;
@@ -78,6 +80,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 		_gameManager = GetNode<GameManager>("/root/GameManager");
+		_uiManager = GetNode<UIManager>("/root/UIManager");
 		
 		_attackArea = GetNode<Area2D>(_attackAreaPath);
 		_rightAttackAreaCollider = GetNode<CollisionShape2D>(_rightAttackAreaColliderPath);
@@ -99,6 +102,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_deathBlowSFX = GetNode<AudioStreamPlayer2D>(_deathBlowSFXPath);
 
 		_attackArea.AreaEntered += _OnSlashHit;
+		_attackArea.BodyEntered += _OnSlashHit;
 		_attackArea.CollisionMask = (uint) PhysicsLayers.HittableLayer;
 		_attackArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
 		
@@ -243,10 +247,11 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			
 		_emitSlashParticle();
 		
-		((EnemyHitbox) hittable).EnemyAIParent.ApplyKnockback(-direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);
+		
 		bool iFrame = false;
 		
 		if(hittable is EnemyHitbox) {
+			((EnemyHitbox) hittable).EnemyAIParent.ApplyKnockback(-direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);
 			if(!((EnemyHitbox) hittable).EnemyAIParent.Invincible) {
 				if(!DesiredDown) {
 					if(!((EnemyHitbox) hittable).EnemyAIParent.Staggered) {
@@ -277,6 +282,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		if(!iFrame) {
 			_invincibleHittables.Add(hittable);
 		}
+
+		// GD.Print(((Node)hittable).Name);
 		
 		hittable.OnHit(_player, damage, direction, postureDamage); // Maybe flip direction, not sure yet
 		_movementController.ApplyKnockback(direction, _playerStats.SlashKnockback, _playerStats.SlashKnockbackAcceleration, _playerStats.SlashKnockbackTime);

@@ -54,6 +54,7 @@ public partial class InventoryUI : Control
 		int addCount = 0;
 		int removeCount = 0;
 		
+		GD.Print("ItemSlots: " + itemSlots.Count + " " + items.Count);
 		// Get amount of slots needed to add/remove
 		if(itemSlots.Count > items.Count) {
 			removeCount = itemSlots.Count - items.Count;

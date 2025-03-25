@@ -8,10 +8,14 @@ public partial class PatrolState : State
 	
 	[Export] private NodePath _patrolSFXPath;
 	private AudioStreamPlayer2D _patrolSFX;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_patrolSFX = GetNode<AudioStreamPlayer2D>(_patrolSFXPath);
+
+		_patrolSFX.Playing = true;
+		_patrolSFX.StreamPaused = true;
 	}
 	
 	public override void Initialize(StateMachine stateMachine) {
@@ -21,12 +25,12 @@ public partial class PatrolState : State
 	
 	public override void Enter(State prev) {
 		_patrolAI.Sprite.Play("patrol");
-		_patrolSFX.Playing = true;
+		_patrolSFX.StreamPaused = false;
 	}
-	
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void PhysicsProcess(double delta)
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void PhysicsProcess(double delta)
 	{
+		
 		if(_patrolAI.Staggered) {
 			_patrolStateMachine.ChangeState(_patrolStateMachine.PostureBreakState);
 			return;
@@ -42,9 +46,14 @@ public partial class PatrolState : State
 			return;
 		}
 	}
+
+	public AudioStreamPlayer2D GetPatrolSFX() {
+		return _patrolSFX;
+	}
 	
 	public override void Exit() {
 		base.Exit();
-		_patrolSFX.Playing = false;
+		// _patrolSFX.Playing = false;
+		_patrolSFX.StreamPaused = true;
 	}
 }

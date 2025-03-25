@@ -14,6 +14,8 @@ public abstract partial class Interactable : Area2D, IInteractable
 		CollisionLayer = (uint) PhysicsLayers.InteractableLayer;
 		_outlinedSprite = GetNode<Sprite2D>(_outlinedSpritePath);
 		_interactPrompt = GetNode<Node2D>(_interactPromptPath);
+
+		_interactPrompt.Visible = false;
 		// _interactArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
 	}
 
