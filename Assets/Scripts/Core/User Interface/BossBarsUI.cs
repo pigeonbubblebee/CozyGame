@@ -26,9 +26,13 @@ public partial class BossBarsUI : Control
 		Boss = e;
 		tweeningValueHealth = ((double)Boss.GetCurrentHealth() / (double)Boss.MaxHealth) * 100;
 		tweeningValuePosture =  100 - (((double)Boss.CurrentPosture / (double)Boss.MaxPosture) * 100);
+
+		_healthBar.Value = tweeningValueHealth;
+		_postureBar.Value = tweeningValuePosture;
 	}
 	
 	public override void _Process(double delta) {
+		// GD.Print(Boss);
 		if(Boss == null) {
 			return;
 		}

@@ -17,12 +17,17 @@ public partial class HUD : Control
 	
 	private Player _currentScenePlayer;
 	
+	private RichTextLabel _moneyText;
+	[Export] private NodePath _moneyTextPath;
+
 	public override void _Ready() {
 		_healBar = GetNode<TextureProgressBar>(_healBarPath);
 		_manaBar = GetNode<TextureProgressBar>(_manaBarPath);
 		_postureBar = GetNode<TextureProgressBar>(_postureBarPath);
 		_internalHealthBar = GetNode<TextureProgressBar>(_internalHealthBarPath);
 		_healthHUD = GetNode<HealthHUD>(_healthHUDPath);
+
+		_moneyText = GetNode<RichTextLabel>(_moneyTextPath);
 	}
 	
 	public void SetCurrentPlayerInstance(Player p) {
@@ -48,6 +53,15 @@ public partial class HUD : Control
 		_UpdatePostureBar(0);
 		_UpdateInternalHealthBar(0);
 	}
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		if(_currentScenePlayer != null) {
+			_moneyText.Text = "[right]" + _currentScenePlayer.InventoryManager.GetItemCount("acorn").ToString();
+		}
+    }
+
 	
 	private void _UpdateHealthHUD(int amt) {
 		if(_currentScenePlayer != null) {

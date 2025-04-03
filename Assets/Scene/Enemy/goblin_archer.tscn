@@ -99,9 +99,6 @@ stream = ExtResource("7_idm5l")
 volume_db = 4.0
 script = ExtResource("8_r8b40")
 
-[node name="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="1"]
-stream_paused = true
-
 [node name="body" type="AnimatedSprite2D" parent="ChaserEnemy"]
 visible = false
 scale = Vector2(4, 4)

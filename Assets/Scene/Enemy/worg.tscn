@@ -202,6 +202,7 @@ size = Vector2(224, 96)
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_dy2dn")]
 RetreatRange = 475.0
 Speed = 400.0
+_currency_drop_amount = 3
 MaxHealth = 20
 MaxPosture = 10
 EnemyNameLocalizationKey = "worg"

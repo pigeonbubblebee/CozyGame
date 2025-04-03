@@ -21,7 +21,7 @@ public partial class EnemyAttack : Node2D
 	
 	[Export] protected EnemyAttackData _attackData;
 	
-	private bool _initialized = false;
+	protected bool _initialized = false;
 	
 	protected bool Active;
 	

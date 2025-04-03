@@ -89,6 +89,12 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 
 	public void ResetHeals() {
 		CurrentHeals = _maxHeals;
+		AddHealEvent?.Invoke();
+	}
+
+	public void SetHeals(int amt) {
+		CurrentHeals = amt;
+		AddHealEvent?.Invoke();
 	}
 	
 	public void AddHeals(int amt) {

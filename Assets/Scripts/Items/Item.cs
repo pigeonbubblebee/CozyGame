@@ -10,6 +10,9 @@ public partial class Item : Resource, IComparable<Item> {
 	[Export] public int SortingID { get; set; }
 	[Export] public Texture2D Image { get; set; }
 	[Export] public ItemType Type { get; set; }
+	[Export] protected string[] _attributeNames { get; set; }
+	[Export] protected string[] _attributeValues { get; set; }
+	[Export] public bool Stackable { get; private set; }
 
 	public int CompareTo(Item other) { // Reversed Compare so important items show up at the top.
 		if(other.ItemTier < ItemTier) {
@@ -20,9 +23,26 @@ public partial class Item : Resource, IComparable<Item> {
 			return -SortingID.CompareTo(other.SortingID);
 		}
 	}
+
+	public virtual string GetItemPath() {
+		return ID;
+	}
+
+	public Dictionary<string, string> GetAttributes(Player p) {
+		Dictionary<string, string> res = new Dictionary<string, string>();
+		if(_attributeNames == null) {
+			return res;
+		}
+		for(int i = 0; i < _attributeNames.Length; i++) {
+			res.Add(_attributeNames[i], _attributeValues[i]);
+		}
+		return res;
+	}
 	
 	public enum ItemType {
 		Weapon,
-		Pickup
+		Pickup,
+		equippable,
+		key_item
 	}
 }

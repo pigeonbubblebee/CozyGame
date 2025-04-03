@@ -662,6 +662,7 @@ position = Vector2(-2840, -112)
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_gp3s4")]
 RetreatRange = 200.0
 Speed = 150.0
+_currency_drop_amount = 20
 MaxHealth = 200
 MaxPosture = 500
 DeathBlowDamage = 200

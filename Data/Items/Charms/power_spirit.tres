@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PowerSpirit" load_steps=3 format=3 uid="uid://c3aurfbcy14u4"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/PowerSpirit.cs" id="1_jvk6w"]
+[ext_resource type="Texture2D" uid="uid://dj85431dova0j" path="res://Assets/Art/Item/merith.png" id="1_n11vv"]
+
+[resource]
+script = ExtResource("1_jvk6w")
+ID = "power_spirit"
+Description = "description_power_spirit"
+ItemTier = 0.0
+SortingID = 50
+Image = ExtResource("1_n11vv")
+Type = 2
+_attributeNames = PackedStringArray("strength_gain", "mystic_threshold")
+_attributeValues = PackedStringArray("2", "50")
+Stackable = false

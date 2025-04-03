@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=27 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs" id="1_cjkk3"]
 [ext_resource type="PackedScene" uid="uid://003fp2vwh75j" path="res://Assets/Scene/Enemy/enemy_template.tscn" id="2_ivrns"]
+[ext_resource type="Resource" uid="uid://clgo3qbo2ki7k" path="res://Data/Items/acorn.tres" id="2_ugdlw"]
 [ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="7_t1h5y"]
 [ext_resource type="Texture2D" uid="uid://cfha16yu1jkjx" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_bandit.png" id="8_5m3ls"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="8_ucmwq"]
@@ -152,6 +153,7 @@ Speed = 250.0
 WaitTimeBetweenFlips = 1.0
 HitboxPath = NodePath("EnemyTemplate/Hurtbox")
 HealthSystemPath = NodePath("EnemyTemplate/Health")
+coin_resource = ExtResource("2_ugdlw")
 _healthBarPath = NodePath("EnemyTemplate/Bars/HealthBar")
 MaxHealth = 40
 MaxPosture = 100

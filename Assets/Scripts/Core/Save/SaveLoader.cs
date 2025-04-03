@@ -46,18 +46,36 @@ public partial class SaveLoader : Node
 		HandleNewRoomData(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
 
 		saveFile.PlayerHealth = GetNode<Player>("/root/Player").PlayerHealth.CurrentHealthPoints;
+		saveFile.PlayerHeals = GetNode<Player>("/root/Player").HealController.CurrentHeals;
+		saveFile.PlayerMystic = GetNode<Player>("/root/Player").PostureController.CurrentPosture;
+		
+		saveFile.attributes = GetNode<Player>("/root/Player").SerializeCurrentBuffs();
+
 		saveFile.RespawnID = GetNode<MainHandler>("/root/MainHandler").GetRespawnID();
 		saveFile.RoomDatas = _roomDatas;
 
 		saveFile.inventory = GetNode<Player>("/root/Player").InventoryManager.SerializeInventory();
+		saveFile.inventoryStacks = GetNode<Player>("/root/Player").InventoryManager.SerializeInventoryStacks();
+
+		saveFile.equipped = GetNode<Player>("/root/Player").InventoryManager.SerializeEquipped();
 
 		SaveToFile(PATH, fileName, JsonConvert.SerializeObject(saveFile.Save()));
 	}
 
 	public void Load() {
 		GD.Print("LOADING FROM:" + PATH);
-		GD.PrintErr("test");
+		// GD.PrintErr("test");
 		CurrentSaveFile = LoadFromFile(PATH, fileName);
+
+		// foreach(object key in CurrentSaveFile.Keys) {
+		// 	GD.Print(key.ToString() + " " + CurrentSaveFile[key].ToString());
+
+		// 	// if(key.Equals("Inventory")) {
+		// 	// 	GD.Print(JsonConvert.DeserializeObject<string[]>(CurrentSaveFile[key].ToString()));
+		// 	// }
+		// 	// GD.Print(JsonConvert.DeserializeObject<string[]>(CurrentSaveFile["Inventory"].ToString()));
+		// }
+
 		ProcessCurrentSaveFile();
 		LoadEvent?.Invoke();
 	}
@@ -101,7 +119,7 @@ public partial class SaveLoader : Node
 
 		newRoomData.RoomID = ID;
 		newRoomData.EnemiesAlive = sceneManager.GetEnemiesAlive();
-		GD.Print("Updating data" + sceneManager.GetBreakablesAlive()[1]);
+		// GD.Print("Updating data" + sceneManager.GetBreakablesAlive()[1]);
 		newRoomData.BreakablesAlive = sceneManager.GetBreakablesAlive();
 
 		return newRoomData;

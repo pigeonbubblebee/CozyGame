@@ -38,4 +38,7 @@ public interface IInputManager
 	public abstract bool GetDeflect();
 	public abstract bool GetDeflectActuation();
 	public abstract bool GetDeflectReleaseActuation();
+
+	public abstract bool GetMenuLeftActuation();
+	public abstract bool GetMenuRightActuation();
 }

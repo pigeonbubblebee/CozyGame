@@ -7,6 +7,9 @@ public partial class Enemy : CharacterBody2D
 	private EnemyHitbox _hitbox;
 	[Export] public NodePath HealthSystemPath { get; private set; }
 	private HealthSystem _health;
+
+	[Export] public int _currency_drop_amount = 5;
+	[Export] private Item coin_resource;
 	
 	[Export] private NodePath _healthBarPath;
 	protected TextureProgressBar _healthBar;
@@ -266,8 +269,11 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	protected virtual void OnDeath() {
+		GD.Print("Death");
 		DeathEvent?.Invoke(this);
+		GetNode<Player>("/root/Player").InventoryManager.AddItemToInventory(coin_resource, _currency_drop_amount);
 		this.QueueFree();
+		GD.Print(IsInstanceValid(this));
 	}
 	
 	public void ApplyKnockback(int direction, float speed, float acceleration, float time) {

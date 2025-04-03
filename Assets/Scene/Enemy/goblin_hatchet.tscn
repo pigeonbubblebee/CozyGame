@@ -42,6 +42,7 @@ size = Vector2(376, 46.5)
 [node name="goblin_hatchet" type="Node2D"]
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_bdr5l")]
+_currency_drop_amount = 7
 EnemyNameLocalizationKey = "goblin_hatchet"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]

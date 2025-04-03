@@ -220,7 +220,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			return;
 		}
 		
-		int damage = _player.DeflectController.Counter ? _playerStats.SlashCounterDamage : _playerStats.SlashDamage;
+		int damage = _player.DeflectController.Counter ? _playerStats.SlashCounterDamage : _playerStats.SlashDamage + _player.CurrentBuffs.Strength;
 		
 		if(hit is EnemyHitbox) {
 			// GD.Print(((Enemy) hit).Staggered);

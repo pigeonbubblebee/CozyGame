@@ -1,4 +1,4 @@
-[gd_scene load_steps=239 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=241 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -51,6 +51,7 @@
 [ext_resource type="AudioStream" uid="uid://cifo51815mb0o" path="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3" id="46_ts2if"]
 [ext_resource type="AudioStream" uid="uid://7iujovvp8snv" path="res://Assets/Sound/SFX/Player/hit.wav" id="50_hmeoo"]
 [ext_resource type="Texture2D" uid="uid://cfkyuxn2wsvfe" path="res://Assets/Art/VFX/blockeffect2.png" id="52_mmr4o"]
+[ext_resource type="Texture2D" uid="uid://cdo30qircy8ws" path="res://Assets/Art/VFX/curseOverloadEffect.png" id="52_nmuvh"]
 [ext_resource type="Texture2D" uid="uid://d3wao7t6xk7hn" path="res://Assets/Art/VFX/deflecteffect2.png" id="53_lbh8w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acva1"]
@@ -1480,6 +1481,17 @@ particles_anim_loop = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvxv2"]
 size = Vector2(128, 216)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b4t7v"]
+particle_flag_disable_z = true
+angle_min = -360.0
+angle_max = 360.0
+spread = 41.629
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 50, 0)
+scale_min = 3.0
+scale_max = 4.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 script = ExtResource("1_l6ek3")
@@ -1495,7 +1507,7 @@ _healControllerPath = NodePath("HealController")
 _spellControllerPath = NodePath("PlayerSpellController")
 _animationControllerPath = NodePath("PlayerAnimationController")
 _deflectControllerPath = NodePath("PlayerDeflectController")
-_postureControllerPath = NodePath("PlayerPostureController")
+_postureControllerPath = NodePath("PlayerMysticController")
 _cameraPath = NodePath("Camera2D")
 _hitSFXPath = NodePath("HitSFX")
 
@@ -1505,13 +1517,12 @@ SpritePath = NodePath("AnimatedSprite2D")
 _logAnimations = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimationController"]
+z_index = 5
 texture_filter = 1
 position = Vector2(0, 8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rojmk")
-animation = &"heal_right"
-frame = 11
-frame_progress = 0.61621
+animation = &"idle_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)
@@ -1794,6 +1805,7 @@ one_shot = true
 [node name="DeflectParticles" type="Node2D" parent="PlayerDeflectController"]
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="PlayerDeflectController/DeflectParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1807,6 +1819,7 @@ interpolate = false
 local_coords = true
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="PlayerDeflectController/DeflectParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1820,6 +1833,7 @@ interpolate = false
 local_coords = true
 
 [node name="GPUParticles2D4" type="GPUParticles2D" parent="PlayerDeflectController/DeflectParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1853,6 +1867,7 @@ one_shot = true
 [node name="BlockParticles" type="Node2D" parent="PlayerDeflectController"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerDeflectController/BlockParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1865,6 +1880,7 @@ fixed_fps = 60
 local_coords = true
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="PlayerDeflectController/BlockParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1877,6 +1893,7 @@ fixed_fps = 60
 local_coords = true
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="PlayerDeflectController/BlockParticles"]
+z_index = 10
 material = SubResource("CanvasItemMaterial_o3ygw")
 scale = Vector2(1.5, 1.5)
 emitting = false
@@ -1896,10 +1913,23 @@ collision_mask = 32
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_gvxv2")
 
-[node name="PlayerPostureController" type="Node2D" parent="."]
+[node name="PlayerMysticController" type="Node2D" parent="."]
 script = ExtResource("37_ax0h8")
 _damageTickTime = 2.0
 _curseDamage = 5
+_maxCurseParticlePath = NodePath("GPUParticles2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerMysticController"]
+z_index = 1
+position = Vector2(-7.99997, 80)
+rotation = -1.5708
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_b4t7v")
+texture = ExtResource("52_nmuvh")
+lifetime = 0.8
+speed_scale = 2.0
+randomness = 1.0
+trail_lifetime = 4.92
 
 [node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3

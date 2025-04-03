@@ -3,4 +3,30 @@ testing_item,Testing
 description_testing_item,Testing item description
 goblin_boss_1,General Borbsnop - Goblin Elite
 sword,Blade of the Forest
-description_sword,An ancient blade gifted to you. Used to protect the forest. \n \n Damage: 5
+description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a magical slash.
+acorn,Acorns
+description_acorn,A small bunch of acorns. The main currency used in the forest.
+forest_essence,Forest Essence
+description_forest_essence,Concentrated mystic in a wooden shell. Consuming it grants the user power.
+power_spirit,Merith
+description_power_spirit,A small spirit that glows green. Grants STRENGTH when you have accumulated enough MYSTIC.
+attribute_damage,Damage
+attribute_spell_damage,Cast Damage
+attribute_pdamage,Composure Damage
+attribute_spell_pdamage,Cast Composure Damage
+attribute_strength_gain,Strength Gain
+attribute_mystic_threshold,Mystic Threshold
+item_type_key_item,Key Item
+item_type_equippable,Woodland Spirit
+tooltip_strength,STRENGTH adds a damage bonus to your slashes.
+tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through spellcasting. Overloading MYSTIC will hurt.
+tooltip_health,HEALTH keeps you alive. Can be gained by using a REGROWTH.
+tooltip_regrowth,Use a REGROWTH to regain HEALTH.
+tooltip_dexterity,DEXTERITY makes you attack faster.
+tooltip_vitality,VITALITY adds to your max HEALTH.
+tooltip_harmony,HARMONY adds to your max MYSTIC.
+tooltip_focus,FOCUS makes your casts stronger.
+tooltip_prowess,PROWESS increases composure damage from parries.
+tooltip_decay,DECAY deals damage over time.
+tooltip_daze,DAZE stuns an enemy when built up.
+tooltip_critical,Landing a CRITICAL triples damage.

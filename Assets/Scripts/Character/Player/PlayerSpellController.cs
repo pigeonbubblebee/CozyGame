@@ -64,6 +64,11 @@ public partial class PlayerSpellController : Node2D
 	
 	public override void _Process(double delta)
 	{
+		if(DesiredShoot) {
+			GD.Print("Desired shot");
+		}
+		// GD.Print(_CheckDesiredShoot() + " " + CanShoot +" "+ (_player.PostureController.CurrentPosture <= 
+			//_playerStats.MaxCurse - _playerStats.CurseUsePerSpell));
 		if(_CheckDesiredShoot() && !CanShoot) {
 			StartShootBuffer();
 		}

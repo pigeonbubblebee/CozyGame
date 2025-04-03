@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bgo6kj04mhm47"]
+
+[ext_resource type="Texture2D" uid="uid://dtf27csg7valy" path="res://Assets/Art/Item/forest_essence.png" id="1_v2kxg"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="2_65x71"]
+
+[resource]
+script = ExtResource("2_65x71")
+ID = "forest_essence"
+Description = "description_forest_essence"
+ItemTier = 0.0
+SortingID = 100
+Image = ExtResource("1_v2kxg")
+Type = 3
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = true

@@ -4,12 +4,14 @@ using System;
 public partial class PlayerInteractionController : Area2D
 {
 	public bool CanInteract = true;
-	public bool DesiredInteract => _CheckDesiredInteract() && CanInteract;
+	public bool DesiredInteract => _CheckDesiredInteract() && CanInteract  && !_uiManager.InventoryOpen;
 	private IInputManager _inputManager;
 
 	private Player _player;
 
 	public IInteractable ObjectCurrentlyInteracting;
+
+	private UIManager _uiManager;
 	
 	public void Initialize(Player player) {
 		_player = player;
@@ -17,6 +19,7 @@ public partial class PlayerInteractionController : Area2D
 
 	public override void _Ready()
 	{
+		_uiManager = GetNode<UIManager>("/root/UIManager");
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 
 		this.CollisionMask = (uint) PhysicsLayers.InteractableLayer;

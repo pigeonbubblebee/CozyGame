@@ -82,6 +82,8 @@ public partial class MainHandler : Node
 		if(_respawnRequest) {
 			_saveLoader.ResetRoomData();
 			_saveLoader.CurrentSaveFile["PlayerHealth"] = _player.PlayerHealth.MaxHealthPoints;
+			_saveLoader.CurrentSaveFile["PlayerMystic"] = _player.CurrentPlayerStats.MaxCurse;
+			_saveLoader.CurrentSaveFile["PlayerHeals"] = _player.CurrentPlayerStats.MaxHeals;
 
 			_respawnRequest = false;
 		}
@@ -97,7 +99,7 @@ public partial class MainHandler : Node
 		_currentScene = newScene;
 
 		newScene.Init();
-
+		_player.PlayerHealth.Invincible = false;
 		_player.Respawn();
 
 		_player.GlobalPosition = _currentScene.GetSpawnPoint(_loadSpawnPosition);
@@ -106,6 +108,7 @@ public partial class MainHandler : Node
 	}
 	
 	public void SpawnPlayer() {
+		_player.PlayerHealth.Invincible = true;
 		CallDeferred(MethodName.LoadLevel, _respawnLocationArea, _respawnLocationLevel, _respawnLocationLocation);
 	}
 
@@ -143,7 +146,6 @@ public partial class MainHandler : Node
 	
 	public void LoadLevel(string area, string levelName, string position) {
 		LoadLevel(area, levelName);
-		_loadSpawnPosition = position;
-		
+		_loadSpawnPosition = position;		
 	}
 }

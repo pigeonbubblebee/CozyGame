@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=30 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -12,10 +12,23 @@
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="8_diypk"]
 [ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="9_vxua4"]
 [ext_resource type="Texture2D" uid="uid://c0sb5sml5du7i" path="res://Assets/Art/UI/curse_bar.png" id="10_3meys"]
+[ext_resource type="Texture2D" uid="uid://6rmh6unbb722" path="res://Assets/Art/UI/inventory_slot.png" id="10_g3jub"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/BossBarsUI.cs" id="11_e04r8"]
+[ext_resource type="Texture2D" uid="uid://d1sbgo48cjteg" path="res://Assets/Art/Item/acorn.png" id="11_vx7rc"]
 [ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="14_vg2je"]
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="15_uenwp"]
 [ext_resource type="Texture2D" uid="uid://ctcjp4dhg7kn" path="res://Sprite-0002.png" id="16_j423v"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mls8h"]
+texture = ExtResource("10_g3jub")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
 bg_color = Color(0, 0, 0, 1)
@@ -121,6 +134,7 @@ _manaBarPath = NodePath("HealthBar")
 _postureBarPath = NodePath("CurseBar")
 _internalHealthBarPath = NodePath("InternalHealthBar")
 _healthHUDPath = NodePath("ManaBar")
+_moneyTextPath = NodePath("Money/RichTextLabel")
 
 [node name="HealBar" type="TextureProgressBar" parent="GUI/HUD"]
 layout_mode = 0
@@ -204,6 +218,33 @@ stretch_margin_bottom = 2
 texture_under = ExtResource("3_0sbdu")
 texture_progress = ExtResource("10_3meys")
 
+[node name="Money" type="Panel" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 704.0
+offset_right = 248.0
+offset_bottom = 752.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_mls8h")
+
+[node name="TextureRect" type="TextureRect" parent="GUI/HUD/Money"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("11_vx7rc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/HUD/Money"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]11"
+
 [node name="BossBars" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
@@ -257,6 +298,7 @@ offset_top = 70.0
 offset_right = 691.0
 offset_bottom = 94.0
 scale = Vector2(2.5, 2.5)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("14_vg2je")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true

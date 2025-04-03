@@ -1,2 +1,4 @@
+PowerSpirit
+Equippable
 Item
 PlayerStats

@@ -30,7 +30,11 @@ public partial class SlashAttack : EnemyAttack
 	
 	
 	public override void Initialize(Enemy e) {
+		if(_initialized)
+			return;
+			
 		base.Initialize(e);
+		
 		EnemyAI.Sprite.FrameChanged += _checkAnimationEvent;
 	}
 	

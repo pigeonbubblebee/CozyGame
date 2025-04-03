@@ -24,6 +24,9 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private bool _interacting;
 	private bool _interactActuation;
 	private bool _interactReleaseActuation;
+
+	private bool _menuLeftActuation;
+	private bool _menuRightActuation;
 	
 	private bool _healing;
 	private bool _healActuation;
@@ -45,6 +48,8 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private readonly string ATTACK = "attack";
 	private readonly string DASH = "dash";
 	private readonly string INVENTORY = "menu";
+	private readonly string MENU_LEFT = "menu_left";
+	private readonly string MENU_RIGHT = "menu_right";
 	private readonly string ESCAPE = "escape";
 	private readonly string INTERACT = "interact";
 	private readonly string HEAL = "heal";
@@ -78,6 +83,9 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 
 		_inventoryActuation = Input.IsActionJustPressed(INVENTORY);
 		_escapeActuation = Input.IsActionJustPressed(ESCAPE);
+
+		_menuLeftActuation = Input.IsActionJustPressed(MENU_LEFT);
+		_menuRightActuation = Input.IsActionJustPressed(MENU_RIGHT);
 
 		_interacting = Input.IsActionPressed(INTERACT);
 		_interactActuation = Input.IsActionJustPressed(INTERACT);
@@ -177,5 +185,12 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	}
 	public bool GetDeflectReleaseActuation() {
 		return _deflectReleaseActuation;
+	}
+
+	public bool GetMenuLeftActuation() {
+		return _menuLeftActuation;
+	}
+	public bool GetMenuRightActuation() {
+		return _menuRightActuation;
 	}
 }

@@ -1,4 +1,7 @@
+res://Assets/Art/UI
 res://Assets/Art/Item
+res://Data/Items/Charms
+res://Data/Items
 res://Assets/Scripts/Core/User Interface
 res://Assets/Scene
 res://Assets/Art/Character/Enemy/GoblinWarrior
@@ -8,7 +11,6 @@ res://Assets/Art/Character/Enemy/GoblinHatchet
 res://Assets/Art/Character/Enemy/GoblinArcher
 res://Assets/Art/Character/Enemy/GoblinBandit
 res://Assets/Art/Character/Enemy/Worg
-res://Assets/Art/UI
 res://Assets/Scripts/Core/Game
 res://Assets/Scripts/Core/Save
 res://Assets/Art/VFX
@@ -18,8 +20,6 @@ res://Assets/Scripts/Core/Localization
 res://Assets/Scene/Enemy
 res://Assets/Art/Character/Player
 res://Data/Enemy/AttackData
-res://Assets/Art/Character/Enemy/GoblinPike
-res://Data/Enemy
 C:/Users/trex0/OneDrive/Documents/Builds/mac zip bomb (dont unzip)
 C:/Users/trex0/OneDrive/Documents/Builds
 C:/Users/trex0/Downloads

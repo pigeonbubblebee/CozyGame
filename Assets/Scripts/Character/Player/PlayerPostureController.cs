@@ -16,16 +16,28 @@ public partial class PlayerPostureController : Node
 	private int _curseDamage;
 
 	private double _damageTickCounter;
+
+	[Export]
+	private NodePath _maxCurseParticlePath;
+	private GpuParticles2D _maxCurseParticle;
 	
 	public void Initialize(Player p) {
 		_player = p;
 	}
+
+    public override void _Ready()
+    {
+        base._Ready();
+		_maxCurseParticle = GetNode<GpuParticles2D>(_maxCurseParticlePath);
+		_maxCurseParticle.Emitting = false;
+    }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
 
 		if(CurrentPosture <= 0) {
+			_maxCurseParticle.Emitting = true;
 			if(_damageTickCounter >= 0) {
 				_damageTickCounter -= delta;
 			} else {
@@ -33,6 +45,7 @@ public partial class PlayerPostureController : Node
 				_damageTickCounter = _damageTickTime;
 			}
 		} else {
+			_maxCurseParticle.Emitting = false;
 			_damageTickCounter = _damageTickTime;
 		}
     }
@@ -40,6 +53,12 @@ public partial class PlayerPostureController : Node
     public void ResetPosture() {
 		int temp = CurrentPosture;
 		CurrentPosture = _player.CurrentPlayerStats.MaxCurse;
+		PostureChangeEvent?.Invoke(_player.CurrentPlayerStats.MaxCurse - temp);
+	}
+
+	public void SetPosture(int amt) {
+		int temp = CurrentPosture;
+		CurrentPosture = amt;
 		PostureChangeEvent?.Invoke(_player.CurrentPlayerStats.MaxCurse - temp);
 	}
 

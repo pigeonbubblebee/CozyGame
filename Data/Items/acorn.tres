@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://clgo3qbo2ki7k"]
+
+[ext_resource type="Texture2D" uid="uid://d1sbgo48cjteg" path="res://Assets/Art/Item/acorn.png" id="1_d4nd3"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="2_4f4fx"]
+
+[resource]
+script = ExtResource("2_4f4fx")
+ID = "acorn"
+Description = "description_acorn"
+ItemTier = 0.0
+SortingID = 101
+Image = ExtResource("1_d4nd3")
+Type = 3
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = true

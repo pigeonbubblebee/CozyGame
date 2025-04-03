@@ -33,7 +33,8 @@ public partial class Player : CharacterBody2D
 	public PlayerPostureController PostureController  { get; private set; }
 	[Export] private NodePath _cameraPath;
 	public PlayerCamera Camera  { get; private set; }
-	
+	public PlayerBuffs BaseBuffs { get; private set; } = new PlayerBuffs();
+	public PlayerBuffs CurrentBuffs { get; private set; }
 	[Export] private NodePath _hitSFXPath;
 	private AudioStreamPlayer2D _hitSFX;
 	
@@ -73,10 +74,13 @@ public partial class Player : CharacterBody2D
 		AnimationController.Initialize(this);
 		DeflectController.Initialize(this);
 		PostureController.Initialize(this);
+		InventoryManager.Initialize(this);
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
+
+		CurrentBuffs = new PlayerBuffs(BaseBuffs);
 	}
 	
 	public void Respawn() {
@@ -84,23 +88,65 @@ public partial class Player : CharacterBody2D
 		//GD.Print("respawn");
 		// GD.Print(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]);
 		PlayerHealth.SetHealth(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]));
+		HealController.SetHeals(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHeals"]));
+		PostureController.SetPosture(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerMystic"]));
 		// PlayerHealth.ResetHealth();
-		SpellController.ResetMana();
-		HealController.ResetHeals();
+		//SpellController.ResetMana();
+		//HealController.ResetHeals();
+		int[] attributes = JsonConvert.DeserializeObject<int[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Attributes"].ToString());
+		BaseBuffs.Strength = attributes[0];
+		BaseBuffs.Dexterity = attributes[1];
+		BaseBuffs.Vitality = attributes[2];
+		BaseBuffs.Focus = attributes[3];
+		BaseBuffs.Harmony = attributes[4];
 		
-		PostureController.ResetPosture();
+		//PostureController.ResetPosture();
 		
 
 		GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
-		GD.Print("count: " + JsonConvert.DeserializeObject<List<string>>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()).Count);
-		InventoryManager.ReadInventory(JsonConvert.DeserializeObject<List<string>>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()));
+		try {
+		
+			// GD.Print("count: " + JsonConvert.DeserializeObject<string[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()).Count);
+			InventoryManager.ReadInventory(JsonConvert.DeserializeObject<string[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Inventory"].ToString()),
+				JsonConvert.DeserializeObject<int[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["InventoryStacks"].ToString()));
+			InventoryManager.ReadEquipped(JsonConvert.DeserializeObject<string[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Equipped"].ToString()));
+		} catch {}
+
+		UpdateBuffs();
+
+	}
+
+	public void UpdateBuffs() {
+		CurrentBuffs.ResetBuffs(BaseBuffs);
+		int i = 0;
+		foreach(Equippable e in InventoryManager.EquippedItems){
+			if(e != null)
+				CurrentBuffs = e.ApplyStatic(CurrentBuffs, this, i);
+			i++;
+		}
+
+		if(Input.IsActionPressed("debug")) { // TODO: Delete this before export
+			CurrentBuffs.Strength += 10000;
+		}
+
+		// GD.Print("strength: "+ CurrentBuffs.Strength);
+	}
+
+	public int[] SerializeCurrentBuffs() {
+		return new int[] {BaseBuffs.Strength, BaseBuffs.Dexterity, BaseBuffs.Vitality,BaseBuffs.Focus, BaseBuffs.Harmony};
 	}
 	
 	private void Quit() { // Temp
 		GetTree().Quit();
 	}
-	
-	public override void _Ready() {
+
+    public override void _Process(double delta)
+    {
+		UpdateBuffs();
+        base._Process(delta);
+    }
+
+    public override void _Ready() {
 		//GetNode<UIManager>("/root/UIManager").SetCurrentPlayerInstance(this);
 		_gameManager = GetNode<GameManager>("/root/GameManager");
 	}
