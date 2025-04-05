@@ -23,7 +23,7 @@ public partial class PlayerAttackState : PlayerState
 	public override void PlayStateAnimation() {
 		GD.Print("Animation Play!");
 		if(AttackController.DesiredDown) {
-			AnimationController.PlayAnimation(AnimationController.SlashDownAnimationClip, Stats.SlashTime);
+			AnimationController.PlayAnimation(AnimationController.SlashDownAnimationClip, AttackController.CalculateAS());
 			return;
 		}
 		if(AttackController.CanDeathBlow) {
@@ -38,10 +38,10 @@ public partial class PlayerAttackState : PlayerState
 		
 		switch(AttackController.CurrentSlashComboAttack) {
 			case 0:
-				AnimationController.PlayAnimation(AnimationController.SlashAnimationClip, Stats.SlashTime);
+				AnimationController.PlayAnimation(AnimationController.SlashAnimationClip, AttackController.CalculateAS());
 				break;
 			case 1:
-				AnimationController.PlayAnimation(AnimationController.Slash2AnimationClip, Stats.SlashTime);
+				AnimationController.PlayAnimation(AnimationController.Slash2AnimationClip, AttackController.CalculateAS());
 				break;
 		}
 	}

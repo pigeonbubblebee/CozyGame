@@ -4,6 +4,7 @@ using System;
 public partial class SceneManager : Node2D
 {
 	// [Export] public Player ScenePlayer;
+	[Export] public string[] AdjacentAreas; // semicolon delimited
 	[Export] private NodePath _respawnPointsParentPath;
 	private Node2D _respawnPointsParent;
 	private Node2D[] _respawnPoints;

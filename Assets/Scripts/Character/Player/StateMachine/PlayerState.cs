@@ -12,7 +12,7 @@ public abstract partial class PlayerState : State
 	protected PlayerSpellController SpellController => ParentPlayerStateMachine.SpellController;
 	protected PlayerAnimationController AnimationController => ParentPlayerStateMachine.AnimationController;
 	protected PlayerDeflectController DeflectController => ParentPlayerStateMachine.DeflectController;
-	protected PlayerPostureController PostureController => ParentPlayerStateMachine.PostureController;
+	protected PlayerCurseController CurseController => ParentPlayerStateMachine.CurseController;
 	protected PlayerCamera Camera => ParentPlayerStateMachine.Player.Camera;
 	protected PlayerStats Stats => ParentPlayerStateMachine.Stats;
 	

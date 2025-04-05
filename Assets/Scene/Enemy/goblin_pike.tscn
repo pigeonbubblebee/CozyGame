@@ -321,7 +321,7 @@ script = ExtResource("4_wq7el")
 Damage = 6
 InternalDamage = 3
 PostureDamage = 50
-DeflectPostureDamage = 66
+DeflectPostureDamage = 266
 Unstoppable = true
 Type = 2
 DeflectKnockbackMultiplier = 1.0
@@ -334,7 +334,7 @@ script = ExtResource("4_wq7el")
 Damage = 4
 InternalDamage = 2
 PostureDamage = 50
-DeflectPostureDamage = 50
+DeflectPostureDamage = 266
 Unstoppable = true
 Type = 3
 DeflectKnockbackMultiplier = 1.0
@@ -347,7 +347,7 @@ script = ExtResource("4_wq7el")
 Damage = 4
 InternalDamage = 2
 PostureDamage = 34
-DeflectPostureDamage = 34
+DeflectPostureDamage = 134
 Unstoppable = false
 Type = 0
 DeflectKnockbackMultiplier = 0.0
@@ -359,6 +359,9 @@ size = Vector2(224, 96)
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_wqvk3")]
 RetreatRange = 200.0
+MaxHealth = 200
+MaxPosture = 400
+DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_pike"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]

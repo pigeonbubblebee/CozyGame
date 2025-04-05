@@ -1,9 +1,10 @@
+res://Assets/Scene
+res://Assets/Scene/Levels/WestWoods
 res://Assets/Art/UI
 res://Assets/Art/Item
 res://Data/Items/Charms
 res://Data/Items
 res://Assets/Scripts/Core/User Interface
-res://Assets/Scene
 res://Assets/Art/Character/Enemy/GoblinWarrior
 res://Assets/Art/Background
 res://Assets/Art/Character/PlayerRedesigned
@@ -19,7 +20,6 @@ res://Assets/Scene/Environment
 res://Assets/Scripts/Core/Localization
 res://Assets/Scene/Enemy
 res://Assets/Art/Character/Player
-res://Data/Enemy/AttackData
 C:/Users/trex0/OneDrive/Documents/Builds/mac zip bomb (dont unzip)
 C:/Users/trex0/OneDrive/Documents/Builds
 C:/Users/trex0/Downloads

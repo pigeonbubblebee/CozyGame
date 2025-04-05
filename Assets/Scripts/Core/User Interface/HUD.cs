@@ -42,7 +42,7 @@ public partial class HUD : Control
 		p.SpellController.ManaUseEvent += _UpdateHealthHUD;
 		p.SpellController.AddManaEvent += _UpdateHealthHUD;
 		
-		p.PostureController.PostureChangeEvent += _UpdatePostureBar;
+		p.CurseController.CurseChangeEvent += _UpdatePostureBar;
 		
 		p.HealController.InternalHealthChangeEvent += _UpdateInternalHealthBar;
 		// p.SpellController.AddManaEvent += _UpdateHealthHUD;
@@ -84,11 +84,13 @@ public partial class HUD : Control
 	private void _UpdateManaBar(int amt) {
 		if(_currentScenePlayer != null) {
 			// float Ratio = ((float) _currentScenePlayer.SpellController.CurrentMana) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxMana);
-			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
+			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.PlayerHealth.MaxHealthPoints);
 			Ratio = Mathf.Max(Ratio, 0);
 			
 			Tween tween = GetTree().CreateTween();
 			tween.TweenProperty(_manaBar, "value", Ratio * 100, 0.075f);
+
+			_manaBar.Size = new Vector2(_currentScenePlayer.PlayerHealth.MaxHealthPoints * 1.5f, _manaBar.Size.Y);
 			
 			// _manaBar.Value = Ratio * 100;
 			
@@ -99,11 +101,13 @@ public partial class HUD : Control
 	private void _UpdateInternalHealthBar(int amt) {
 		if(_currentScenePlayer != null) {
 			// float Ratio = ((float) _currentScenePlayer.SpellController.CurrentMana) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxMana);
-			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
+			float Ratio = ((float) _currentScenePlayer.PlayerHealth.CurrentHealthPoints) / ((float) _currentScenePlayer.PlayerHealth.MaxHealthPoints);
 			Ratio = Mathf.Max(Ratio, 0);
 			
-			float SecondRatio = ((float) _currentScenePlayer.HealController.InternalDamage) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHealth);
+			float SecondRatio = ((float) _currentScenePlayer.HealController.InternalDamage) / ((float) _currentScenePlayer.PlayerHealth.MaxHealthPoints);
 			SecondRatio = Mathf.Max(SecondRatio, 0);
+
+			_internalHealthBar.Size = new Vector2(_currentScenePlayer.PlayerHealth.MaxHealthPoints * 1.5f, _internalHealthBar.Size.Y);
 			
 			// Tween tween = GetTree().CreateTween();
 			// tween.TweenProperty(_internalHealthBar, "value", (Ratio+SecondRatio) * 100, 0.075f);
@@ -114,14 +118,17 @@ public partial class HUD : Control
 	private void _UpdatePostureBar(int amt) {
 		if(_currentScenePlayer != null) {
 			// float Ratio = ((float) _currentScenePlayer.SpellController.CurrentMana) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxMana);
-			double Ratio = ((((double) _currentScenePlayer.PostureController.CurrentPosture))) / (((double) _currentScenePlayer.CurrentPlayerStats.MaxCurse));
-			GD.Print(Ratio);
+			double Ratio = ((((double) _currentScenePlayer.CurseController.CurrentCurse))) / (((double) _currentScenePlayer.CurseController.MaxCurse));
+			//GD.Print(Ratio);
 			// Ratio = Mathf.Max(Ratio, 0);
-			Ratio = 1.0 - Ratio;
+			//Ratio =  Ratio;
 			// Ratio *= 100.0;
 			
 			Tween tween = GetTree().CreateTween();
+			
 			tween.TweenProperty(_postureBar, "value", (Ratio) * 100, 0.075f);
+
+			_postureBar.Size = new Vector2(_currentScenePlayer.CurseController.MaxCurse, _postureBar.Size.Y);
 			// _postureBar.Value = Ratio * 100;
 		}
 	}

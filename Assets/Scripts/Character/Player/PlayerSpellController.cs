@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public partial class PlayerSpellController : Node2D
 {	
-	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot && _player.PostureController.CurrentPosture <= 
-		_playerStats.MaxCurse - _playerStats.CurseUsePerSpell/*&& CurrentMana >= _playerStats.ManaUsage*/;
+	public bool DesiredShoot => _CheckDesiredShoot() && CanShoot && _player.CurseController.CurrentCurse >= _playerStats.CurseUsePerSpell/*&& CurrentMana >= _playerStats.ManaUsage*/;
 	
 	private int _maxMana => _playerStats.MaxMana;
 	[Export] public int CurrentMana { get; private set; }
@@ -89,7 +88,7 @@ public partial class PlayerSpellController : Node2D
 		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude * 2f);
 		_player.MovementController.ApplyKnockback(-_player.MovementController.Direction, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 		// _gameManager.FreezeFrame(0.02f, 0.1f);
-		_player.PostureController.ReduceCurse(_playerStats.CurseUsePerSpell);
+		_player.CurseController.ReduceCurse(_playerStats.CurseUsePerSpell);
 		// CurrentMana -= _playerStats.ManaUsage;
 		// ManaUseEvent?.Invoke(_playerStats.ManaUsage);
 
@@ -163,7 +162,7 @@ public partial class PlayerSpellController : Node2D
 			return;
 		}
 		
-		HitEvent?.Invoke((IHittable) hit, _playerStats.ShootDamage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.ShootPostureDamage);
+		HitEvent?.Invoke((IHittable) hit, _playerStats.ShootDamage + (_player.CurrentBuffs.Focus * 5), this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.ShootDamage + (_player.CurrentBuffs.Focus * 5));
 	}
 
 	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {

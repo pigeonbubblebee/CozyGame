@@ -11,7 +11,7 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerSpellController SpellController { get; private set; }
 	public PlayerAnimationController AnimationController { get; private set; }
 	public PlayerDeflectController DeflectController { get; private set; }
-	public PlayerPostureController PostureController { get; private set; }
+	public PlayerCurseController CurseController { get; private set; }
 	
 	public Player Player;
 	public PlayerStats Stats => Player.CurrentPlayerStats;
@@ -48,7 +48,7 @@ public partial class PlayerStateMachine : StateMachine
 		SpellController = player.SpellController;
 		AnimationController = player.AnimationController;
 		DeflectController = player.DeflectController;
-		PostureController = player.PostureController;
+		CurseController = player.CurseController;
 		// Stats = player.PlayerStatsResource;
 	}
 	

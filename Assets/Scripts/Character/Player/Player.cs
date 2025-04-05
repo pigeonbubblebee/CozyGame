@@ -29,8 +29,8 @@ public partial class Player : CharacterBody2D
 	public PlayerAnimationController AnimationController  { get; private set; }
 	[Export] private NodePath _deflectControllerPath;
 	public PlayerDeflectController DeflectController  { get; private set; }
-	[Export] private NodePath _postureControllerPath;
-	public PlayerPostureController PostureController  { get; private set; }
+	[Export] private NodePath _curseControllerPath;
+	public PlayerCurseController CurseController  { get; private set; }
 	[Export] private NodePath _cameraPath;
 	public PlayerCamera Camera  { get; private set; }
 	public PlayerBuffs BaseBuffs { get; private set; } = new PlayerBuffs();
@@ -42,10 +42,12 @@ public partial class Player : CharacterBody2D
 	
 	private GameManager _gameManager;
 
+	private UIManager _uiManager;
+
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-
+		CurrentBuffs = new PlayerBuffs(BaseBuffs);
 		MovementController = GetNode<PlayerMovementController>(_movementControllerPath);
 		AttackController = GetNode<PlayerAttackController>(_attackControllerPath);
 		StateMachine = GetNode<PlayerStateMachine>(_stateMachinePath);
@@ -57,13 +59,16 @@ public partial class Player : CharacterBody2D
 		SpellController = GetNode<PlayerSpellController>(_spellControllerPath);
 		AnimationController = GetNode<PlayerAnimationController>(_animationControllerPath);
 		DeflectController = GetNode<PlayerDeflectController>(_deflectControllerPath);
-		PostureController = GetNode<PlayerPostureController>(_postureControllerPath);
+		CurseController = GetNode<PlayerCurseController>(_curseControllerPath);
 		Camera = GetNode<PlayerCamera>(_cameraPath);
 		
-		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth;
+		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + CurrentBuffs.Vitality;
+		CurseController.MaxCurse = PlayerStatsResource.MaxCurse + CurrentBuffs.Harmony;
 		
 		// PlayerHealth.DeathEvent += Quit;
 		PlayerHealth.Invincible = false;
+
+		_uiManager = GetNode<UIManager>("/root/UIManager");
 
 		StateMachine.Initialize(this); // PLEASE ADD A PLAYER COMPONENT CLSS OR SMTH
 		MovementController.Initialize(this);
@@ -73,14 +78,14 @@ public partial class Player : CharacterBody2D
 		SpellController.Initialize(this);
 		AnimationController.Initialize(this);
 		DeflectController.Initialize(this);
-		PostureController.Initialize(this);
+		CurseController.Initialize(this);
 		InventoryManager.Initialize(this);
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
 
-		CurrentBuffs = new PlayerBuffs(BaseBuffs);
+		
 	}
 	
 	public void Respawn() {
@@ -89,7 +94,7 @@ public partial class Player : CharacterBody2D
 		// GD.Print(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]);
 		PlayerHealth.SetHealth(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHealth"]));
 		HealController.SetHeals(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHeals"]));
-		PostureController.SetPosture(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerMystic"]));
+		CurseController.SetCurse(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerMystic"]));
 		// PlayerHealth.ResetHealth();
 		//SpellController.ResetMana();
 		//HealController.ResetHeals();
@@ -116,6 +121,8 @@ public partial class Player : CharacterBody2D
 
 	}
 
+	private int _prevVit = 0;
+
 	public void UpdateBuffs() {
 		CurrentBuffs.ResetBuffs(BaseBuffs);
 		int i = 0;
@@ -125,9 +132,26 @@ public partial class Player : CharacterBody2D
 			i++;
 		}
 
-		if(Input.IsActionPressed("debug")) { // TODO: Delete this before export
-			CurrentBuffs.Strength += 10000;
-		}
+		// if(Input.IsActionPressed("debug")) { // TODO: Delete this before export
+		// 	CurrentBuffs.Strength += 10000;
+		// }
+
+		int diff = 0;
+
+		if(_prevVit < CurrentBuffs.Vitality)
+			diff = CurrentBuffs.Vitality - _prevVit;
+		_prevVit = CurrentBuffs.Vitality;
+
+		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + (int)Math.Ceiling(2.5*(double)CurrentBuffs.Vitality);
+		// PlayerHealth.AddHealth((int)Math.Ceiling(2.5*(double)diff), false);
+		 PlayerHealth.AddHealth(0, false);
+
+		CurseController.MaxCurse = PlayerStatsResource.MaxCurse + (int)Math.Ceiling(5*(double)CurrentBuffs.Harmony);
+		CurseController.AddCurse(0);
+
+		_uiManager.UpdateStatus();
+		// CurseController.AddCurse((int)Math.Ceiling(5*(double)diff));
+
 
 		// GD.Print("strength: "+ CurrentBuffs.Strength);
 	}
@@ -143,6 +167,11 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
 		UpdateBuffs();
+
+		if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
+			this.GlobalPosition = GetGlobalMousePosition();
+		}
+
         base._Process(delta);
     }
 
@@ -162,7 +191,7 @@ public partial class Player : CharacterBody2D
 				TakeTrueDamage(e, enemy);
 				return;
 			}
-			PostureController.TakePostureDamage(CurrentPlayerStats.CurseBuildRate);
+			CurseController.AddCurse(CurrentPlayerStats.CurseBuildRate);
 			DeflectController.Block(e, enemy);
 		} else {
 			TakeTrueDamage(e, enemy);

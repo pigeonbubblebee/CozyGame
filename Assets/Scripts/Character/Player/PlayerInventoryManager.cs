@@ -101,21 +101,24 @@ public partial class PlayerInventoryManager : Node
 	}
 
 	public void RemoveItemFromInventory(string ID) {
-		bool zero = false;
+		// bool zero = false;
 		Item item = new Item();
 
 		foreach(Item i in _playerInventory.Keys) {
 			if(i.ID.Equals(ID)) {
-				_playerInventory[i] -= 1;
 				item = i;
-				if(_playerInventory[i] == 0)
-					zero = true;
-				InventoryRemoveItemEvent?.Invoke(item);
+				
 			}
 		}
-		
-		if(zero)
-			_playerInventory.Remove(item);
+
+		if(item != null) {
+			_playerInventory[item] -= 1;
+
+			if(_playerInventory[item] == 0)
+				_playerInventory.Remove(item);
+		}
+
+		InventoryRemoveItemEvent?.Invoke(item);
 	}
 
 	public string[] SerializeEquipped() {

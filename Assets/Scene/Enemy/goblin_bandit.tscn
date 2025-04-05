@@ -15,6 +15,9 @@ size = Vector2(200, 178.5)
 [node name="goblin_bandit" type="Node2D"]
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_amwn4")]
+MaxHealth = 200
+MaxPosture = 400
+DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_bandit"
 
 [node name="CollisionShape2D" parent="ChaserEnemy" index="0"]

@@ -49,10 +49,10 @@ public class SaveFile
 	public static Dictionary<object, object> GenerateFreshSave() {
 		Dictionary<object, object> res = new Dictionary<object, object>()
 		{
-			{ "RespawnID", "TutorialArea;testing;StartingLocation" },
+			{ "RespawnID", "WestWoods;ww1;StartingLocation" },
 			{ "PlayerHealth", 50 },
 			{ "PlayerHeals", 2 },
-			{ "PlayerMystic", 100 },
+			{ "PlayerMystic", 0 },
 			{ "Inventory",  "[\"sword\"]" },
 			{ "InventoryStacks", "[1]" },
 			{ "Equipped", new string[0] },

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0pdyjglw66h1"]
+
+[ext_resource type="AudioStream" uid="uid://bnqwq0q04gcdo" path="res://Assets/Sound/lofi type beat unfinished.mp3" id="1_v2ah1"]
+
+[node name="Music" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_v2ah1")
+volume_db = -7.0
+autoplay = true

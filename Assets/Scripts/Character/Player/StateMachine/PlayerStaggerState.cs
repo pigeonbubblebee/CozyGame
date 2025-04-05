@@ -6,7 +6,7 @@ public partial class PlayerStaggerState : PlayerState
 	public override void Initialize(StateMachine playerStateMachine) {
 		base.Initialize(playerStateMachine);
 
-		PostureController.PostureRecoverEvent += _EnterDefaultState;
+		// CurseController.PostureRecoverEvent += _EnterDefaultState;
 	}
 	// Called when the node enters the scene tree for the first time.
 	public override void Enter(State previousState) {

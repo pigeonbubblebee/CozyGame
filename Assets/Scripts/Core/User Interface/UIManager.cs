@@ -41,6 +41,10 @@ public partial class UIManager : Node2D
 		_bossBars.Boss = null;
 	}
 
+	public void UpdateStatus() {
+		_inventory.UpdateStatusScreen();
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{

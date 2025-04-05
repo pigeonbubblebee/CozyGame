@@ -11,6 +11,7 @@ description_forest_essence,Concentrated mystic in a wooden shell. Consuming it g
 power_spirit,Merith
 description_power_spirit,A small spirit that glows green. Grants STRENGTH when you have accumulated enough MYSTIC.
 attribute_damage,Damage
+attribute_attack_speed,Attack Speed
 attribute_spell_damage,Cast Damage
 attribute_pdamage,Composure Damage
 attribute_spell_pdamage,Cast Composure Damage

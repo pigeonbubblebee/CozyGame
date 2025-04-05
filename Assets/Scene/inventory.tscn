@@ -935,17 +935,18 @@ theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
 text = "[center]>"
 
-[node name="GridContainer2" type="GridContainer" parent="stat/Panel/attributes/attributeAdd"]
-layout_mode = 0
+[node name="GridContainer2" type="Control" parent="stat/Panel/attributes/attributeAdd"]
+anchors_preset = 0
 offset_left = -8.0
 offset_top = 144.0
 offset_right = 40.0
 offset_bottom = 576.0
-theme_override_constants/v_separation = 0
 
 [node name="TextureButton5" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+offset_right = 48.0
+offset_bottom = 48.0
 theme = SubResource("Theme_7xjq3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_v4y4h")
 script = ExtResource("12_gcs1w")
@@ -966,6 +967,9 @@ text = "[center]<"
 [node name="TextureButton6" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 96.0
 theme = SubResource("Theme_7xjq3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_v4y4h")
 script = ExtResource("12_gcs1w")
@@ -986,6 +990,9 @@ text = "[center]<"
 [node name="TextureButton7" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+offset_top = 96.0
+offset_right = 48.0
+offset_bottom = 144.0
 theme = SubResource("Theme_7xjq3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_v4y4h")
 script = ExtResource("12_gcs1w")
@@ -1006,6 +1013,9 @@ text = "[center]<"
 [node name="TextureButton8" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+offset_top = 144.0
+offset_right = 48.0
+offset_bottom = 192.0
 theme = SubResource("Theme_7xjq3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_v4y4h")
 script = ExtResource("12_gcs1w")
@@ -1026,6 +1036,9 @@ text = "[center]<"
 [node name="TextureButton9" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+offset_top = 192.0
+offset_right = 48.0
+offset_bottom = 240.0
 theme = SubResource("Theme_7xjq3")
 theme_override_styles/panel = SubResource("StyleBoxTexture_v4y4h")
 script = ExtResource("12_gcs1w")

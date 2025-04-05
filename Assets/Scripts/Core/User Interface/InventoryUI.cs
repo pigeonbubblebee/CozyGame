@@ -139,18 +139,6 @@ public partial class InventoryUI : Control
     public override void _Process(double delta)
     {
         base._Process(delta);
-
-		if(_currentScenePlayer != null) {
-			_attributesVal.Text = "[right]" + _currentScenePlayer.PlayerHealth.CurrentHealthPoints + " / " + _currentScenePlayer.PlayerHealth.MaxHealthPoints + "\n"
-				+ (_currentScenePlayer.CurrentPlayerStats.MaxCurse - _currentScenePlayer.PostureController.CurrentPosture) + " / " + _currentScenePlayer.CurrentPlayerStats.MaxCurse + "\n"
-				+ (_currentScenePlayer.HealController.CurrentHeals) + " / " + _currentScenePlayer.CurrentPlayerStats.MaxHeals + "\n\n"
-				+ _currentScenePlayer.CurrentBuffs.Strength + "\n" + _currentScenePlayer.CurrentBuffs.Dexterity + "\n" + _currentScenePlayer.CurrentBuffs.Vitality 
-				+ "\n" + _currentScenePlayer.CurrentBuffs.Focus + "\n" + _currentScenePlayer.CurrentBuffs.Harmony;
-
-			_moneyText.Text = "[right]" + _currentScenePlayer.InventoryManager.GetItemCount("acorn").ToString();
-			_levelsText.Text = "[right]" + _currentScenePlayer.InventoryManager.GetItemCount("forest_essence").ToString();
-		}
-
 		if(_inputManager.GetMenuLeftActuation() && this.Visible) {
 			_screens[CurrentScreen].Visible = false;
 
@@ -356,6 +344,41 @@ public partial class InventoryUI : Control
 			instance.OnItemClickEvent += _UpdateItemDisplay;
 		}
 	}
+
+	public void UpdateStatusScreen() {
+		if(_currentScenePlayer == null || CurrentScreen != 2)
+			return;
+		_attributesVal.Text = "[right]" + _currentScenePlayer.PlayerHealth.CurrentHealthPoints + " / " + _currentScenePlayer.PlayerHealth.MaxHealthPoints + "\n"
+			+ (_currentScenePlayer.CurseController.CurrentCurse) + " / " + _currentScenePlayer.CurseController.MaxCurse + "\n"
+			+ (_currentScenePlayer.HealController.CurrentHeals) + " / " + _currentScenePlayer.CurrentPlayerStats.MaxHeals + "\n\n";
+			// + _currentScenePlayer.CurrentBuffs.Strength + "\n" + _currentScenePlayer.CurrentBuffs.Dexterity + "\n" + _currentScenePlayer.CurrentBuffs.Vitality 
+			// + "\n" + _currentScenePlayer.CurrentBuffs.Focus + "\n" + _currentScenePlayer.CurrentBuffs.Harmony;
+		
+
+		_attributesVal.Text += (_currentScenePlayer.CurrentBuffs.Strength - _currentScenePlayer.BaseBuffs.Strength == 0) ? _currentScenePlayer.BaseBuffs.Strength + "\n" : 
+			_currentScenePlayer.BaseBuffs.Strength + "[color=#56d36d]+" + (_currentScenePlayer.CurrentBuffs.Strength - _currentScenePlayer.BaseBuffs.Strength) + "[/color]\n";
+		_attributesVal.Text += (_currentScenePlayer.CurrentBuffs.Dexterity - _currentScenePlayer.BaseBuffs.Dexterity == 0) ? _currentScenePlayer.BaseBuffs.Dexterity + "\n" : 
+			_currentScenePlayer.BaseBuffs.Dexterity + "[color=#56d36d]+" + (_currentScenePlayer.CurrentBuffs.Dexterity - _currentScenePlayer.BaseBuffs.Dexterity) + "[/color]\n";
+		_attributesVal.Text += (_currentScenePlayer.CurrentBuffs.Vitality - _currentScenePlayer.BaseBuffs.Vitality == 0) ? _currentScenePlayer.BaseBuffs.Vitality + "\n" : 
+			_currentScenePlayer.BaseBuffs.Vitality + "[color=#56d36d]+" + (_currentScenePlayer.CurrentBuffs.Vitality - _currentScenePlayer.BaseBuffs.Vitality) + "[/color]\n";
+		_attributesVal.Text += (_currentScenePlayer.CurrentBuffs.Focus - _currentScenePlayer.BaseBuffs.Focus == 0) ? _currentScenePlayer.BaseBuffs.Focus + "\n" : 
+			_currentScenePlayer.BaseBuffs.Focus + "[color=#56d36d]+" + (_currentScenePlayer.CurrentBuffs.Focus - _currentScenePlayer.BaseBuffs.Focus) + "[/color]\n";
+		_attributesVal.Text += (_currentScenePlayer.CurrentBuffs.Harmony - _currentScenePlayer.BaseBuffs.Harmony == 0) ? _currentScenePlayer.BaseBuffs.Harmony + "\n" : 
+			_currentScenePlayer.BaseBuffs.Harmony + "[color=#56d36d]+" + (_currentScenePlayer.CurrentBuffs.Harmony - _currentScenePlayer.BaseBuffs.Harmony) + "[/color]\n";
+
+		_moneyText.Text = "[right]" + _currentScenePlayer.InventoryManager.GetItemCount("acorn").ToString();
+		_levelsText.Text = "[right]" + _currentScenePlayer.InventoryManager.GetItemCount("forest_essence").ToString();
+
+		_decrementAttributesButtons[0].Visible = _currentScenePlayer.BaseBuffs.Strength > 0;
+		_decrementAttributesButtons[1].Visible = _currentScenePlayer.BaseBuffs.Dexterity > 0;
+		_decrementAttributesButtons[2].Visible = _currentScenePlayer.BaseBuffs.Vitality > 0;
+		_decrementAttributesButtons[3].Visible = _currentScenePlayer.BaseBuffs.Focus > 0;
+		_decrementAttributesButtons[4].Visible = _currentScenePlayer.BaseBuffs.Harmony > 0;
+
+		foreach(CanvasItem item in _incrementAttributesButtons) {
+			item.Visible = _currentScenePlayer.InventoryManager.GetItemCount("forest_essence") > 0;
+		}
+	}
 	
 	private void _UpdateItemDisplay(Item i) {
 		_ItemDisplayName.Text = "[center]" + Tr(i.ID) + "[/center]"; // TODO: Add Localizer
@@ -404,18 +427,18 @@ public partial class InventoryUI : Control
 
 	private string _createDescription(string desc) {
 		string res = desc;
-		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#d84f2f]STRENGTH[/color][/url]");
+		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#f93e00]STRENGTH[/color][/url]");
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"][color=#78ff26]MYSTIC[/color][/url]");
-		res = res.Replace("HEALTH", "[url=\"tooltip_health\"][color=#b20b93]HEALTH[/color][/url]");
-		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"][color=#ff9292]REGROWTH[/color][/url]");
+		res = res.Replace("HEALTH", "[url=\"tooltip_health\"][color=#cf0451]HEALTH[/color][/url]");
+		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"][color=#cf0451]REGROWTH[/color][/url]");
 		res = res.Replace("DEXTERITY", "[url=\"tooltip_dexterity\"][color=#ecd42c]DEXTERITY[/color][/url]");
-		res = res.Replace("VITALITY", "[url=\"tooltip_vitality\"][color=#15b433]VITALITY[/color][/url]");
-		res = res.Replace("HARMONY", "[url=\"tooltip_harmony\"][color=#b455ff]HARMONY[/color][/url]");
-		res = res.Replace("FOCUS", "[url=\"tooltip_focus\"][color=#7880ff]FOCUS[/color][/url]");
+		res = res.Replace("VITALITY", "[url=\"tooltip_vitality\"][color=#cf0451]VITALITY[/color][/url]");
+		res = res.Replace("HARMONY", "[url=\"tooltip_harmony\"][color=#78ff26]HARMONY[/color][/url]");
+		res = res.Replace("FOCUS", "[url=\"tooltip_focus\"][color=#9fe7ff]FOCUS[/color][/url]");
 		res = res.Replace("PROWESS", "[url=\"tooltip_prowess\"][color=#ff7103]PROWESS[/color][/url]");
 		res = res.Replace("DECAY", "[url=\"tooltip_decay\"][color=#2e2a32]DECAY[/color][/url]");
-		res = res.Replace("DAZE", "[url=\"tooltip_daze\"][color=#eec059]DAZE[/color][/url]");
-		res = res.Replace("CRITICAL", "[url=\"tooltip_critical\"][color=#103e21]CRITICAL[/color][/url]");
+		res = res.Replace("DAZE", "[url=\"tooltip_daze\"][color=#d84f2f]DAZE[/color][/url]");
+		res = res.Replace("CRITICAL", "[url=\"tooltip_critical\"][color=#ecd42c]CRITICAL[/color][/url]");
 		
 		// res = _addColorToText(res, "STRENGTH", "d84f2f");
 		//res = _addColorToText(res, "MYSTIC", "78ff26");

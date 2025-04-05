@@ -1,4 +1,4 @@
-[gd_scene load_steps=241 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=242 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -41,7 +41,6 @@
 [ext_resource type="Texture2D" uid="uid://bk7x5snjkyjtx" path="res://Assets/Art/VFX/SlashHitEffect.png" id="31_84j2f"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerDeflectController.cs" id="31_evuhc"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerCamera.cs" id="31_fqcx7"]
-[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerPostureController.cs" id="37_ax0h8"]
 [ext_resource type="AudioStream" uid="uid://jvx0jqlthhq6" path="res://Assets/Sound/SFX/Player/slashhit.wav" id="37_f6755"]
 [ext_resource type="Texture2D" uid="uid://bx6eblb84scw8" path="res://Assets/Art/Background/bgtest.png" id="38_4378s"]
 [ext_resource type="AudioStream" uid="uid://qyno48mhhse0" path="res://Assets/Sound/SFX/Player/deathblow.wav" id="38_x8y7v"]
@@ -50,6 +49,7 @@
 [ext_resource type="AudioStream" uid="uid://cnpyrijoou5jq" path="res://Assets/Sound/SFX/Player/deflect.wav" id="46_pgerj"]
 [ext_resource type="AudioStream" uid="uid://cifo51815mb0o" path="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3" id="46_ts2if"]
 [ext_resource type="AudioStream" uid="uid://7iujovvp8snv" path="res://Assets/Sound/SFX/Player/hit.wav" id="50_hmeoo"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerCurseController.cs" id="51_b6dbt"]
 [ext_resource type="Texture2D" uid="uid://cfkyuxn2wsvfe" path="res://Assets/Art/VFX/blockeffect2.png" id="52_mmr4o"]
 [ext_resource type="Texture2D" uid="uid://cdo30qircy8ws" path="res://Assets/Art/VFX/curseOverloadEffect.png" id="52_nmuvh"]
 [ext_resource type="Texture2D" uid="uid://d3wao7t6xk7hn" path="res://Assets/Art/VFX/deflecteffect2.png" id="53_lbh8w"]
@@ -1469,6 +1469,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_topxr"]
+size = Vector2(2560, 1440)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a61ee"]
 size = Vector2(118, 202)
 
@@ -1507,7 +1510,7 @@ _healControllerPath = NodePath("HealController")
 _spellControllerPath = NodePath("PlayerSpellController")
 _animationControllerPath = NodePath("PlayerAnimationController")
 _deflectControllerPath = NodePath("PlayerDeflectController")
-_postureControllerPath = NodePath("PlayerMysticController")
+_curseControllerPath = NodePath("PlayerMysticController")
 _cameraPath = NodePath("Camera2D")
 _hitSFXPath = NodePath("HitSFX")
 
@@ -1743,6 +1746,11 @@ drag_right_margin = 0.15
 drag_bottom_margin = 0.15
 script = ExtResource("31_fqcx7")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D"]
+visible = false
+position = Vector2(0, -120)
+shape = SubResource("RectangleShape2D_topxr")
+
 [node name="PlayerInteractionController" type="Area2D" parent="."]
 script = ExtResource("12_4sjmy")
 
@@ -1914,8 +1922,8 @@ position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_gvxv2")
 
 [node name="PlayerMysticController" type="Node2D" parent="."]
-script = ExtResource("37_ax0h8")
-_damageTickTime = 2.0
+script = ExtResource("51_b6dbt")
+_damageTickTime = 1.0
 _curseDamage = 5
 _maxCurseParticlePath = NodePath("GPUParticles2D")
 

@@ -12,5 +12,5 @@ SortingID = 50
 Image = ExtResource("1_n11vv")
 Type = 2
 _attributeNames = PackedStringArray("strength_gain", "mystic_threshold")
-_attributeValues = PackedStringArray("2", "50")
+_attributeValues = PackedStringArray("4", "50")
 Stackable = false

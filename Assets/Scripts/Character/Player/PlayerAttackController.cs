@@ -145,7 +145,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	public void Slash() {
-		GD.Print("Slashing !");
+		// GD.Print("Slashing !");
 		_invincibleHittables.Clear();
 		foreach(Area2D hit in _deathblowCheckArea.GetOverlappingAreas()) {
 			GD.Print(hit.Name);
@@ -173,7 +173,9 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		} else {
 			_EnableAttackCollision();
 		}
-		GetTree().CreateTimer(CanDeathBlow ? 1f : _playerStats.SlashTime).Timeout += _FinishSlash;
+
+		GD.Print(CalculateAS());
+		GetTree().CreateTimer(CanDeathBlow ? 1f : CalculateAS()).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}
 	
@@ -208,7 +210,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 
 	public void StartSlashCooldown() {
 		CanSlash = false;
-		GetTree().CreateTimer(_playerStats.SlashCooldown).Timeout += _FinishSlashCooldown;
+		GetTree().CreateTimer(CalculateASCD()).Timeout += _FinishSlashCooldown;
 	}
 
 	private void _FinishSlashCooldown() {
@@ -220,7 +222,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			return;
 		}
 		
-		int damage = _player.DeflectController.Counter ? _playerStats.SlashCounterDamage : _playerStats.SlashDamage + _player.CurrentBuffs.Strength;
+		int damage = _playerStats.SlashDamage + _player.CurrentBuffs.Strength;
 		
 		if(hit is EnemyHitbox) {
 			// GD.Print(((Enemy) hit).Staggered);
@@ -236,7 +238,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		
 		// GD.Print(damage);
 		
-		HitEvent?.Invoke((IHittable) hit, damage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1, _playerStats.SlashPostureDamage);
+		HitEvent?.Invoke((IHittable) hit, damage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1,  _playerStats.SlashDamage + _player.CurrentBuffs.Strength);
 	}
 
 	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
@@ -368,5 +370,22 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		// _attackSprite.Visible = false;
 	}
 	
-	
+	public float CalculateAS() {
+		float speed = _playerStats.SlashCooldown; // Base 2
+		float trueSpeed = _playerStats.SlashTime; // base 2.5
+
+		speed += (0.1f * _player.CurrentBuffs.Dexterity);
+
+		if(speed  < 2.5)
+			return 1 / trueSpeed;
+		else
+			return 1 / speed;
+	}
+
+	public float CalculateASCD() {
+		float speed = _playerStats.SlashCooldown; // Base 2
+
+		speed += (0.1f * _player.CurrentBuffs.Dexterity);
+		return 1 / speed;
+	}
 }

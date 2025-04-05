@@ -47,7 +47,7 @@ public partial class SaveLoader : Node
 
 		saveFile.PlayerHealth = GetNode<Player>("/root/Player").PlayerHealth.CurrentHealthPoints;
 		saveFile.PlayerHeals = GetNode<Player>("/root/Player").HealController.CurrentHeals;
-		saveFile.PlayerMystic = GetNode<Player>("/root/Player").PostureController.CurrentPosture;
+		saveFile.PlayerMystic = GetNode<Player>("/root/Player").CurseController.CurrentCurse;
 		
 		saveFile.attributes = GetNode<Player>("/root/Player").SerializeCurrentBuffs();
 
@@ -136,7 +136,7 @@ public partial class SaveLoader : Node
 					roomData =  JsonConvert.DeserializeObject<RoomData>(CurrentSaveFile[key].ToString());
 					_roomDatas.Add(roomData);
 
-					GD.Print(roomData.RoomID + " " + roomData.BreakablesAlive[1]);
+					// GD.Print(roomData.RoomID + " " + roomData.BreakablesAlive[1]);
 				}
 			}
 		}

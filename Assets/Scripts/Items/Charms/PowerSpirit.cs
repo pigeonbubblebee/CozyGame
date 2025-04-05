@@ -20,8 +20,8 @@ public partial class PowerSpirit : Equippable
 		// 	}
 		// }
 
-		if(player.PostureController.CurrentPosture <= player.CurrentPlayerStats.MaxCurse - 50) {
-			p.Strength += 2;
+		if(player.CurseController.CurrentCurse >= 50) {
+			p.Strength += 4;
 		}	
 		
 		return p;

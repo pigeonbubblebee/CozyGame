@@ -56,12 +56,26 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private readonly string SHOOT = "shoot";
 	private readonly string DEFLECT = "deflect";
 
+	private MainHandler _mainHandler;	
+
 	public override void _Process(double delta) {
 		GetInput();
 	}
 
+    public override void _Ready()
+    {
+        base._Ready();
+		_mainHandler = GetNode<MainHandler>("/root/MainHandler");
+    }
+
+
 	public void GetInput()
 	{
+		if(_mainHandler.Loading) {
+			_movementDirection = Vector2.Zero;
+			return;
+		}
+
 		Vector2 inputDirection = Vector2.Zero;
 		inputDirection.X = Input.GetAxis(MOVE_LEFT, MOVE_RIGHT);
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cwkap4sv4rhga"]
+[gd_scene load_steps=12 format=4 uid="uid://cwkap4sv4rhga"]
 
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="1_npisq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_y1opr"]
@@ -8,9 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="5_d1t81"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="6_hidts"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/TransitionTriggerArea.cs" id="8_vjqhn"]
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/CameraBound.cs" id="9_s3jtj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gs684"]
 size = Vector2(514, 944)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx183"]
+size = Vector2(9048, 8016)
 
 [node name="Forest1" type="Node2D"]
 script = ExtResource("1_y1opr")
@@ -39,7 +43,7 @@ autoplay = true
 [node name="RespawnLocations" type="Node2D" parent="."]
 
 [node name="Right" type="Node2D" parent="RespawnLocations"]
-position = Vector2(4656, 3168)
+position = Vector2(5232, 3200)
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -143,12 +147,21 @@ texture = ExtResource("6_hidts")
 [node name="TransitionPoints" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="TransitionPoints"]
-position = Vector2(4888, 3184)
+position = Vector2(5496, 3184)
 script = ExtResource("8_vjqhn")
 SpawnArea = "Left"
 Area = "TutorialArea"
 Level = "testing"
+Direction = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionPoints/Area2D"]
-position = Vector2(200, -16)
+position = Vector2(72, -16)
 shape = SubResource("RectangleShape2D_gs684")
+
+[node name="CamBound" type="Area2D" parent="."]
+script = ExtResource("9_s3jtj")
+_shapePath = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamBound"]
+position = Vector2(796, 2880)
+shape = SubResource("RectangleShape2D_tx183")

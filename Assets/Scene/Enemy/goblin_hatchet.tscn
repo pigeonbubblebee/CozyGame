@@ -18,7 +18,7 @@ script = ExtResource("4_epu1p")
 Damage = 8
 InternalDamage = 4
 PostureDamage = 34
-DeflectPostureDamage = 50
+DeflectPostureDamage = 200
 Unstoppable = false
 Type = 0
 DeflectKnockbackMultiplier = 2.0
@@ -31,7 +31,7 @@ script = ExtResource("4_epu1p")
 Damage = 6
 InternalDamage = 3
 PostureDamage = 34
-DeflectPostureDamage = 100
+DeflectPostureDamage = 400
 Unstoppable = true
 Type = 1
 DeflectKnockbackMultiplier = 1.0
@@ -43,6 +43,9 @@ size = Vector2(376, 46.5)
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_bdr5l")]
 _currency_drop_amount = 7
+MaxHealth = 200
+MaxPosture = 400
+DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_hatchet"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]

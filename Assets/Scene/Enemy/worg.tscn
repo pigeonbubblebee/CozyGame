@@ -203,8 +203,9 @@ size = Vector2(224, 96)
 RetreatRange = 475.0
 Speed = 400.0
 _currency_drop_amount = 3
-MaxHealth = 20
-MaxPosture = 10
+MaxHealth = 100
+MaxPosture = 20
+DeathBlowDamage = 100
 EnemyNameLocalizationKey = "worg"
 
 [node name="CollisionShape2D" parent="ChaserEnemy" index="0"]

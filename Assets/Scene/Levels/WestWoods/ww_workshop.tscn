@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://co7dgj5m3p5bs"]
+
+[ext_resource type="PackedScene" uid="uid://cxeyk37wrxud7" path="res://Assets/Scene/Levels/WestWoods/ww1.tscn" id="1_vulcs"]
+[ext_resource type="PackedScene" uid="uid://bklev6kbs68qk" path="res://Assets/Scene/Levels/WestWoods/ww2.tscn" id="2_08ukt"]
+[ext_resource type="PackedScene" uid="uid://bumi8em53kosl" path="res://Assets/Scene/Levels/WestWoods/ww3.tscn" id="3_t76wl"]
+[ext_resource type="PackedScene" uid="uid://c8aw007w7csd4" path="res://Assets/Scene/Levels/WestWoods/ww4.tscn" id="4_mk0qe"]
+[ext_resource type="PackedScene" uid="uid://ca3hwpjletf4g" path="res://Assets/Scene/Levels/WestWoods/ww5.tscn" id="5_gkktv"]
+[ext_resource type="PackedScene" uid="uid://x21dj43un7rw" path="res://Assets/Scene/Levels/WestWoods/ww6.tscn" id="6_u6upf"]
+[ext_resource type="PackedScene" uid="uid://eo4g5684jr7v" path="res://Assets/Scene/player.tscn" id="9_ps5wd"]
+
+[node name="WwWorkshop" type="Node2D"]
+
+[node name="Ww1" parent="." instance=ExtResource("1_vulcs")]
+AdjacentAreas = PackedStringArray("WestWoods;ww2", "WestWoods;ww4")
+
+[node name="Ww2" parent="." instance=ExtResource("2_08ukt")]
+
+[node name="Ww3" parent="." instance=ExtResource("3_t76wl")]
+AdjacentAreas = PackedStringArray("WestWoods;ww2", "Westwoods;ww4")
+
+[node name="Ww4" parent="." instance=ExtResource("4_mk0qe")]
+
+[node name="Ww5" parent="." instance=ExtResource("5_gkktv")]
+
+[node name="Ww6" parent="." instance=ExtResource("6_u6upf")]
+
+[node name="Player" parent="." instance=ExtResource("9_ps5wd")]
+position = Vector2(-5672, 2992)
