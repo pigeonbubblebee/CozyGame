@@ -57,6 +57,7 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private readonly string DEFLECT = "deflect";
 
 	private MainHandler _mainHandler;	
+	private UIManager _uiManager;
 
 	public override void _Process(double delta) {
 		GetInput();
@@ -66,6 +67,7 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
     {
         base._Ready();
 		_mainHandler = GetNode<MainHandler>("/root/MainHandler");
+		_uiManager = GetNode<UIManager>("/root/UIManager");
     }
 
 
@@ -73,6 +75,17 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	{
 		if(_mainHandler.Loading) {
 			_movementDirection = Vector2.Zero;
+			return;
+		}
+
+		if(_uiManager.InventoryOpen || _uiManager.DialogueOpen) {
+			_movementDirection = Vector2.Zero;
+			_inventoryActuation = Input.IsActionJustPressed(INVENTORY);
+			_escapeActuation = Input.IsActionJustPressed(ESCAPE);
+
+			_menuLeftActuation = Input.IsActionJustPressed(MENU_LEFT);
+			_interactActuation = Input.IsActionJustPressed(INTERACT);
+			_menuRightActuation = Input.IsActionJustPressed(MENU_RIGHT);
 			return;
 		}
 

@@ -30,10 +30,14 @@ public partial class PlayerInteractionController : Area2D
 
 	private void _OnItemOverlap(Node2D hit) {
 		if(hit is IInteractable) {
+			if(!((IInteractable) hit).GetCondition(this._player))
+				return;
+
 			if(ObjectCurrentlyInteracting != null) {
 				ObjectCurrentlyInteracting.OnExit(_player);
 			}
 			ObjectCurrentlyInteracting = (IInteractable) hit;
+			
 			ObjectCurrentlyInteracting.OnEnter(_player);
 		}
 	}
@@ -59,7 +63,8 @@ public partial class PlayerInteractionController : Area2D
 	
 	private void _Interact() {
 		if(ObjectCurrentlyInteracting != null) {
-			ObjectCurrentlyInteracting.OnInteract(_player);
+			if(ObjectCurrentlyInteracting.GetCondition(_player))
+				ObjectCurrentlyInteracting.OnInteract(_player);
 		}
 	}
 }

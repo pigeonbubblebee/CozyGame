@@ -7,4 +7,5 @@ public interface IInteractable
 	void OnInteractHold(Player player);
 	void OnEnter(Player player);
 	void OnExit(Player player);
+	bool GetCondition(Player player);
 }

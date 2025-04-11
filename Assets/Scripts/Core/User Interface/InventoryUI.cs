@@ -171,7 +171,7 @@ public partial class InventoryUI : Control
 			_UpdateMenuIcons();
 		}
 
-		if(_inputManager.GetInteractActuation() && CurrentScreen == 1) {
+		if(_inputManager.GetInteractActuation() && CurrentScreen == 1 && Visible) {
 			bool emptySlot = false;
 			bool alreadyEquipped = false;
 			for(SelectedEquipSlot = 0; SelectedEquipSlot < _currentScenePlayer.InventoryManager.EquippedItems.Length; SelectedEquipSlot++) {
@@ -258,6 +258,7 @@ public partial class InventoryUI : Control
 	}
 
     public void CloseInventory() {
+		_currentSelectedItem = null;
 		_ItemDisplayName.Visible = false;
 		_ItemDisplayDescription.Visible = false;
 		_ItemDisplayImage.Visible = false;
@@ -425,7 +426,7 @@ public partial class InventoryUI : Control
 		}
 	}
 
-	private string _createDescription(string desc) {
+	public static string _createDescription(string desc) {
 		string res = desc;
 		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#f93e00]STRENGTH[/color][/url]");
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"][color=#78ff26]MYSTIC[/color][/url]");

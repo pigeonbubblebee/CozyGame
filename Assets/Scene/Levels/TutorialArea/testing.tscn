@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bvpmp8o31rqpk"]
+[gd_scene load_steps=33 format=4 uid="uid://bvpmp8o31rqpk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_ibhl6"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="3_pv41r"]
@@ -7,13 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://b8q4yxucabmv2" path="res://Assets/Art/Environment/CombatGate.png" id="6_ecatu"]
 [ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="7_ti4xj"]
 [ext_resource type="Texture2D" uid="uid://dj85431dova0j" path="res://Assets/Art/Item/merith.png" id="7_ts6n0"]
-[ext_resource type="Texture2D" uid="uid://bt0a5asjxpc24" path="res://Assets/Art/Environment/BreakableWall.png" id="8_084ho"]
-[ext_resource type="Script" path="res://Assets/Scripts/Environmental/BreakableWall.cs" id="8_k660a"]
 [ext_resource type="PackedScene" uid="uid://b0fu168ri1a68" path="res://Assets/Scene/Enemy/goblin_bandit.tscn" id="8_n7a58"]
 [ext_resource type="Resource" uid="uid://c3aurfbcy14u4" path="res://Data/Items/Charms/power_spirit.tres" id="9_5g0vr"]
 [ext_resource type="AudioStream" uid="uid://bnqwq0q04gcdo" path="res://Assets/Sound/lofi type beat unfinished.mp3" id="9_ei8k8"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="9_vhrep"]
-[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="10_bhcfp"]
 [ext_resource type="PackedScene" uid="uid://dfi6e0ou7w3pm" path="res://Assets/Scene/Enemy/goblin_archer.tscn" id="10_rh2xm"]
 [ext_resource type="Texture2D" uid="uid://bsst4jdtiynq1" path="res://Assets/Art/Background/parallax1.png" id="11_alx4h"]
 [ext_resource type="PackedScene" uid="uid://bskrg487tax4i" path="res://Assets/Scene/Enemy/worg.tscn" id="11_ftk6d"]
@@ -22,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dtf27csg7valy" path="res://Assets/Art/Item/forest_essence.png" id="12_m5kqd"]
 [ext_resource type="PackedScene" uid="uid://dvmfdkq5niknb" path="res://Assets/Scene/Enemy/goblin_warrior_easier.tscn" id="13_3wlhf"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="13_wfvcs"]
+[ext_resource type="PackedScene" uid="uid://bwud6pqm7cylu" path="res://Assets/Scene/Environment/breakable_wall.tscn" id="14_cowc5"]
 [ext_resource type="PackedScene" uid="uid://bh6371v0h7qfw" path="res://Assets/Scene/Enemy/goblin_hatchet.tscn" id="14_n0kds"]
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="16_f6uas"]
 [ext_resource type="PackedScene" uid="uid://brlayd7re18fg" path="res://Assets/Scene/Environment/respawn_point.tscn" id="16_sswap"]
@@ -45,6 +43,12 @@ size = Vector2(32, 144)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewan5"]
 radius = 64.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1nbx"]
+shader = ExtResource("4_hl5ra")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xhjr"]
 size = Vector2(312, 944)
@@ -271,28 +275,8 @@ position = Vector2(0, -48)
 scale = Vector2(0.5, 0.5)
 PromptText = "Take"
 
-[node name="BreakableWall" type="StaticBody2D" parent="Breakables" groups=["Ground"]]
-material = SubResource("ShaderMaterial_bd3v5")
-position = Vector2(-3672, 4168)
-scale = Vector2(-4, 4)
-collision_layer = 19
-script = ExtResource("8_k660a")
-_healthSystemPath = NodePath("HealthSystem")
-_oneWay = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Breakables/BreakableWall"]
-z_index = -1
-material = SubResource("ShaderMaterial_uvaue")
-texture = ExtResource("8_084ho")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/BreakableWall"]
-shape = SubResource("RectangleShape2D_jpjep")
-
-[node name="HealthSystem" type="Node2D" parent="Breakables/BreakableWall"]
-script = ExtResource("10_bhcfp")
-MaxHealthPoints = 3
-HealthPointsAreTrueHitAmount = true
-CurrentHealthPoints = 3
+[node name="BreakableWall" parent="Breakables" instance=ExtResource("14_cowc5")]
+material = SubResource("ShaderMaterial_s1nbx")
 
 [node name="Enemies" type="Node2D" parent="."]
 

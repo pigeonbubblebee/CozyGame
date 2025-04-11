@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwud6pqm7cylu"]
+
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="1_1x0p5"]
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/BreakableWall.cs" id="2_4sxim"]
+[ext_resource type="Texture2D" uid="uid://bt0a5asjxpc24" path="res://Assets/Art/Environment/BreakableWall.png" id="3_62gl6"]
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="4_pygas"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bd3v5"]
+shader = ExtResource("1_1x0p5")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvaue"]
+shader = ExtResource("1_1x0p5")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcbh4"]
+size = Vector2(32, 144)
+
+[node name="BreakableWall" type="StaticBody2D" groups=["Ground"]]
+material = SubResource("ShaderMaterial_bd3v5")
+position = Vector2(-3672, 4168)
+scale = Vector2(-4, 4)
+collision_layer = 19
+script = ExtResource("2_4sxim")
+_healthSystemPath = NodePath("HealthSystem")
+_oneWay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_uvaue")
+texture = ExtResource("3_62gl6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rcbh4")
+
+[node name="HealthSystem" type="Node2D" parent="."]
+script = ExtResource("4_pygas")
+MaxHealthPoints = 3
+HealthPointsAreTrueHitAmount = true
+CurrentHealthPoints = 3

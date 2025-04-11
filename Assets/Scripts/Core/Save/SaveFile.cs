@@ -18,11 +18,16 @@ public class SaveFile
 	public string[] equipped = new string[0];
 
 	public int[] attributes = new int[0];
+	public List<MerchantData> MerchantDatas { get; set; } = new List<MerchantData>();
 	
 	public class RoomData {
 		public string RoomID;
 		public bool[] EnemiesAlive;
 		public bool[] BreakablesAlive;
+	}
+	public class MerchantData {
+		public string MerchantID;
+		public int[] Stock;
 	}
 
 	public Dictionary<object, object> Save()
@@ -41,6 +46,9 @@ public class SaveFile
 
 		foreach(RoomData roomData in RoomDatas) {
 			res.Add("RD:" + roomData.RoomID, roomData);
+		}
+		foreach(MerchantData merchantData in MerchantDatas) {
+			res.Add("MD:" + merchantData.MerchantID, merchantData);
 		}
 
 		return res;

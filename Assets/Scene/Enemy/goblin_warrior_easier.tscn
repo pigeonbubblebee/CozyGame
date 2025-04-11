@@ -725,7 +725,7 @@ target_position = Vector2(-96, 0)
 
 [node name="RandomSlash" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="1"]
 script = ExtResource("10_6wu0w")
-AttackPaths = Array[NodePath]([NodePath("Slash"), NodePath("SlashComboChain"), NodePath("Cleave"), NodePath("Slash"), NodePath("SlashComboChain")])
+AttackPaths = Array[NodePath]([NodePath("Slash"), NodePath("SlashComboChain")])
 AttackCooldown = 1.5
 NotChainAttack = true
 

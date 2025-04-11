@@ -160,10 +160,12 @@ public partial class MainHandler : Node
 				string s = _currentScene.AdjacentAreas[_adjSceneNum];
 
 				if(s.Split(';')[1].Equals(currentLevel)) {
-					_adjacentScenes[_adjSceneNum] = currentScene;
-					GD.Print("exists: " + _adjacentScenes[_adjSceneNum].SceneID + " " + _adjSceneNum);
-					GD.Print("arr: " + _adjacentScenes[_adjSceneNum].SceneID + " length: " + _adjacentScenes.Length + " index: " + _adjSceneNum);
-					_adjSceneNum ++;
+					if(IsInstanceValid(currentScene)) {
+						_adjacentScenes[_adjSceneNum] = currentScene;
+						GD.Print("exists: " + _adjacentScenes[_adjSceneNum].SceneID + " " + _adjSceneNum);
+						GD.Print("arr: " + _adjacentScenes[_adjSceneNum].SceneID + " length: " + _adjacentScenes.Length + " index: " + _adjSceneNum);
+						_adjSceneNum ++;
+					}
 				}
 				if(_adjSceneNum < _adjacentScenes.Length) {
 					s = _currentScene.AdjacentAreas[_adjSceneNum];
@@ -181,8 +183,10 @@ public partial class MainHandler : Node
 
 		newScene.Init();
 
-		if(_respawnRequest)
+		if(_respawnRequest) {
+			_player.PlayerHealth.ResetHealth();
 			_respawnRequest = false;
+		}
 
 		_uiManager.ResetUI();
 	}
@@ -200,6 +204,8 @@ public partial class MainHandler : Node
 			_currentScene.QueueFree();
 			if(_adjacentScenes != null) {
 				foreach(Node n in _adjacentScenes) {
+					if(!IsInstanceValid(n))
+						continue;
 					if(n != _currentScene)
 						n.QueueFree();
 				}
@@ -207,8 +213,15 @@ public partial class MainHandler : Node
 		}
 		_currentScene = null;
 		_adjacentScenes = null;
+		_adjacentRequest = false;
 		_currentLevel = "";
 		_currentArea = "";
+		if(_prevScene!= null) {
+			_prevScene.QueueFree();
+			_prevScene = null;
+		}
+		
+		
 		// _chunkRequest = false;
 		// _adjacentRequest = false;
 		// _saveLoader.CurrentSaveFile["PlayerHealth"] = 20

@@ -1,24 +1,45 @@
 key,en
 testing_item,Testing
 description_testing_item,Testing item description
+
 goblin_boss_1,General Borbsnop - Goblin Elite
-sword,Blade of the Forest
+
+sword,Arboreal Edge
 description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a magical slash.
 acorn,Acorns
 description_acorn,A small bunch of acorns. The main currency used in the forest.
 forest_essence,Forest Essence
 description_forest_essence,Concentrated mystic in a wooden shell. Consuming it grants the user power.
-power_spirit,Merith
-description_power_spirit,A small spirit that glows green. Grants STRENGTH when you have accumulated enough MYSTIC.
+mystic_ore,Mystic Ore
+description_mystic_ore,Mystic crystals wrapped by primordial stone.
+honey_wine,Honey Wine
+description_honey_wine,Smells extremely rich and sweet"," with scents of different berry. Seems to be mainly honey fermented in water.
+power_spirit,Bloom
+description_power_spirit,A small spirit that's taken residence in a flower. Reacts positively to the presence of magic"," granting STRENGTH when you have accumulated enough MYSTIC.
+honeycomb,Honeycomb
+description_honeycomb,Magical honey produced by the spirit inside heals you"," causing you to regenerate HEALTH when you cast.
+hive,Hive
+description_hive,A hive of bees commanded by the spirit inside. Summons a bee to help you in combat.
+claw,Sweetclaw
+description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of Blinny into you"," increasing STRENGTH"," DEXTERITY"," and VITALITY.
+
 attribute_damage,Damage
 attribute_attack_speed,Attack Speed
 attribute_spell_damage,Cast Damage
 attribute_pdamage,Composure Damage
 attribute_spell_pdamage,Cast Composure Damage
 attribute_strength_gain,Strength Gain
+attribute_dexterity_gain,Dexterity Gain
+attribute_vitality_gain,Vitality Gain
+attribute_focus_gain,Focus Gain
+attribute_harmony_gain,Harmony Gain
+attribute_heal_amount,Healing Amount
 attribute_mystic_threshold,Mystic Threshold
 item_type_key_item,Key Item
+item_type_upgrade_material,Upgrade Material
 item_type_equippable,Woodland Spirit
+item_type_achohol,Achohol
+
 tooltip_strength,STRENGTH adds a damage bonus to your slashes.
 tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through spellcasting. Overloading MYSTIC will hurt.
 tooltip_health,HEALTH keeps you alive. Can be gained by using a REGROWTH.
@@ -29,5 +50,50 @@ tooltip_harmony,HARMONY adds to your max MYSTIC.
 tooltip_focus,FOCUS makes your casts stronger.
 tooltip_prowess,PROWESS increases composure damage from parries.
 tooltip_decay,DECAY deals damage over time.
-tooltip_daze,DAZE stuns an enemy when built up.
+tooltip_daze,DAZE stuns an enemy when built up to 30 stacks.
 tooltip_critical,Landing a CRITICAL triples damage.
+
+name_player,Player
+name_cat,Cat
+name_blinny,Blinny
+
+blinny_claw,One of Blinny's very own claw clipping! The spirit on top will make you super extra strong!
+blinny_honeycomb,Blinny's source of tasty honey. This one is special because there's a spirit inside. Blinny's honey is very very healthy for you and will help you stay strong!
+blinny_hive,Some of Blinny's bee friends live in here. Blinny'll give it to you though because you're also a friend!
+blinny_forest_essence_1,Hmmmm... Blinny found this weird thingy in the forest. Blinny'll give it to you for a price!
+blinny_forest_essence_2,Ooh! Blinny lied... Blinny has a second weird thingy! Its one of Blinny's last though so the price is going up!
+blinny_forest_essence_3,Blinny's bees just found a third... Since its a special bee gift"," Blinny won't part with it easy.
+blinny_honey_wine,Blinny's favorite drink! Super sweet. Goes great with Honey!
+blinny_mystic_ore,Blinny's bees brought him this shiny rock... Not sure what it does though but it looks valuable.
+price,Price: 
+stock,Stock: 
+stock_left, Left
+
+dialogue_cat_tutorial_1,Are you awake? My friend is trapped and I-
+dialogue_player_tutorial,Are you a talking cat?
+dialogue_cat_tutorial_2,I just freed you. Some gratitude would be nice.
+dialogue_cat_tutorial_3,We need to move quick. Do your legs feel spry? Try moving around.
+dialogue_move_instruction,Movement - \nUse A and D to move. Use L or Shift to dash around while on the ground.
+dialogue_cat_jump_tutorial_1,That's a big ledge ahead.
+dialogue_cat_jump_tutorial_2,Though I trust your legs will be enough to carry us.
+dialogue_jump_instruction,Jumping - \nTap SPACE to jump. Holding SPACE will increase jump height.
+dialogue_cat_rest_tutorial,Up ahead is a mystic tree. It allows your kind to regrow. Resting at it should restore your vitals.
+dialogue_rest_instruction,Resting - \nInteract with trees to fully restore your health. Dying will cause you to regrow at that tree.
+dialogue_cat_slash_tutorial_1,Looks like our path has been blocked.
+dialogue_cat_slash_tutorial_2,The blade I gave you should be more than enough to deal with it though.
+dialogue_slash_instruction,Attacking - \nTap LMB or P to attack. Attacking can break some walls.
+dialogue_cat_block_tutorial_1,YIKES! Those are the guys that took over after you died. They took my friend and stuffed him up one of their outposts.
+dialogue_cat_block_tutorial_2,Goblins are ferocious. Blindly attacking may not be enough to take them down.
+dialogue_block_instruction,Blocking - \nTap RMB or O before an attack lands to block it.
+dialogue_composure_instruction,Composure - \nBlocking RIGHT BEFORE an attack lands deals composure damage. When the composure meter is full"," you can instantly execute an enemy.
+dialogue_cat_heal_tutorial_1,What a rough battle. Let me take a look at your wounds.
+dialogue_internal_health_instruction,Internal Health - \nBlocking early"," denoted by orange sparks"," deals internal damage to you. Internal damage is healed over time and by executing.
+dialogue_cat_heal_tutorial_2,Looks like you might need some healing. I can lend my power to you.
+dialogue_heal_instruction,Regrowths - \nHold E to regenerate health.
+dialogue_cat_cast_tutorial,That's a giant horde... Fortunately"," the magical energy your sword holds can deal with it.
+dialogue_mystic_instruction,Mystic - \nBlocking attacks generates mystic. When your mystic bar is full"," you'll take damage over time.
+dialogue_cast_instruction,Casting - \nTap R to release your mystic and fire a piercing bolt in front of you.
+dialogue_cat_pretutboss_1,We're getting pretty close to exiting the forest. I heard there's an outpost up ahead.
+dialogue_cat_pretutboss_2,I really hope we can find my friend in there...
+dialogue_blinny_1,New friends for Blinny?
+dialogue_blinny_2,Blinny would love to show friends his things.

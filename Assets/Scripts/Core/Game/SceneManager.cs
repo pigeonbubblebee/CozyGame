@@ -66,11 +66,13 @@ public partial class SceneManager : Node2D
 			if(loadedRoomDataFromSave == null) {
 				_enemies[i].DeathEvent += _CleanupEnemy;
 			} else {
-				if(loadedRoomDataFromSave.EnemiesAlive[i])
-					_enemies[i].DeathEvent += _CleanupEnemy;
-				else {
-					_enemies[i].QueueFree();
-					_enemies[i] = null;
+				if(i < loadedRoomDataFromSave.EnemiesAlive.Length) {
+					if(loadedRoomDataFromSave.EnemiesAlive[i])
+						_enemies[i].DeathEvent += _CleanupEnemy;
+					else {
+						_enemies[i].QueueFree();
+						_enemies[i] = null;
+					}
 				}
 			}
 			i ++;
@@ -79,17 +81,20 @@ public partial class SceneManager : Node2D
 		i = 0;
 
 		foreach(Node n in _breakablesParent.GetChildren()) {
+			
 			_breakables[i] = (Node2D) n;
 			// GD.Print("breakable" + _breakables[i] +" " + _breakables.Length);
 			// GD.Print(loadedRoomDataFromSave.RoomID + " from scene manager");
 			if(loadedRoomDataFromSave == null) {
 				// _breakables[i].TreeExited += _CleanupBreakables;
 			} else {
-				if(loadedRoomDataFromSave.BreakablesAlive[i]) {
-					// _breakables[i].TreeExited += _CleanupBreakables;
-				} else {
-					_breakables[i].QueueFree();
-					_breakables[i] = null;
+				if(i < loadedRoomDataFromSave.BreakablesAlive.Length) {
+					if(loadedRoomDataFromSave.BreakablesAlive[i]) {
+						// _breakables[i].TreeExited += _CleanupBreakables;
+					} else {
+						_breakables[i].QueueFree();
+						_breakables[i] = null;
+					}
 				}
 			}
 			i ++;

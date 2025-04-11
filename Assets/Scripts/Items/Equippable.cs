@@ -15,8 +15,12 @@ public partial class Equippable : Item
 		return p;
 	}
 
-	public virtual void OnEquip(Player p) {
+	public virtual void OnShoot(Player p) {
 
+	}
+
+	public virtual void OnEquip(Player p) {
+		p.SpellController.ShootEvent += OnShoot;
 	}
 
 	public virtual void OnUnequip(Player p) {

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://75lrmo0fad7o"]
+
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="1_bvv7v"]
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/MoneyPile.cs" id="2_o6ccr"]
+[ext_resource type="Resource" uid="uid://clgo3qbo2ki7k" path="res://Data/Items/acorn.tres" id="3_pu444"]
+[ext_resource type="Texture2D" uid="uid://ckue25jsorcuc" path="res://Assets/Art/Environment/acorn.png" id="4_s5jq7"]
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="5_qi55h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hq3ov"]
+shader = ExtResource("1_bvv7v")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71v8o"]
+shader = ExtResource("1_bvv7v")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr2me"]
+size = Vector2(32, 28)
+
+[node name="Money" type="StaticBody2D" groups=["Ground"]]
+material = SubResource("ShaderMaterial_hq3ov")
+position = Vector2(-2808, 4720)
+scale = Vector2(-4, 4)
+collision_layer = 19
+script = ExtResource("2_o6ccr")
+_healthSystemPath = NodePath("HealthSystem")
+_amt = 15
+coin_resource = ExtResource("3_pu444")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_71v8o")
+position = Vector2(0, 28)
+texture = ExtResource("4_s5jq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_pr2me")
+
+[node name="HealthSystem" type="Node2D" parent="."]
+script = ExtResource("5_qi55h")
+MaxHealthPoints = 3
+HealthPointsAreTrueHitAmount = true
+CurrentHealthPoints = 3

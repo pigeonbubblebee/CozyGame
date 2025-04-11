@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 // using Dictionary = Godot.Collections.Dictionary;
 using System.Collections.Generic;
 using RoomData = SaveFile.RoomData;
+using MerchantData = SaveFile.MerchantData;
 using System;
 
 public partial class SaveLoader : Node
@@ -14,6 +15,7 @@ public partial class SaveLoader : Node
 	readonly string PATH = ProjectSettings.GlobalizePath("user://");
 
 	private List<RoomData> _roomDatas = new List<RoomData>();
+	private List<MerchantData> _merchantDatas = new List<MerchantData>();
 
 	private int _saveSlot = 1;
 
@@ -53,6 +55,8 @@ public partial class SaveLoader : Node
 
 		saveFile.RespawnID = GetNode<MainHandler>("/root/MainHandler").GetRespawnID();
 		saveFile.RoomDatas = _roomDatas;
+
+		saveFile.MerchantDatas = _merchantDatas;
 
 		saveFile.inventory = GetNode<Player>("/root/Player").InventoryManager.SerializeInventory();
 		saveFile.inventoryStacks = GetNode<Player>("/root/Player").InventoryManager.SerializeInventoryStacks();
@@ -125,6 +129,50 @@ public partial class SaveLoader : Node
 		return newRoomData;
 	}
 
+	public int GetStock(string MerchantID, int index, MerchantInventory merchantInventory) {
+		foreach(MerchantData md in _merchantDatas) {
+			if(md.MerchantID.Equals(MerchantID)) {
+				return md.Stock[index];
+			}
+		}
+
+		// for(int i = 0; i < merchantInventory.Inventory.Length; i++) {	
+		// 	// if(merchantInventory.Inventory[i].ID.Equals(ItemID)) {
+		// 	// 	return merchantInventory.Stock[i];
+		// 	// }
+			
+		// }
+		return merchantInventory.Stock[index];
+
+		// return 0;
+	}
+
+	public void ReduceStock(string MerchantID, int index, MerchantInventory merchantInventory) {
+		foreach(MerchantData md in _merchantDatas) {
+			if(md.MerchantID.Equals(MerchantID)) { 
+				// for(int i = 0; i < md.Stock.Length; i++) {
+				// 	if(merchantInventory.Inventory[i].ID.Equals(ItemID)) {
+				// 		md.Stock[i] --;
+				// 		return;
+				// 	}
+				// }
+				md.Stock[index] --;
+				return;
+			}
+		}
+		MerchantData mData = new MerchantData();
+		mData.MerchantID = merchantInventory.MerchantNameCode;
+		int[] newStock = new int[merchantInventory.Stock.Length];
+		for(int i = 0; i < merchantInventory.Stock.Length; i++) {
+			newStock[i] = merchantInventory.Stock[i];
+			// if(merchantInventory.Inventory[i].ID.Equals(ItemID))
+			// 	newStock[i]--;
+		}
+		newStock[index] --;
+		mData.Stock = newStock;
+		_merchantDatas.Add(mData);
+	}
+
 	public void ProcessCurrentSaveFile() {
 		_roomDatas.Clear();
 		foreach(object key in CurrentSaveFile.Keys) {
@@ -135,6 +183,20 @@ public partial class SaveLoader : Node
 					roomData.RoomID = ((string)key).Substring(3);
 					roomData =  JsonConvert.DeserializeObject<RoomData>(CurrentSaveFile[key].ToString());
 					_roomDatas.Add(roomData);
+
+					// GD.Print(roomData.RoomID + " " + roomData.BreakablesAlive[1]);
+				}
+			}
+		}
+		_merchantDatas.Clear();
+		foreach(object key in CurrentSaveFile.Keys) {
+			char[] chars = ((string)key).ToCharArray();
+			if(chars.Length > 3) {
+				if(chars[0] == 'M' && chars[1] == 'D' && chars[2] == ':') {
+					MerchantData merchantData = new MerchantData();
+					merchantData.MerchantID = ((string)key).Substring(3);
+					merchantData =  JsonConvert.DeserializeObject<MerchantData>(CurrentSaveFile[key].ToString());
+					_merchantDatas.Add(merchantData);
 
 					// GD.Print(roomData.RoomID + " " + roomData.BreakablesAlive[1]);
 				}

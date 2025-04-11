@@ -5,6 +5,7 @@ public partial class PlayerCamera : Camera2D
 {
 	// Called when the node enters the scene tree for the first time.
 	// private CinemachineVirtualCamera _vcam;
+	[Export] public float _Offset = -120f;
 	
 	private double _shakeTimer;
 	private Vector2 _camBasePosition;
@@ -35,13 +36,13 @@ public partial class PlayerCamera : Camera2D
 		_shakeMagnitude = Mathf.Lerp(_shakeMagnitude, 0f, 5f * (float)delta);
 		
 		if (_shakeTimer > 0f) {
-			this.Offset = new Vector2(0, -220f)
+			this.Offset = new Vector2(0, _Offset)
 				+ _GetNoise(delta);
 			_shakeTimer -= delta;
 		}
 		if(_shakeTimer <= 0f) {
 			// this.Position = new Vector2(0f, 0f);
-			this.Offset = new Vector2(0, -220f);
+			this.Offset = new Vector2(0, _Offset);
 		}
 	}
 

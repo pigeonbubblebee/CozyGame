@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public partial class InventorySlot : Panel
 {
@@ -7,9 +8,12 @@ public partial class InventorySlot : Panel
 	private RichTextLabel _label;
 	private Item _item;
 	public event Action<Item> OnItemClickEvent;
+	public event Action<Item, int> OnMerchantItemClickEvent;
 	private Texture2D _texture;
 	private Font _numberFont;
 	private int _stack;
+
+	public int MerchantIndex = -1;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -40,7 +44,7 @@ public partial class InventorySlot : Panel
 		textLabel.AddThemeFontSizeOverride("normal_font_size", 16);
 		textLabel.AddThemeColorOverride("default_color", new Color("cbb36a"));
 		if(_item != null) {
-			textLabel.Text = "[right]" + (!_item.Stackable ? "" : _stack.ToString());
+			textLabel.Text = "[right]" + (!_item.Stackable && MerchantIndex == -1 ? "" : _stack.ToString());
 		}
 		textLabel.ZIndex = 2;
 		textLabel.BbcodeEnabled = true;
@@ -60,7 +64,7 @@ public partial class InventorySlot : Panel
 		// GD.Print(i.Image);
 		
 		_label.Text = "[right]" +
-			 (!_item.Stackable ? "" : _stack.ToString());
+			 (!_item.Stackable && MerchantIndex == -1 ? "" : _stack.ToString());
 	}
 
 	public void RemoveItem() {
@@ -99,6 +103,10 @@ public partial class InventorySlot : Panel
 			{
 				if(_item != null) {
 					OnItemClickEvent?.Invoke(_item);
+
+					if(MerchantIndex != -1) {
+						OnMerchantItemClickEvent?.Invoke(_item, MerchantIndex);
+					}
 				}
 			}
 		}

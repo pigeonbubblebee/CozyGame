@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=3 format=3 uid="uid://dadooxybbhqju"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/DialogueData.cs" id="1_omj7o"]
+[ext_resource type="Texture2D" uid="uid://mkh7lxvynva1" path="res://Assets/Art/UI/DialoguePortraits/cat.png" id="1_u5qdo"]
+
+[resource]
+script = ExtResource("1_omj7o")
+Portrait = ExtResource("1_u5qdo")
+DialogueKey = PackedStringArray("cat_pretutboss_1", "cat_pretutboss_2")
+NameKey = "cat"

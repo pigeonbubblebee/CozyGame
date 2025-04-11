@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://6hq4j7vgemmj"]
+
+[ext_resource type="Texture2D" uid="uid://g6oorshjcivn" path="res://Assets/Art/Item/hive.png" id="1_j3gnl"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Equippable.cs" id="2_k1thj"]
+
+[resource]
+script = ExtResource("2_k1thj")
+ID = "hive"
+Description = "description_hive"
+ItemTier = 0.0
+SortingID = 48
+Image = ExtResource("1_j3gnl")
+Type = 2
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = false

@@ -11,6 +11,7 @@ public partial class PlayerSpellController : Node2D
 
 	public event Action<int> ManaUseEvent;
 	public event Action<int> AddManaEvent;
+	public event Action<Player> ShootEvent;
 	
 	public event Action<IHittable, int, int, int> HitEvent; // Hittable, Damage, Direction, Posture
 	
@@ -63,9 +64,9 @@ public partial class PlayerSpellController : Node2D
 	
 	public override void _Process(double delta)
 	{
-		if(DesiredShoot) {
-			GD.Print("Desired shot");
-		}
+		// if(DesiredShoot) {
+		// 	GD.Print("Desired shot");
+		// }
 		// GD.Print(_CheckDesiredShoot() + " " + CanShoot +" "+ (_player.PostureController.CurrentPosture <= 
 			//_playerStats.MaxCurse - _playerStats.CurseUsePerSpell));
 		if(_CheckDesiredShoot() && !CanShoot) {
@@ -84,7 +85,7 @@ public partial class PlayerSpellController : Node2D
 	}
 	
 	public void UseSpell() {
-		
+		ShootEvent?.Invoke(_player);
 		_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude * 2f);
 		_player.MovementController.ApplyKnockback(-_player.MovementController.Direction, _playerStats.DeflectKnockback, _playerStats.DeflectKnockbackAcceleration, _playerStats.DeflectKnockbackTime);
 		// _gameManager.FreezeFrame(0.02f, 0.1f);

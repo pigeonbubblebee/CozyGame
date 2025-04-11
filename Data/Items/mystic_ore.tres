@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cu8o3hb1u4n27"]
+
+[ext_resource type="Texture2D" uid="uid://bh1utl8fat4ee" path="res://Assets/Art/Item/mystic_ore.png" id="1_heho8"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_vl1v7"]
+
+[resource]
+script = ExtResource("1_vl1v7")
+ID = "mystic_ore"
+Description = "mystic_ore_description"
+ItemTier = 0.0
+SortingID = 99
+Image = ExtResource("1_heho8")
+Type = 4
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = true

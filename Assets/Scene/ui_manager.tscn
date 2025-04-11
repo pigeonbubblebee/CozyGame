@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=45 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dwfd3h1q50kau" path="res://Assets/Art/UI/ManaEmpty.png" id="6_h24h4"]
 [ext_resource type="Texture2D" uid="uid://c6xkeauk014jr" path="res://Assets/Art/UI/Mana.png" id="8_ama06"]
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="8_diypk"]
+[ext_resource type="Texture2D" uid="uid://2ibx1nym34x4" path="res://Assets/Art/Item/sword.png" id="9_5auh3"]
 [ext_resource type="Texture2D" uid="uid://boa1bkgr064an" path="res://Assets/Art/UI/posture_bar.png" id="9_vxua4"]
 [ext_resource type="Texture2D" uid="uid://c0sb5sml5du7i" path="res://Assets/Art/UI/curse_bar.png" id="10_3meys"]
 [ext_resource type="Texture2D" uid="uid://6rmh6unbb722" path="res://Assets/Art/UI/inventory_slot.png" id="10_g3jub"]
@@ -18,6 +19,9 @@
 [ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="14_vg2je"]
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="15_uenwp"]
 [ext_resource type="Texture2D" uid="uid://ctcjp4dhg7kn" path="res://Sprite-0002.png" id="16_j423v"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/MerchantUI.cs" id="16_s7qjf"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/Dialogue.cs" id="17_ldyx3"]
+[ext_resource type="Texture2D" uid="uid://mkh7lxvynva1" path="res://Assets/Art/UI/DialoguePortraits/cat.png" id="17_sb6p1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mls8h"]
 texture = ExtResource("10_g3jub")
@@ -30,7 +34,60 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_strnc"]
+texture = ExtResource("10_g3jub")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjbb6"]
+bg_color = Color(0.796078, 0.701961, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bpop"]
+bg_color = Color(0.935488, 0.874837, 0.648708, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bk3g3"]
+bg_color = Color(0.783003, 0.597703, 0.360687, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kwyl"]
+content_margin_right = 4.0
+bg_color = Color(0.22617, 0.0760011, 0.0511117, 1)
+
+[sub_resource type="Theme" id="Theme_dng51"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_jjbb6")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_1bpop")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_bk3g3")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_5kwyl")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esek0"]
+bg_color = Color(0.380392, 0.231373, 0.164706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk0um"]
+bg_color = Color(0.796078, 0.701961, 0.415686, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7tkfx"]
+texture = ExtResource("10_g3jub")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtcbe"]
+texture = ExtResource("10_g3jub")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7binc"]
+texture = ExtResource("10_g3jub")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sigd0"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8jew"]
@@ -115,8 +172,10 @@ VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_kwa84")
 [node name="UIManager" type="Node2D"]
 script = ExtResource("1_fitbl")
 _inventoryPath = NodePath("GUI/Inventory")
+_dialoguePath = NodePath("GUI/Dialogue")
 _hudPath = NodePath("GUI/HUD")
 _bossBarsPath = NodePath("GUI/BossBars")
+_merchantPath = NodePath("GUI/Merchant")
 _loadingScreenPath = NodePath("Loading/Loading")
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -304,10 +363,387 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center] Boss Name [/center]"
 
+[node name="Merchant" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_s7qjf")
+_gridContainerPath = NodePath("inv/Panel/ScrollContainer/GridContainer")
+_ItemDisplayNamePath = NodePath("inv/Panel/ItemDisplay/ItemName2")
+_ItemDisplayDescriptionPath = NodePath("inv/Panel/ItemDisplay/ScrollContainer/ItemDesc")
+_ItemDisplayImagePath = NodePath("inv/Panel/ItemDisplay/Image")
+_inventorySlotTexture = ExtResource("10_g3jub")
+_inventorySlotFont = ExtResource("14_vg2je")
+_tooltipPath = NodePath("Tooltip")
+_tooltipTextPath = NodePath("Tooltip/Tooltip/ItemDesc")
+
+[node name="Tooltip" type="Control" parent="GUI/Merchant"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = 1256.0
+offset_top = 478.0
+offset_right = 1256.0
+offset_bottom = 478.0
+
+[node name="Tooltip" type="Panel" parent="GUI/Merchant/Tooltip"]
+z_index = 3
+layout_mode = 0
+offset_left = -132.0
+offset_top = -192.0
+offset_right = 132.0
+offset_bottom = -72.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_strnc")
+
+[node name="ItemDesc" type="RichTextLabel" parent="GUI/Merchant/Tooltip/Tooltip"]
+visibility_layer = 512
+z_index = 3
+custom_minimum_size = Vector2(170, 50)
+layout_mode = 2
+offset_left = 2.0
+offset_right = 172.0
+offset_bottom = 80.0
+scale = Vector2(1.5, 1.5)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Accumulate MYSTIC by parrying\",\" and release it through spellcasting. Overloading MYSTIC will hurt!."
+fit_content = true
+scroll_active = false
+meta_underlined = false
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="GUI/Merchant/Tooltip/Tooltip"]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_right = 177.0
+offset_bottom = 80.0
+scale = Vector2(1.5, 1.5)
+theme = SubResource("Theme_dng51")
+horizontal_scroll_mode = 0
+
+[node name="inv" type="CenterContainer" parent="GUI/Merchant"]
+layout_mode = 1
+offset_top = 32.0
+offset_right = 1600.0
+offset_bottom = 932.0
+
+[node name="Panel" type="Panel" parent="GUI/Merchant/inv"]
+z_index = 2
+custom_minimum_size = Vector2(1500, 750)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")
+
+[node name="Border" type="Control" parent="GUI/Merchant/inv/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel3" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = -1
+custom_minimum_size = Vector2(25, 600)
+layout_mode = 2
+offset_left = -25.0
+offset_top = -18.0
+offset_bottom = 776.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel4" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = -1
+custom_minimum_size = Vector2(25, 600)
+layout_mode = 2
+offset_left = 1500.0
+offset_top = -19.0
+offset_right = 1525.0
+offset_bottom = 775.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel7" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = 1
+custom_minimum_size = Vector2(8, 600)
+layout_mode = 2
+offset_left = 918.0
+offset_top = 85.0
+offset_right = 926.0
+offset_bottom = 765.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel5" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = -1
+custom_minimum_size = Vector2(1500, 25)
+layout_mode = 2
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 1525.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel9" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = 1
+custom_minimum_size = Vector2(1500, 5)
+layout_mode = 2
+offset_left = -18.0
+offset_top = 85.0
+offset_right = 1518.0
+offset_bottom = 93.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="Panel6" type="Panel" parent="GUI/Merchant/inv/Panel/Border"]
+z_index = -1
+custom_minimum_size = Vector2(1500, 25)
+layout_mode = 2
+offset_top = 750.0
+offset_right = 1510.0
+offset_bottom = 775.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk0um")
+
+[node name="InvLabel" type="RichTextLabel" parent="GUI/Merchant/inv/Panel"]
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = 13.0
+offset_right = -1126.0
+offset_bottom = 36.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center] SHOP [/center]"
+scroll_active = false
+
+[node name="ItemDisplay" type="Control" parent="GUI/Merchant/inv/Panel"]
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -35.0
+offset_right = 1490.0
+offset_bottom = 765.0
+
+[node name="ItemName2" type="RichTextLabel" parent="GUI/Merchant/inv/Panel/ItemDisplay"]
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 974.0
+offset_top = 144.0
+offset_right = -361.0
+offset_bottom = 168.0
+grow_horizontal = 2
+scale = Vector2(3, 3)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center] ITEM [/center]"
+scroll_active = false
+
+[node name="Image" type="TextureRect" parent="GUI/Merchant/inv/Panel/ItemDisplay"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 0
+offset_left = 1126.0
+offset_top = 196.0
+offset_right = 1318.5
+offset_bottom = 388.5
+texture = ExtResource("15_uenwp")
+
+[node name="Equip Prompt" type="RichTextLabel" parent="GUI/Merchant/inv/Panel/ItemDisplay"]
+visibility_layer = 512
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+offset_left = 1270.0
+offset_top = 742.0
+offset_right = 1371.0
+offset_bottom = 758.0
+scale = Vector2(2, 2)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]F - Buy"
+fit_content = true
+scroll_active = false
+
+[node name="ItemDesc3" type="RichTextLabel" parent="GUI/Merchant/inv/Panel/ItemDisplay"]
+visible = false
+visibility_layer = 512
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+offset_left = 966.0
+offset_top = 750.0
+offset_right = 1050.0
+offset_bottom = 766.0
+scale = Vector2(2, 2)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]W/S - Scroll"
+fit_content = true
+scroll_active = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Merchant/inv/Panel/ItemDisplay"]
+layout_mode = 0
+offset_left = 966.0
+offset_top = 398.0
+offset_right = 1222.0
+offset_bottom = 558.0
+scale = Vector2(2, 2)
+theme = SubResource("Theme_dng51")
+
+[node name="ItemDesc" type="RichTextLabel" parent="GUI/Merchant/inv/Panel/ItemDisplay/ScrollContainer"]
+visibility_layer = 512
+custom_minimum_size = Vector2(245, 160)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "ITEM DESC Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
+fit_content = true
+scroll_active = false
+meta_underlined = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Merchant/inv/Panel"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 141.0
+offset_right = 862.0
+offset_bottom = 709.0
+theme = SubResource("Theme_dng51")
+
+[node name="GridContainer" type="GridContainer" parent="GUI/Merchant/inv/Panel/ScrollContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 5
+
+[node name="Panel" type="Panel" parent="GUI/Merchant/inv/Panel/ScrollContainer/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7tkfx")
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Merchant/inv/Panel/ScrollContainer/GridContainer/Panel"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("9_5auh3")
+
+[node name="Button" type="Button" parent="GUI/Merchant/inv/Panel/ScrollContainer/GridContainer/Panel"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/Merchant/inv/Panel/ScrollContainer/GridContainer/Panel"]
+z_index = 2
+layout_mode = 0
+offset_left = 8.0
+offset_top = 96.0
+offset_right = 80.0
+offset_bottom = 136.0
+scale = Vector2(1.5, 1.5)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]1333"
+
 [node name="Inventory" parent="GUI" instance=ExtResource("2_gwf6h")]
 visible = false
 
+[node name="Dialogue" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_ldyx3")
+_portraitPath = NodePath("Panel/portrait")
+_namePath = NodePath("Panel/Panel/Name")
+_textPath = NodePath("Panel/Text")
+_namePanelPath = NodePath("Panel/Panel")
+_panelPath = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="GUI/Dialogue"]
+z_index = 1
+layout_mode = 0
+offset_left = 544.0
+offset_top = 656.0
+offset_right = 782.0
+offset_bottom = 710.0
+scale = Vector2(4, 4)
+theme_override_styles/panel = SubResource("StyleBoxTexture_rtcbe")
+
+[node name="portrait" type="TextureRect" parent="GUI/Dialogue/Panel"]
+z_index = 2
+layout_mode = 0
+offset_left = -136.0
+offset_top = -90.0
+offset_right = 14.0
+offset_bottom = 60.0
+texture = ExtResource("17_sb6p1")
+
+[node name="Panel" type="Panel" parent="GUI/Dialogue/Panel"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 80.0
+offset_bottom = -2.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7binc")
+
+[node name="Name" type="RichTextLabel" parent="GUI/Dialogue/Panel/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 170.0
+offset_bottom = 24.0
+scale = Vector2(0.75, 0.75)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+text = "Character Name"
+
+[node name="Text" type="RichTextLabel" parent="GUI/Dialogue/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 458.0
+offset_bottom = 106.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+text = "Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... Dialogue, dialogue, dialogue ... "
+
+[node name="Name2" type="RichTextLabel" parent="GUI/Dialogue/Panel"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = -12.0
+offset_right = 253.0
+offset_bottom = 8.0
+scale = Vector2(0.75, 0.75)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("14_vg2je")
+theme_override_font_sizes/normal_font_size = 16
+text = "F - Next"
+
 [node name="Loading" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Loading" type="Control" parent="Loading"]
 layout_mode = 3
@@ -342,7 +778,7 @@ offset_bottom = 900.0
 [node name="Panel" type="Panel" parent="Loading/Loading/CenterContainer"]
 custom_minimum_size = Vector2(1600, 900)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sigd0")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 visible = false

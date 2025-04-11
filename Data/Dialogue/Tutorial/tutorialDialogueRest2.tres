@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=3 format=3 uid="uid://cq3nnslxhj5lt"]
+
+[ext_resource type="Texture2D" uid="uid://btuhp47rom3fn" path="res://Assets/Art/UI/DialoguePortraits/empty.png" id="1_0k1o8"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/DialogueData.cs" id="1_0x0ph"]
+
+[resource]
+script = ExtResource("1_0x0ph")
+Portrait = ExtResource("1_0k1o8")
+DialogueKey = PackedStringArray("rest_instruction")
+NameKey = ""

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="StatBoostSpirit" load_steps=3 format=3 uid="uid://c832bn0avj46l"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/StatBoostSpirit.cs" id="1_e5fn2"]
+[ext_resource type="Texture2D" uid="uid://dlae7m5mqnt7j" path="res://Assets/Art/Item/claw.png" id="1_fu8tn"]
+
+[resource]
+script = ExtResource("1_e5fn2")
+strength_gain = 1
+dexterity_gain = 1
+vitality_gain = 1
+focus_gain = 0
+harmony_gain = 0
+ID = "claw"
+Description = "description_claw"
+ItemTier = 0.0
+SortingID = 47
+Image = ExtResource("1_fu8tn")
+Type = 2
+_attributeNames = PackedStringArray("strength_gain", "dexterity_gain", "vitality_gain")
+_attributeValues = PackedStringArray("1", "1", "1")
+Stackable = false

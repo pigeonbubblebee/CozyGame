@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=4 format=3 uid="uid://dejomm544rfkm"]
+
+[ext_resource type="Texture2D" uid="uid://mkh7lxvynva1" path="res://Assets/Art/UI/DialoguePortraits/cat.png" id="1_1tqgs"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/DialogueData.cs" id="1_mtxl8"]
+[ext_resource type="Resource" uid="uid://ojn3oclmur7c" path="res://Data/Dialogue/Tutorial/tutorialJumpInstruction.tres" id="1_xcnwt"]
+
+[resource]
+script = ExtResource("1_mtxl8")
+Portrait = ExtResource("1_1tqgs")
+DialogueKey = PackedStringArray("cat_jump_tutorial_1", "cat_jump_tutorial_2")
+NameKey = "cat"
+NextDialogue = ExtResource("1_xcnwt")

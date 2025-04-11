@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dilhfcxabe3of"]
+
+[ext_resource type="Texture2D" uid="uid://u3w2bkr1vm0b" path="res://Assets/Art/Item/honey_wine.png" id="1_vcy56"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_xks8p"]
+
+[resource]
+script = ExtResource("1_xks8p")
+ID = "honey_wine"
+Description = "honey_wine_description"
+ItemTier = 0.0
+SortingID = 75
+Image = ExtResource("1_vcy56")
+Type = 5
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = false

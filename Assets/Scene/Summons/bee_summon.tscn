@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://s3u4ww4pnyqp"]
+
+[ext_resource type="Texture2D" uid="uid://dsavi0pxb11tx" path="res://Assets/Art/Character/Summon/bee.png" id="1_fxb7o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ny1w6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fxb7o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vko8u"]
+size = Vector2(120, 104)
+
+[node name="BeeSummon" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ny1w6")
+animation = &"idle"
+
+[node name="collision" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/collision"]
+position = Vector2(-4, 4)
+shape = SubResource("RectangleShape2D_vko8u")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShootHealSpirit" load_steps=3 format=3 uid="uid://c2s54sjo66iqj"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/ShootHealSpirit.cs" id="1_qtlxo"]
+[ext_resource type="Texture2D" uid="uid://d1dvylwuttt1q" path="res://Assets/Art/Item/honeycomb.png" id="1_uc0a3"]
+
+[resource]
+script = ExtResource("1_qtlxo")
+healAmt = 2
+ID = "honeycomb"
+Description = "description_honeycomb"
+ItemTier = 0.0
+SortingID = 49
+Image = ExtResource("1_uc0a3")
+Type = 2
+_attributeNames = PackedStringArray("heal_amount")
+_attributeValues = PackedStringArray("2")
+Stackable = false

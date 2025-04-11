@@ -43,6 +43,8 @@ public partial class Item : Resource, IComparable<Item> {
 		Weapon,
 		Pickup,
 		equippable,
-		key_item
+		key_item,
+		upgrade_material,
+		achohol
 	}
 }

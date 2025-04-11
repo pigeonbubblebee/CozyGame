@@ -24,6 +24,7 @@ Player="*res://Assets/Scene/player.tscn"
 SaveLoader="*res://Assets/Scripts/Core/Save/SaveLoader.cs"
 MainHandler="*res://Assets/Scripts/Core/Game/MainHandler.cs"
 Music="*res://Assets/Scene/music.tscn"
+Background="*res://Assets/Scene/Environment/ww_background.tscn"
 
 [display]
 

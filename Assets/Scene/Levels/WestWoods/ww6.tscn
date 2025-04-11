@@ -81,6 +81,7 @@ position = Vector2(72, -808)
 shape = SubResource("RectangleShape2D_rvntt")
 
 [node name="CamBound" type="Area2D" parent="."]
+visible = false
 script = ExtResource("5_f4ups")
 _shapePath = NodePath("CollisionShape2D")
 
@@ -89,6 +90,7 @@ position = Vector2(-7916, 11177.5)
 shape = SubResource("RectangleShape2D_cdvmb")
 
 [node name="CamBound2" type="Area2D" parent="."]
+visible = false
 position = Vector2(-6888, -10496)
 script = ExtResource("5_f4ups")
 _shapePath = NodePath("CollisionShape2D")

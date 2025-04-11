@@ -8,7 +8,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	[Export] private NodePath _slashBufferPath;
 	private Timer _slashBuffer;
 
-	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash && !_uiManager.InventoryOpen;
+	public bool DesiredAttack => _CheckDesiredAttack() && CanSlash && !_uiManager.InventoryOpen  && !_uiManager.MerchantOpen;
 	private IInputManager _inputManager;
 	
 	public bool DesiredDown => _inputManager.GetDown() && !_movementController.Grounded;
