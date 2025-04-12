@@ -1,4 +1,4 @@
-[gd_scene load_steps=242 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=243 format=3 uid="uid://eo4g5684jr7v"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://cfkyuxn2wsvfe" path="res://Assets/Art/VFX/blockeffect2.png" id="52_mmr4o"]
 [ext_resource type="Texture2D" uid="uid://cdo30qircy8ws" path="res://Assets/Art/VFX/curseOverloadEffect.png" id="52_nmuvh"]
 [ext_resource type="Texture2D" uid="uid://d3wao7t6xk7hn" path="res://Assets/Art/VFX/deflecteffect2.png" id="53_lbh8w"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSummonController.cs" id="54_eeqha"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acva1"]
 atlas = ExtResource("4_ubixj")
@@ -1511,6 +1512,7 @@ _spellControllerPath = NodePath("PlayerSpellController")
 _animationControllerPath = NodePath("PlayerAnimationController")
 _deflectControllerPath = NodePath("PlayerDeflectController")
 _curseControllerPath = NodePath("PlayerMysticController")
+_summonControllerPath = NodePath("PlayerSummonController")
 _cameraPath = NodePath("Camera2D")
 _hitSFXPath = NodePath("HitSFX")
 
@@ -1641,7 +1643,7 @@ _deathblowCheckAreaPath = NodePath("DeathblowCheck")
 _rightDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Right")
 _leftDeathblowCheckAreaColliderPath = NodePath("DeathblowCheck/Left")
 _attackSpritePath = NodePath("Visuals/Sprite")
-_slashHitParticlePath = NodePath("Visuals/GPUParticles2D")
+_slashParticlePoolPath = NodePath("Visuals/SlashParticlePool")
 _swingSFXPath = NodePath("SwingSFX")
 _slashHitSFXPath = NodePath("SlashHitSFX")
 _deathBlowSFXPath = NodePath("DeathBlowSFX")
@@ -1681,7 +1683,38 @@ disabled = true
 
 [node name="Visuals" type="Node2D" parent="PlayerAttackController"]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerAttackController/Visuals"]
+[node name="SlashParticlePool" type="Node2D" parent="PlayerAttackController/Visuals"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerAttackController/Visuals/SlashParticlePool"]
+z_index = 4
+material = SubResource("CanvasItemMaterial_r4kkq")
+position = Vector2(0, 280)
+rotation = -0.785398
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ghirs")
+texture = ExtResource("31_84j2f")
+lifetime = 0.12
+one_shot = true
+fixed_fps = 40
+local_coords = true
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="PlayerAttackController/Visuals/SlashParticlePool"]
+z_index = 4
+material = SubResource("CanvasItemMaterial_r4kkq")
+position = Vector2(0, 280)
+rotation = -0.785398
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ghirs")
+texture = ExtResource("31_84j2f")
+lifetime = 0.12
+one_shot = true
+fixed_fps = 40
+local_coords = true
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="PlayerAttackController/Visuals/SlashParticlePool"]
+z_index = 4
 material = SubResource("CanvasItemMaterial_r4kkq")
 position = Vector2(0, 280)
 rotation = -0.785398
@@ -1944,3 +1977,6 @@ process_mode = 3
 stream = ExtResource("50_hmeoo")
 volume_db = 2.0
 script = ExtResource("23_s2csh")
+
+[node name="PlayerSummonController" type="Node" parent="."]
+script = ExtResource("54_eeqha")

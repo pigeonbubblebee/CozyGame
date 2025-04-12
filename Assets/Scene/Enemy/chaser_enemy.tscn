@@ -154,7 +154,7 @@ WaitTimeBetweenFlips = 1.0
 HitboxPath = NodePath("EnemyTemplate/Hurtbox")
 HealthSystemPath = NodePath("EnemyTemplate/Health")
 coin_resource = ExtResource("2_ugdlw")
-_healthBarPath = NodePath("EnemyTemplate/Bars/HealthBar")
+_healthBarPath = NodePath("EnemyTemplate/Bars/Node/Node2D/Healthbar")
 MaxHealth = 40
 MaxPosture = 100
 PostureRegenerationCooldownTime = 0.5
@@ -162,11 +162,13 @@ PostureRegenerationTime = 0.5
 PostureRegenerationRate = 10
 _postureRegenerationCooldownTimerPath = NodePath("EnemyTemplate/PostureRegenerationCooldown")
 _postureRegenerationTimerPath = NodePath("EnemyTemplate/PostureRegeneration")
-_deathblowMarkPath = NodePath("EnemyTemplate/Bars/Deathblow")
+_deathblowMarkPath = NodePath("EnemyTemplate/Bars/Node/Node2D/Deathblow")
 _attacksParentPath = NodePath("EnemyTemplate/AttackPattern")
 _spritePath = NodePath("EnemyTemplate/AnimatedSprite2D")
 StateMachinePath = NodePath("EnemyTemplate/StateMachine")
-_postureBarPath = NodePath("EnemyTemplate/Bars/PostureBar")
+_postureBarPath = NodePath("EnemyTemplate/Bars/Node/Node2D/PostureBar")
+_bleedLogoPath = NodePath("EnemyTemplate/Bars/Node/Node2D/TextureRect")
+_bleedStackPath = NodePath("EnemyTemplate/Bars/Node/Node2D/RichTextLabel")
 StaggerRecoveryTime = 4.0
 DeathBlowDamage = 40
 _knockbackTimePath = NodePath("EnemyTemplate/KnockbackTimer")
@@ -197,14 +199,34 @@ one_shot = true
 
 [node name="EnemyTemplate" parent="." instance=ExtResource("2_ivrns")]
 
-[node name="Bars" parent="EnemyTemplate" index="0"]
+[node name="Bars" parent="EnemyTemplate" index="1"]
 position = Vector2(0, -96)
 
-[node name="AnimatedSprite2D" parent="EnemyTemplate" index="1"]
+[node name="PostureBar" parent="EnemyTemplate/Bars/Node/Node2D" index="0"]
+offset_top = -168.0
+offset_bottom = -163.0
+
+[node name="Healthbar" parent="EnemyTemplate/Bars/Node/Node2D" index="1"]
+offset_top = -192.0
+offset_bottom = -187.0
+
+[node name="Deathblow" parent="EnemyTemplate/Bars/Node/Node2D" index="2"]
+offset_top = -280.0
+offset_bottom = -232.0
+
+[node name="TextureRect" parent="EnemyTemplate/Bars/Node/Node2D" index="3"]
+offset_top = -232.0
+offset_bottom = -200.0
+
+[node name="RichTextLabel" parent="EnemyTemplate/Bars/Node/Node2D" index="4"]
+offset_top = -232.0
+offset_bottom = -216.0
+
+[node name="AnimatedSprite2D" parent="EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_ommm0")
 animation = &"idle"
 
-[node name="StateMachine" parent="EnemyTemplate" index="3"]
+[node name="StateMachine" parent="EnemyTemplate" index="4"]
 script = ExtResource("11_mmfnb")
 _aggroStatePath = NodePath("AggroState")
 _patrolStatePath = NodePath("PatrolState")

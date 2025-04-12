@@ -657,7 +657,6 @@ size = Vector2(308, 178.5)
 size = Vector2(408, 38.5)
 
 [node name="goblin_warrior_easier" type="Node2D"]
-position = Vector2(-2840, -112)
 
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_gp3s4")]
 RetreatRange = 200.0
@@ -685,23 +684,44 @@ position = Vector2(-200, 0)
 [node name="AggroCheckUp" parent="ChaserEnemy/AggroChecks" index="1"]
 target_position = Vector2(1360, -104)
 
-[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="0"]
+[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(0, -192)
 
-[node name="PostureBar" parent="ChaserEnemy/EnemyTemplate/Bars" index="0"]
-offset_left = -192.0
-offset_right = -64.0
+[node name="PostureBar" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="0"]
+offset_left = -96.0
+offset_top = -256.0
+offset_right = -32.0
+offset_bottom = -251.0
 
-[node name="HealthBar" parent="ChaserEnemy/EnemyTemplate/Bars" index="1"]
-offset_left = -192.0
-offset_right = -64.0
+[node name="Healthbar" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="1"]
+offset_left = -96.0
+offset_top = -280.0
+offset_right = -32.0
+offset_bottom = -275.0
 
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="Deathblow" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="2"]
+offset_top = -368.0
+offset_bottom = -320.0
+
+[node name="TextureRect" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="3"]
+offset_left = -96.0
+offset_top = -320.0
+offset_right = -64.0
+offset_bottom = -288.0
+
+[node name="RichTextLabel" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="4"]
+offset_left = -64.0
+offset_top = -320.0
+offset_right = -48.0
+offset_bottom = -304.0
+
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 material = SubResource("ShaderMaterial_u2csa")
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_cx26y")
-animation = &"slash2_2"
-frame_progress = 0.478677
+animation = &"slash2_1"
+frame = 8
+frame_progress = 0.944817
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_3alm1")

@@ -31,7 +31,10 @@ public partial class Player : CharacterBody2D
 	public PlayerDeflectController DeflectController  { get; private set; }
 	[Export] private NodePath _curseControllerPath;
 	public PlayerCurseController CurseController  { get; private set; }
+	[Export] private NodePath _summonControllerPath;
+	public PlayerSummonController SummonController  { get; private set; }
 	[Export] private NodePath _cameraPath;
+	
 	public PlayerCamera Camera  { get; private set; }
 	public PlayerBuffs BaseBuffs { get; private set; } = new PlayerBuffs();
 	public PlayerBuffs CurrentBuffs { get; private set; }
@@ -60,6 +63,7 @@ public partial class Player : CharacterBody2D
 		AnimationController = GetNode<PlayerAnimationController>(_animationControllerPath);
 		DeflectController = GetNode<PlayerDeflectController>(_deflectControllerPath);
 		CurseController = GetNode<PlayerCurseController>(_curseControllerPath);
+		SummonController = GetNode<PlayerSummonController>(_summonControllerPath);
 		Camera = GetNode<PlayerCamera>(_cameraPath);
 		
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + CurrentBuffs.Vitality;
@@ -80,6 +84,7 @@ public partial class Player : CharacterBody2D
 		DeflectController.Initialize(this);
 		CurseController.Initialize(this);
 		InventoryManager.Initialize(this);
+		SummonController.Initialize(this);
 
 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
@@ -104,6 +109,8 @@ public partial class Player : CharacterBody2D
 		BaseBuffs.Vitality = attributes[2];
 		BaseBuffs.Focus = attributes[3];
 		BaseBuffs.Harmony = attributes[4];
+
+		SummonController.ClearSummons();
 		
 		//PostureController.ResetPosture();
 		

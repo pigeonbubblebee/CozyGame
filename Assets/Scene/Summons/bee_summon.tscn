@@ -1,32 +1,151 @@
-[gd_scene load_steps=4 format=3 uid="uid://s3u4ww4pnyqp"]
+[gd_scene load_steps=17 format=3 uid="uid://s3u4ww4pnyqp"]
 
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Summon/BeeSummon.cs" id="1_3lx3s"]
 [ext_resource type="Texture2D" uid="uid://dsavi0pxb11tx" path="res://Assets/Art/Character/Summon/bee.png" id="1_fxb7o"]
+[ext_resource type="Texture2D" uid="uid://bk7x5snjkyjtx" path="res://Assets/Art/VFX/SlashHitEffect.png" id="3_1lbjy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vko8u"]
+size = Vector2(116, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glc1r"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8v1c"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_garl6"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydobw"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niglt"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg4ww"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6eeo"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2n60"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdifi"]
+atlas = ExtResource("1_fxb7o")
+region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ny1w6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_fxb7o")
+"texture": SubResource("AtlasTexture_glc1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8v1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_garl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydobw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niglt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg4ww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6eeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2n60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdifi")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vko8u"]
-size = Vector2(120, 104)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i1xey"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 2
+particles_anim_loop = false
 
-[node name="BeeSummon" type="Node2D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcgme"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="BeeSummon" type="CharacterBody2D"]
+z_index = 4
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_3lx3s")
+_attackCooldown = 2.0
+_dashSpeed = 1000.0
+_attackAreaPath = NodePath("DamageBox")
+_attackColliderAreaPath = NodePath("DamageBox/CollisionShape2D")
+_damage = 10
+_hitParticlePath = NodePath("Node/GPUParticles2D")
+_spritePath = NodePath("Node2D/AnimatedSprite2D")
+SummonID = "bee_summon"
+Speed = 400
+IdleSpeed = 3.0
+Friction = 400.0
+BobSpeed = 1.0
+IdleHeight = 30.0
+FollowDist = 100.0
+TargetStepRange = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_vko8u")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+z_index = 1
+position = Vector2(8, -16)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ny1w6")
 animation = &"idle"
+frame_progress = 0.416638
 
-[node name="collision" type="Area2D" parent="Node2D"]
+[node name="DamageBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/collision"]
-position = Vector2(-4, 4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_vko8u")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node"]
+z_index = 6
+material = SubResource("CanvasItemMaterial_i1xey")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_hcgme")
+texture = ExtResource("3_1lbjy")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 40
+local_coords = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://003fp2vwh75j"]
+[gd_scene load_steps=18 format=3 uid="uid://003fp2vwh75j"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyBar.cs" id="1_w7x6g"]
 [ext_resource type="Texture2D" uid="uid://bwfit68g85aub" path="res://Assets/Art/UI/posture_bar_bg.png" id="2_1rgjd"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c7uvxmionuogu" path="res://Assets/Art/UI/health_bar_bg.png" id="4_q0j0g"]
 [ext_resource type="Texture2D" uid="uid://ck53awq3axik7" path="res://Assets/Art/UI/health_bar.png" id="5_iwusi"]
 [ext_resource type="Texture2D" uid="uid://bajwcvcu40f18" path="res://Assets/Art/UI/execution_prompt.png" id="6_sesh6"]
+[ext_resource type="Texture2D" uid="uid://cfeo07mluds5j" path="res://Assets/Art/UI/poison.png" id="7_1wm85"]
 [ext_resource type="Texture2D" uid="uid://boyahe6edb37b" path="res://Assets/Art/Character/Enemy/Dummy.png" id="7_i40ht"]
+[ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="8_ws8oy"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/EnemyStateMachine.cs" id="9_0ivpm"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserIdleState.cs" id="9_ucgag"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/AttackState.cs" id="14_nfbi1"]
@@ -38,17 +40,26 @@ size = Vector2(96, 192)
 
 [node name="EnemyTemplate" type="Node2D"]
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Bars/Node/Node2D")
+update_rotation = false
+update_scale = false
+
 [node name="Bars" type="Node2D" parent="."]
 position = Vector2(0, -48)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_w7x6g")
 
-[node name="PostureBar" type="TextureProgressBar" parent="Bars"]
+[node name="Node" type="Node" parent="Bars"]
+
+[node name="Node2D" type="Node2D" parent="Bars/Node"]
+
+[node name="PostureBar" type="TextureProgressBar" parent="Bars/Node/Node2D"]
 z_index = 10
-offset_left = -104.0
+offset_left = -56.0
 offset_top = -144.0
-offset_right = -34.0
-offset_bottom = -136.0
+offset_right = -19.0
+offset_bottom = -139.0
 scale = Vector2(3, 3)
 value = 50.0
 fill_mode = 6
@@ -61,30 +72,50 @@ stretch_margin_bottom = 2
 texture_under = ExtResource("2_1rgjd")
 texture_progress = ExtResource("3_mtvsp")
 
-[node name="HealthBar" type="TextureProgressBar" parent="Bars"]
+[node name="Healthbar" type="TextureProgressBar" parent="Bars/Node/Node2D"]
 z_index = 10
-offset_left = -104.0
-offset_top = -176.0
-offset_right = -34.0
-offset_bottom = -168.0
+offset_left = -56.0
+offset_top = -168.0
+offset_right = -19.0
+offset_bottom = -163.0
 scale = Vector2(3, 3)
-value = 100.0
+value = 50.0
 radial_fill_degrees = 0.0
 nine_patch_stretch = true
-stretch_margin_left = 4
-stretch_margin_top = 4
-stretch_margin_right = 4
-stretch_margin_bottom = 4
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
 texture_under = ExtResource("4_q0j0g")
 texture_progress = ExtResource("5_iwusi")
 
-[node name="Deathblow" type="TextureRect" parent="Bars"]
+[node name="Deathblow" type="TextureRect" parent="Bars/Node/Node2D"]
 visible = false
-offset_left = -64.0
-offset_top = -320.0
-offset_right = 64.0
-offset_bottom = -192.0
+offset_left = -24.0
+offset_top = -256.0
+offset_right = 24.0
+offset_bottom = -208.0
 texture = ExtResource("6_sesh6")
+
+[node name="TextureRect" type="TextureRect" parent="Bars/Node/Node2D"]
+z_index = 10
+offset_left = -56.0
+offset_top = -208.0
+offset_right = -24.0
+offset_bottom = -176.0
+texture = ExtResource("7_1wm85")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Bars/Node/Node2D"]
+z_index = 10
+offset_left = -24.0
+offset_top = -208.0
+offset_right = -8.0
+offset_bottom = -192.0
+scale = Vector2(2, 2)
+theme_override_fonts/normal_font = ExtResource("8_ws8oy")
+theme_override_font_sizes/mono_font_size = 16
+bbcode_enabled = true
+text = "1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4

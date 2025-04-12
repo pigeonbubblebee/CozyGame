@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -49,6 +51,11 @@ public partial class Enemy : CharacterBody2D
 	
 	[Export] private NodePath _postureBarPath;
 	protected TextureProgressBar _postureBar;
+
+	[Export] private NodePath _bleedLogoPath;
+	protected TextureRect _bleedLogo;
+	[Export] private NodePath _bleedStackPath;
+	protected RichTextLabel _bleedStack;
 	
 	public event Action<Player, int, int, int> TakeDamageEvent;
 	
@@ -75,6 +82,8 @@ public partial class Enemy : CharacterBody2D
 	
 	[Export] public bool HasBossBar { get; private set; } = false;
 	[Export] public string EnemyNameLocalizationKey;
+
+	private List<BleedData> _bleedStacks = new List<BleedData>();
 	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
@@ -95,6 +104,11 @@ public partial class Enemy : CharacterBody2D
 		_health.DeathEvent += DisableBossBar;
 		// _health.DamageEvent += TakeDamageEvent;
 		CurrentPosture = MaxPosture;
+
+		_bleedStack = GetNode<RichTextLabel>(_bleedStackPath);
+		_bleedLogo = GetNode<TextureRect>(_bleedLogoPath);
+		_bleedLogo.Visible = false;
+		_bleedStack.Visible = false;
 		
 		_health.MaxHealthPoints = MaxHealth;
 		_health.ResetHealth();
@@ -232,6 +246,8 @@ public partial class Enemy : CharacterBody2D
 			tween.TweenProperty(_healthBar, "value", Ratio, 0.075f);
 			// tweeningValuePosture = Ratio;
 		}
+
+		_HandleBleed((float)delta);
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -252,7 +268,7 @@ public partial class Enemy : CharacterBody2D
 	public virtual void OnHit(Player player, int damage, int direction, int postureDamage) {
 		if(_iFrameOn)
 			return;
-		GD.Print("OUCH!");
+		// GD.Print("OUCH!");
 		TakeDamageEvent?.Invoke(player, damage, direction, postureDamage);
 		_health.TakeDamage(damage);
 		TakePostureDamage(postureDamage);
@@ -298,6 +314,46 @@ public partial class Enemy : CharacterBody2D
 	public void DisableBossBar() {
 		if(HasBossBar) {
 			GetNode<UIManager>("/root/UIManager").DisableBossBar(this);
+		}
+	}
+
+	private void _HandleBleed(float delta) {
+		_bleedStack.Text = _bleedStacks.Count.ToString();
+		_bleedStack.Visible = _bleedStacks.Count > 0;
+		_bleedLogo.Visible = _bleedStacks.Count > 0;
+
+		foreach(BleedData bd in _bleedStacks) {
+			if(!bd.doneTick) {
+				_health.TakeDamage(1);
+				TakePostureDamage(1);
+				bd.doneTick = true;
+				bd.timeLeft = 0.5f;
+				bd.totalTicksDone ++; 
+			} else {
+				bd.timeLeft -= delta;
+				if(bd.timeLeft <= 0) {
+					bd.doneTick = false;
+				}
+			}
+		}
+
+		_bleedStacks.RemoveAll(_isOver);
+	}
+
+	private bool _isOver(BleedData bd) {
+        if(bd.totalTicksDone >= 6) {
+            return true;
+        }
+
+        return false;
+    }
+
+	public void AddBleed() {
+		_bleedStacks.Add(new BleedData());
+	}
+	public void AddBleed(int buildup) {
+		for(int i = 0; i < buildup; i++) {
+			_bleedStacks.Add(new BleedData());
 		}
 	}
 }

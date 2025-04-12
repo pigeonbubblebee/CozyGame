@@ -649,18 +649,10 @@ position = Vector2(64, 0)
 [node name="AggroCheckForward" parent="ChaserEnemy/AggroChecks" index="0"]
 position = Vector2(-200, 0)
 
-[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="0"]
+[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(0, -192)
 
-[node name="PostureBar" parent="ChaserEnemy/EnemyTemplate/Bars" index="0"]
-offset_left = -192.0
-offset_right = -64.0
-
-[node name="HealthBar" parent="ChaserEnemy/EnemyTemplate/Bars" index="1"]
-offset_left = -192.0
-offset_right = -64.0
-
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_eyvvn")
 animation = &"cleave"

@@ -170,7 +170,7 @@ scale = Vector2(4, -4)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="goblin_archer" parent="Enemies" instance=ExtResource("4_rgrxu")]
-position = Vector2(-584, 6688)
+position = Vector2(-7288, 7168)
 
 [node name="goblin_bandit" parent="Enemies" instance=ExtResource("5_5negc")]
 position = Vector2(-824, 7696)

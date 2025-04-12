@@ -38,8 +38,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	[Export] private NodePath _attackSpritePath;
 	private AnimatedSprite2D _attackSprite;
 	
-	[Export] private NodePath _slashHitParticlePath;
-	private GpuParticles2D _slashHitParticle;
+	[Export] private NodePath _slashParticlePoolPath;
+	private Node2D _slashParticlePool;
 
 	private CollisionShape2D _currentAttackAreaCollider;
 	public bool CanSwitchAttackDirection = true;
@@ -92,7 +92,8 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_leftDeathblowCheckAreaCollider = GetNode<CollisionShape2D>(_leftDeathblowCheckAreaColliderPath);
 
 		_attackSprite = GetNode<AnimatedSprite2D>(_attackSpritePath);
-		_slashHitParticle = GetNode<GpuParticles2D>(_slashHitParticlePath);
+		// _slashHitParticle = GetNode<GpuParticles2D>(_slashHitParticlePath);
+		_slashParticlePool = GetNode<Node2D>(_slashParticlePoolPath);
 
 		_slashBuffer = GetNode<Timer>(_slashBufferPath);
 		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
@@ -193,6 +194,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_downAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		CanSwitchAttackDirection = true;
 		FinishSlashEvent?.Invoke();
+		// _slashHitParticle.Emitting = false;
 		CanDeathBlow = false;
 	}
 	
@@ -204,6 +206,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_leftAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_downAttackAreaCollider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		CanSwitchAttackDirection = true;
+		// _slashHitParticle.Emitting = false;
 		// FinishSlashEvent?.Invoke();
 		CanDeathBlow = false;
 	}
@@ -293,24 +296,37 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	}
 
 	private void _emitSlashParticle() {
-		if(_movementController.Direction < 0) {
-			_slashHitParticle.GlobalRotation = Mathf.DegToRad(245f);
-			_slashHitParticle.Position = new Vector2(-215, 32f);
-		} else {
-			_slashHitParticle.GlobalRotation = Mathf.DegToRad(0f);
-			_slashHitParticle.Position = new Vector2(225, 0f);
+		foreach(Node p in _slashParticlePool.GetChildren()) {
+			if(p is GpuParticles2D) {
+				if(!((GpuParticles2D)p).Emitting) {
+					GpuParticles2D _slashHitParticle = ((GpuParticles2D)p);
+
+					// ((ParticleProcessMaterial)(_slashHitParticle.ProcessMaterial)).
+					_slashHitParticle.Lifetime = CalculateAS() / 1.5f;
+
+					if(_movementController.Direction < 0) {
+						_slashHitParticle.GlobalRotation = Mathf.DegToRad(245f);
+						_slashHitParticle.Position = new Vector2(-215, 32f);
+					} else {
+						_slashHitParticle.GlobalRotation = Mathf.DegToRad(0f);
+						_slashHitParticle.Position = new Vector2(225, 0f);
+					}
+					
+					if(CurrentSlashComboAttack == 0 && !_player.DeflectController.Counter) {
+						_slashHitParticle.GlobalRotation += (_movementController.Direction == 1) ? Mathf.DegToRad(75f) : Mathf.DegToRad(-75f);
+					}
+					
+					if(DesiredDown) {
+						_slashHitParticle.GlobalRotation = Mathf.DegToRad(-45f);
+						_slashHitParticle.Position = new Vector2(0, 280f);
+					}
+					
+					_slashHitParticle.Restart();
+					return;
+				}
+			}
 		}
 		
-		if(CurrentSlashComboAttack == 0 && !_player.DeflectController.Counter) {
-			_slashHitParticle.GlobalRotation += (_movementController.Direction == 1) ? Mathf.DegToRad(75f) : Mathf.DegToRad(-75f);
-		}
-		
-		if(DesiredDown) {
-			_slashHitParticle.GlobalRotation = Mathf.DegToRad(-45f);
-			_slashHitParticle.Position = new Vector2(0, 280f);
-		}
-		
-		_slashHitParticle.Emitting = true;
 	}
 
 	private void _UpdateAttackCollider() {

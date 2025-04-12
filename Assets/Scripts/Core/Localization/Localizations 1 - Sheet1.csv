@@ -5,7 +5,7 @@ description_testing_item,Testing item description
 goblin_boss_1,General Borbsnop - Goblin Elite
 
 sword,Arboreal Edge
-description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a magical slash.
+description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a CAST"," or a magical slash.
 acorn,Acorns
 description_acorn,A small bunch of acorns. The main currency used in the forest.
 forest_essence,Forest Essence
@@ -17,11 +17,11 @@ description_honey_wine,Smells extremely rich and sweet"," with scents of differe
 power_spirit,Bloom
 description_power_spirit,A small spirit that's taken residence in a flower. Reacts positively to the presence of magic"," granting STRENGTH when you have accumulated enough MYSTIC.
 honeycomb,Honeycomb
-description_honeycomb,Magical honey produced by the spirit inside heals you"," causing you to regenerate HEALTH when you cast.
+description_honeycomb,Magical honey produced by the spirit inside heals you"," causing you to regenerate HEALTH when you CAST.
 hive,Hive
-description_hive,A hive of bees commanded by the spirit inside. Summons a bee to help you in combat.
+description_hive,A hive of bees commanded by the spirit inside. Summons a bee to help you in combat"," inflicing POISON on hits.
 claw,Sweetclaw
-description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of Blinny into you"," increasing STRENGTH"," DEXTERITY"," and VITALITY.
+description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of a bear into you"," increasing STRENGTH"," DEXTERITY"," and VITALITY.
 
 attribute_damage,Damage
 attribute_attack_speed,Attack Speed
@@ -35,23 +35,26 @@ attribute_focus_gain,Focus Gain
 attribute_harmony_gain,Harmony Gain
 attribute_heal_amount,Healing Amount
 attribute_mystic_threshold,Mystic Threshold
+attribute_poison_buildup,Poison Buildup
+
 item_type_key_item,Key Item
 item_type_upgrade_material,Upgrade Material
 item_type_equippable,Woodland Spirit
 item_type_achohol,Achohol
 
-tooltip_strength,STRENGTH adds a damage bonus to your slashes.
-tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through spellcasting. Overloading MYSTIC will hurt.
+tooltip_strength,Your raw physicality. STRENGTH adds a damage bonus to your slashes.
+tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through CASTs. Overloading MYSTIC will hurt.
 tooltip_health,HEALTH keeps you alive. Can be gained by using a REGROWTH.
-tooltip_regrowth,Use a REGROWTH to regain HEALTH.
-tooltip_dexterity,DEXTERITY makes you attack faster.
-tooltip_vitality,VITALITY adds to your max HEALTH.
-tooltip_harmony,HARMONY adds to your max MYSTIC.
-tooltip_focus,FOCUS makes your casts stronger.
+tooltip_regrowth,Borrowed power from your cat friend. Use a REGROWTH to regain HEALTH.
+tooltip_dexterity,Pure agility of your muscles. DEXTERITY makes you attack faster.
+tooltip_vitality,Your life energy. VITALITY adds to your max HEALTH.
+tooltip_harmony,Your connection to those around you. HARMONY adds to your max MYSTIC and makes you allies stronger.
+tooltip_focus,Your magical power. FOCUS makes your CASTs stronger.
 tooltip_prowess,PROWESS increases composure damage from parries.
-tooltip_decay,DECAY deals damage over time.
+tooltip_poison,POISON deals damage over time.
 tooltip_daze,DAZE stuns an enemy when built up to 30 stacks.
 tooltip_critical,Landing a CRITICAL triples damage.
+tooltip_cast,Using a CAST releases MYSTIC and deals damage in the form of a projectile.
 
 name_player,Player
 name_cat,Cat

@@ -23,7 +23,11 @@ EnemyNameLocalizationKey = "goblin_bandit"
 [node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
 position = Vector2(0, 8)
 
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="Deathblow" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="2"]
+offset_top = -280.0
+offset_bottom = -232.0
+
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = ExtResource("2_dqyxp")
 animation = &"stagger"
 

@@ -430,6 +430,7 @@ public partial class InventoryUI : Control
 		string res = desc;
 		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#f93e00]STRENGTH[/color][/url]");
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"][color=#78ff26]MYSTIC[/color][/url]");
+		res = res.Replace("CAST", "[url=\"tooltip_cast\"][color=#78ff26]CAST[/color][/url]");
 		res = res.Replace("HEALTH", "[url=\"tooltip_health\"][color=#cf0451]HEALTH[/color][/url]");
 		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"][color=#cf0451]REGROWTH[/color][/url]");
 		res = res.Replace("DEXTERITY", "[url=\"tooltip_dexterity\"][color=#ecd42c]DEXTERITY[/color][/url]");
@@ -437,7 +438,7 @@ public partial class InventoryUI : Control
 		res = res.Replace("HARMONY", "[url=\"tooltip_harmony\"][color=#78ff26]HARMONY[/color][/url]");
 		res = res.Replace("FOCUS", "[url=\"tooltip_focus\"][color=#9fe7ff]FOCUS[/color][/url]");
 		res = res.Replace("PROWESS", "[url=\"tooltip_prowess\"][color=#ff7103]PROWESS[/color][/url]");
-		res = res.Replace("DECAY", "[url=\"tooltip_decay\"][color=#2e2a32]DECAY[/color][/url]");
+		res = res.Replace("POISON", "[url=\"tooltip_poison\"][color=#379e08]POISON[/color][/url]");
 		res = res.Replace("DAZE", "[url=\"tooltip_daze\"][color=#d84f2f]DAZE[/color][/url]");
 		res = res.Replace("CRITICAL", "[url=\"tooltip_critical\"][color=#ecd42c]CRITICAL[/color][/url]");
 		
@@ -450,6 +451,7 @@ public partial class InventoryUI : Control
 		string res = desc;
 		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"]STRENGTH[/url]");
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"]MYSTIC[/url]");
+		res = res.Replace("CAST", "[url=\"tooltip_cast\"]CAST[/url]");
 		res = res.Replace("HEALTH", "[url=\"tooltip_health\"]HEALTH[/url]");
 		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"]REGROWTH[/url]");
 		res = res.Replace("DEXTERITY", "[url=\"tooltip_dexterity\"]DEXTERITY[/url]");
@@ -457,7 +459,7 @@ public partial class InventoryUI : Control
 		res = res.Replace("HARMONY", "[url=\"tooltip_harmony\"]HARMONY[/url]");
 		res = res.Replace("FOCUS", "[url=\"tooltip_focus\"]FOCUS[/url]");
 		res = res.Replace("PROWESS", "[url=\"tooltip_prowess\"]PROWESS[/url]");
-		res = res.Replace("DECAY", "[url=\"tooltip_decay\"]DECAY[/url]");
+		res = res.Replace("POISON", "[url=\"tooltip_poison\"]POISON[/url]");
 		res = res.Replace("DAZE", "[url=\"tooltip_daze\"]DAZE[/url]");
 		res = res.Replace("CRITICAL", "[url=\"tooltip_critical\"]CRITICAL[/url]");
 		
