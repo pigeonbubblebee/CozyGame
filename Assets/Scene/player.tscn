@@ -1991,5 +1991,5 @@ script = ExtResource("54_eeqha")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)
 color = Color(0.696628, 0.430866, 0.313138, 1)
-energy = 0.5
+energy = 0.4
 texture = ExtResource("57_sxo4n")

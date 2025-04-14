@@ -1,8 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://s3u4ww4pnyqp"]
+[gd_scene load_steps=20 format=3 uid="uid://s3u4ww4pnyqp"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Summon/BeeSummon.cs" id="1_3lx3s"]
 [ext_resource type="Texture2D" uid="uid://dsavi0pxb11tx" path="res://Assets/Art/Character/Summon/bee.png" id="1_fxb7o"]
 [ext_resource type="Texture2D" uid="uid://bk7x5snjkyjtx" path="res://Assets/Art/VFX/SlashHitEffect.png" id="3_1lbjy"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="4_vl3cn"]
+[ext_resource type="AudioStream" uid="uid://jvx0jqlthhq6" path="res://Assets/Sound/SFX/Player/slashhit.wav" id="5_c5mg1"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="6_o5k6r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vko8u"]
 size = Vector2(116, 104)
@@ -104,6 +107,7 @@ _attackAreaPath = NodePath("DamageBox")
 _attackColliderAreaPath = NodePath("DamageBox/CollisionShape2D")
 _damage = 10
 _hitParticlePath = NodePath("Node/GPUParticles2D")
+_hitSFXPath = NodePath("HitSFX")
 _spritePath = NodePath("Node2D/AnimatedSprite2D")
 SummonID = "bee_summon"
 Speed = 400
@@ -149,3 +153,17 @@ lifetime = 0.4
 one_shot = true
 fixed_fps = 40
 local_coords = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(3, 3)
+color = Color(0.878679, 0.573582, 0.424986, 1)
+energy = 0.3
+texture = ExtResource("4_vl3cn")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_c5mg1")
+volume_db = 4.0
+pitch_scale = 2.2
+max_polyphony = 5
+script = ExtResource("6_o5k6r")

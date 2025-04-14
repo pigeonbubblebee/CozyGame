@@ -1,5 +1,9 @@
-Node2D
+AudioStreamPlayer2D
+AudioStreamPlayer
 PointLight2D
+ColorRect
+CanvasLayer
+Node2D
 CanvasModulate
 Parallax2D
 DirectionalLight2D
@@ -9,6 +13,3 @@ AnimatedSprite2D
 Control
 RichTextLabel
 TextureRect
-Camera2D
-Sprite2D
-SubViewport

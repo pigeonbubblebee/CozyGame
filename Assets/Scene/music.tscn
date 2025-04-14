@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0pdyjglw66h1"]
+[gd_scene load_steps=4 format=3 uid="uid://d0pdyjglw66h1"]
 
 [ext_resource type="AudioStream" uid="uid://bnqwq0q04gcdo" path="res://Assets/Sound/lofi type beat unfinished.mp3" id="1_v2ah1"]
+[ext_resource type="AudioStream" uid="uid://cs8ijbgpnny3q" path="res://Assets/Sound/lo-fi-rain-sfx_102bpm.wav" id="2_mq72d"]
+[ext_resource type="AudioStream" uid="uid://dv55fjul1dsyi" path="res://Assets/Sound/youtube_83X26UkmbkM_audio.mp3" id="3_0ic0p"]
 
 [node name="Music" type="AudioStreamPlayer"]
 process_mode = 3
 stream = ExtResource("1_v2ah1")
 volume_db = -7.0
+autoplay = true
+
+[node name="rain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mq72d")
+autoplay = true
+
+[node name="ambi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0ic0p")
+volume_db = 2.0
 autoplay = true

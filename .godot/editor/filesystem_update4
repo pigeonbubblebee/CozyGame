@@ -168,3 +168,5 @@ res://Assets/Scene/main.tscn
 res://Assets/Scene/Environment/respawn_point.tscn
 res://Assets/Scene/Enemy/worg.tscn
 res://Data/Dialogue/Tutorial/demoEndDialogue.tres
+res://Shader/blur.gdshader
+res://Assets/Scene/music.tscn

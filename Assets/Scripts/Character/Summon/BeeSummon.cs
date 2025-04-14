@@ -18,6 +18,8 @@ public partial class BeeSummon : Summon
 	[Export] private int _damage;
 	[Export] private NodePath _hitParticlePath;
 	private GpuParticles2D _hitParticle;
+	[Export] private NodePath _hitSFXPath;
+	private AudioStreamPlayer2D _hitSFX;
 
     public override void _Ready()
     {
@@ -28,6 +30,7 @@ public partial class BeeSummon : Summon
 		_attackArea.AreaEntered += _OnHit;
 
 		_hitParticle = GetNode<GpuParticles2D>(_hitParticlePath);
+		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
     }
 
 
@@ -61,6 +64,8 @@ public partial class BeeSummon : Summon
 		if(hit is EnemyHitbox) {
 			// GD.Print("summon hit");
 			_player.Camera.Shake(0.05f, 800f);
+			_hitSFX.Play();
+
 			Enemy e = ((EnemyHitbox)hit).EnemyAIParent;
 			_attackColliderArea.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 			_hitParticle.GlobalPosition = e.GlobalPosition;

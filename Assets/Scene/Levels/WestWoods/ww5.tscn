@@ -259,11 +259,11 @@ PromptText = "Talk"
 [node name="Env" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Env"]
-position = Vector2(-2912, 7512)
+position = Vector2(-2616, 9168)
 rotation = -0.303054
 scale = Vector2(13, 13)
 color = Color(0.898928, 0.776597, 0.249637, 1)
-energy = 3.8
+energy = 2.0
 texture = ExtResource("14_se7op")
 
 [node name="Node2D" type="Node2D" parent="Env"]
