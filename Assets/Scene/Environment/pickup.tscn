@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://ds1gmhr7rsu74"]
+
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="1_s0axn"]
+[ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="2_nv633"]
+[ext_resource type="Resource" uid="uid://c3aurfbcy14u4" path="res://Data/Items/Charms/power_spirit.tres" id="3_b12mf"]
+[ext_resource type="Texture2D" uid="uid://dj85431dova0j" path="res://Assets/Art/Item/merith.png" id="4_vrbok"]
+[ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="5_u03ed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf23q"]
+shader = ExtResource("1_s0axn")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcfyf"]
+shader = ExtResource("1_s0axn")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0teh"]
+radius = 64.0
+
+[node name="pickup" type="Area2D"]
+material = SubResource("ShaderMaterial_yf23q")
+position = Vector2(-5048, 3976)
+scale = Vector2(4, 4)
+script = ExtResource("2_nv633")
+_itemResource = ExtResource("3_b12mf")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wcfyf")
+texture = ExtResource("4_vrbok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l0teh")
+
+[node name="InteractPrompt" parent="." instance=ExtResource("5_u03ed")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"

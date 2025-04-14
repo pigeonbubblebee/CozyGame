@@ -1,13 +1,14 @@
-[gd_scene load_steps=243 format=3 uid="uid://eo4g5684jr7v"]
+[gd_scene load_steps=247 format=3 uid="uid://eo4g5684jr7v"]
 
-[ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_8vckk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/Player.cs" id="1_l6ek3"]
 [ext_resource type="Resource" uid="uid://pffa3f4xmb1o" path="res://Data/player_stats.tres" id="2_lsgqv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerStateMachine.cs" id="3_c3qdv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerAnimationController.cs" id="3_oo0kg"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs" id="4_37u3h"]
+[ext_resource type="Shader" path="res://Shader/Godot-Palette-Swap-Shader-master/Godot-Palette-Swap-Shader-master/PaletteSwap.gdshader" id="4_p3rp0"]
 [ext_resource type="Texture2D" uid="uid://chqsumwtly86y" path="res://Assets/Art/Character/PlayerRedesigned/player_block.png" id="4_ubixj"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerRunState.cs" id="5_0xgu4"]
+[ext_resource type="Texture2D" uid="uid://dgoo34yft23kf" path="res://Assets/Art/Character/PlayerRedesigned/skin_swap_1.png" id="5_ghty3"]
 [ext_resource type="Texture2D" uid="uid://xewitm71uw2s" path="res://Assets/Art/Character/PlayerRedesigned/player_deathblow.png" id="6_ciote"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs" id="6_npsk0"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerFallState.cs" id="7_tcmgt"]
@@ -46,6 +47,7 @@
 [ext_resource type="AudioStream" uid="uid://qyno48mhhse0" path="res://Assets/Sound/SFX/Player/deathblow.wav" id="38_x8y7v"]
 [ext_resource type="AudioStream" uid="uid://buxc4svmy1yn" path="res://Assets/Sound/SFX/Player/swing.wav" id="39_7tto5"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/StateMachine/PlayerGrabState.cs" id="40_sd268"]
+[ext_resource type="Resource" uid="uid://dl53re7s0b2oj" path="res://Data/Dialogue/Tutorial/Charm/tutorialCharmDialogue.tres" id="44_acrak"]
 [ext_resource type="AudioStream" uid="uid://cnpyrijoou5jq" path="res://Assets/Sound/SFX/Player/deflect.wav" id="46_pgerj"]
 [ext_resource type="AudioStream" uid="uid://cifo51815mb0o" path="res://Assets/Sound/SFX/Player/IMG_3730 (mp3cut.net) (2).mp3" id="46_ts2if"]
 [ext_resource type="AudioStream" uid="uid://7iujovvp8snv" path="res://Assets/Sound/SFX/Player/hit.wav" id="50_hmeoo"]
@@ -54,6 +56,14 @@
 [ext_resource type="Texture2D" uid="uid://cdo30qircy8ws" path="res://Assets/Art/VFX/curseOverloadEffect.png" id="52_nmuvh"]
 [ext_resource type="Texture2D" uid="uid://d3wao7t6xk7hn" path="res://Assets/Art/VFX/deflecteffect2.png" id="53_lbh8w"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Player/PlayerSummonController.cs" id="54_eeqha"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="57_sxo4n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vek14"]
+shader = ExtResource("4_p3rp0")
+shader_parameter/skip_first_row = true
+shader_parameter/use_palette_alpha = false
+shader_parameter/fps = 6.0
+shader_parameter/palette = ExtResource("5_ghty3")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acva1"]
 atlas = ExtResource("4_ubixj")
@@ -1502,7 +1512,6 @@ script = ExtResource("1_l6ek3")
 _stateMachinePath = NodePath("StateMachine")
 _movementControllerPath = NodePath("PlayerMovementController")
 _attackControllerPath = NodePath("PlayerAttackController")
-_playerSpritePath = NodePath("Sprite")
 _interactionControllerPath = NodePath("PlayerInteractionController")
 _inventoryManagerPath = NodePath("PlayerInventoryManager")
 PlayerStatsResource = ExtResource("2_lsgqv")
@@ -1524,20 +1533,17 @@ _logAnimations = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimationController"]
 z_index = 5
 texture_filter = 1
+material = SubResource("ShaderMaterial_vek14")
 position = Vector2(0, 8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rojmk")
-animation = &"idle_right"
+animation = &"block_transition_right"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_0qth3")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, 24)
-scale = Vector2(0.8125, 1.59375)
-texture = ExtResource("1_8vckk")
 
 [node name="PlayerMovementController" type="Node2D" parent="."]
 script = ExtResource("8_8py8k")
@@ -1566,14 +1572,14 @@ one_shot = true
 [node name="Run" type="AudioStreamPlayer2D" parent="PlayerMovementController"]
 process_mode = 3
 stream = ExtResource("22_812t3")
-volume_db = 10.0
+volume_db = 5.0
 max_polyphony = 5
 script = ExtResource("23_s2csh")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="PlayerMovementController"]
 process_mode = 3
 stream = ExtResource("23_b73w5")
-volume_db = 1.0
+volume_db = 3.0
 max_polyphony = 5
 script = ExtResource("23_s2csh")
 
@@ -1793,6 +1799,7 @@ shape = SubResource("RectangleShape2D_a61ee")
 
 [node name="PlayerInventoryManager" type="Node2D" parent="."]
 script = ExtResource("13_f1mh6")
+_firstTimeCharmPickupDialogue = ExtResource("44_acrak")
 
 [node name="HealthSystem" type="Node2D" parent="."]
 script = ExtResource("17_qt607")
@@ -1915,7 +1922,7 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
 texture = ExtResource("52_mmr4o")
-lifetime = 0.25
+lifetime = 0.4
 one_shot = true
 fixed_fps = 60
 local_coords = true
@@ -1928,7 +1935,7 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
 texture = ExtResource("52_mmr4o")
-lifetime = 0.25
+lifetime = 0.4
 one_shot = true
 fixed_fps = 60
 local_coords = true
@@ -1941,7 +1948,7 @@ emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ghirs")
 texture = ExtResource("52_mmr4o")
-lifetime = 0.25
+lifetime = 0.4
 one_shot = true
 fixed_fps = 60
 local_coords = true
@@ -1980,3 +1987,9 @@ script = ExtResource("23_s2csh")
 
 [node name="PlayerSummonController" type="Node" parent="."]
 script = ExtResource("54_eeqha")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(4, 4)
+color = Color(0.696628, 0.430866, 0.313138, 1)
+energy = 0.5
+texture = ExtResource("57_sxo4n")

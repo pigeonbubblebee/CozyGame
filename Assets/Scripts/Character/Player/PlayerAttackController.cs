@@ -60,7 +60,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	public bool CanDeathBlow { get; private set; }
 	
 	[Export] private NodePath _swingSFXPath;
-	private AudioStreamPlayer2D _swingSFX;
+	private AdjustableSound _swingSFX;
 	
 	[Export] private NodePath _slashHitSFXPath;
 	private AudioStreamPlayer2D _slashHitSFX;
@@ -98,7 +98,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		_slashBuffer = GetNode<Timer>(_slashBufferPath);
 		_slashBuffer.WaitTime = _playerStats.SlashBuffer;
 		
-		_swingSFX = GetNode<AudioStreamPlayer2D>(_swingSFXPath);
+		_swingSFX = GetNode<AdjustableSound>(_swingSFXPath);
 		_slashHitSFX = GetNode<AudioStreamPlayer2D>(_slashHitSFXPath);
 		_deathBlowSFX = GetNode<AudioStreamPlayer2D>(_deathBlowSFXPath);
 
@@ -159,7 +159,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		}
 		
 		if(!CanDeathBlow) {
-			_swingSFX.Play();
+			_swingSFX.PlayPitchShifted(0.1f);
 		}
 		
 		CanSwitchAttackDirection = false;

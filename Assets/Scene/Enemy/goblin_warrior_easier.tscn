@@ -661,7 +661,7 @@ size = Vector2(408, 38.5)
 [node name="ChaserEnemy" parent="." instance=ExtResource("1_gp3s4")]
 RetreatRange = 200.0
 Speed = 150.0
-_currency_drop_amount = 20
+_currency_drop_amount = 100
 MaxHealth = 1000
 MaxPosture = 2000
 DeathBlowDamage = 1000
@@ -965,6 +965,10 @@ stream = ExtResource("22_3l7d6")
 [node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
 position = Vector2(-16, -36)
 shape = SubResource("RectangleShape2D_yfhya")
+
+[node name="PointLight2D" parent="ChaserEnemy" index="6"]
+scale = Vector2(6, 6)
+energy = 1.5
 
 [editable path="ChaserEnemy"]
 [editable path="ChaserEnemy/EnemyTemplate"]

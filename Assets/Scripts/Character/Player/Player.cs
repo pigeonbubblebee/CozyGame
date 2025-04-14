@@ -11,10 +11,10 @@ public partial class Player : CharacterBody2D
 	public PlayerMovementController MovementController  { get; private set; }
 	[Export] private NodePath _attackControllerPath;
 	public PlayerAttackController AttackController  { get; private set; }
-	[Export] private NodePath _playerSpritePath;
+	//[Export] private NodePath _playerSpritePath;
 	public PlayerInteractionController InteractionController  { get; private set; }
 	[Export] private NodePath _interactionControllerPath;
-	public Sprite2D PlayerSprite  { get; private set; }
+	//public Sprite2D PlayerSprite  { get; private set; }
 	[Export] private NodePath _inventoryManagerPath;
 	public PlayerInventoryManager InventoryManager  { get; private set; }
 	[Export] public PlayerStats PlayerStatsResource { get; private set; }
@@ -54,7 +54,7 @@ public partial class Player : CharacterBody2D
 		MovementController = GetNode<PlayerMovementController>(_movementControllerPath);
 		AttackController = GetNode<PlayerAttackController>(_attackControllerPath);
 		StateMachine = GetNode<PlayerStateMachine>(_stateMachinePath);
-		PlayerSprite = GetNode<Sprite2D>(_playerSpritePath);
+		//PlayerSprite = GetNode<Sprite2D>(_playerSpritePath);
 		InteractionController = GetNode<PlayerInteractionController>(_interactionControllerPath);
 		InventoryManager = GetNode<PlayerInventoryManager>(_inventoryManagerPath);
 		PlayerHealth = GetNode<HealthSystem>(_healthSystemPath);
@@ -86,7 +86,7 @@ public partial class Player : CharacterBody2D
 		InventoryManager.Initialize(this);
 		SummonController.Initialize(this);
 
-		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
+// 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
 		
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
 
@@ -101,6 +101,8 @@ public partial class Player : CharacterBody2D
 		HealController.SetHeals(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerHeals"]));
 		CurseController.SetCurse(Convert.ToInt32(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["PlayerMystic"]));
 		// PlayerHealth.ResetHealth();
+		GD.Print("spirit pickup " + GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["SpiritPickup"].ToString());
+		InventoryManager.HasPickedUpEquip = GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["SpiritPickup"].ToString().Equals("True");
 		//SpellController.ResetMana();
 		//HealController.ResetHeals();
 		int[] attributes = JsonConvert.DeserializeObject<int[]>(GetNode<SaveLoader>("/root/SaveLoader").CurrentSaveFile["Attributes"].ToString());
@@ -175,9 +177,9 @@ public partial class Player : CharacterBody2D
     {
 		UpdateBuffs();
 
-		if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
-			this.GlobalPosition = GetGlobalMousePosition();
-		}
+		// if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
+		// 	this.GlobalPosition = GetGlobalMousePosition();
+		// }
 		if(Input.IsActionPressed("debug")) {
 			InventoryManager.AddItemToInventory("acorn");
 		}

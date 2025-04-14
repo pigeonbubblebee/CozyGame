@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MoneyPile : StaticBody2D, IHittable
+public partial class MoneyPile : Area2D, IHittable
 {
 	[Export] private NodePath _healthSystemPath;
 	private HealthSystem _healthSystem;

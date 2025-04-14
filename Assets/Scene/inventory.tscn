@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c78kctwoddfg6"]
+[gd_scene load_steps=35 format=3 uid="uid://c78kctwoddfg6"]
 
 [ext_resource type="Texture2D" uid="uid://b5h2j8rglt8my" path="res://icon.svg" id="1_71fcw"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/InventoryUI.cs" id="1_pvkgr"]
@@ -6,13 +6,23 @@
 [ext_resource type="FontFile" uid="uid://d2d4wakcwn6us" path="res://Assets/KiwiSoda.ttf" id="5_lw1ii"]
 [ext_resource type="Texture2D" uid="uid://b72wi77yp5xqy" path="res://Assets/Art/UI/inv.png" id="5_vxic3"]
 [ext_resource type="Texture2D" uid="uid://mgajghf0q4f7" path="res://Assets/Art/UI/map.png" id="6_6v63h"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/Map.cs" id="7_3b06i"]
 [ext_resource type="Texture2D" uid="uid://bvc4du765f0ro" path="res://Assets/Art/UI/arrow.png" id="7_cogmh"]
+[ext_resource type="Texture2D" uid="uid://duxvfntg5cs6l" path="res://Assets/Art/UI/Minimap/ww1.png" id="7_sgusi"]
+[ext_resource type="Texture2D" uid="uid://cayxr13pyr4lm" path="res://Assets/Art/UI/Minimap/ww2.png" id="8_g30jx"]
 [ext_resource type="Texture2D" uid="uid://dged16g4ik1nv" path="res://Assets/Art/UI/stat.png" id="8_lpbrq"]
 [ext_resource type="Texture2D" uid="uid://2ibx1nym34x4" path="res://Assets/Art/Item/sword.png" id="8_o5m3w"]
 [ext_resource type="Texture2D" uid="uid://d2gy3rigl7aqw" path="res://Assets/Art/UI/statusportrait.png" id="9_rrh87"]
+[ext_resource type="Texture2D" uid="uid://chxosaff1nth6" path="res://Assets/Art/UI/Minimap/ww3.png" id="9_up4mv"]
+[ext_resource type="Texture2D" uid="uid://b1pksv00hnvkr" path="res://Assets/Art/UI/Minimap/ww4.png" id="10_ooak6"]
+[ext_resource type="Texture2D" uid="uid://d30v5oantlcbb" path="res://Assets/Art/UI/Minimap/ww5.png" id="11_hp5a8"]
 [ext_resource type="Texture2D" uid="uid://dtf27csg7valy" path="res://Assets/Art/Item/forest_essence.png" id="11_su27f"]
+[ext_resource type="Texture2D" uid="uid://bqrrev85fr2np" path="res://Assets/Art/UI/Minimap/npcmarker.png" id="12_dwnwv"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/AttributeButton.cs" id="12_gcs1w"]
+[ext_resource type="Texture2D" uid="uid://g8f5p7wym1tf" path="res://Assets/Art/UI/Minimap/restmarker.png" id="13_e8mep"]
 [ext_resource type="Texture2D" uid="uid://d1sbgo48cjteg" path="res://Assets/Art/Item/acorn.png" id="13_t8wcb"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/RestPointMapMarker.cs" id="14_d2fs2"]
+[ext_resource type="Texture2D" uid="uid://2emgj6atynrk" path="res://Assets/Art/UI/Minimap/icon.png" id="15_g5tlr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_strnc"]
 texture = ExtResource("5_bp20q")
@@ -84,6 +94,7 @@ _attributesPath = NodePath("stat/Panel/attributes/Attributes")
 _attributesValPath = NodePath("stat/Panel/attributes/Attributes2")
 _moneyTextPath = NodePath("stat/Panel/Resources/money")
 _levelsTextPath = NodePath("stat/Panel/Resources/levels")
+_mapPath = NodePath("map/Panel/Map")
 _incrementAttributePath = NodePath("stat/Panel/attributes/attributeAdd/GridContainer")
 _decrementAttributePath = NodePath("stat/Panel/attributes/attributeAdd/GridContainer2")
 
@@ -135,7 +146,6 @@ theme = SubResource("Theme_dng51")
 horizontal_scroll_mode = 0
 
 [node name="map" type="CenterContainer" parent="."]
-visible = false
 layout_mode = 1
 offset_top = 32.0
 offset_right = 1600.0
@@ -144,6 +154,7 @@ offset_bottom = 932.0
 [node name="Panel" type="Panel" parent="map"]
 custom_minimum_size = Vector2(1500, 750)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_esek0")
 
 [node name="Border" type="Control" parent="map/Panel"]
@@ -216,6 +227,241 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center] MAP [/center]"
 scroll_active = false
+
+[node name="Map" type="Control" parent="map/Panel"]
+anchors_preset = 0
+offset_left = -66.0
+offset_top = -355.0
+offset_right = -66.0
+offset_bottom = -355.0
+scale = Vector2(4, 4)
+script = ExtResource("7_3b06i")
+_minimapRoomsContainerPaths = Array[NodePath]([NodePath("Container/WestWoods")])
+_minimapMarkerContainerPath = NodePath("Container/Markers")
+_playerIconPath = NodePath("Container/PlayerIcon")
+
+[node name="Container" type="Control" parent="map/Panel/Map"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WestWoods" type="Control" parent="map/Panel/Map/Container"]
+anchors_preset = 0
+offset_top = 62.0
+offset_right = 40.0
+offset_bottom = 102.0
+
+[node name="ww1" type="TextureRect" parent="map/Panel/Map/Container/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("7_sgusi")
+
+[node name="ww2" type="TextureRect" parent="map/Panel/Map/Container/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("8_g30jx")
+
+[node name="ww3" type="TextureRect" parent="map/Panel/Map/Container/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("9_up4mv")
+
+[node name="ww4" type="TextureRect" parent="map/Panel/Map/Container/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("10_ooak6")
+
+[node name="ww5" type="TextureRect" parent="map/Panel/Map/Container/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("11_hp5a8")
+
+[node name="Markers" type="Control" parent="map/Panel/Map/Container"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WestWoods" type="Control" parent="map/Panel/Map/Container/Markers"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ww2" type="Control" parent="map/Panel/Map/Container/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww2"]
+layout_mode = 0
+offset_left = 178.5
+offset_top = 189.0
+offset_right = 194.5
+offset_bottom = 205.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_e8mep")
+script = ExtResource("14_d2fs2")
+
+[node name="ww3" type="Control" parent="map/Panel/Map/Container/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww3"]
+layout_mode = 0
+offset_left = 247.1
+offset_top = 189.0
+offset_right = 263.1
+offset_bottom = 205.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_e8mep")
+script = ExtResource("14_d2fs2")
+
+[node name="ww4" type="Control" parent="map/Panel/Map/Container/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww4"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 172.0
+offset_right = 238.0
+offset_bottom = 188.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_e8mep")
+script = ExtResource("14_d2fs2")
+
+[node name="RespawnPoint2" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww4"]
+layout_mode = 0
+offset_left = 185.7
+offset_top = 165.4
+offset_right = 201.7
+offset_bottom = 181.4
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_e8mep")
+script = ExtResource("14_d2fs2")
+
+[node name="ww5" type="Control" parent="map/Panel/Map/Container/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="blinny" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww5"]
+layout_mode = 0
+offset_left = 127.3
+offset_top = 220.5
+offset_right = 143.3
+offset_bottom = 236.5
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_dwnwv")
+
+[node name="RespawnPoint" type="TextureRect" parent="map/Panel/Map/Container/Markers/WestWoods/ww5"]
+layout_mode = 0
+offset_left = 152.1
+offset_top = 210.0
+offset_right = 168.1
+offset_bottom = 226.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_e8mep")
+script = ExtResource("14_d2fs2")
+
+[node name="PlayerIcon" type="Control" parent="map/Panel/Map/Container"]
+anchors_preset = 0
+offset_left = 166.0
+offset_top = 186.0
+offset_right = 206.0
+offset_bottom = 226.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="map/Panel/Map/Container/PlayerIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_g5tlr")
+
+[node name="Legend" type="Control" parent="map/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="map/Panel/Legend"]
+layout_mode = 0
+offset_left = 998.0
+offset_top = 693.0
+offset_right = 1238.0
+offset_bottom = 709.0
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+text = "Click on a Rest Point to fast travel."
+
+[node name="RespawnPoint" type="TextureRect" parent="map/Panel/Legend"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 109.0
+offset_right = 30.0
+offset_bottom = 125.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("13_e8mep")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="map/Panel/Legend/RespawnPoint"]
+layout_mode = 0
+offset_left = 37.334
+offset_top = 8.0
+offset_right = 117.334
+offset_bottom = 24.0
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+text = "Rest Point"
+
+[node name="NPC" type="TextureRect" parent="map/Panel/Legend"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 165.0
+offset_right = 30.0
+offset_bottom = 181.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_dwnwv")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="map/Panel/Legend/NPC"]
+layout_mode = 0
+offset_left = 37.334
+offset_top = 8.0
+offset_right = 117.334
+offset_bottom = 24.0
+theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
+theme_override_fonts/normal_font = ExtResource("5_lw1ii")
+text = "Creature"
 
 [node name="inv" type="CenterContainer" parent="."]
 visible = false
@@ -473,6 +719,7 @@ bbcode_enabled = true
 text = "[right]1333"
 
 [node name="stat" type="CenterContainer" parent="."]
+visible = false
 layout_mode = 1
 offset_top = 32.0
 offset_right = 1600.0
@@ -849,7 +1096,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]>"
+text = "[center]+"
 
 [node name="TextureButton2" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -870,7 +1117,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]>"
+text = "[center]+"
 
 [node name="TextureButton3" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -891,7 +1138,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]>"
+text = "[center]+"
 
 [node name="TextureButton4" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -912,7 +1159,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]>"
+text = "[center]+"
 
 [node name="TextureButton5" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -933,7 +1180,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]>"
+text = "[center]+"
 
 [node name="GridContainer2" type="Control" parent="stat/Panel/attributes/attributeAdd"]
 anchors_preset = 0
@@ -962,7 +1209,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]<"
+text = "[center]-"
 
 [node name="TextureButton6" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
@@ -985,7 +1232,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]<"
+text = "[center]-"
 
 [node name="TextureButton7" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
@@ -1008,7 +1255,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]<"
+text = "[center]-"
 
 [node name="TextureButton8" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
@@ -1031,7 +1278,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]<"
+text = "[center]-"
 
 [node name="TextureButton9" type="Panel" parent="stat/Panel/attributes/attributeAdd/GridContainer2"]
 custom_minimum_size = Vector2(48, 48)
@@ -1054,7 +1301,7 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
 bbcode_enabled = true
-text = "[center]<"
+text = "[center]-"
 
 [node name="arrows" type="Control" parent="."]
 anchors_preset = 0

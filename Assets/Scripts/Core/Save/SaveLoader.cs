@@ -16,8 +16,10 @@ public partial class SaveLoader : Node
 
 	private List<RoomData> _roomDatas = new List<RoomData>();
 	private List<MerchantData> _merchantDatas = new List<MerchantData>();
+	private List<string> _unlockedMapMarkers = new List<string>();
 
 	private int _saveSlot = 1;
+	private int _faeSaved;
 
 	private string fileName => "SaveSlot" + _saveSlot + ".json";
 
@@ -50,6 +52,10 @@ public partial class SaveLoader : Node
 		saveFile.PlayerHealth = GetNode<Player>("/root/Player").PlayerHealth.CurrentHealthPoints;
 		saveFile.PlayerHeals = GetNode<Player>("/root/Player").HealController.CurrentHeals;
 		saveFile.PlayerMystic = GetNode<Player>("/root/Player").CurseController.CurrentCurse;
+
+		saveFile.hasPickedUpEquip = GetNode<Player>("/root/Player").InventoryManager.HasPickedUpEquip;
+
+		saveFile.faeSaved = _faeSaved;
 		
 		saveFile.attributes = GetNode<Player>("/root/Player").SerializeCurrentBuffs();
 
@@ -57,6 +63,8 @@ public partial class SaveLoader : Node
 		saveFile.RoomDatas = _roomDatas;
 
 		saveFile.MerchantDatas = _merchantDatas;
+
+		saveFile.UnlockedMapMarkers = _unlockedMapMarkers;
 
 		saveFile.inventory = GetNode<Player>("/root/Player").InventoryManager.SerializeInventory();
 		saveFile.inventoryStacks = GetNode<Player>("/root/Player").InventoryManager.SerializeInventoryStacks();
@@ -116,6 +124,16 @@ public partial class SaveLoader : Node
 		}
 
 		return null;
+	}
+
+	public string[] GetExploredRooms() {
+		string[] res = new string[_roomDatas.Count];
+		int i = 0;
+		foreach(RoomData r in _roomDatas) {
+			res[i] = r.RoomID;
+			i++;
+		}
+		return res;
 	}
 
 	private RoomData _UpdateRoomData(string ID, SceneManager sceneManager) {
@@ -202,6 +220,26 @@ public partial class SaveLoader : Node
 				}
 			}
 		}
+		_unlockedMapMarkers.Clear();
+		_unlockedMapMarkers = JsonConvert.DeserializeObject<List<string>>(CurrentSaveFile["MapMarkers"].ToString());
+
+		_faeSaved = Convert.ToInt32(CurrentSaveFile["FaeSaved"]);
+	}
+
+	public void SaveFae() {
+		_faeSaved ++;
+	}
+
+	public List<string> GetMapMarkers() {
+		return _unlockedMapMarkers;
+	}
+	public void AddMapMarker(string marker) {
+		GD.Print(marker);
+		foreach(string s in _unlockedMapMarkers) {
+			if(s.Equals(marker))
+				return;
+		}
+		_unlockedMapMarkers.Add(marker);
 	}
 
 	public Dictionary<object, object> LoadFromFile(string path, string fileName) {

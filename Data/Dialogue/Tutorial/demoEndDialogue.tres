@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=3 format=3 uid="uid://bg8viemdrskii"]
+
+[ext_resource type="Texture2D" uid="uid://btuhp47rom3fn" path="res://Assets/Art/UI/DialoguePortraits/empty.png" id="1_2h3nv"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/DialogueData.cs" id="1_ir6c3"]
+
+[resource]
+script = ExtResource("1_ir6c3")
+Portrait = ExtResource("1_2h3nv")
+DialogueKey = PackedStringArray("That\'s it for the demo! Thanks so much for playing. If you want, keep on exploring! There\'s a total of 4 spirits to collect!")
+NameKey = ""

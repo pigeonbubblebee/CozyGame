@@ -14,6 +14,9 @@ public partial class PlayerInventoryManager : Node
 	public Equippable[] EquippedItems;
 	private Player _player;
 
+	[Export] private DialogueData _firstTimeCharmPickupDialogue;
+	public bool HasPickedUpEquip { get; set; }
+
 	public void Initialize(Player p) {
 		_player = p;
 		EquippedItems = new Equippable[p.CurrentPlayerStats.EquipSlots];
@@ -44,6 +47,15 @@ public partial class PlayerInventoryManager : Node
 	public void AddItemToInventory(Item i) {
 		int value;
 		//GD.Print(i);
+		
+
+		if(i is Equippable && !HasPickedUpEquip) {
+			
+			HasPickedUpEquip = true;
+
+			GetTree().CreateTimer(0.1f).Timeout += delegate { GetNode<UIManager>("/root/UIManager").LoadDialogue(_firstTimeCharmPickupDialogue); };
+		}
+
 		if(_playerInventory.TryGetValue(i, out value)) {
 			_playerInventory[i] = value + 1;
 		} else {

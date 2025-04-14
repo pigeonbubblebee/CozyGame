@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1m6uuvysduqf"]
+[gd_scene load_steps=6 format=3 uid="uid://c1m6uuvysduqf"]
 
 [ext_resource type="Texture2D" uid="uid://bsst4jdtiynq1" path="res://Assets/Art/Background/parallax1.png" id="1_a5gt4"]
 [ext_resource type="Texture2D" uid="uid://d03ridhuig42t" path="res://Assets/Art/Background/parallaxsky.png" id="2_r4f6w"]
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="3_x8qd2"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="4_jpxvx"]
+[ext_resource type="Texture2D" uid="uid://dkmgr7iitsh3a" path="res://Assets/Art/Environment/pointLight.png" id="5_vmdf5"]
 
 [node name="Background" type="Node2D"]
 position = Vector2(38416, -2000)
@@ -35,6 +36,8 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_a5gt4")
 
 [node name="Sky" type="Parallax2D" parent="."]
+modulate = Color(0.335369, 0.390233, 0.335562, 1)
+z_index = -10
 scroll_offset = Vector2(-488, 1408)
 
 [node name="Parallaxsky" type="Sprite2D" parent="Sky"]
@@ -116,6 +119,8 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_r4f6w")
 
 [node name="Hills" type="Parallax2D" parent="."]
+modulate = Color(0.335369, 0.390233, 0.335562, 1)
+z_index = -10
 scale = Vector2(-1, 1)
 scroll_scale = Vector2(0.65, 0.65)
 scroll_offset = Vector2(-504, 2548)
@@ -145,6 +150,8 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_x8qd2")
 
 [node name="Hills2" type="Parallax2D" parent="."]
+modulate = Color(0.403603, 0.465033, 0.403774, 1)
+z_index = -10
 scroll_scale = Vector2(0.75, 0.75)
 scroll_offset = Vector2(-5864, 2864)
 
@@ -171,3 +178,19 @@ z_index = -6
 position = Vector2(-19200, -64)
 scale = Vector2(4, 4)
 texture = ExtResource("4_jpxvx")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.174675, 0.24127, 0.22676, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(-1158, 1158)
+scale = Vector2(37.1875, 37.1875)
+color = Color(0.960654, 0.923227, 0.887493, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-1158, 1158)
+scale = Vector2(37.1875, 37.1875)
+color = Color(0.604254, 0.372802, 0.226421, 1)
+energy = 2.55
+texture = ExtResource("5_vmdf5")

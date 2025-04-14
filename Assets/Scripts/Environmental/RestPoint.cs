@@ -20,5 +20,13 @@ public partial class RestPoint : Interactable
 		GetNode<MainHandler>("/root/MainHandler").RespawnPlayer();
 	}
 
+    public override void OnEnter(Player player)
+    {
+        base.OnEnter(player);
+
+		GetNode<SaveLoader>("/root/SaveLoader").AddMapMarker(GetNode<MainHandler>("/root/MainHandler").GetMarkerID(this.Name));
+    }
+
+
 	// public void OnInteractHold(Player player) {}
 }

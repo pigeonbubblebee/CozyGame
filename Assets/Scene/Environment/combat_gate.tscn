@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpfa8jbo2ncn2"]
+
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="1_wiiu3"]
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/CombatGate.cs" id="2_58ei3"]
+[ext_resource type="Texture2D" uid="uid://b8q4yxucabmv2" path="res://Assets/Art/Environment/CombatGate.png" id="3_pke52"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ks4xd"]
+shader = ExtResource("1_wiiu3")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj8nb"]
+shader = ExtResource("1_wiiu3")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upo3a"]
+size = Vector2(32, 144)
+
+[node name="CombatGate" type="StaticBody2D" groups=["Ground"]]
+material = SubResource("ShaderMaterial_ks4xd")
+collision_layer = 19
+script = ExtResource("2_58ei3")
+enemyPaths = Array[NodePath]([])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_wj8nb")
+scale = Vector2(4, 4)
+texture = ExtResource("3_pke52")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_upo3a")

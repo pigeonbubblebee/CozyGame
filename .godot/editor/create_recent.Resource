@@ -1,7 +1,7 @@
+DialogueData
 Equippable
 Item
 MerchantInventory
 MerchantDialogueData
-DialogueData
 PowerSpirit
 PlayerStats

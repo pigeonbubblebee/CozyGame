@@ -17,8 +17,12 @@ public class SaveFile
 
 	public string[] equipped = new string[0];
 
+	public int faeSaved;
+
 	public int[] attributes = new int[0];
 	public List<MerchantData> MerchantDatas { get; set; } = new List<MerchantData>();
+	public List<string> UnlockedMapMarkers; // Delimited by ;
+	public bool hasPickedUpEquip;
 	
 	public class RoomData {
 		public string RoomID;
@@ -41,7 +45,10 @@ public class SaveFile
 			{ "Inventory", inventory },
 			{ "InventoryStacks", inventoryStacks },
 			{ "Equipped", equipped },
-			{ "Attributes", attributes }
+			{ "Attributes", attributes },
+			{ "MapMarkers", UnlockedMapMarkers },
+			{ "FaeSaved", faeSaved },
+			{ "SpiritPickup", hasPickedUpEquip }
 		};
 
 		foreach(RoomData roomData in RoomDatas) {
@@ -64,7 +71,10 @@ public class SaveFile
 			{ "Inventory",  "[\"sword\"]" },
 			{ "InventoryStacks", "[1]" },
 			{ "Equipped", new string[0] },
-			{ "Attributes", "[0,0,0,0,0]" }
+			{ "Attributes", "[0,0,0,0,0]" },
+			{ "MapMarkers", "[]" },
+			{ "FaeSaved", 0 },
+			{ "SpiritPickup", false }
 		};
 		// GD.Print("inventory:" + res["Inventory"]);
 		return res;

@@ -66,6 +66,8 @@ public partial class UIManager : Node2D
 				
 				if(!_inventory.Visible) {
 					_inventory.CloseInventory();
+				} else {
+					_inventory.OpenInventory();
 				}
 			}
 			if(MerchantOpen) {
@@ -75,12 +77,17 @@ public partial class UIManager : Node2D
 	}
 
 	public void LoadDialogue(DialogueData d) {
+		_inventory.Visible = false;
+		_inventory.CloseInventory();
+		_merchant.Visible = false;
+
 		OriginalCamZoom = new Vector2(_currentScenePlayer.Camera.Zoom.X, _currentScenePlayer.Camera.Zoom.Y);
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(_currentScenePlayer.Camera, "zoom", OriginalCamZoom * 1.2f, 0.075f);
 		OriginalOffset = _currentScenePlayer.Camera._Offset;
 		Tween tween2 = GetTree().CreateTween();
 		tween2.TweenProperty(_currentScenePlayer.Camera, "_Offset", 0f, 0.075f);
+		
 		_dialogue.Visible = true;
 		_dialogue.LoadDialogue(d);
 	}
@@ -117,5 +124,9 @@ public partial class UIManager : Node2D
 	public void LoadMerchant(MerchantInventory merchantInventory) {
 		_merchant.Visible = true;
 		_merchant.LoadMerchant(merchantInventory);
+	}
+
+	public void DisableMerchant() {
+		_merchant.Visible = false;
 	}
 }

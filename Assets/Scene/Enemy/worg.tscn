@@ -218,10 +218,10 @@ position = Vector2(112, 0)
 [node name="AggroCheckForward" parent="ChaserEnemy/AggroChecks" index="0"]
 target_position = Vector2(2000, 0)
 
-[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="0"]
+[node name="Bars" parent="ChaserEnemy/EnemyTemplate" index="1"]
 position = Vector2(0, 40)
 
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_fwwuj")
 animation = &"pounce"
 frame_progress = 0.791319

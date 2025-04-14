@@ -59,6 +59,11 @@ public partial class InventoryUI : Control
 	[Export] private NodePath _levelsTextPath;
 	private RichTextLabel _levelsText;
 
+	[Export] private NodePath _mapPath;
+	private Map _map;
+
+	public event Action<int> SwitchScreenEvent;
+
 	[Export] private NodePath _incrementAttributePath;
 	[Export] private NodePath _decrementAttributePath;
 	private AttributeButton[] _incrementAttributesButtons;
@@ -77,6 +82,10 @@ public partial class InventoryUI : Control
 
 		_moneyText = GetNode<RichTextLabel>(_moneyTextPath);
 		_levelsText = GetNode<RichTextLabel>(_levelsTextPath);
+
+		_map = GetNode<Map>(_mapPath);
+		_map.UpdateMapVisibility();
+		SwitchScreenEvent += delegate { if(CurrentScreen == 0) { _map.UpdateMapVisibility(); } };
 
 		_screens = new CanvasItem[_screensPath.Length];
 		for(int i = 0; i < _screensPath.Length; i++) {
@@ -152,6 +161,8 @@ public partial class InventoryUI : Control
 
 			_screens[CurrentScreen].Visible = true;
 
+			SwitchScreenEvent?.Invoke(CurrentScreen);
+
 			_UpdateMenuIcons();
 		}
 
@@ -163,6 +174,8 @@ public partial class InventoryUI : Control
 			} else {
 				CurrentScreen ++;
 			}
+
+			SwitchScreenEvent?.Invoke(CurrentScreen);
 
 			//GD.Print(CurrentScreen);
 
@@ -263,6 +276,10 @@ public partial class InventoryUI : Control
 		_ItemDisplayDescription.Visible = false;
 		_ItemDisplayImage.Visible = false;
 		_equipPrompt.Visible = false;
+	}
+
+	public void OpenInventory() {
+		_map.UpdateMapVisibility();
 	}
 	
 	private void _addItem(Item i, int stack) {
@@ -428,17 +445,19 @@ public partial class InventoryUI : Control
 
 	public static string _createDescription(string desc) {
 		string res = desc;
-		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#f93e00]STRENGTH[/color][/url]");
+		
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"][color=#78ff26]MYSTIC[/color][/url]");
 		res = res.Replace("CAST", "[url=\"tooltip_cast\"][color=#78ff26]CAST[/color][/url]");
 		res = res.Replace("HEALTH", "[url=\"tooltip_health\"][color=#cf0451]HEALTH[/color][/url]");
 		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"][color=#cf0451]REGROWTH[/color][/url]");
+		res = res.Replace("FAMILIAR","[url=\"tooltip_familiar\"][color=#a350f0]FAMILIAR[/color][/url]");
+		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"][color=#f93e00]STRENGTH[/color][/url]");
 		res = res.Replace("DEXTERITY", "[url=\"tooltip_dexterity\"][color=#ecd42c]DEXTERITY[/color][/url]");
 		res = res.Replace("VITALITY", "[url=\"tooltip_vitality\"][color=#cf0451]VITALITY[/color][/url]");
 		res = res.Replace("HARMONY", "[url=\"tooltip_harmony\"][color=#78ff26]HARMONY[/color][/url]");
 		res = res.Replace("FOCUS", "[url=\"tooltip_focus\"][color=#9fe7ff]FOCUS[/color][/url]");
 		res = res.Replace("PROWESS", "[url=\"tooltip_prowess\"][color=#ff7103]PROWESS[/color][/url]");
-		res = res.Replace("POISON", "[url=\"tooltip_poison\"][color=#379e08]POISON[/color][/url]");
+		res = res.Replace("POISON", "[url=\"tooltip_poison\"][color=#92a255]POISON[/color][/url]");
 		res = res.Replace("DAZE", "[url=\"tooltip_daze\"][color=#d84f2f]DAZE[/color][/url]");
 		res = res.Replace("CRITICAL", "[url=\"tooltip_critical\"][color=#ecd42c]CRITICAL[/color][/url]");
 		
@@ -451,6 +470,7 @@ public partial class InventoryUI : Control
 		string res = desc;
 		res = res.Replace("STRENGTH", "[url=\"tooltip_strength\"]STRENGTH[/url]");
 		res = res.Replace("MYSTIC", "[url=\"tooltip_mystic\"]MYSTIC[/url]");
+		res = res.Replace("FAMILIAR","[url=\"tooltip_familiar\"]FAMILIAR[/url]");
 		res = res.Replace("CAST", "[url=\"tooltip_cast\"]CAST[/url]");
 		res = res.Replace("HEALTH", "[url=\"tooltip_health\"]HEALTH[/url]");
 		res = res.Replace("REGROWTH", "[url=\"tooltip_regrowth\"]REGROWTH[/url]");

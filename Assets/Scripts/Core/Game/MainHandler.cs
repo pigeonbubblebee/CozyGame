@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -68,6 +69,20 @@ public partial class MainHandler : Node
 		_respawnLocationLocation = location;
 	}
 
+	public void FastTravel(string path) {
+		GD.Print("warping:"+path);
+		string[] split = path.Split(";");
+		_respawnLocationArea = split[0];
+		_respawnLocationLevel = split[1];
+		_respawnLocationLocation = split[2];
+
+		RespawnPlayer();
+	}
+
+	public string GetMarkerID(string location) {
+		return _currentArea + ';' + _currentLevel + ';' + location;
+	}
+
 	public string GetRespawnID() {
 		return _respawnLocationArea + ';' + _respawnLocationLevel + ';' + _respawnLocationLocation;
 	}
@@ -81,17 +96,17 @@ public partial class MainHandler : Node
 		// }
 		// }
 
-		ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(_currentLoadScenePath, _loadProgess);
+		// ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(_currentLoadScenePath, _loadProgess);
 		
-		if(status == ResourceLoader.ThreadLoadStatus.Loaded && !_finishedLoad) {
-			_finishedLoad = true;
-			_FinishLoadSceneRequest();
-		}
+		// if(status == ResourceLoader.ThreadLoadStatus.Loaded && !_finishedLoad) {
+		// 	_finishedLoad = true;
+		// 	_FinishLoadSceneRequest();
+		// }
 	}
 
 	private bool _finishedLoad = false;
 
-	private void _FinishLoadSceneRequest() {
+	private void _FinishLoadSceneRequest(PackedScene level) {
 		if(_currentScene != null && !_chunkRequest && !_adjacentRequest) {
 			_currentScene.QueueFree();
 			// foreach(Node n in _adjacentScenes) {
@@ -110,7 +125,7 @@ public partial class MainHandler : Node
 			}
 		}
 	
-		PackedScene level = (PackedScene)ResourceLoader.LoadThreadedGet(_currentLoadScenePath);
+		// PackedScene level = (PackedScene)ResourceLoader.LoadThreadedGet(_currentLoadScenePath);
 		
 		SceneManager newScene = (SceneManager)level.Instantiate();
 		// GD.Print(newScene.SceneID + ": loaded");
@@ -252,7 +267,8 @@ public partial class MainHandler : Node
 		}
 
 		// PackedScene level = GD.Load<PackedScene>("res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn");
-		ResourceLoader.LoadThreadedRequest(_currentLoadScenePath);
+		// ResourceLoader.LoadThreadedRequest(_currentLoadScenePath);
+		CallDeferred(MethodName._FinishLoadSceneRequest, (LoadResource<PackedScene>(_currentLoadScenePath)));
 		// _loadSpawnPosition = Vector2.Zero;
 	}
 
@@ -372,4 +388,17 @@ public partial class MainHandler : Node
 		LoadLevel(area, levelName);
 		_loadSpawnPosition = position;		
 	}
+
+	public static T LoadResource<T>(string resPath) where T : Resource
+	{
+		if(!loadedResources.TryGetValue(resPath, out var loadedRes))
+		{
+			if(!ResourceLoader.Exists(resPath))
+				return null;
+			loadedRes = ResourceLoader.Load<Resource>(resPath);
+			loadedResources[resPath] = loadedRes;
+		}
+		return loadedRes as T;
+	}
+	readonly private static Dictionary<string, Resource> loadedResources = new Dictionary<string, Resource>();
 }

@@ -19,7 +19,7 @@ description_power_spirit,A small spirit that's taken residence in a flower. Reac
 honeycomb,Honeycomb
 description_honeycomb,Magical honey produced by the spirit inside heals you"," causing you to regenerate HEALTH when you CAST.
 hive,Hive
-description_hive,A hive of bees commanded by the spirit inside. Summons a bee to help you in combat"," inflicing POISON on hits.
+description_hive,A hive of bees commanded by the spirit inside. Summons a bee FAMILIAR to help you in combat"," inflicing POISON on hits.
 claw,Sweetclaw
 description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of a bear into you"," increasing STRENGTH"," DEXTERITY"," and VITALITY.
 
@@ -42,19 +42,20 @@ item_type_upgrade_material,Upgrade Material
 item_type_equippable,Woodland Spirit
 item_type_achohol,Achohol
 
-tooltip_strength,Your raw physicality. STRENGTH adds a damage bonus to your slashes.
+tooltip_strength,Your raw physicality. STRENGTH adds a damage bonus to your attacks.
 tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through CASTs. Overloading MYSTIC will hurt.
 tooltip_health,HEALTH keeps you alive. Can be gained by using a REGROWTH.
 tooltip_regrowth,Borrowed power from your cat friend. Use a REGROWTH to regain HEALTH.
 tooltip_dexterity,Pure agility of your muscles. DEXTERITY makes you attack faster.
 tooltip_vitality,Your life energy. VITALITY adds to your max HEALTH.
-tooltip_harmony,Your connection to those around you. HARMONY adds to your max MYSTIC and makes you allies stronger.
+tooltip_harmony,Your connection to those around you. HARMONY adds to your max MYSTIC and makes your allies stronger.
 tooltip_focus,Your magical power. FOCUS makes your CASTs stronger.
 tooltip_prowess,PROWESS increases composure damage from parries.
 tooltip_poison,POISON deals damage over time.
 tooltip_daze,DAZE stuns an enemy when built up to 30 stacks.
 tooltip_critical,Landing a CRITICAL triples damage.
 tooltip_cast,Using a CAST releases MYSTIC and deals damage in the form of a projectile.
+tooltip_familiar,A FAMILIAR is a summoned ally that will attack enemies after you attack them.
 
 name_player,Player
 name_cat,Cat
@@ -98,5 +99,12 @@ dialogue_mystic_instruction,Mystic - \nBlocking attacks generates mystic. When y
 dialogue_cast_instruction,Casting - \nTap R to release your mystic and fire a piercing bolt in front of you.
 dialogue_cat_pretutboss_1,We're getting pretty close to exiting the forest. I heard there's an outpost up ahead.
 dialogue_cat_pretutboss_2,I really hope we can find my friend in there...
+dialogue_cat_charm_tutorial_1,Oooh! A woodland spirit! They're fiesty little creatures who find themselves in random objects.
+dialogue_cat_charm_tutorial_2,If you give them to me"," I'll help you channel them!
+dialogue_charm_instruction,Woodland Spirits - \nTap B to open your inventory. Select a spirit and press F to equip and unequip it. Each spirit grants you a powerful bonus.
+dialogue_cat_map_tutorial_1,Mystic trees also allow you to travel instantaneously between them.
+dialogue_inventory_instruction,Inventory - \nTap B to open your inventory to view your current items. Use Z and X to switch to different parts of the inventory.
+dialogue_map_instruction,Teleporting - \nIn the map screen of the inventory"," click on a rest point marker to instantly travel to it.
+
 dialogue_blinny_1,New friends for Blinny?
 dialogue_blinny_2,Blinny would love to show friends his things.

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=4 uid="uid://dteadx5vcybmk"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/HiddenArea.cs" id="1_4nyk2"]
+[ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_8dslv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_653lh"]
+size = Vector2(1101, 1057)
+
+[node name="HiddenArea" type="Area2D"]
+script = ExtResource("1_4nyk2")
+
+[node name="SecretWall" type="TileMapLayer" parent="." groups=["Ground"]]
+z_index = 12
+use_parent_material = true
+position = Vector2(0, -3)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAEABkAAAAAAAEAAAAEABoAAAAAAAEAAAAEABsAAAAAAAEAAAAEABgAAAAAAAEAAAAFABgAAAABAAEAAAAGABgAAAABAAEAAAAHABkAAAABAAEAAAAHABoAAAABAAEAAAAHABsAAAABAAEAAAAHABwAAAABAAEAAAAGABwAAAABAAEAAAAFABwAAAABAAEAAAAEABwAAAAEAAEAAAAFABoAAAABAAEAAAAFABkAAAABAAEAAAAFABsAAAABAAEAAAAGABsAAAABAAEAAAAGABoAAAABAAEAAAAGABkAAAABAAEAAAAHABgAAAABAAEAAAAIABkAAAABAAEAAAAIABoAAAABAAEAAAAIABsAAAABAAEAAAAIABwAAAABAAEAAAAJABkAAAABAAEAAAAJABoAAAABAAEAAAAJABsAAAABAAEAAAAJABwAAAABAAEAAAAKABkAAAABAAEAAAAKABoAAAABAAEAAAAKABsAAAABAAEAAAAKABwAAAABAAEAAAA=")
+tile_set = ExtResource("2_8dslv")
+rendering_quadrant_size = 32
+collision_enabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 12
+position = Vector2(1185.5, 3728.5)
+shape = SubResource("RectangleShape2D_653lh")

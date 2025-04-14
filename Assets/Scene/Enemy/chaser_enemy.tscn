@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bx4xvh2o6pyxf"]
+[gd_scene load_steps=28 format=3 uid="uid://bx4xvh2o6pyxf"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs" id="1_cjkk3"]
 [ext_resource type="PackedScene" uid="uid://003fp2vwh75j" path="res://Assets/Scene/Enemy/enemy_template.tscn" id="2_ivrns"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="8_ucmwq"]
 [ext_resource type="Texture2D" uid="uid://dwo1pd2sf7ugu" path="res://Assets/Art/Character/Enemy/GoblinBandit/goblin_stagger.png" id="9_177p6"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserStateMachine.cs" id="11_mmfnb"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="11_ufv2f"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs" id="15_5d18m"]
 [ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Chaser/ChaserPatrolState.cs" id="16_v3xuk"]
 
@@ -243,5 +244,10 @@ script = ExtResource("8_ucmwq")
 
 [node name="AggroState" type="Node2D" parent="EnemyTemplate/StateMachine" index="4"]
 script = ExtResource("15_5d18m")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(3, 3)
+color = Color(0.634628, 0.152551, 0.151802, 1)
+texture = ExtResource("11_ufv2f")
 
 [editable path="EnemyTemplate"]

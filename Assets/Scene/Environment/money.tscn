@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ckue25jsorcuc" path="res://Assets/Art/Environment/acorn.png" id="4_s5jq7"]
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/HealthSystem.cs" id="5_qi55h"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hq3ov"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xx1jq"]
 shader = ExtResource("1_bvv7v")
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 7.025
@@ -21,9 +21,8 @@ shader_parameter/shaderon = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr2me"]
 size = Vector2(32, 28)
 
-[node name="Money" type="StaticBody2D" groups=["Ground"]]
-material = SubResource("ShaderMaterial_hq3ov")
-position = Vector2(-2808, 4720)
+[node name="Money" type="Area2D" groups=["Ground"]]
+material = SubResource("ShaderMaterial_xx1jq")
 scale = Vector2(-4, 4)
 collision_layer = 19
 script = ExtResource("2_o6ccr")

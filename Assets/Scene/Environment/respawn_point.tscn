@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://brlayd7re18fg"]
+[gd_scene load_steps=8 format=3 uid="uid://brlayd7re18fg"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/RestPoint.cs" id="1_g4cj5"]
 [ext_resource type="Texture2D" uid="uid://dn8h24xsb4ui1" path="res://Assets/Art/Environment/RespawnLocation.png" id="1_ter2r"]
 [ext_resource type="Shader" path="res://Shader/outline.gdshader" id="2_7aoik"]
 [ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="4_kfvbm"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="5_71vma"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1bgm0"]
 shader = ExtResource("2_7aoik")
@@ -32,3 +33,9 @@ shape = SubResource("RectangleShape2D_gvr7g")
 position = Vector2(0, -56)
 scale = Vector2(0.5, 0.5)
 PromptText = "Rest"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 5
+scale = Vector2(1.5, 1.5)
+color = Color(0.696628, 0.430866, 0.313138, 1)
+texture = ExtResource("5_71vma")

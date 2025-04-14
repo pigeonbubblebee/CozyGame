@@ -1,4 +1,5 @@
-res://Assets/Scene/Enemy/enemy_template.tscn
+res://Assets/Scripts/Core/Localization/Localizations 1 - Sheet1.en.translation
+res://Assets/Scene/player.tscn
 res://Assets/Scripts/Character/Player/PlayerStats.cs
 res://Data/Items/acorn.tres
 res://Data/Enemy/goblin_archer.tres
@@ -16,27 +17,52 @@ res://Data/Items/mystic_ore.tres
 res://Data/Items/Charms/claw.tres
 res://Data/Dialogue/Blinny/blinnyInv.tres
 res://Data/Dialogue/Blinny/blinny.tres
-res://Assets/Scene/Enemy/chaser_enemy.tscn
-res://Assets/Scene/Enemy/goblin_bandit.tscn
-res://Assets/Scene/Enemy/goblin_warrior_easier.tscn
+res://Data/Dialogue/Tutorial/tutorialDialogue3.tres
+res://Data/Dialogue/Tutorial/tutorialDialogue2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogue.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueStart.tres
+res://Data/Dialogue/Tutorial/tutorialJumpInstruction.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueJump.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueRest2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueRest.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueSlash2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueSlash.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueBlock2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueBlock.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueHeal4.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueHeal3.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueHeal2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueHeal.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueCast2.tres
+res://Data/Dialogue/Tutorial/tutorialDialogueCast.tres
 res://Assets/Scene/Summons/bee_summon.tscn
-res://Assets/Scene/player.tscn
 res://Assets/Scene/Enemy/goblin_archer.tscn
 res://Assets/Scene/Levels/WestWoods/ww4.tscn
 res://Assets/Scene/Levels/WestWoods/ww5.tscn
+res://Assets/Scene/Enemy/enemy_template.tscn
+res://Assets/Scene/Enemy/chaser_enemy.tscn
 res://Assets/Scene/Enemy/goblin_warrior.tscn
+res://Assets/Scene/Enemy/goblin_warrior_easier.tscn
+res://Assets/Scene/Enemy/goblin_bandit.tscn
+res://Assets/Scene/Levels/WestWoods/ww_workshop.tscn
+res://Assets/Scene/Minimap.tscn
+res://Assets/Scene/Levels/WestWoods/ww3.tscn
+res://Assets/Scene/Levels/WestWoods/ww1.tscn
+res://Assets/Scene/Levels/WestWoods/ww2.tscn
+res://Assets/Scene/ui_manager.tscn
+res://Assets/Scene/inventory.tscn
 res://Assets/Scripts/Interactables/Interactable.cs
 res://Assets/Scripts/Character/Enemy/Attacks/SlashAttack.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerJumpState.cs
 res://Assets/Scripts/Character/Enemy/EnemyHitbox.cs
 res://Assets/Scripts/Character/Enemy/Attacks/RandomAttack.cs
-res://Assets/Scripts/Core/User Interface/HealthHUD.cs
-res://Assets/Scripts/Character/Enemy/Patrol/PatrolStateMachine.cs
 res://Assets/Scripts/Core/User Interface/HUD.cs
+res://Assets/Scripts/Character/Enemy/Patrol/PatrolStateMachine.cs
+res://Assets/Scripts/Core/User Interface/InventorySlot.cs
 res://Assets/Scripts/Character/Enemy/PostureBreakState.cs
 res://Assets/Scripts/Character/Enemy/Attacks/CleaveCounterArea.cs
 res://Assets/Scripts/Character/Enemy/Chaser/EnemyChaserAI.cs
-res://Assets/Scripts/Core/User Interface/InventoryUI.cs
+res://Assets/Scripts/Core/User Interface/MerchantDialogueData.cs
 res://Assets/Scripts/Character/Player/PlayerHealController.cs
 res://Assets/Scripts/Environmental/DamageTriggerArea.cs
 res://Assets/Scripts/Character/Enemy/Attacks/SlashCombo.cs
@@ -59,13 +85,13 @@ res://Assets/Scripts/Character/Enemy/Patrol/EnemyPatrolAI.cs
 res://Assets/Scripts/Character/Enemy/TestingDummy.cs
 res://Assets/Scripts/Items/Charms/SummonSpirit.cs
 res://Assets/Scripts/Character/Player/PlayerAnimationController.cs
-res://Assets/Scripts/Core/System/Input/InputManager.cs
+res://Assets/Scripts/Core/User Interface/AttributeButton.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerHealState.cs
 res://Assets/Scripts/Items/Charms/ShootHealSpirit.cs
 res://Assets/Scripts/Items/Charms/StatBoostSpirit.cs
 res://Assets/Scripts/Character/Enemy/VunerableAttack.cs
-res://Assets/Scripts/Core/User Interface/Dialogue.cs
-res://Assets/Scripts/Core/User Interface/InteractPrompt.cs
+res://Assets/Scripts/Core/User Interface/DialogueData.cs
+res://Assets/Scripts/Core/User Interface/InventoryUI.cs
 res://Assets/Scripts/Character/Enemy/AttackState.cs
 res://Assets/Scripts/Character/Enemy/Chaser/ChaserIdleState.cs
 res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs
@@ -74,10 +100,10 @@ res://Assets/Scripts/Environmental/DialogueTriggerArea.cs
 res://Assets/Scripts/Character/Player/PlayerCurseController.cs
 res://Assets/Scripts/Character/Player/PlayerMovementController.cs
 res://Assets/Scripts/Character/Player/PlayerSummonController.cs
-res://Assets/Scripts/Core/User Interface/DialogueData.cs
+res://Assets/Scripts/Core/User Interface/HealthHUD.cs
 res://Assets/Scripts/Character/Enemy/Attacks/CleaveAttack.cs
 res://Assets/Scripts/Character/Enemy/Attacks/ShootAttack.cs
-res://Assets/Scripts/Core/User Interface/MerchantDialogueData.cs
+res://Assets/Scripts/Core/User Interface/MerchantUI.cs
 res://Assets/Scripts/Character/Enemy/Patrol/PatrolStaggerState.cs
 res://Assets/Scripts/Character/Player/PlayerInventoryManager.cs
 res://Assets/Scripts/Character/Enemy/Attacks/PounceAttack.cs
@@ -86,7 +112,7 @@ res://Assets/Scripts/Environmental/CombatGate.cs
 res://Assets/Scripts/Character/Player/Player.cs
 res://Assets/Scripts/Environmental/MoneyPile.cs
 res://Assets/Scripts/Character/Enemy/Chaser/ChaserAggroState.cs
-res://Assets/Scripts/Core/User Interface/BossBarsUI.cs
+res://Assets/Scripts/Core/User Interface/Dialogue.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerIdleState.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerDashState.cs
 res://Assets/Scripts/Character/Player/PlayerSpellController.cs
@@ -102,7 +128,7 @@ res://Assets/Scripts/Character/Enemy/EnemyIdleState.cs
 res://Assets/Scripts/Character/Player/PlayerDeflectController.cs
 res://Assets/Scripts/Core/Scene/Tilemap.cs
 res://Assets/Scripts/Character/Summon/Summon.cs
-res://Assets/Scripts/Core/Sound/AdjustableSound.cs
+res://Assets/Scripts/Core/System/Input/InputManager.cs
 res://Assets/Scripts/Character/Player/PlayerInteractionController.cs
 res://Assets/Scripts/Core/Game/MainHandler.cs
 res://Assets/Scripts/Items/Charms/PowerSpirit.cs
@@ -111,16 +137,34 @@ res://Assets/Scripts/Character/StateMachine/StateMachine.cs
 res://Assets/Scripts/Combat/HealthSystem.cs
 res://Assets/Scripts/Character/StateMachine/State.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerAttackState.cs
-res://Assets/Scripts/Core/User Interface/MerchantUI.cs
+res://Assets/Scripts/Core/User Interface/MinimapSubViewport.cs
 res://Assets/Scripts/Environmental/CameraBound.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerState.cs
 res://Assets/Scripts/Environmental/RestPoint.cs
 res://Assets/Scripts/Character/Player/StateMachine/PlayerStaggerState.cs
-res://Assets/Scripts/Core/User Interface/AttributeButton.cs
+res://Assets/Scripts/Core/User Interface/BossBarsUI.cs
 res://Assets/Scripts/Interactables/TestingItem.cs
 res://Assets/Scripts/Combat/Bullet/Bullet.cs
 res://Assets/Scripts/Core/Game/DependencyInjectionManager.cs
 res://Assets/Scripts/Character/Enemy/Attacks/Retreat.cs
 res://Assets/Scripts/Core/Save/SaveLoader.cs
 res://Assets/Scripts/Character/Enemy/Patrol/PatrolIdleState.cs
-res://Assets/Scripts/Core/User Interface/InventorySlot.cs
+res://Assets/Scripts/Core/User Interface/Map.cs
+res://Assets/Scripts/Core/User Interface/InteractPrompt.cs
+res://Assets/Scripts/Core/Sound/AdjustableSound.cs
+res://Assets/Scripts/Core/User Interface/RestPointMapMarker.cs
+res://Assets/Scripts/Environmental/HiddenArea.cs
+res://Assets/Scene/Environment/money.tscn
+res://Assets/Scene/Environment/hidden_area.tscn
+res://Assets/Scene/Environment/combat_gate.tscn
+res://Assets/Scripts/Environmental/TrappedCollectible.cs
+res://Assets/Scene/Environment/fae_in_a_jar.tscn
+res://Data/Dialogue/Tutorial/Charm/tutorialCharmDialogue.tres
+res://Data/Dialogue/Tutorial/Charm/tutorialCharmDialogue2.tres
+res://Data/Dialogue/Tutorial/Map/tutorialInvDialogue.tres
+res://Data/Dialogue/Tutorial/Map/tutorialMapDialogue.tres
+res://Assets/Scene/Environment/ww_background.tscn
+res://Assets/Scene/main.tscn
+res://Assets/Scene/Environment/respawn_point.tscn
+res://Assets/Scene/Enemy/worg.tscn
+res://Data/Dialogue/Tutorial/demoEndDialogue.tres
