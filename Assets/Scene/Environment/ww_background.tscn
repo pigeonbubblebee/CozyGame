@@ -43,7 +43,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_a5gt4")
 
 [node name="Sky" type="Parallax2D" parent="."]
-modulate = Color(0.335369, 0.390233, 0.335562, 1)
+modulate = Color(0.427627, 0.490895, 0.427782, 1)
 z_index = -10
 scroll_offset = Vector2(-488, 1408)
 
@@ -126,7 +126,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_r4f6w")
 
 [node name="Hills" type="Parallax2D" parent="."]
-modulate = Color(0.335369, 0.390233, 0.335562, 1)
+modulate = Color(0.394461, 0.45512, 0.394636, 1)
 z_index = -10
 scale = Vector2(-1, 1)
 scroll_scale = Vector2(0.65, 0.65)
@@ -157,7 +157,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_x8qd2")
 
 [node name="Hills2" type="Parallax2D" parent="."]
-modulate = Color(0.403603, 0.465033, 0.403774, 1)
+modulate = Color(0.606105, 0.391715, 0.716438, 1)
 z_index = -10
 scroll_scale = Vector2(0.75, 0.75)
 scroll_offset = Vector2(-5864, 2864)
@@ -187,7 +187,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("4_jpxvx")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.174675, 0.24127, 0.22676, 1)
+color = Color(0.546505, 0.668932, 0.641323, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-1158, 1158)

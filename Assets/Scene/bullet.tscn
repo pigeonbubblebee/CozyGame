@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctuqbvm6mv8uh"]
+[gd_scene load_steps=5 format=3 uid="uid://ctuqbvm6mv8uh"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Combat/Bullet/Bullet.cs" id="1_eoywk"]
 [ext_resource type="Texture2D" uid="uid://dy82u10ni2eg7" path="res://Assets/Art/VFX/spellEffect.png" id="2_hramn"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="3_rmhp8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ifv"]
 size = Vector2(72, 232)
@@ -26,5 +27,11 @@ shape = SubResource("RectangleShape2D_k6ifv")
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(5, 5)
+color = Color(0.615443, 0.910804, 0.280316, 1)
+energy = 3.0
+texture = ExtResource("3_rmhp8")
 
 [connection signal="body_entered" from="." to="." method="_AreaEntered"]

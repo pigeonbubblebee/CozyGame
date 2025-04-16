@@ -77,7 +77,6 @@ tile_set = ExtResource("2_0oget")
 rendering_quadrant_size = 32
 
 [node name="HiddenArea2" parent="." instance=ExtResource("3_0u836")]
-visible = false
 position = Vector2(2048, 384)
 
 [node name="SecretWall" parent="HiddenArea2" index="0"]
@@ -87,6 +86,7 @@ tile_map_data = PackedByteArray("AAAEABkAAAAAAAEAAAAEABoAAAAAAAEAAAAEABsAAAAAAAE
 position = Vector2(1240, 3288)
 
 [node name="HiddenArea" parent="." instance=ExtResource("3_0u836")]
+visible = false
 position = Vector2(-640, 2688)
 
 [node name="SecretWall" parent="HiddenArea" index="0"]
@@ -141,15 +141,14 @@ _healthSystemPath = NodePath("../Money/HealthSystem")
 position = Vector2(1880, 6648)
 enemyPaths = Array[NodePath]([NodePath("goblin_archer"), NodePath("goblin_bandit"), NodePath("goblin_bandit2")])
 
-[node name="goblin_archer" parent="Breakables/CombatGate" instance=ExtResource("4_ihthv")]
-position = Vector2(-408, 120)
-scale = Vector2(-1, 1)
-
 [node name="goblin_bandit" parent="Breakables/CombatGate" instance=ExtResource("3_82161")]
 position = Vector2(-1416, 128)
 
 [node name="goblin_bandit2" parent="Breakables/CombatGate" instance=ExtResource("3_82161")]
 position = Vector2(-1008, 144)
+
+[node name="goblin_archer" parent="Breakables/CombatGate" instance=ExtResource("4_ihthv")]
+position = Vector2(-1720, 96)
 
 [node name="Money2" parent="Breakables" instance=ExtResource("5_smw85")]
 position = Vector2(2144, 6632)

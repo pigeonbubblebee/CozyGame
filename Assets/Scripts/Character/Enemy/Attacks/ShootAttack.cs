@@ -38,7 +38,7 @@ public partial class ShootAttack : EnemyAttack
 		base._Ready();
 		
 		ObjectPool = GetNode<Node>(_objectPoolPath);
-		_bulletScene = GD.Load<PackedScene>(_bulletPath);
+		_bulletScene = ResourceLoader.Load<PackedScene>(_bulletPath);
 		
 		for(int i = 0; i < _objectPoolNumber; i++) {
 			InstantiateBullet();

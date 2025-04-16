@@ -55,6 +55,7 @@ public partial class MainHandler : Node
 		
 		// LoadLevel(_respawnLocationArea, _respawnLocationLevel, _respawnLocationLocation); // Change to only w fresh save
 		_respawnRequest = true;
+		_uiManager.EnableLoadingScreen();
 		SpawnPlayer();
 		_player.PlayerHealth.DeathEvent += RespawnPlayer;
 	}
@@ -96,19 +97,19 @@ public partial class MainHandler : Node
 		// }
 		// }
 
-		// ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(_currentLoadScenePath, _loadProgess);
+		ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(_currentLoadScenePath, _loadProgess);
 		
-		// if(status == ResourceLoader.ThreadLoadStatus.Loaded && !_finishedLoad) {
-		// 	_finishedLoad = true;
-		// 	_FinishLoadSceneRequest();
-		// }
+		if(status == ResourceLoader.ThreadLoadStatus.Loaded && !_finishedLoad) {
+			_finishedLoad = true;
+			_FinishLoadSceneRequest();
+		}
 	}
 
 	private bool _finishedLoad = false;
 
-	private void _FinishLoadSceneRequest(PackedScene level) {
+	private void _FinishLoadSceneRequest() {
 		if(_currentScene != null && !_chunkRequest && !_adjacentRequest) {
-			_currentScene.QueueFree();
+			_currentScene.CallDeferred(MethodName.QueueFree);
 			// foreach(Node n in _adjacentScenes) {
 			// 	GD.Print(n == null ? "null" : ((SceneManager)n).SceneID);
 			// 	if(n != _currentScene)
@@ -125,7 +126,7 @@ public partial class MainHandler : Node
 			}
 		}
 	
-		// PackedScene level = (PackedScene)ResourceLoader.LoadThreadedGet(_currentLoadScenePath);
+		PackedScene level = (PackedScene)ResourceLoader.LoadThreadedGet(_currentLoadScenePath);
 		
 		SceneManager newScene = (SceneManager)level.Instantiate();
 		// GD.Print(newScene.SceneID + ": loaded");
@@ -199,7 +200,10 @@ public partial class MainHandler : Node
 		newScene.Init();
 
 		if(_respawnRequest) {
+			GetTree().CreateTimer(0.5f).Timeout += _DisableLoadingScreen;
 			_player.PlayerHealth.ResetHealth();
+			_player.StateMachine.ChangeState(_player.StateMachine.RestState);
+			GetTree().CreateTimer(0.5f).Timeout += delegate { _player.StateMachine.EnterDefaultState(); };
 			_respawnRequest = false;
 		}
 
@@ -212,6 +216,7 @@ public partial class MainHandler : Node
 	}
 
 	public void RespawnPlayer() {
+		_uiManager.EnableLoadingScreen();
 		//GD.Print("respawn Req");
 		_saveLoader.Save();
 		_respawnRequest = true;
@@ -253,7 +258,7 @@ public partial class MainHandler : Node
 			Loading = true;
 		}
 		_currentLoadScenePath = "res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn";
-		GD.Print(area + " " + levelName);
+		// GD.Print(area + " " + levelName);
 
 		if(!_adjacentRequest) {
 			_currentArea = area;
@@ -267,8 +272,8 @@ public partial class MainHandler : Node
 		}
 
 		// PackedScene level = GD.Load<PackedScene>("res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn");
-		// ResourceLoader.LoadThreadedRequest(_currentLoadScenePath);
-		CallDeferred(MethodName._FinishLoadSceneRequest, (LoadResource<PackedScene>(_currentLoadScenePath)));
+		ResourceLoader.LoadThreadedRequest(_currentLoadScenePath);
+		//CallDeferred(MethodName._FinishLoadSceneRequest, (LoadResource<PackedScene>(_currentLoadScenePath)));
 		// _loadSpawnPosition = Vector2.Zero;
 	}
 
@@ -288,7 +293,7 @@ public partial class MainHandler : Node
 				foreach(Node n in _adjacentScenes) {
 					GD.Print(n == null ? "null" : ((SceneManager)n).SceneID);
 					if(n != _currentScene)
-						n.QueueFree();
+						n.CallDeferred(MethodName.QueueFree);
 				}
 			}
 

@@ -27,6 +27,9 @@ public partial class RestPoint : Interactable
 		GetNode<SaveLoader>("/root/SaveLoader").AddMapMarker(GetNode<MainHandler>("/root/MainHandler").GetMarkerID(this.Name));
     }
 
+	public override bool GetCondition(Player player) {
+		return !(GetNode<Player>("/root/Player").StateMachine.CurrentState is PlayerRestState);
+	}
 
 	// public void OnInteractHold(Player player) {}
 }

@@ -234,7 +234,7 @@ public partial class SaveLoader : Node
 		return _unlockedMapMarkers;
 	}
 	public void AddMapMarker(string marker) {
-		GD.Print(marker);
+		// GD.Print(marker);
 		foreach(string s in _unlockedMapMarkers) {
 			if(s.Equals(marker))
 				return;

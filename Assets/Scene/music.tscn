@@ -9,6 +9,7 @@ process_mode = 3
 stream = ExtResource("1_v2ah1")
 volume_db = -7.0
 autoplay = true
+parameters/looping = true
 
 [node name="rain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mq72d")
@@ -18,3 +19,4 @@ autoplay = true
 stream = ExtResource("3_0ic0p")
 volume_db = 2.0
 autoplay = true
+parameters/looping = true

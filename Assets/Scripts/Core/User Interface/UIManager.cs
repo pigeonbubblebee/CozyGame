@@ -16,6 +16,8 @@ public partial class UIManager : Node2D
 	
 	[Export] private NodePath _loadingScreenPath;
 	private Control _loadingScreen;
+	[Export] private NodePath _quickMapPath;
+	private QuickMapUI _quickMap;
 	
 	private IInputManager _inputManager;
 	
@@ -38,6 +40,7 @@ public partial class UIManager : Node2D
 		_loadingScreen = GetNode<Control>(_loadingScreenPath);
 		_dialogue = GetNode<Dialogue>(_dialoguePath);
 		_merchant = GetNode<MerchantUI>(_merchantPath);
+		_quickMap = GetNode<QuickMapUI>(_quickMapPath);
 		_loadingScreen.Visible = false;
 		_merchant.Visible = false;
 		
@@ -59,6 +62,11 @@ public partial class UIManager : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if(_inputManager.GetQuickMap() && !DialogueOpen && !InventoryOpen && !MerchantOpen) {
+			_quickMap.Visible = true;
+		} else {
+			_quickMap.Visible = false;
+		}
 		if(_CheckDesiredInventory()) {
 			if(!DialogueOpen && !MerchantOpen) {
 				_inventory.Visible = !_inventory.Visible;
@@ -115,6 +123,7 @@ public partial class UIManager : Node2D
 	}
 	
 	public void EnableLoadingScreen() {
+		GD.Print("loading screen");
 		_loadingScreen.Visible = true;
 	}
 	public void DisableLoadingScreen() {

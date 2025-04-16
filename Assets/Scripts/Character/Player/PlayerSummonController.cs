@@ -12,7 +12,7 @@ public partial class PlayerSummonController : Node
     }
 
     public void AddSummon(string summonID) {
-        PackedScene _summonScene = GD.Load<PackedScene>("res://Assets/Scene/Summons/" + summonID + ".tscn");
+        PackedScene _summonScene = ResourceLoader.Load<PackedScene>("res://Assets/Scene/Summons/" + summonID + ".tscn");
         Summon summon = (Summon)_summonScene.Instantiate();
 		summons.Add(summon);
         summon.Initialize(_player);

@@ -203,7 +203,7 @@ public partial class PlayerInventoryManager : Node
 	}
 
 	private Resource _LoadItemResource(string targetFile) {
-		return GD.Load<Resource>("res://Data/Items/"+targetFile+".tres");
+		return ResourceLoader.Load<Resource>("res://Data/Items/"+targetFile+".tres");
 		// foreach(string file_name in DirAccess.GetFilesAt("res://Data/Items/")) {
 		// 	GD.Print(file_name);
 		// 	string new_file_name = "";

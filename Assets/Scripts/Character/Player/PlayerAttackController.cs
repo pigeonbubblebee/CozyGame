@@ -282,6 +282,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			} else {
 				iFrame = true;
 			}
+		} else {
+			_slashHitSFX.Play();
+					_gameManager.FreezeFrame(_playerStats.SlashFreezeTime, _playerStats.SlashFreezeDelay);
+					_player.Camera.Shake(_player.DeflectController.Counter ? _playerStats.CounterShakeTime : _playerStats.SlashShakeTime, _player.DeflectController.Counter ?  _playerStats.CounterShakeMagnitude : _playerStats.SlashShakeMagnitude);
 		}
 		
 		if(!iFrame) {

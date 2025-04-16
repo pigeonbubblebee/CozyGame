@@ -416,14 +416,15 @@ offset_bottom = 40.0
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="map/Panel/Legend"]
 layout_mode = 0
-offset_left = 998.0
+offset_left = 806.0
 offset_top = 693.0
-offset_right = 1238.0
+offset_right = 1142.0
 offset_bottom = 709.0
 scale = Vector2(2, 2)
 theme_override_colors/default_color = Color(0.796078, 0.701961, 0.415686, 1)
 theme_override_fonts/normal_font = ExtResource("5_lw1ii")
-text = "Click on a Rest Point to fast travel."
+bbcode_enabled = true
+text = "[right]Click on a Mystic Tree to fast travel."
 
 [node name="RespawnPoint" type="TextureRect" parent="map/Panel/Legend"]
 layout_mode = 0

@@ -41,4 +41,5 @@ public interface IInputManager
 
 	public abstract bool GetMenuLeftActuation();
 	public abstract bool GetMenuRightActuation();
+	public abstract bool GetQuickMap();
 }

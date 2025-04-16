@@ -719,9 +719,7 @@ offset_bottom = -304.0
 material = SubResource("ShaderMaterial_u2csa")
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_cx26y")
-animation = &"slash2_1"
-frame = 8
-frame_progress = 0.944817
+animation = &"slash2_2"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_3alm1")

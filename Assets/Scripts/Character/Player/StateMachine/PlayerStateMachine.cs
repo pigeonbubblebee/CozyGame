@@ -38,6 +38,8 @@ public partial class PlayerStateMachine : StateMachine
 	public PlayerStaggerState StaggerState { get; private set; }
 	[Export] private NodePath _playerGrabStatePath;
 	public PlayerGrabState GrabState { get; private set; }
+	[Export] private NodePath _playerRestStatePath;
+	public PlayerRestState RestState { get; private set; }
 	
 	public void Initialize(Player player) {
 		Player = player;
@@ -77,6 +79,8 @@ public partial class PlayerStateMachine : StateMachine
 		StaggerState.Initialize(this);
 		GrabState = GetNode<PlayerGrabState>(_playerGrabStatePath);
 		GrabState.Initialize(this);
+		RestState = GetNode<PlayerRestState>(_playerRestStatePath);
+		RestState.Initialize(this);
 
 		EnterDefaultState();
 	}

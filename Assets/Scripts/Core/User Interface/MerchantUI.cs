@@ -25,6 +25,9 @@ public partial class MerchantUI : Control
 	private RichTextLabel _tooltipText;
 	[Export] private NodePath _tooltipTextPath;
 
+	private RichTextLabel _moneyLabel;
+	[Export] private NodePath _moneyLabelPath;
+
 	private MerchantInventory _currentMerchant;
 	private Player _player;
 	private SaveLoader _saveLoader;
@@ -39,6 +42,8 @@ public partial class MerchantUI : Control
 		_ItemDisplayName = GetNode<RichTextLabel>(_ItemDisplayNamePath);
 		_ItemDisplayDescription = GetNode<RichTextLabel>(_ItemDisplayDescriptionPath);
 		_ItemDisplayImage = GetNode<TextureRect>(_ItemDisplayImagePath);
+
+		_moneyLabel = GetNode<RichTextLabel>(_moneyLabelPath);
 
 		_ItemDisplayDescription.MetaHoverStarted += _showTooltip;
 		_ItemDisplayDescription.MetaHoverEnded += _hideToolTip;
@@ -125,6 +130,7 @@ public partial class MerchantUI : Control
 				LoadMerchant(_currentMerchant);
 			}
 		}
+		_moneyLabel.Text = _player.InventoryManager.GetItemCount("acorn").ToString();
 	}
 
 	private void _showTooltip(Variant meta) {

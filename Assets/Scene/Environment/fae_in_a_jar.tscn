@@ -339,6 +339,7 @@ script = ExtResource("2_whf5w")
 _healthSystemPath = NodePath("HealthSystem")
 _spritePath = NodePath("AnimatedSprite2D")
 _playerDetectPath = NodePath("Area2D")
+_hitboxPath = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 21)

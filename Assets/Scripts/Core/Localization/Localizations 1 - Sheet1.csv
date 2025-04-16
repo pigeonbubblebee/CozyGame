@@ -43,7 +43,7 @@ item_type_equippable,Woodland Spirit
 item_type_achohol,Achohol
 
 tooltip_strength,Your raw physicality. STRENGTH adds a damage bonus to your attacks.
-tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through CASTs. Overloading MYSTIC will hurt.
+tooltip_mystic,Accumulate MYSTIC by parrying"," and release it through CASTs.
 tooltip_health,HEALTH keeps you alive. Can be gained by using a REGROWTH.
 tooltip_regrowth,Borrowed power from your cat friend. Use a REGROWTH to regain HEALTH.
 tooltip_dexterity,Pure agility of your muscles. DEXTERITY makes you attack faster.
@@ -89,13 +89,13 @@ dialogue_slash_instruction,Attacking - \nTap LMB or P to attack. Attacking can b
 dialogue_cat_block_tutorial_1,YIKES! Those are the guys that took over after you died. They took my friend and stuffed him up one of their outposts.
 dialogue_cat_block_tutorial_2,Goblins are ferocious. Blindly attacking may not be enough to take them down.
 dialogue_block_instruction,Blocking - \nTap RMB or O before an attack lands to block it.
-dialogue_composure_instruction,Composure - \nBlocking RIGHT BEFORE an attack lands deals composure damage. When the composure meter is full"," you can instantly execute an enemy.
+dialogue_composure_instruction,Composure - \nBlocking RIGHT BEFORE an attack lands deals composure damage. When the composure meter (the orange bar) is full"," you can instantly execute an enemy.
 dialogue_cat_heal_tutorial_1,What a rough battle. Let me take a look at your wounds.
 dialogue_internal_health_instruction,Internal Health - \nBlocking early"," denoted by orange sparks"," deals internal damage to you. Internal damage is healed over time and by executing.
 dialogue_cat_heal_tutorial_2,Looks like you might need some healing. I can lend my power to you.
-dialogue_heal_instruction,Regrowths - \nHold E to regenerate health.
+dialogue_heal_instruction,Regrowths - \nHold E to regenerate health. The big red block on the side denotes how many heals you have left.
 dialogue_cat_cast_tutorial,That's a giant horde... Fortunately"," the magical energy your sword holds can deal with it.
-dialogue_mystic_instruction,Mystic - \nBlocking attacks generates mystic. When your mystic bar is full"," you'll take damage over time.
+dialogue_mystic_instruction,Mystic - \nBlocking attacks generates mystic energy"," denoted by the green bar in your HUD.
 dialogue_cast_instruction,Casting - \nTap R to release your mystic and fire a piercing bolt in front of you.
 dialogue_cat_pretutboss_1,We're getting pretty close to exiting the forest. I heard there's an outpost up ahead.
 dialogue_cat_pretutboss_2,I really hope we can find my friend in there...
@@ -104,7 +104,7 @@ dialogue_cat_charm_tutorial_2,If you give them to me"," I'll help you channel th
 dialogue_charm_instruction,Woodland Spirits - \nTap B to open your inventory. Select a spirit and press F to equip and unequip it. Each spirit grants you a powerful bonus.
 dialogue_cat_map_tutorial_1,Mystic trees also allow you to travel instantaneously between them.
 dialogue_inventory_instruction,Inventory - \nTap B to open your inventory to view your current items. Use Z and X to switch to different parts of the inventory.
-dialogue_map_instruction,Teleporting - \nIn the map screen of the inventory"," click on a rest point marker to instantly travel to it.
+dialogue_map_instruction,Teleporting - \nUse TAB to quickly open the map without going into the inventory. In the map screen"," click on a mystic tree marker to instantly travel to it.
 
 dialogue_blinny_1,New friends for Blinny?
 dialogue_blinny_2,Blinny would love to show friends his things.

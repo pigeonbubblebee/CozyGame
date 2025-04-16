@@ -590,3 +590,4 @@ C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\ExportDeb
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\ExportDebug\osx-x64\Cozy Game.pdb
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\ExportDebug\osx-x64\Cozy Game.genruntimeconfig.cache
 C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\obj\ExportDebug\osx-x64\ref\Cozy Game.dll
+C:\Users\trex0\OneDrive\Documents\GitHub\CozyGame\.godot\mono\temp\bin\ExportDebug\osx-x64\Newtonsoft.Json.dll

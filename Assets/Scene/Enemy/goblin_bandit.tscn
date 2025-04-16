@@ -25,7 +25,7 @@ position = Vector2(0, 8)
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = ExtResource("2_dqyxp")
-animation = &"stagger"
+animation = &"slash"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_ima5s")
@@ -53,9 +53,9 @@ SlashRange = 180.0
 SlashCooldown = 1.0
 LungeSpeed = 2800.0
 LungeRange = 230.0
-StopLungeFrame = 6
-OnFrame = 5
-OffFrame = 7
+StopLungeFrame = 5
+OnFrame = 4
+OffFrame = 5
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 _slashSFXPath = NodePath("SlashSFX")

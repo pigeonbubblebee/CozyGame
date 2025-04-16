@@ -11,11 +11,19 @@ public partial class TrappedCollectible : Area2D, IHittable
 
 	[Export] private NodePath _playerDetectPath;
 	private Area2D _playerDetect;
+	[Export] private NodePath _hitboxPath;
+	private CollisionShape2D _hitbox;
+
 
 	public override void _Ready() {
 		_healthSystem = GetNode<HealthSystem>(_healthSystemPath);
 		_healthSystem.DeathEvent += OnDeath;
 		_healthSystem.ResetHealth();
+
+		_hitbox = GetNode<CollisionShape2D>(_hitboxPath);
+
+		this.Monitorable = true;
+		this.Monitoring = true;
 
 		_sprite = GetNode<AnimatedSprite2D>(_spritePath);
 		_sprite.Play("sad");
@@ -37,6 +45,7 @@ public partial class TrappedCollectible : Area2D, IHittable
 
 	public virtual void OnDeath() {
 		_sprite.Play("free");
+		_hitbox.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		_sprite.AnimationFinished += 
 			delegate { 
 				GetNode<SaveLoader>("/root/SaveLoader").SaveFae();

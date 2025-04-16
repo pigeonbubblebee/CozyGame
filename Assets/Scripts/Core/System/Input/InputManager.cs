@@ -40,6 +40,8 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private bool _deflectActuation;
 	private bool _deflectReleaseActuation;
 
+	private bool _quickMap;
+
 	// Vars for control bind names on input maps
 	private readonly string MOVE_LEFT = "move_left";
 	private readonly string MOVE_RIGHT = "move_right";
@@ -55,6 +57,7 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	private readonly string HEAL = "heal";
 	private readonly string SHOOT = "shoot";
 	private readonly string DEFLECT = "deflect";
+	private readonly string QUICK_MAP = "quick_map";
 
 	private MainHandler _mainHandler;	
 	private UIManager _uiManager;
@@ -129,6 +132,8 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 		_deflecting = Input.IsActionPressed(DEFLECT);
 		_deflectActuation = Input.IsActionJustPressed(DEFLECT);
 		_deflectReleaseActuation = Input.IsActionJustReleased(DEFLECT);
+
+		_quickMap = Input.IsActionPressed(QUICK_MAP);
 	}
 
 	public Vector2 GetMovementDirection() {
@@ -219,5 +224,9 @@ public partial class InputManager : Node, IInputManager // Pretty poorly written
 	}
 	public bool GetMenuRightActuation() {
 		return _menuRightActuation;
+	}
+
+	public bool GetQuickMap() {
+		return _quickMap;
 	}
 }

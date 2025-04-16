@@ -49,7 +49,7 @@ public partial class PlayerSpellController : Node2D
 		_inputManager = GetNode<IInputManager>("/root/InputManager");
 		
 		ObjectPool = GetNode<Node>(_objectPoolPath);
-		_bulletScene = GD.Load<PackedScene>(BULLET_PATH);
+		_bulletScene = ResourceLoader.Load<PackedScene>(BULLET_PATH);
 		
 		_shootBuffer = GetNode<Timer>(_shootBufferPath);
 		_shootBuffer.WaitTime = _playerStats.ShootBuffer;

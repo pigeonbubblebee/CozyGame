@@ -42,7 +42,7 @@ public partial class PlayerCurseController : Node
 			if(_damageTickCounter >= 0) {
 				_damageTickCounter -= delta;
 			} else {
-				_player.TakeCurseDamage(_curseDamage, _curseDamage);
+				// _player.TakeCurseDamage(_curseDamage, _curseDamage);
 				_damageTickCounter = _damageTickTime;
 			}
 		} else {
