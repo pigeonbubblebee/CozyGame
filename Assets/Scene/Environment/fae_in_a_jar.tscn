@@ -355,8 +355,6 @@ CurrentHealthPoints = 3
 position = Vector2(0, 18)
 sprite_frames = SubResource("SpriteFrames_fnm5a")
 animation = &"free"
-frame = 10
-frame_progress = 0.916334
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(58, -6)

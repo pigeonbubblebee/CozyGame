@@ -86,7 +86,6 @@ tile_map_data = PackedByteArray("AAAEABkAAAAAAAEAAAAEABoAAAAAAAEAAAAEABsAAAAAAAE
 position = Vector2(1240, 3288)
 
 [node name="HiddenArea" parent="." instance=ExtResource("3_0u836")]
-visible = false
 position = Vector2(-640, 2688)
 
 [node name="SecretWall" parent="HiddenArea" index="0"]

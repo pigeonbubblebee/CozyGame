@@ -46,7 +46,7 @@ public partial class TrappedCollectible : Area2D, IHittable
 	public virtual void OnDeath() {
 		_sprite.Play("free");
 		_hitbox.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-		_sprite.AnimationFinished += 
+		GetTree().CreateTimer(1.91666667f).Timeout += 
 			delegate { 
 				GetNode<SaveLoader>("/root/SaveLoader").SaveFae();
 				QueueFree(); 

@@ -56,10 +56,13 @@ public partial class MerchantUI : Control
 		_tooltipText = GetNode<RichTextLabel>(_tooltipTextPath);
 
 		_tooltip.Visible = false;
+
+		_currentSelectedIndex = -1;
 	}
 
 	public void LoadMerchant(MerchantInventory merchant) {
 		_currentMerchant = merchant;
+		_currentSelectedIndex = -1;
 
 		foreach(Node n in _gridContainer.GetChildren()) {
 			n.QueueFree();
@@ -116,7 +119,7 @@ public partial class MerchantUI : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(_inputManager.GetInteractActuation() && Visible) {
+		if(_inputManager.GetInteractActuation() && Visible && _currentSelectedIndex != -1) {
 			if(_player.InventoryManager.GetItemCount("acorn") >= _currentMerchant.Price[_currentSelectedIndex]) {
 				// update stock in save loader
 				_player.InventoryManager.AddItemToInventory(_currentSelectedItem);
@@ -127,6 +130,7 @@ public partial class MerchantUI : Control
 				_ItemDisplayName.Visible = false;
 				_ItemDisplayDescription.Visible = false;
 				_ItemDisplayImage.Visible = false;
+				_currentSelectedIndex = -1;
 				LoadMerchant(_currentMerchant);
 			}
 		}
