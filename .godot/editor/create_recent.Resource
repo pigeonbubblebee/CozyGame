@@ -1,6 +1,7 @@
+Item
+Resource
 DialogueData
 Equippable
-Item
 MerchantInventory
 MerchantDialogueData
 PowerSpirit

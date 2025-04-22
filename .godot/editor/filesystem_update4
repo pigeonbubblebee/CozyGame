@@ -167,3 +167,12 @@ res://Assets/Scene/Enemy/goblin_bandit.tscn
 res://Assets/Scene/bullet.tscn
 res://Assets/Scene/thumbnail.tscn
 res://Assets/Scripts/Core/User Interface/QuickMapUI.cs
+res://Assets/Scene/Environment/pickup.tscn
+res://Data/Items/heavy_sword.tres
+res://Data/Items/sword.tres
+res://Assets/Scene/Levels/Fort/f1.tscn
+res://Assets/Scene/Levels/Fort/fworkshop.tscn
+res://Assets/Scene/Enemy/goblin_soldier.tscn
+res://Data/player_stats.tres
+res://Data/Enemy/goblin_hatchet.tres
+res://Data/Items/sellable_1.tres

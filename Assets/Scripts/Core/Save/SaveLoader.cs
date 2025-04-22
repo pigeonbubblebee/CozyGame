@@ -34,9 +34,12 @@ public partial class SaveLoader : Node
 	public override void _Notification(int notification) { // Handles Quit Requests to AutoSave before quitting
 
 		if(notification == NotificationWMCloseRequest) {
-			Save();
-
-			GetTree().Quit();
+			try {
+				Save();
+				GetTree().Quit();
+			} catch {
+				GetTree().Quit();
+			}
 		}
 	}
 

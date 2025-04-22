@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://exvde1a7vvpb"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_rn88f"]
+[ext_resource type="Texture2D" uid="uid://db0cdm6v8we5p" path="res://Assets/Art/Item/sellable_1.png" id="1_t576v"]
+
+[resource]
+script = ExtResource("1_rn88f")
+ID = "sellable_1"
+Description = "description_sellable_1"
+ItemTier = 0.0
+SortingID = 97
+Image = ExtResource("1_t576v")
+Type = 3
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = true

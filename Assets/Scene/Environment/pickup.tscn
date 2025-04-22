@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds1gmhr7rsu74"]
+[gd_scene load_steps=10 format=3 uid="uid://ds1gmhr7rsu74"]
 
 [ext_resource type="Shader" path="res://Shader/outline.gdshader" id="1_s0axn"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="2_nv633"]
 [ext_resource type="Resource" uid="uid://c3aurfbcy14u4" path="res://Data/Items/Charms/power_spirit.tres" id="3_b12mf"]
 [ext_resource type="Texture2D" uid="uid://dj85431dova0j" path="res://Assets/Art/Item/merith.png" id="4_vrbok"]
 [ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="5_u03ed"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="6_vm4pt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yf23q"]
 shader = ExtResource("1_s0axn")
@@ -23,10 +24,10 @@ radius = 64.0
 
 [node name="pickup" type="Area2D"]
 material = SubResource("ShaderMaterial_yf23q")
-position = Vector2(-5048, 3976)
 scale = Vector2(4, 4)
 script = ExtResource("2_nv633")
 _itemResource = ExtResource("3_b12mf")
+_itemIconPath = NodePath("Sprite2D")
 _outlinedSpritePath = NodePath("Sprite2D")
 _interactPromptPath = NodePath("InteractPrompt")
 
@@ -41,3 +42,8 @@ shape = SubResource("CircleShape2D_l0teh")
 position = Vector2(0, -48)
 scale = Vector2(0.5, 0.5)
 PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.5
+texture = ExtResource("6_vm4pt")

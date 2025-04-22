@@ -149,7 +149,6 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		// GD.Print("Slashing !");
 		_invincibleHittables.Clear();
 		foreach(Area2D hit in _deathblowCheckArea.GetOverlappingAreas()) {
-			GD.Print(hit.Name);
 			if(hit is EnemyHitbox) {
 			// GD.Print(((Enemy) hit).Staggered);
 				if(((EnemyHitbox) hit).EnemyAIParent.Staggered) {
@@ -175,7 +174,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			_EnableAttackCollision();
 		}
 
-		GD.Print(CalculateAS());
+		// GD.Print(CalculateAS());
 		GetTree().CreateTimer(CanDeathBlow ? 1f : CalculateAS()).Timeout += _FinishSlash;
 		// await ToSignal(GetTree().CreateTimer(SlashTime), SceneTreeTimer.SignalName.Timeout);
 	}

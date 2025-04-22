@@ -21,7 +21,7 @@ public partial class PlayerAttackState : PlayerState
 	}
 	
 	public override void PlayStateAnimation() {
-		GD.Print("Animation Play!");
+		// GD.Print("Animation Play!");
 		if(AttackController.DesiredDown) {
 			AnimationController.PlayAnimation(AnimationController.SlashDownAnimationClip, AttackController.CalculateAS());
 			return;
@@ -31,7 +31,7 @@ public partial class PlayerAttackState : PlayerState
 			return;
 		}
 		
-		GD.Print(AttackController.CurrentSlashComboAttack);
+		// GD.Print(AttackController.CurrentSlashComboAttack);
 		
 		// AnimationController.PlayAnimation(DeflectController.Counter ? AnimationController.CounterAnimationClip : AnimationController.SlashAnimationClip, Stats.SlashTime);
 		// TODO: Start Idle Animation

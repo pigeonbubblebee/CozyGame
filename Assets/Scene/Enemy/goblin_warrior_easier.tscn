@@ -679,7 +679,7 @@ position = Vector2(64, 0)
 position = Vector2(64, 0)
 
 [node name="AggroCheckForward" parent="ChaserEnemy/AggroChecks" index="0"]
-position = Vector2(-200, 0)
+position = Vector2(-256, 0)
 
 [node name="AggroCheckUp" parent="ChaserEnemy/AggroChecks" index="1"]
 target_position = Vector2(1360, -104)
@@ -719,7 +719,7 @@ offset_bottom = -304.0
 material = SubResource("ShaderMaterial_u2csa")
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_cx26y")
-animation = &"slash2_2"
+animation = &"cleave_countered"
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_3alm1")

@@ -76,5 +76,5 @@ DeflectShakeMagnitude = 1700.0
 MaxCurse = 100
 CurseBuildRate = 10
 CurseUsePerSpell = 30
-CanCounterCleave = true
+CanCounterCleave = false
 EquipSlots = 2

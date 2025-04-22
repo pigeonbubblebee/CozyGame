@@ -20,7 +20,8 @@ public partial class Item : Resource, IComparable<Item> {
 		} else if(other.ItemTier > ItemTier) {
 			return 1;
 		} else {
-			return -SortingID.CompareTo(other.SortingID);
+			int sortingIDCompare = other.SortingID.CompareTo(SortingID);
+			return sortingIDCompare != 0 ? sortingIDCompare : -Description.CompareTo(other.Description);
 		}
 	}
 

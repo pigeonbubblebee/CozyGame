@@ -106,7 +106,6 @@ public partial class SceneManager : Node2D
 
 		for(int i = 0; i < res.Length; i++) {
 			res[i] = !(_breakables[i] is null);
-			// GD.Print(res[i]);
 		}
 
 		return res;
@@ -132,6 +131,8 @@ public partial class SceneManager : Node2D
 		int i = 0;
 		foreach(Node2D x in _breakables) {
 			if(!IsInstanceValid(x)) {
+				if(x != null)
+					GD.Print(i);
 				_breakables[i] = null;
 			}
 			i++;

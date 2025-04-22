@@ -177,9 +177,9 @@ public partial class Player : CharacterBody2D
     {
 		UpdateBuffs();
 
-		// if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
-		// 	this.GlobalPosition = GetGlobalMousePosition();
-		// }
+		if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
+			this.GlobalPosition = GetGlobalMousePosition();
+		}
 		if(Input.IsActionPressed("debug")) {
 			InventoryManager.AddItemToInventory("acorn");
 		}

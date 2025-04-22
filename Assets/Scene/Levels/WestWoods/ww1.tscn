@@ -628,3 +628,5 @@ scale = Vector2(4, 4)
 color = Color(0.865236, 0.817809, 0.482201, 1)
 energy = 0.5
 texture = ExtResource("22_l3kbt")
+
+[editable path="HiddenArea"]

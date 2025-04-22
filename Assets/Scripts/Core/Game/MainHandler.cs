@@ -138,6 +138,8 @@ public partial class MainHandler : Node
 			_player.PlayerHealth.Invincible = false;
 			_player.Respawn();
 
+			
+
 			GetTree().CreateTimer(0.5f).Timeout += _DisableLoadingScreen;
 
 			_chunkRequest = false;
@@ -153,6 +155,7 @@ public partial class MainHandler : Node
 
 			_player.Respawn();
 			_currentScene = newScene;
+			_saveLoader.HandleNewRoomData(GetCurrentScene());
 			
 			if(_respawnRequest)
 				_player.GlobalPosition = _currentScene.GetSpawnPoint(_loadSpawnPosition);
@@ -267,10 +270,6 @@ public partial class MainHandler : Node
 
 		_uiManager.ResetUI();
 
-		if(_currentScene != null) {
-			_saveLoader.HandleNewRoomData(GetCurrentScene());
-		}
-
 		// PackedScene level = GD.Load<PackedScene>("res://Assets/Scene/Levels/" + area + "/" + levelName + ".tscn");
 		ResourceLoader.LoadThreadedRequest(_currentLoadScenePath);
 		//CallDeferred(MethodName._FinishLoadSceneRequest, (LoadResource<PackedScene>(_currentLoadScenePath)));
@@ -349,6 +348,7 @@ public partial class MainHandler : Node
 		GD.Print("attempting load");
 		if(levelName.Equals(_currentLevel))
 			return;
+		_saveLoader.HandleNewRoomData(GetCurrentScene());
 
 		_adjSceneNum = 0;
 
@@ -362,6 +362,7 @@ public partial class MainHandler : Node
 					_currentScene = s;
 					_currentArea = area;
 					_currentLevel = levelName;
+					_saveLoader.HandleNewRoomData(GetCurrentScene());
 					_LoadAdjScenes();
 					return;
 				}

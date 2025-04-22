@@ -116,7 +116,7 @@ public partial class PlayerDeflectController : Node
 			_deflectSFX.Play();
 			_emitDeflectParticle();
 			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
-			_gameManager.FreezeFrame(0.02f, 0.1f);
+			_gameManager.FreezeFrame(0.1f, 0.1f);
 			
 			BlockEvent?.Invoke(true, data.PostureDamage, e);
 			e.TakePostureDamage(data.DeflectPostureDamage);

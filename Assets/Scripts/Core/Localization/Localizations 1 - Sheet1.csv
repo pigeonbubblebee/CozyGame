@@ -6,6 +6,9 @@ goblin_boss_1,General Borbsnop - Goblin Elite
 
 sword,Arboreal Edge
 description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a CAST"," or a magical slash.
+heavy_sword,Heavy Arboreal Edge
+description_heavy_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a CAST"," or a magical slash. \n\nReinforced with superdense copper.
+
 acorn,Acorns
 description_acorn,A small bunch of acorns. The main currency used in the forest.
 forest_essence,Forest Essence
@@ -27,6 +30,7 @@ attribute_damage,Damage
 attribute_attack_speed,Attack Speed
 attribute_spell_damage,Cast Damage
 attribute_pdamage,Composure Damage
+attribute_daze_buildup,Daze Buildup
 attribute_spell_pdamage,Cast Composure Damage
 attribute_strength_gain,Strength Gain
 attribute_dexterity_gain,Dexterity Gain

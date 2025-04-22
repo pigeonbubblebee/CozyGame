@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bh4ehgkdgkpwv"]
+
+[ext_resource type="Texture2D" uid="uid://bebwojfja707f" path="res://Assets/Art/Item/sword_heavy.png" id="1_1564t"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="2_fj6cx"]
+
+[resource]
+script = ExtResource("2_fj6cx")
+ID = "heavy_sword"
+Description = "description_heavy_sword"
+ItemTier = 0.0
+SortingID = 99
+Image = ExtResource("1_1564t")
+Type = 3
+_attributeNames = PackedStringArray("damage", "attack_speed", "spell_damage", "daze_buildup")
+_attributeValues = PackedStringArray("23 + 1.5 x STRENGTH", "1.75 + 0.065 x DEXTERITY", "100 + 5 x FOCUS", "4 + STRENGTH")
+Stackable = false
