@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyAttackData" load_steps=2 format=3 uid="uid://cplnesjvh74ff"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="1_gmq4x"]
+
+[resource]
+script = ExtResource("1_gmq4x")
+Damage = 10
+InternalDamage = 0
+PostureDamage = 0
+DeflectPostureDamage = 0
+Unstoppable = true
+Type = 2
+DeflectKnockbackMultiplier = 0.0

@@ -30,6 +30,8 @@ public partial class MainHandler : Node
 	private Vector2 _chunkPosition;
 	private bool _chunkRequest = false;
 	private bool _adjacentRequest = false;
+
+	public event Action<string> BackgroundChangeEvent;
 	
 	public bool Loading { get; private set; }
 
@@ -348,6 +350,8 @@ public partial class MainHandler : Node
 		GD.Print("attempting load");
 		if(levelName.Equals(_currentLevel))
 			return;
+		if(!area.Equals(_currentArea))
+			BackgroundChangeEvent?.Invoke(area);
 		_saveLoader.HandleNewRoomData(GetCurrentScene());
 
 		_adjSceneNum = 0;

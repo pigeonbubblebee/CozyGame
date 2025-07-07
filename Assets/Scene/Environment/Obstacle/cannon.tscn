@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cyh5eomsd4eor"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/Obstacle/Cannon.cs" id="1_8ffp2"]
+[ext_resource type="Texture2D" uid="uid://cofxj732li1dy" path="res://Assets/Art/Environment/Obstacle/cannon.png" id="1_r0nth"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Enemy/Attacks/EnemyAttackData.cs" id="2_a80u6"]
+
+[sub_resource type="Resource" id="Resource_vng2n"]
+script = ExtResource("2_a80u6")
+Damage = 8
+InternalDamage = 4
+PostureDamage = 34
+DeflectPostureDamage = 100
+Unstoppable = true
+Type = 3
+DeflectKnockbackMultiplier = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1xj6"]
+atlas = ExtResource("1_r0nth")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe73m"]
+atlas = ExtResource("1_r0nth")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_646n4"]
+atlas = ExtResource("1_r0nth")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th4qv"]
+atlas = ExtResource("1_r0nth")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqw0h"]
+atlas = ExtResource("1_r0nth")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxv1v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1xj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe73m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_646n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th4qv")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqw0h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_8ffp2")
+_sceneName = "Cannonball"
+_targetPostionPath = NodePath("Direction")
+_attackData = SubResource("Resource_vng2n")
+_objectPoolPath = NodePath("Pool")
+_shotIntervalTime = 1.5
+_spritePath = NodePath("Cannon")
+
+[node name="Cannon" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_fxv1v")
+animation = &"fire"
+frame = 3
+frame_progress = 1.0
+
+[node name="Direction" type="Node2D" parent="."]
+position = Vector2(496, 0)
+
+[node name="Pool" type="Node" parent="."]

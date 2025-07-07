@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://blrrl47iqciv4"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Combat/Bullet/Bullet.cs" id="1_muvub"]
+[ext_resource type="Texture2D" uid="uid://wd5uor0qojud" path="res://Assets/Art/Environment/Obstacle/cannonball.png" id="2_44qwr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ux74e"]
+radius = 64.0
+
+[node name="Cannonball" type="Area2D"]
+script = ExtResource("1_muvub")
+Lifetime = 3.0
+Speed = 1000.0
+SpritePath = NodePath("Sprite2D")
+LifetimePath = NodePath("Lifetime")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_44qwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ux74e")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true

@@ -19,13 +19,16 @@ public partial class TransitionTriggerArea : Area2D
 	}
 
 	public void TransitionScene(Node2D hit) {
-		if(hit is Player) {
-			
+
+		if (hit is Player)
+		{
+
 
 			// GetNode<MainHandler>("/root/MainHandler").LoadLevelChunk(Area, Level, ChunkPos);
-			//GD.Print("transing scene");
+
 			//GD.Print(Direction.X + " " + hit.GlobalPosition.X + " " + GlobalPosition.X);
-			if((Direction.X > 0 && hit.GlobalPosition.X < this.GlobalPosition.X) || (Direction.X < 0 && hit.GlobalPosition.X > this.GlobalPosition.X)) {
+			if ((Direction.X > 0 && hit.GlobalPosition.X < this.GlobalPosition.X) || (Direction.X < 0 && hit.GlobalPosition.X > this.GlobalPosition.X))
+			{
 				//GD.Print("load");
 				GetNode<SaveLoader>("/root/SaveLoader").Save();
 				GetNode<MainHandler>("/root/MainHandler").LoadLevelChunk(Area, Level);
@@ -33,7 +36,7 @@ public partial class TransitionTriggerArea : Area2D
 			// else if((Direction.X > 1 && hit.GlobalPosition.X > this.Position.X) || (Direction.X < 1 && hit.GlobalPosition.X < this.Position.X)) {
 			// 	GetNode<MainHandler>("/root/MainHandler").QueueFreePrevScene();
 			// }
-			
+
 			// GetNode<MainHandler>("/root/MainHandler").LoadLevel(Area, Level, SpawnArea);
 
 			// GetNode<MainHandler>("/root/MainHandler").LoadLevelChunk(Area, Level);

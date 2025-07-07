@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1m6uuvysduqf"]
+[gd_scene load_steps=10 format=3 uid="uid://c1m6uuvysduqf"]
 
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/BackgroundManager.cs" id="1_6cg4b"]
 [ext_resource type="Texture2D" uid="uid://bsst4jdtiynq1" path="res://Assets/Art/Background/parallax1.png" id="1_a5gt4"]
 [ext_resource type="Texture2D" uid="uid://d03ridhuig42t" path="res://Assets/Art/Background/parallaxsky.png" id="2_r4f6w"]
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="3_x8qd2"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="4_jpxvx"]
 [ext_resource type="Texture2D" uid="uid://dkmgr7iitsh3a" path="res://Assets/Art/Environment/pointLight.png" id="5_vmdf5"]
 [ext_resource type="Shader" path="res://Shader/blur.gdshader" id="6_xf2wd"]
+[ext_resource type="Texture2D" uid="uid://hxpjyy2oeqi3" path="res://Assets/Art/Background/Fort/fortBackground.png" id="7_gi7t1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yq405"]
 shader = ExtResource("6_xf2wd")
@@ -16,175 +18,8 @@ shader_parameter/animate = false
 [node name="Background" type="Node2D"]
 position = Vector2(38416, -2000)
 scale = Vector2(2, 2)
-
-[node name="Parallax2D" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.75, 0.75)
-scroll_offset = Vector2(-784, 296)
-
-[node name="Parallax1" type="Sprite2D" parent="Parallax2D"]
-visible = false
-z_index = -4
-position = Vector2(0, 840)
-scale = Vector2(4, 4)
-texture = ExtResource("1_a5gt4")
-
-[node name="Parallax3" type="Sprite2D" parent="Parallax2D"]
-visible = false
-z_index = -4
-position = Vector2(9600, 1800)
-scale = Vector2(4, 4)
-texture = ExtResource("1_a5gt4")
-
-[node name="Parallax2" type="Sprite2D" parent="Parallax2D"]
-visible = false
-z_index = -4
-position = Vector2(-9600, 840)
-scale = Vector2(4, 4)
-texture = ExtResource("1_a5gt4")
-
-[node name="Sky" type="Parallax2D" parent="."]
-modulate = Color(0.427627, 0.490895, 0.427782, 1)
-z_index = -10
-scroll_offset = Vector2(-488, 1408)
-
-[node name="Parallaxsky" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(0, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky2" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(0, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky3" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(6400, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky4" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(6400, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky5" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-13984, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky6" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-13984, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky7" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-7583.99, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky8" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-7583.99, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky9" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-26580, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky10" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-26580, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky11" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-20180, -1128)
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Parallaxsky12" type="Sprite2D" parent="Sky"]
-z_index = -10
-position = Vector2(-20180, 2400)
-rotation = 3.14159
-scale = Vector2(4, 4)
-texture = ExtResource("2_r4f6w")
-
-[node name="Hills" type="Parallax2D" parent="."]
-modulate = Color(0.394461, 0.45512, 0.394636, 1)
-z_index = -10
-scale = Vector2(-1, 1)
-scroll_scale = Vector2(0.65, 0.65)
-scroll_offset = Vector2(-504, 2548)
-
-[node name="Parallaxhills" type="Sprite2D" parent="Hills"]
-z_index = -8
-position = Vector2(0, -372)
-scale = Vector2(4, 4)
-texture = ExtResource("3_x8qd2")
-
-[node name="Parallaxhills2" type="Sprite2D" parent="Hills"]
-z_index = -8
-position = Vector2(9600, -372)
-scale = Vector2(4, 4)
-texture = ExtResource("3_x8qd2")
-
-[node name="Parallaxhills4" type="Sprite2D" parent="Hills"]
-z_index = -8
-position = Vector2(19200, -372)
-scale = Vector2(4, 4)
-texture = ExtResource("3_x8qd2")
-
-[node name="Parallaxhills3" type="Sprite2D" parent="Hills"]
-z_index = -8
-position = Vector2(-9600, -372)
-scale = Vector2(4, 4)
-texture = ExtResource("3_x8qd2")
-
-[node name="Hills2" type="Parallax2D" parent="."]
-modulate = Color(0.606105, 0.391715, 0.716438, 1)
-z_index = -10
-scroll_scale = Vector2(0.75, 0.75)
-scroll_offset = Vector2(-5864, 2864)
-
-[node name="Parallaxhills" type="Sprite2D" parent="Hills2"]
-z_index = -6
-position = Vector2(0, -64)
-scale = Vector2(4, 4)
-texture = ExtResource("4_jpxvx")
-
-[node name="Parallaxhills2" type="Sprite2D" parent="Hills2"]
-z_index = -6
-position = Vector2(9600, -64)
-scale = Vector2(4, 4)
-texture = ExtResource("4_jpxvx")
-
-[node name="Parallaxhills3" type="Sprite2D" parent="Hills2"]
-z_index = -6
-position = Vector2(-9600, -64)
-scale = Vector2(4, 4)
-texture = ExtResource("4_jpxvx")
-
-[node name="Parallaxhills4" type="Sprite2D" parent="Hills2"]
-z_index = -6
-position = Vector2(-19200, -64)
-scale = Vector2(4, 4)
-texture = ExtResource("4_jpxvx")
+script = ExtResource("1_6cg4b")
+bgPaths = Array[NodePath]([NodePath("WestWoods"), NodePath("Fort")])
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.546505, 0.668932, 0.641323, 1)
@@ -213,3 +48,213 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="WestWoods" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="WestWoods"]
+scroll_scale = Vector2(0.75, 0.75)
+scroll_offset = Vector2(-784, 296)
+
+[node name="Parallax1" type="Sprite2D" parent="WestWoods/Parallax2D"]
+visible = false
+z_index = -4
+position = Vector2(0, 840)
+scale = Vector2(4, 4)
+texture = ExtResource("1_a5gt4")
+
+[node name="Parallax3" type="Sprite2D" parent="WestWoods/Parallax2D"]
+visible = false
+z_index = -4
+position = Vector2(9600, 1800)
+scale = Vector2(4, 4)
+texture = ExtResource("1_a5gt4")
+
+[node name="Parallax2" type="Sprite2D" parent="WestWoods/Parallax2D"]
+visible = false
+z_index = -4
+position = Vector2(-9600, 840)
+scale = Vector2(4, 4)
+texture = ExtResource("1_a5gt4")
+
+[node name="Sky" type="Parallax2D" parent="WestWoods"]
+modulate = Color(0.427627, 0.490895, 0.427782, 1)
+z_index = -10
+scroll_offset = Vector2(-488, 1408)
+
+[node name="Parallaxsky" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(0, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky2" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(0, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky3" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(6400, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky4" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(6400, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky5" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-13984, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky6" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-13984, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky7" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-7583.99, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky8" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-7583.99, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky9" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-26580, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky10" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-26580, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky11" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-20180, -1128)
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Parallaxsky12" type="Sprite2D" parent="WestWoods/Sky"]
+z_index = -10
+position = Vector2(-20180, 2400)
+rotation = 3.14159
+scale = Vector2(4, 4)
+texture = ExtResource("2_r4f6w")
+
+[node name="Hills" type="Parallax2D" parent="WestWoods"]
+modulate = Color(0.394461, 0.45512, 0.394636, 1)
+z_index = -10
+rotation = 3.14159
+scale = Vector2(1, -1)
+scroll_scale = Vector2(0.65, 0.65)
+scroll_offset = Vector2(-504, 2548)
+
+[node name="Parallaxhills" type="Sprite2D" parent="WestWoods/Hills"]
+z_index = -8
+position = Vector2(0, -372)
+scale = Vector2(4, 4)
+texture = ExtResource("3_x8qd2")
+
+[node name="Parallaxhills2" type="Sprite2D" parent="WestWoods/Hills"]
+z_index = -8
+position = Vector2(9600, -372)
+scale = Vector2(4, 4)
+texture = ExtResource("3_x8qd2")
+
+[node name="Parallaxhills4" type="Sprite2D" parent="WestWoods/Hills"]
+z_index = -8
+position = Vector2(19200, -372)
+scale = Vector2(4, 4)
+texture = ExtResource("3_x8qd2")
+
+[node name="Parallaxhills3" type="Sprite2D" parent="WestWoods/Hills"]
+z_index = -8
+position = Vector2(-9600, -372)
+scale = Vector2(4, 4)
+texture = ExtResource("3_x8qd2")
+
+[node name="Hills2" type="Parallax2D" parent="WestWoods"]
+modulate = Color(0.606105, 0.391715, 0.716438, 1)
+z_index = -10
+scroll_scale = Vector2(0.75, 0.75)
+scroll_offset = Vector2(-5864, 2864)
+
+[node name="Parallaxhills" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(2400, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Parallaxhills5" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(9600, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Parallaxhills6" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(16800, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Parallaxhills2" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(-4800, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Parallaxhills3" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(-12000, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Parallaxhills4" type="Sprite2D" parent="WestWoods/Hills2"]
+z_index = -6
+position = Vector2(-19200, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("4_jpxvx")
+
+[node name="Fort" type="Node2D" parent="."]
+
+[node name="Hills2" type="Parallax2D" parent="Fort"]
+modulate = Color(0.606105, 0.391715, 0.716438, 1)
+z_index = -10
+scroll_scale = Vector2(0.75, 0.75)
+scroll_offset = Vector2(37132, 2908)
+
+[node name="Parallaxhills" type="Sprite2D" parent="Fort/Hills2"]
+z_index = -6
+position = Vector2(-39436, -1608)
+scale = Vector2(20, 20)
+texture = ExtResource("7_gi7t1")
+
+[node name="Parallaxhills2" type="Sprite2D" parent="Fort/Hills2"]
+z_index = -6
+position = Vector2(-14028, 8504)
+scale = Vector2(20, 20)
+texture = ExtResource("7_gi7t1")
+
+[node name="Parallaxhills3" type="Sprite2D" parent="Fort/Hills2"]
+z_index = -6
+position = Vector2(-9228, -4424)
+scale = Vector2(20, 20)
+texture = ExtResource("7_gi7t1")

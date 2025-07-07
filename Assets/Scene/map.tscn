@@ -1,0 +1,246 @@
+[gd_scene load_steps=12 format=3 uid="uid://bbpvuluqmp1cw"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/Map.cs" id="1_wao0w"]
+[ext_resource type="Texture2D" uid="uid://duxvfntg5cs6l" path="res://Assets/Art/UI/Minimap/ww1.png" id="2_b2igw"]
+[ext_resource type="Texture2D" uid="uid://cayxr13pyr4lm" path="res://Assets/Art/UI/Minimap/ww2.png" id="3_34wg1"]
+[ext_resource type="Texture2D" uid="uid://chxosaff1nth6" path="res://Assets/Art/UI/Minimap/ww3.png" id="4_3khy0"]
+[ext_resource type="Texture2D" uid="uid://b1pksv00hnvkr" path="res://Assets/Art/UI/Minimap/ww4.png" id="5_3f6os"]
+[ext_resource type="Texture2D" uid="uid://d30v5oantlcbb" path="res://Assets/Art/UI/Minimap/ww5.png" id="6_642m7"]
+[ext_resource type="Texture2D" uid="uid://b6mmkn0rnpccq" path="res://Assets/Art/UI/Minimap/f1.png" id="7_xm3fb"]
+[ext_resource type="Texture2D" uid="uid://g8f5p7wym1tf" path="res://Assets/Art/UI/Minimap/restmarker.png" id="8_0mvqc"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/RestPointMapMarker.cs" id="9_2r6dv"]
+[ext_resource type="Texture2D" uid="uid://bqrrev85fr2np" path="res://Assets/Art/UI/Minimap/npcmarker.png" id="10_8vt68"]
+[ext_resource type="Texture2D" uid="uid://2emgj6atynrk" path="res://Assets/Art/UI/Minimap/icon.png" id="11_lcw4e"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -66.0
+offset_top = -355.0
+offset_right = -66.0
+offset_bottom = -355.0
+scale = Vector2(4, 4)
+script = ExtResource("1_wao0w")
+_minimapRoomsContainerPaths = Array[NodePath]([NodePath("Container/Positioning/WestWoods"), NodePath("Container/Positioning/Fort")])
+_minimapMarkerContainerPath = NodePath("Container/Positioning/Markers")
+_playerIconPath = NodePath("Container/Positioning/PlayerIcon")
+
+[node name="Container" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 190.0
+offset_top = 184.0
+offset_right = 230.0
+offset_bottom = 224.0
+scale = Vector2(0.811425, 0.811425)
+
+[node name="Positioning" type="Control" parent="Container"]
+anchors_preset = 0
+offset_left = -192.254
+offset_top = -182.395
+offset_right = -192.254
+offset_bottom = -182.395
+
+[node name="WestWoods" type="Control" parent="Container/Positioning"]
+anchors_preset = 0
+offset_top = 62.0
+offset_right = 40.0
+offset_bottom = 102.0
+
+[node name="ww1" type="TextureRect" parent="Container/Positioning/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("2_b2igw")
+
+[node name="ww2" type="TextureRect" parent="Container/Positioning/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("3_34wg1")
+
+[node name="ww3" type="TextureRect" parent="Container/Positioning/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("4_3khy0")
+
+[node name="ww4" type="TextureRect" parent="Container/Positioning/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("5_3f6os")
+
+[node name="ww5" type="TextureRect" parent="Container/Positioning/WestWoods"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 313.0
+offset_bottom = 178.0
+mouse_filter = 2
+texture = ExtResource("6_642m7")
+
+[node name="Fort" type="Control" parent="Container/Positioning"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="f1" type="TextureRect" parent="Container/Positioning/Fort"]
+offset_left = 255.874
+offset_top = 125.611
+offset_right = 404.875
+offset_bottom = 222.611
+mouse_filter = 2
+texture = ExtResource("7_xm3fb")
+
+[node name="Markers" type="Control" parent="Container/Positioning"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WestWoods" type="Control" parent="Container/Positioning/Markers"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ww2" type="Control" parent="Container/Positioning/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww2"]
+layout_mode = 0
+offset_left = 178.5
+offset_top = 189.0
+offset_right = 194.5
+offset_bottom = 205.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="ww3" type="Control" parent="Container/Positioning/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww3"]
+layout_mode = 0
+offset_left = 247.1
+offset_top = 189.0
+offset_right = 263.1
+offset_bottom = 205.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="ww4" type="Control" parent="Container/Positioning/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww4"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 172.0
+offset_right = 238.0
+offset_bottom = 188.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="RespawnPoint2" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww4"]
+layout_mode = 0
+offset_left = 185.7
+offset_top = 165.4
+offset_right = 201.7
+offset_bottom = 181.4
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="ww5" type="Control" parent="Container/Positioning/Markers/WestWoods"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="blinny" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww5"]
+layout_mode = 0
+offset_left = 127.3
+offset_top = 220.5
+offset_right = 143.3
+offset_bottom = 236.5
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_8vt68")
+
+[node name="RespawnPoint" type="TextureRect" parent="Container/Positioning/Markers/WestWoods/ww5"]
+layout_mode = 0
+offset_left = 152.1
+offset_top = 210.0
+offset_right = 168.1
+offset_bottom = 226.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="Fort" type="Control" parent="Container/Positioning/Markers"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="f1" type="Control" parent="Container/Positioning/Markers/Fort"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RespawnPoint" type="TextureRect" parent="Container/Positioning/Markers/Fort/f1"]
+offset_left = 268.0
+offset_top = 142.0
+offset_right = 300.0
+offset_bottom = 174.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="RespawnPoint2" type="TextureRect" parent="Container/Positioning/Markers/Fort/f1"]
+offset_left = 328.0
+offset_top = 166.0
+offset_right = 360.0
+offset_bottom = 198.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_0mvqc")
+script = ExtResource("9_2r6dv")
+
+[node name="PlayerIcon" type="Control" parent="Container/Positioning"]
+anchors_preset = 0
+offset_left = 166.0
+offset_top = 186.0
+offset_right = 206.0
+offset_bottom = 226.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Container/Positioning/PlayerIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_lcw4e")

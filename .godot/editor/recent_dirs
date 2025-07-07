@@ -1,22 +1,22 @@
-res://Data/Items
-res://Assets/Art/Character/Enemy/GoblinSoldier
+res://Assets/Art/Character/Enemy/GoblinWarden
 res://Assets/Scene/Enemy
 res://Assets/Scene/Levels/Fort
+res://Assets/Art/UI/DialoguePortraits
+res://Data/Dialogue/Tutorial/Red Attacks
+res://Assets/Scripts/Environmental
+res://Assets/Scene
+res://Assets/Scene/Environment/Obstacle
+res://Data/Obstacle
+res://Assets/Scripts/Environmental/Obstacle
+res://Data/Tileset
+res://Assets/Art/Environment/Obstacle
+res://Assets/Scene/Environment
+res://Data/Items
+res://Assets/Scene/Environment/Projectile
+res://Assets/Art/Character/Enemy/GoblinSoldier
 res://Assets/Art/Tileset
 res://Assets/Art/Item
-res://Assets/Scene
 C:/Users/trex0/OneDrive/Documents/Builds/demo_mac
 res://Assets/Art/Character/PlayerRedesigned
 C:/Users/trex0/OneDrive/Documents/Builds/demo_windows
-res://Assets/Art/UI/DialoguePortraits
 res://Shader
-res://Data/Dialogue/Tutorial
-res://Assets/Scene/Environment
-res://Data/Dialogue/Tutorial/Charm
-res://Assets/Art/Environment
-res://Assets/Scripts/Environmental
-res://Assets/Scripts/Core/User Interface
-res://Assets/Art/Character/Summon
-res://Assets/Scene/Summons
-res://Data/Items/Charms
-res://Data/Dialogue/Blinny

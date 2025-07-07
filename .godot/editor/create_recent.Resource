@@ -1,6 +1,6 @@
+DialogueData
 Item
 Resource
-DialogueData
 Equippable
 MerchantInventory
 MerchantDialogueData

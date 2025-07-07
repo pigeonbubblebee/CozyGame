@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://c8aw007w7csd4"]
+[gd_scene load_steps=50 format=4 uid="uid://c8aw007w7csd4"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_hxdxc"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_jpmoa"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dvmfdkq5niknb" path="res://Assets/Scene/Enemy/goblin_warrior_easier.tscn" id="6_upgnb"]
 [ext_resource type="PackedScene" uid="uid://ds1gmhr7rsu74" path="res://Assets/Scene/Environment/pickup.tscn" id="9_6ns7d"]
 [ext_resource type="Resource" uid="uid://bgo6kj04mhm47" path="res://Data/Items/forest_essence.tres" id="11_sxt4q"]
+[ext_resource type="PackedScene" uid="uid://75lrmo0fad7o" path="res://Assets/Scene/Environment/money.tscn" id="12_ye6d6"]
 [ext_resource type="PackedScene" uid="uid://bwud6pqm7cylu" path="res://Assets/Scene/Environment/breakable_wall.tscn" id="13_4u1qp"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/DialogueTriggerArea.cs" id="14_4rx77"]
 [ext_resource type="Resource" uid="uid://dadooxybbhqju" path="res://Data/Dialogue/Tutorial/tutorialDialoguePreBoss.tres" id="15_odxp5"]
@@ -129,6 +130,11 @@ _dialogueData = ExtResource("15_p2dn1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/demoEndPrompt"]
 position = Vector2(-5536, 3184)
 shape = SubResource("RectangleShape2D_yok4e")
+
+[node name="Money" parent="Breakables" instance=ExtResource("12_ye6d6")]
+position = Vector2(-3784, 7656)
+rotation = 3.14159
+scale = Vector2(4, -4)
 
 [node name="Enemies" type="Node2D" parent="."]
 

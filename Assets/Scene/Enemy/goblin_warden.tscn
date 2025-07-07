@@ -1,0 +1,182 @@
+[gd_scene load_steps=21 format=3 uid="uid://cb5dslike6cx3"]
+
+[ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_u8v7e"]
+[ext_resource type="Texture2D" uid="uid://bnabwe0hebcqe" path="res://Assets/Art/Character/Enemy/GoblinWarden/GoblinWarden.png" id="2_x3lhm"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="7_proyf"]
+[ext_resource type="AudioStream" uid="uid://2x2ipng5nxm7" path="res://Assets/Sound/SFX/Enemy/Goblin/gobbowalk.wav" id="8_d6sxt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1um8y"]
+size = Vector2(304, 304)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w0b1"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vhfo"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kdna"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7o3w"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2n5m"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(256, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rrvp"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(512, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8o5l"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62sqg"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnxw2"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whckx"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnhj5"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(256, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y112x"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(512, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ful5c"]
+atlas = ExtResource("2_x3lhm")
+region = Rect2(0, 256, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r81ey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w0b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vhfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kdna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7o3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2n5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rrvp")
+}],
+"loop": true,
+"name": &"aggro",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8o5l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62sqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnxw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whckx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnhj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y112x")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ful5c")
+}],
+"loop": true,
+"name": &"stagger",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_buj0s"]
+size = Vector2(160, 248)
+
+[node name="goblin_warden" type="Node2D"]
+
+[node name="ChaserEnemy" parent="." instance=ExtResource("1_u8v7e")]
+RetreatRange = 200.0
+Speed = 100.0
+_currency_drop_amount = 125
+MaxHealth = 1250
+MaxPosture = 2500
+DeathBlowDamage = 1250
+EnemyNameLocalizationKey = "goblin_warden"
+
+[node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
+position = Vector2(-72, -32)
+shape = SubResource("RectangleShape2D_1um8y")
+
+[node name="PostureBar" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="0"]
+offset_left = -128.0
+offset_top = -256.0
+offset_right = -43.0
+offset_bottom = -251.0
+
+[node name="Healthbar" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="1"]
+offset_left = -128.0
+offset_top = -280.0
+offset_right = -43.0
+offset_bottom = -275.0
+
+[node name="TextureRect" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="3"]
+offset_left = -128.0
+offset_top = -320.0
+offset_right = -96.0
+offset_bottom = -288.0
+
+[node name="RichTextLabel" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="4"]
+offset_left = -96.0
+offset_top = -320.0
+offset_right = -80.0
+offset_bottom = -304.0
+
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
+sprite_frames = SubResource("SpriteFrames_r81ey")
+animation = &"aggro"
+frame_progress = 0.112847
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/StateMachine/PatrolState" index="0"]
+stream = ExtResource("8_d6sxt")
+volume_db = 4.0
+script = ExtResource("7_proyf")
+
+[node name="HurtboxCollider" parent="ChaserEnemy/EnemyTemplate/Hurtbox" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_buj0s")
+
+[editable path="ChaserEnemy"]
+[editable path="ChaserEnemy/EnemyTemplate"]

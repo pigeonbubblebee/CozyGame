@@ -48,7 +48,7 @@ MaxPosture = 400
 DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_hatchet"
 
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 position = Vector2(9, -16)
 sprite_frames = ExtResource("2_wxot2")
 animation = &"cleave_countered"

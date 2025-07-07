@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cd5i4i0qhg25b"]
+
+[ext_resource type="Texture2D" uid="uid://dnshttxm2v7lu" path="res://Assets/Art/Item/starfruit.png" id="1_dsc8v"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Item.cs" id="1_qhqyw"]
+
+[resource]
+script = ExtResource("1_qhqyw")
+ID = "equip_slot_shard"
+Description = "description_equip_slot_shard"
+ItemTier = 0.0
+SortingID = 96
+Image = ExtResource("1_dsc8v")
+Type = 4
+_attributeNames = PackedStringArray()
+_attributeValues = PackedStringArray()
+Stackable = true

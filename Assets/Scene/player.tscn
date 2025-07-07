@@ -1783,9 +1783,9 @@ position_smoothing_speed = 15.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.15
-drag_top_margin = 0.15
+drag_top_margin = 0.05
 drag_right_margin = 0.15
-drag_bottom_margin = 0.15
+drag_bottom_margin = 0.05
 script = ExtResource("31_fqcx7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D"]

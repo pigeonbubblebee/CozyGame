@@ -364,7 +364,7 @@ MaxPosture = 400
 DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_pike"
 
-[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="1"]
+[node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
 animation = &"sweep"
 

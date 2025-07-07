@@ -56,7 +56,7 @@ public partial class ShootAttack : EnemyAttack
 	public override void Execute(Player p, Enemy e) {
 		base.Execute(p, e);
 		
-		GD.Print("executing!");
+		// FGD.Print("executing!");
 		
 		_playerPosition = p.GlobalPosition;
 		_aimedPlayer = p;
@@ -117,7 +117,7 @@ public partial class ShootAttack : EnemyAttack
 	private void _FinishShoot() {
 		Finish();
 		_bodyTop.Visible = false;
-		GD.Print("Shoot Finish!");
+		// GD.Print("Shoot Finish!");
 	}
 	
 	public override void Interrupt() {

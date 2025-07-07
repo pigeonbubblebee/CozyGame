@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cqon1yc42pgbh"]
+
+[ext_resource type="Texture2D" uid="uid://l1dc4ki35m0h" path="res://Assets/Art/Environment/Obstacle/spike.png" id="1_0et73"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lreuq"]
+texture = ExtResource("1_0et73")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_lreuq")

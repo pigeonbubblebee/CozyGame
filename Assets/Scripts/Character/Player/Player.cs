@@ -182,6 +182,7 @@ public partial class Player : CharacterBody2D
 		}
 		if(Input.IsActionPressed("debug")) {
 			InventoryManager.AddItemToInventory("acorn");
+			InventoryManager.AddItemToInventory("forest_essence");
 		}
 
         base._Process(delta);
@@ -200,17 +201,26 @@ public partial class Player : CharacterBody2D
 		
 		if(DeflectController.Blocking) {
 			if(e.Unstoppable && (e.Type == EnemyAttackData.AttackType.Sweep || e.Type == EnemyAttackData.AttackType.Cleave)) {
-				TakeTrueDamage(e, enemy);
+				TakeTrueDamage(e);
 				return;
 			}
 			CurseController.AddCurse(CurrentPlayerStats.CurseBuildRate);
 			DeflectController.Block(e, enemy);
 		} else {
-			TakeTrueDamage(e, enemy);
+			TakeTrueDamage(e);
 		}
 	}
+
+	public void TakeObstacleDamage(EnemyAttackData e, Node2D source, float knockBackMultiplier) {
+		Camera.Shake(0.2f, 2000f);
+		_gameManager.FreezeFrame(0.02f, 0.08f);
+		// GD.Print(e.Enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1);
+		MovementController.ApplyKnockback(source.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 1000*knockBackMultiplier, 500f*knockBackMultiplier, 0.1f);
+		
+		TakeTrueDamage(e);
+	}
 	
-	public void TakeTrueDamage(EnemyAttackData e, Enemy enemy) {
+	public void TakeTrueDamage(EnemyAttackData e) {
 		_hitSFX.Play();
 		HealController.ConvertInternalDamage();
 		PlayerHealth.TakeDamage(e.Damage);

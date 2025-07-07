@@ -15,6 +15,11 @@ forest_essence,Forest Essence
 description_forest_essence,Concentrated mystic in a wooden shell. Consuming it grants the user power.
 mystic_ore,Mystic Ore
 description_mystic_ore,Mystic crystals wrapped by primordial stone.
+equip_slot_shard,Super Starfruit
+description_equip_slot_shard,An extremely rare fruit coursing with raw energy. Extremely sweet and smells intoxicating.
+sellable_1,Silverware Set
+description_sellable_1,A vintage set of silverware of little value.
+
 honey_wine,Honey Wine
 description_honey_wine,Smells extremely rich and sweet"," with scents of different berry. Seems to be mainly honey fermented in water.
 power_spirit,Bloom
@@ -109,6 +114,10 @@ dialogue_charm_instruction,Woodland Spirits - \nTap B to open your inventory. Se
 dialogue_cat_map_tutorial_1,Mystic trees also allow you to travel instantaneously between them.
 dialogue_inventory_instruction,Inventory - \nTap B to open your inventory to view your current items. Use Z and X to switch to different parts of the inventory.
 dialogue_map_instruction,Teleporting - \nUse TAB to quickly open the map without going into the inventory. In the map screen"," click on a mystic tree marker to instantly travel to it.
+dialogue_cat_red_attack_1,Hey"," we should be more careful in the fort. This place won't be filled with just lowly bandits. Elite soldiers may also roam here.
+dialogue_cat_red_attack_2,I heard that sometimes"," they can harness evil magic. When their blades glow red"," I don't even think the sword I gave you will be enough to stop them.
+dialogue_red_attack_instruction,Unstoppable Attacks - \nWhen an attack is coated in red magic"," it cannot be parried. Avoid it by dodging"," as red attacks require significant charging time.
+
 
 dialogue_blinny_1,New friends for Blinny?
 dialogue_blinny_2,Blinny would love to show friends his things.

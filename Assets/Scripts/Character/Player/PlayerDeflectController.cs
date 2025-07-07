@@ -111,12 +111,13 @@ public partial class PlayerDeflectController : Node
 	}
 	
 	public int Block(EnemyAttackData data, Enemy e) {
+		// _gameManager.FreezeFrame(3f, 0.1f);
 		// GD.Print(_deflectWindowTimer.TimeLeft + " deflect");
 		if(InDeflectWindow()) {
 			_deflectSFX.Play();
 			_emitDeflectParticle();
 			_player.Camera.Shake(_playerStats.DeflectShakeTime, _playerStats.DeflectShakeMagnitude);
-			_gameManager.FreezeFrame(0.1f, 0.1f);
+			_gameManager.FreezeFrame(0.06, 0.1f);
 			
 			BlockEvent?.Invoke(true, data.PostureDamage, e);
 			e.TakePostureDamage(data.DeflectPostureDamage);
@@ -132,7 +133,7 @@ public partial class PlayerDeflectController : Node
 			return 0;
 		} else {
 			if(data.Unstoppable && data.Type == EnemyAttackData.AttackType.Thrust) {
-				_player.TakeTrueDamage(data, e);
+				_player.TakeTrueDamage(data);
 				// _blockSFX.Play();
 				_emitBlockParticle();
 				BlockEvent?.Invoke(false, data.PostureDamage, e);

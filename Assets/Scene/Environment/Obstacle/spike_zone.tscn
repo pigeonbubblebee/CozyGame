@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=4 uid="uid://bganube2mbkf"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Environmental/Obstacle/SpikeZone.cs" id="1_rkisn"]
+[ext_resource type="Resource" uid="uid://cplnesjvh74ff" path="res://Data/Obstacle/spike_data.tres" id="2_kfifi"]
+[ext_resource type="TileSet" uid="uid://cqon1yc42pgbh" path="res://Data/Tileset/spike.tres" id="3_pulyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47vma"]
+size = Vector2(1800, 128)
+
+[node name="SpikeZone" type="Area2D"]
+position = Vector2(360, 728)
+script = ExtResource("1_rkisn")
+SpikeData = ExtResource("2_kfifi")
+_SafePointLocation = NodePath("SafePoint")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(24, 1848)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAA=")
+tile_set = ExtResource("3_pulyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(656, 1912)
+shape = SubResource("RectangleShape2D_47vma")
+
+[node name="SafePoint" type="Node2D" parent="."]
+position = Vector2(-424, 1224)

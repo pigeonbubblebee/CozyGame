@@ -48,7 +48,7 @@ public partial class SaveLoader : Node
 		GD.Print("save");
 		SaveFile saveFile = new SaveFile();
 
-		// GD.Print(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
+		GD.Print(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene().Name);
 
 		HandleNewRoomData(GetNode<MainHandler>("/root/MainHandler").GetCurrentScene());
 

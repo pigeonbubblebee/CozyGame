@@ -76,7 +76,7 @@ public partial class Enemy : CharacterBody2D
 	
 	public bool KnockbackEnabled = true;
 	
-	[Export] public float IFrameTime = 0.3f;
+	[Export] public float IFrameTime = 0.1f;
 	private bool _iFrameOn = false;
 	public bool Invincible => _iFrameOn;
 	

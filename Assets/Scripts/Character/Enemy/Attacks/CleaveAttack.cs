@@ -86,7 +86,7 @@ public partial class CleaveAttack : SlashAttack
 	
 	protected override void _FinishSlash() {
 		if(!_countered) {
-			GD.Print("Finish!");
+			// GD.Print("Finish!");
 			_accelerating = false;
 			// _canHit = false;
 			_canHit= false;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b8lcxi3dix7ax"]
+[gd_scene load_steps=51 format=3 uid="uid://b8lcxi3dix7ax"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/UIManager.cs" id="1_fitbl"]
 [ext_resource type="PackedScene" uid="uid://c78kctwoddfg6" path="res://Assets/Scene/inventory.tscn" id="2_gwf6h"]
@@ -23,16 +23,9 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/Dialogue.cs" id="17_ldyx3"]
 [ext_resource type="Texture2D" uid="uid://mkh7lxvynva1" path="res://Assets/Art/UI/DialoguePortraits/cat.png" id="17_sb6p1"]
 [ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/QuickMapUI.cs" id="22_c7iei"]
-[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/Map.cs" id="22_e0hje"]
-[ext_resource type="Texture2D" uid="uid://duxvfntg5cs6l" path="res://Assets/Art/UI/Minimap/ww1.png" id="23_thf1u"]
-[ext_resource type="Texture2D" uid="uid://cayxr13pyr4lm" path="res://Assets/Art/UI/Minimap/ww2.png" id="24_tvowj"]
-[ext_resource type="Texture2D" uid="uid://chxosaff1nth6" path="res://Assets/Art/UI/Minimap/ww3.png" id="25_58q8r"]
-[ext_resource type="Texture2D" uid="uid://b1pksv00hnvkr" path="res://Assets/Art/UI/Minimap/ww4.png" id="26_yui0u"]
-[ext_resource type="Texture2D" uid="uid://d30v5oantlcbb" path="res://Assets/Art/UI/Minimap/ww5.png" id="27_bv403"]
+[ext_resource type="PackedScene" uid="uid://bbpvuluqmp1cw" path="res://Assets/Scene/map.tscn" id="23_6u138"]
 [ext_resource type="Texture2D" uid="uid://g8f5p7wym1tf" path="res://Assets/Art/UI/Minimap/restmarker.png" id="28_8affb"]
-[ext_resource type="Script" path="res://Assets/Scripts/Core/User Interface/RestPointMapMarker.cs" id="29_2j07j"]
 [ext_resource type="Texture2D" uid="uid://bqrrev85fr2np" path="res://Assets/Art/UI/Minimap/npcmarker.png" id="30_0w7li"]
-[ext_resource type="Texture2D" uid="uid://2emgj6atynrk" path="res://Assets/Art/UI/Minimap/icon.png" id="31_7ujkc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mls8h"]
 texture = ExtResource("10_g3jub")
@@ -898,186 +891,7 @@ bbcode_enabled = true
 text = "[center] MAP [/center]"
 scroll_active = false
 
-[node name="Map" type="Control" parent="GUI/Map/map/Panel"]
-anchors_preset = 0
-offset_left = -66.0
-offset_top = -355.0
-offset_right = -66.0
-offset_bottom = -355.0
-scale = Vector2(4, 4)
-script = ExtResource("22_e0hje")
-_minimapRoomsContainerPaths = Array[NodePath]([NodePath("Container/WestWoods")])
-_minimapMarkerContainerPath = NodePath("Container/Markers")
-_playerIconPath = NodePath("Container/PlayerIcon")
-
-[node name="Container" type="Control" parent="GUI/Map/map/Panel/Map"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="WestWoods" type="Control" parent="GUI/Map/map/Panel/Map/Container"]
-anchors_preset = 0
-offset_top = 62.0
-offset_right = 40.0
-offset_bottom = 102.0
-
-[node name="ww1" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/WestWoods"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 87.0
-offset_right = 313.0
-offset_bottom = 178.0
-mouse_filter = 2
-texture = ExtResource("23_thf1u")
-
-[node name="ww2" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/WestWoods"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 87.0
-offset_right = 313.0
-offset_bottom = 178.0
-mouse_filter = 2
-texture = ExtResource("24_tvowj")
-
-[node name="ww3" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/WestWoods"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 87.0
-offset_right = 313.0
-offset_bottom = 178.0
-mouse_filter = 2
-texture = ExtResource("25_58q8r")
-
-[node name="ww4" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/WestWoods"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 87.0
-offset_right = 313.0
-offset_bottom = 178.0
-mouse_filter = 2
-texture = ExtResource("26_yui0u")
-
-[node name="ww5" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/WestWoods"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 87.0
-offset_right = 313.0
-offset_bottom = 178.0
-mouse_filter = 2
-texture = ExtResource("27_bv403")
-
-[node name="Markers" type="Control" parent="GUI/Map/map/Panel/Map/Container"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="WestWoods" type="Control" parent="GUI/Map/map/Panel/Map/Container/Markers"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ww2" type="Control" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="RespawnPoint" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww2"]
-layout_mode = 0
-offset_left = 178.5
-offset_top = 189.0
-offset_right = 194.5
-offset_bottom = 205.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("28_8affb")
-script = ExtResource("29_2j07j")
-
-[node name="ww3" type="Control" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="RespawnPoint" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww3"]
-layout_mode = 0
-offset_left = 247.1
-offset_top = 189.0
-offset_right = 263.1
-offset_bottom = 205.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("28_8affb")
-script = ExtResource("29_2j07j")
-
-[node name="ww4" type="Control" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="RespawnPoint" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww4"]
-layout_mode = 0
-offset_left = 222.0
-offset_top = 172.0
-offset_right = 238.0
-offset_bottom = 188.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("28_8affb")
-script = ExtResource("29_2j07j")
-
-[node name="RespawnPoint2" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww4"]
-layout_mode = 0
-offset_left = 185.7
-offset_top = 165.4
-offset_right = 201.7
-offset_bottom = 181.4
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("28_8affb")
-script = ExtResource("29_2j07j")
-
-[node name="ww5" type="Control" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="blinny" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww5"]
-layout_mode = 0
-offset_left = 127.3
-offset_top = 220.5
-offset_right = 143.3
-offset_bottom = 236.5
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("30_0w7li")
-
-[node name="RespawnPoint" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/Markers/WestWoods/ww5"]
-layout_mode = 0
-offset_left = 152.1
-offset_top = 210.0
-offset_right = 168.1
-offset_bottom = 226.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("28_8affb")
-script = ExtResource("29_2j07j")
-
-[node name="PlayerIcon" type="Control" parent="GUI/Map/map/Panel/Map/Container"]
-anchors_preset = 0
-offset_left = 166.0
-offset_top = 186.0
-offset_right = 206.0
-offset_bottom = 226.0
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="GUI/Map/map/Panel/Map/Container/PlayerIcon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -12.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("31_7ujkc")
+[node name="Map" parent="GUI/Map/map/Panel" instance=ExtResource("23_6u138")]
 
 [node name="Legend" type="Control" parent="GUI/Map/map/Panel"]
 anchors_preset = 0
