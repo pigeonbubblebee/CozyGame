@@ -30,6 +30,7 @@ animation = &"slash"
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_ima5s")
 RetreatRange = 160.0
+StartRange = 160.0
 RetreatSpeed = 500.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")

@@ -444,7 +444,7 @@ EnemyNameLocalizationKey = "goblin_soldier"
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_b3q1f")
 animation = &"slash_2"
-frame_progress = 0.0531405
+frame_progress = 0.555136
 
 [node name="SlashComboChain" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("3_bt0hm")

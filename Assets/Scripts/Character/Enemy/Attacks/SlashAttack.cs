@@ -126,7 +126,7 @@ public partial class SlashAttack : EnemyAttack
 	}
 
 	protected virtual void _FinishSlash() {
-		GD.Print("Finish!");
+		// GD.Print("Finish!");
 		_accelerating = false;
 		// _canHit = false;
 		_canHit= false;

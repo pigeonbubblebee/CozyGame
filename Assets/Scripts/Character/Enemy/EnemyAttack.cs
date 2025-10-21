@@ -24,11 +24,17 @@ public partial class EnemyAttack : Node2D
 	protected bool _initialized = false;
 	
 	protected bool Active;
+
+	public bool CanChain = true;
 	
-	public EnemyAttack GetNextChainAttack() {
-		if(NotChainAttack) {
+	public EnemyAttack GetNextChainAttack()
+	{
+		if (NotChainAttack)
+		{
 			return this;
-		} else {
+		}
+		else
+		{
 			return _chainedAttack.GetNextChainAttack();
 		}
 	}
@@ -88,7 +94,7 @@ public partial class EnemyAttack : Node2D
 			
 		// GD.Print("Finished!");
 		
-		if(!NotChainAttack) {
+		if(!NotChainAttack && CanChain) {
 			// GD.Print("Chaining!");
 			// _chainedAttack.Execute(TargetPlayer, EnemyAI);
 			EnemyAI.ExecuteAttack(_chainedAttack, TargetPlayer);

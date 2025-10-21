@@ -371,6 +371,7 @@ animation = &"sweep"
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_0nfbp")
 RetreatRange = 180.0
+StartRange = 180.0
 RetreatSpeed = 500.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")

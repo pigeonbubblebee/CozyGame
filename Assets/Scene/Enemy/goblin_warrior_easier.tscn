@@ -719,11 +719,14 @@ offset_bottom = -304.0
 material = SubResource("ShaderMaterial_u2csa")
 position = Vector2(9, -16)
 sprite_frames = SubResource("SpriteFrames_cx26y")
-animation = &"cleave_countered"
+animation = &"slash1"
+frame = 1
+frame_progress = 0.488737
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("10_3alm1")
 RetreatRange = 290.0
+StartRange = 290.0
 RetreatSpeed = 200.0
 RayCastLedgePath = NodePath("LedgeCheck")
 RayCastWallPath = NodePath("WallCheck")
