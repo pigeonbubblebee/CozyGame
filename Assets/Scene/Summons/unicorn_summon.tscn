@@ -1,0 +1,172 @@
+[gd_scene load_steps=20 format=3 uid="uid://ct5o4a1c1tilk"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Character/Summon/UnicornSummon.cs" id="1_as21p"]
+[ext_resource type="Texture2D" uid="uid://c3wfulnw0v2yu" path="res://Assets/Art/Character/Summon/unicorn.png" id="2_rk4b7"]
+[ext_resource type="Texture2D" uid="uid://bk7x5snjkyjtx" path="res://Assets/Art/VFX/SlashHitEffect.png" id="3_e0odh"]
+[ext_resource type="Texture2D" uid="uid://dsv1vdrm8n76d" path="res://Assets/Art/VFX/2d_lights_and_shadows_neutral_point_light.png" id="4_kf4ni"]
+[ext_resource type="AudioStream" uid="uid://jvx0jqlthhq6" path="res://Assets/Sound/SFX/Player/slashhit.wav" id="5_52p5m"]
+[ext_resource type="Script" path="res://Assets/Scripts/Core/Sound/AdjustableSound.cs" id="6_arhud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vko8u"]
+size = Vector2(116, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imhg6"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7vfd"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apjag"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v1fu"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa4wb"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvi4x"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtwd7"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn4g2"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3w0r"]
+atlas = ExtResource("2_rk4b7")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dm0op"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imhg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7vfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apjag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v1fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa4wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvi4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtwd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn4g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3w0r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i1xey"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcgme"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="UnicornSummon" type="CharacterBody2D"]
+z_index = 4
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_as21p")
+_HealAmount = 10
+_attackCooldown = 10.0
+_dashSpeed = 1200.0
+_dashLen = 0.6
+_attackAreaPath = NodePath("DamageBox")
+_attackColliderAreaPath = NodePath("DamageBox/CollisionShape2D")
+_damage = 10
+_hitParticlePath = NodePath("Node/GPUParticles2D")
+_hitSFXPath = NodePath("HitSFX")
+_spritePath = NodePath("Node2D/AnimatedSprite2D")
+SummonID = "unicorn_summon"
+Speed = 400
+IdleSpeed = 3.0
+Friction = 400.0
+BobSpeed = 1.0
+IdleHeight = -10.0
+FollowDist = 200.0
+TargetStepRange = 250.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_vko8u")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+z_index = 1
+position = Vector2(8, -16)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_dm0op")
+animation = &"idle"
+frame_progress = 0.159231
+
+[node name="DamageBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_vko8u")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node"]
+z_index = 6
+material = SubResource("CanvasItemMaterial_i1xey")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_hcgme")
+texture = ExtResource("3_e0odh")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 40
+local_coords = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(3, 3)
+enabled = false
+color = Color(0.35662, 0.748096, 0.567334, 1)
+energy = 0.05
+texture = ExtResource("4_kf4ni")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_52p5m")
+volume_db = 4.0
+pitch_scale = 2.2
+max_polyphony = 5
+script = ExtResource("6_arhud")

@@ -7,9 +7,13 @@ public class BleedData {
 
 	public int totalTicksDone;
 
-	public BleedData() {
+	public int bonusDamage;
+
+	public BleedData(int bonus) {
 		timeLeft = 0.5f;
 		doneTick = false;
 		totalTicksDone = 0;
+
+		bonusDamage = bonus;
 	}
 }

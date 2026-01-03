@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cb5dslike6cx3"]
+[gd_scene load_steps=64 format=3 uid="uid://cb5dslike6cx3"]
 
 [ext_resource type="PackedScene" uid="uid://bx4xvh2o6pyxf" path="res://Assets/Scene/Enemy/chaser_enemy.tscn" id="1_u8v7e"]
 [ext_resource type="Texture2D" uid="uid://bnabwe0hebcqe" path="res://Assets/Art/Character/Enemy/GoblinWarden/GoblinWarden.png" id="2_x3lhm"]
@@ -348,11 +348,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Resource" id="Resource_p8x6q"]
+[sub_resource type="Resource" id="Resource_q7iot"]
 script = ExtResource("5_riwkg")
-Damage = 8
-InternalDamage = 4
-PostureDamage = 4
+Damage = 6
+InternalDamage = 3
+PostureDamage = 3
 DeflectPostureDamage = 100
 Unstoppable = false
 Type = 0
@@ -374,11 +374,21 @@ DeflectKnockbackMultiplier = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7rxi"]
 size = Vector2(568, 456)
 
+[sub_resource type="Resource" id="Resource_p8x6q"]
+script = ExtResource("5_riwkg")
+Damage = 6
+InternalDamage = 3
+PostureDamage = 3
+DeflectPostureDamage = 100
+Unstoppable = false
+Type = 0
+DeflectKnockbackMultiplier = 1.0
+
 [sub_resource type="Resource" id="Resource_2q3mt"]
 script = ExtResource("5_riwkg")
-Damage = 8
-InternalDamage = 4
-PostureDamage = 4
+Damage = 4
+InternalDamage = 2
+PostureDamage = 2
 DeflectPostureDamage = 100
 Unstoppable = false
 Type = 0
@@ -393,15 +403,18 @@ size = Vector2(160, 248)
 RetreatRange = 200.0
 Speed = 100.0
 _currency_drop_amount = 125
-MaxHealth = 1250
-MaxPosture = 2500
-DeathBlowDamage = 1250
+MaxHealth = 1000
+MaxPosture = 1200
+DeathBlowDamage = 500
 HasBossBar = true
 EnemyNameLocalizationKey = "goblin_warden"
 
 [node name="CollisionShape2D" parent="ChaserEnemy" index="0"]
 position = Vector2(-72, -32)
 shape = SubResource("RectangleShape2D_1um8y")
+
+[node name="WallCheck" parent="ChaserEnemy" index="2"]
+target_position = Vector2(72, 0)
 
 [node name="PostureBar" parent="ChaserEnemy/EnemyTemplate/Bars/Node/Node2D" index="0"]
 offset_left = -128.0
@@ -429,8 +442,8 @@ offset_bottom = -304.0
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_r81ey")
-animation = &"jump"
-frame_progress = 0.440975
+animation = &"slash_1"
+frame_progress = 0.90988
 
 [node name="SlashComboChain" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_yx86w")
@@ -448,7 +461,7 @@ AttackCooldown = 2.3
 AnimationName = "slash_1"
 AttackLength = 0.9
 _chainedAttackPath = NodePath("Slash")
-_attackData = SubResource("Resource_p8x6q")
+_attackData = SubResource("Resource_q7iot")
 
 [node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/SlashComboChain"]
 stream = ExtResource("6_iek4k")

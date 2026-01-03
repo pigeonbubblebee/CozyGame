@@ -13,7 +13,7 @@ description_heavy_sword,An ancient blade gifted to you"," used to protect the fo
 acorn,Acorns
 description_acorn,A small bunch of acorns. The main currency used in the forest.
 forest_essence,Forest Essence
-description_forest_essence,Concentrated mystic in a wooden shell. Consuming it grants the user power.
+description_forest_essence,Concentrated mystic in a wooden shell. Can be used in the status screen to increase attributes.
 mystic_ore,Mystic Ore
 description_mystic_ore,Mystic crystals wrapped by primordial stone.
 equip_slot_shard,Super Starfruit
@@ -30,22 +30,40 @@ description_honeycomb,Magical honey produced by the spirit inside heals you"," c
 hive,Hive
 description_hive,A hive of bees commanded by the spirit inside. Summons a bee FAMILIAR to help you in combat"," inflicing POISON on hits.
 claw,Sweetclaw
-description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of a bear into you"," increasing STRENGTH"," DEXTERITY"," and VITALITY.
+description_claw,A clipping of a bear claw"," controlled by a small spirit at the base. Channels the power of a bear into you"," increasing STRENGTH and DEXTERITY.
+crystal,Shine
+description_crystal,A small chunk of magical crystal with a spirit inside that boosts magic afffinity"," increasing FOCUS and HARMONY.
+rainbow,Rainbow
+description_rainbow,A pair of fae wings. Between them lies a powerful spirit that commands a unicorn FAMILIAR"," regenerating HEALTH on hits.
+heart,Woody
+description_heart,A carving of a heart made of wood. It thumps due to the small spirit in the center. Increases your sword damage when you regenerate HEALTH.
+skull,Skull
+description_skull,An old skull hosting a toxic spirit. Coats your blade in toxin"," causing your CAST and perfect blocks to inflict POISON.
+book,Archive
+description_book,A dusty old spelltome. One of its pages houses an ancient spirit. Causes your sword and any summoned FAMILIARs to regain MYSTIC when attacking.
+mushroom,Nightcap
+description_mushroom,A extremely toxic species of mushroom. In the stem lies a dormant spirit. Causes POISON to deal increased damage.
 
 attribute_damage,Damage
 attribute_attack_speed,Attack Speed
 attribute_spell_damage,Cast Damage
+attribute_bonus_damage,Bonus Damage
 attribute_pdamage,Composure Damage
 attribute_daze_buildup,Daze Buildup
 attribute_spell_pdamage,Cast Composure Damage
 attribute_strength_gain,Strength Gain
 attribute_dexterity_gain,Dexterity Gain
 attribute_vitality_gain,Vitality Gain
+attribute_harmony_gain,Harmony Gain
+attribute_focus_gain,Focus Gain
 attribute_focus_gain,Focus Gain
 attribute_harmony_gain,Harmony Gain
 attribute_heal_amount,Healing Amount
 attribute_mystic_threshold,Mystic Threshold
 attribute_poison_buildup,Poison Buildup
+attribute_buff_duration,Buff Duration
+attribute_mystic_gain,Mystic Gain
+attribute_bonus_poison,Bonus Damage Per Tick
 
 item_type_key_item,Key Item
 item_type_upgrade_material,Upgrade Material
@@ -61,7 +79,7 @@ tooltip_vitality,Your life energy. VITALITY adds to your max HEALTH.
 tooltip_harmony,Your connection to those around you. HARMONY adds to your max MYSTIC and makes your allies stronger.
 tooltip_focus,Your magical power. FOCUS makes your CASTs stronger.
 tooltip_prowess,PROWESS increases composure damage from parries.
-tooltip_poison,POISON deals damage over time.
+tooltip_poison,POISON deals damage over time"," a total of 6 damage over 3 seconds.
 tooltip_daze,DAZE stuns an enemy when built up to 30 stacks.
 tooltip_critical,Landing a CRITICAL triples damage.
 tooltip_cast,Using a CAST releases MYSTIC and deals damage in the form of a projectile.

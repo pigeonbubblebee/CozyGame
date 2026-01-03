@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonSpellParrySpirit" load_steps=3 format=3 uid="uid://cv374yxh63gkl"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/PoisonSpellParrySpirit.cs" id="1_tx22g"]
+[ext_resource type="Texture2D" uid="uid://dl5th6ofj5e3o" path="res://Assets/Art/Item/skull.png" id="1_xs2nj"]
+
+[resource]
+script = ExtResource("1_tx22g")
+_Buildup = 4
+ID = "skull"
+Description = "description_skull"
+ItemTier = 0.0
+SortingID = 43
+Image = ExtResource("1_xs2nj")
+Type = 2
+_attributeNames = PackedStringArray("poison_buildup")
+_attributeValues = PackedStringArray("4")
+Stackable = false

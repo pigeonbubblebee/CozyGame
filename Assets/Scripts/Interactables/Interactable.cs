@@ -25,6 +25,12 @@ public abstract partial class Interactable : Area2D, IInteractable
 
 		_interactPrompt.Visible = false;
 		// _interactArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
+
+		if(_outlinedSprite != null)
+			((ShaderMaterial)_outlinedSprite.GetMaterial()).SetShaderParameter("shaderon", false);
+		if(_outlinedAnimatedSprite != null)
+			((ShaderMaterial)_outlinedAnimatedSprite.GetMaterial()).SetShaderParameter("shaderon", false);
+		_interactPrompt.Visible = false;
 	}
 
 	public virtual void OnInteract(Player player) {}

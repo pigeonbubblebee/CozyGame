@@ -48,7 +48,7 @@ public partial class HUD : Control
 		// p.SpellController.AddManaEvent += _UpdateHealthHUD;
 		
 		_UpdateHealthHUD(0);
-		_UpdateHealBar();
+		_UpdateHealBar(p);
 		_UpdateManaBar(0);
 		_UpdatePostureBar(0);
 		_UpdateInternalHealthBar(0);
@@ -70,7 +70,7 @@ public partial class HUD : Control
 		}
 	}
 	
-	private void _UpdateHealBar() {
+	private void _UpdateHealBar(Player p) {
 		if(_currentScenePlayer != null) {
 			
 			float Ratio = ((float) _currentScenePlayer.HealController.CurrentHeals) / ((float) _currentScenePlayer.CurrentPlayerStats.MaxHeals);

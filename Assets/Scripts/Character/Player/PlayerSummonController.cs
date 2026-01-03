@@ -6,6 +6,7 @@ public partial class PlayerSummonController : Node
 {
 	private List<Summon> summons = new List<Summon>();
     private Player _player;
+    public event Action<Enemy, int, Summon, Player> SummonHitEvent;
 
     public void Initialize(Player p) {
         _player = p;
@@ -18,10 +19,17 @@ public partial class PlayerSummonController : Node
         summon.Initialize(_player);
         AddChild(summon);
 		summon.Position = _player.GlobalPosition;
+        summon.OnHitEvent += _InvokeSummonHitEvent;
+    }
+
+    private void _InvokeSummonHitEvent(Enemy e, int damage, Summon s)
+    {
+        SummonHitEvent?.Invoke(e, damage, s, _player);
     }
 
     public void ClearSummons() {
         foreach(Summon s in summons) {
+            s.OnHitEvent -= _InvokeSummonHitEvent;
             s.QueueFree();
         }
 
@@ -32,6 +40,7 @@ public partial class PlayerSummonController : Node
         Summon remove = null;
         foreach(Summon s in summons) {
             if(s.SummonID.Equals(summonID)) {
+                s.OnHitEvent -= _InvokeSummonHitEvent;
                 remove = s;
             }
         }

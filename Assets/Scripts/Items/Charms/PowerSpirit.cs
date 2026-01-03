@@ -21,7 +21,7 @@ public partial class PowerSpirit : Equippable
 		// }
 
 		if(player.CurseController.CurrentCurse >= 50) {
-			p.Strength += 4;
+			p.Strength += 7;
 		}	
 		
 		return p;

@@ -1,16 +1,20 @@
-[gd_scene load_steps=55 format=4 uid="uid://bklev6kbs68qk"]
+[gd_scene load_steps=64 format=4 uid="uid://bklev6kbs68qk"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_bfovm"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_y8xmf"]
 [ext_resource type="PackedScene" uid="uid://dteadx5vcybmk" path="res://Assets/Scene/Environment/hidden_area.tscn" id="3_1paus"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/DialogueTriggerArea.cs" id="3_6leab"]
 [ext_resource type="PackedScene" uid="uid://b0fu168ri1a68" path="res://Assets/Scene/Enemy/goblin_bandit.tscn" id="3_f4brn"]
+[ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="3_rh38q"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/CameraBound.cs" id="4_3n8gh"]
+[ext_resource type="Resource" uid="uid://dntnf5d02mqnb" path="res://Data/Items/Charms/book.tres" id="4_5awxq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/TransitionTriggerArea.cs" id="4_fui1q"]
 [ext_resource type="Resource" uid="uid://ce5m16di4h1w4" path="res://Data/Dialogue/Tutorial/tutorialDialogueRest.tres" id="4_pa67u"]
+[ext_resource type="Texture2D" uid="uid://bjkw733jbyws4" path="res://Assets/Art/Item/book.png" id="5_4oe4k"]
 [ext_resource type="Resource" uid="uid://betdflyxlreqk" path="res://Data/Dialogue/Tutorial/tutorialDialogueSlash.tres" id="5_gaqfy"]
 [ext_resource type="PackedScene" uid="uid://bwud6pqm7cylu" path="res://Assets/Scene/Environment/breakable_wall.tscn" id="5_o20md"]
 [ext_resource type="PackedScene" uid="uid://brlayd7re18fg" path="res://Assets/Scene/Environment/respawn_point.tscn" id="5_paa8b"]
+[ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="6_ov50y"]
 [ext_resource type="Resource" uid="uid://cmwi1g43p6gbx" path="res://Data/Dialogue/Tutorial/tutorialDialogueBlock.tres" id="6_tlj0n"]
 [ext_resource type="Resource" uid="uid://bvtn0ks4771db" path="res://Data/Dialogue/Tutorial/tutorialDialogueHeal.tres" id="7_gotli"]
 [ext_resource type="Resource" uid="uid://dlo46k6qv6x77" path="res://Data/Dialogue/Tutorial/tutorialDialogueCast.tres" id="8_vwg6l"]
@@ -19,10 +23,12 @@
 [ext_resource type="Shader" path="res://Shader/outline.gdshader" id="10_fgs1s"]
 [ext_resource type="PackedScene" uid="uid://75lrmo0fad7o" path="res://Assets/Scene/Environment/money.tscn" id="11_vk3vs"]
 [ext_resource type="Texture2D" uid="uid://bsst4jdtiynq1" path="res://Assets/Art/Background/parallax1.png" id="15_bmfha"]
+[ext_resource type="Resource" uid="uid://cv374yxh63gkl" path="res://Data/Items/Charms/skull.tres" id="15_npa06"]
 [ext_resource type="Texture2D" uid="uid://d03ridhuig42t" path="res://Assets/Art/Background/parallaxsky.png" id="16_ptfon"]
 [ext_resource type="PackedScene" uid="uid://bskrg487tax4i" path="res://Assets/Scene/Enemy/worg.tscn" id="17_37rg1"]
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="17_r3vxj"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="18_vg3wd"]
+[ext_resource type="Resource" uid="uid://bgo6kj04mhm47" path="res://Data/Items/forest_essence.tres" id="19_qhscf"]
 [ext_resource type="Texture2D" uid="uid://bysb6stxxm36o" path="res://Assets/Art/VFX/16299.jpg" id="24_55s4d"]
 [ext_resource type="Texture2D" uid="uid://dve4uotp1gtog" path="res://Assets/Art/Environment/WestWoodsBGArt/WestWoodsBGLarge4.png" id="24_osx20"]
 [ext_resource type="Texture2D" uid="uid://5iiqkduj2bt7" path="res://Assets/Art/Environment/WestWoodsBGArt/WestWoodsBGLarge3.png" id="25_lrgri"]
@@ -60,6 +66,21 @@ shader = ExtResource("10_fgs1s")
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 7.025
 shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1omix"]
+shader = ExtResource("10_fgs1s")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t72g5"]
+shader = ExtResource("10_fgs1s")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18h2k"]
+radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_say8v"]
 size = Vector2(586, 1218)
@@ -179,6 +200,114 @@ scale = Vector2(4, -4)
 position = Vector2(-7424, 4592)
 rotation = 3.14159
 scale = Vector2(4, -4)
+
+[node name="pickup3" type="Area2D" parent="Breakables"]
+material = SubResource("ShaderMaterial_1omix")
+position = Vector2(-7776, 4624)
+scale = Vector2(4, 4)
+script = ExtResource("3_rh38q")
+_itemResource = ExtResource("15_npa06")
+_itemIconPath = NodePath("Sprite2D")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Breakables/pickup3"]
+material = SubResource("ShaderMaterial_t72g5")
+texture = ExtResource("5_4oe4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/pickup3"]
+shape = SubResource("CircleShape2D_18h2k")
+
+[node name="InteractPrompt" parent="Breakables/pickup3" instance=ExtResource("6_ov50y")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="Breakables/pickup3"]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.2
+texture = ExtResource("41_22dka")
+
+[node name="pickup5" type="Area2D" parent="Breakables"]
+material = SubResource("ShaderMaterial_1omix")
+position = Vector2(-3176, 6136)
+scale = Vector2(4, 4)
+script = ExtResource("3_rh38q")
+_itemResource = ExtResource("19_qhscf")
+_itemIconPath = NodePath("Sprite2D")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Breakables/pickup5"]
+material = SubResource("ShaderMaterial_t72g5")
+texture = ExtResource("5_4oe4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/pickup5"]
+shape = SubResource("CircleShape2D_18h2k")
+
+[node name="InteractPrompt" parent="Breakables/pickup5" instance=ExtResource("6_ov50y")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="Breakables/pickup5"]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.2
+texture = ExtResource("41_22dka")
+
+[node name="pickup6" type="Area2D" parent="Breakables"]
+material = SubResource("ShaderMaterial_1omix")
+position = Vector2(-6704, 4648)
+scale = Vector2(4, 4)
+script = ExtResource("3_rh38q")
+_itemResource = ExtResource("19_qhscf")
+_itemIconPath = NodePath("Sprite2D")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Breakables/pickup6"]
+material = SubResource("ShaderMaterial_t72g5")
+texture = ExtResource("5_4oe4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/pickup6"]
+shape = SubResource("CircleShape2D_18h2k")
+
+[node name="InteractPrompt" parent="Breakables/pickup6" instance=ExtResource("6_ov50y")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="Breakables/pickup6"]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.2
+texture = ExtResource("41_22dka")
+
+[node name="pickup4" type="Area2D" parent="Breakables"]
+material = SubResource("ShaderMaterial_1omix")
+position = Vector2(-800, 4856)
+scale = Vector2(4, 4)
+script = ExtResource("3_rh38q")
+_itemResource = ExtResource("4_5awxq")
+_itemIconPath = NodePath("Sprite2D")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Breakables/pickup4"]
+material = SubResource("ShaderMaterial_t72g5")
+texture = ExtResource("5_4oe4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/pickup4"]
+shape = SubResource("CircleShape2D_18h2k")
+
+[node name="InteractPrompt" parent="Breakables/pickup4" instance=ExtResource("6_ov50y")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="Breakables/pickup4"]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.2
+texture = ExtResource("41_22dka")
 
 [node name="Enemies" type="Node2D" parent="."]
 

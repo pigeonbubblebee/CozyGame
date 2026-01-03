@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MysticGainSpirit" load_steps=3 format=3 uid="uid://dntnf5d02mqnb"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/MysticGainSpirit.cs" id="1_6plsl"]
+[ext_resource type="Texture2D" uid="uid://bjkw733jbyws4" path="res://Assets/Art/Item/book.png" id="1_euynw"]
+
+[resource]
+script = ExtResource("1_6plsl")
+_buildRate = 5
+ID = "book"
+Description = "description_book"
+ItemTier = 0.0
+SortingID = 42
+Image = ExtResource("1_euynw")
+Type = 2
+_attributeNames = PackedStringArray("mystic_gain")
+_attributeValues = PackedStringArray("5")
+Stackable = false

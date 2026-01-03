@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SummonSpirit" load_steps=3 format=3 uid="uid://bmekiqnf7ff5g"]
+
+[ext_resource type="Texture2D" uid="uid://c4th0d2g7h0k8" path="res://Assets/Art/Item/wings.png" id="1_38fcm"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/SummonSpirit.cs" id="1_g44gq"]
+
+[resource]
+script = ExtResource("1_g44gq")
+SummonID = "unicorn_summon"
+ID = "rainbow"
+Description = "description_rainbow"
+ItemTier = 0.0
+SortingID = 44
+Image = ExtResource("1_38fcm")
+Type = 2
+_attributeNames = PackedStringArray("damage", "attack_speed", "heal_amount")
+_attributeValues = PackedStringArray("10 + HARMONY", "0.1", "10")
+Stackable = false

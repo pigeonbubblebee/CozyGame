@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="MerchantInventory" load_steps=8 format=3 uid="uid://b1xgaepth8bd7"]
+[gd_resource type="Resource" script_class="MerchantInventory" load_steps=6 format=3 uid="uid://b1xgaepth8bd7"]
 
 [ext_resource type="Resource" uid="uid://bgo6kj04mhm47" path="res://Data/Items/forest_essence.tres" id="1_acqvj"]
 [ext_resource type="Resource" uid="uid://c2s54sjo66iqj" path="res://Data/Items/Charms/honeycomb.tres" id="1_rpf1g"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactables/MerchantInventory.cs" id="1_ytmac"]
 [ext_resource type="Resource" uid="uid://6hq4j7vgemmj" path="res://Data/Items/Charms/hive.tres" id="2_16sds"]
-[ext_resource type="Resource" uid="uid://dilhfcxabe3of" path="res://Data/Items/honey_wine.tres" id="2_jjfkf"]
-[ext_resource type="Resource" uid="uid://cu8o3hb1u4n27" path="res://Data/Items/mystic_ore.tres" id="3_6nr7t"]
 [ext_resource type="Resource" uid="uid://c832bn0avj46l" path="res://Data/Items/Charms/claw.tres" id="3_frgkf"]
 
 [resource]
 script = ExtResource("1_ytmac")
 MerchantNameCode = "blinny"
-Inventory = Array[Object]([ExtResource("1_rpf1g"), ExtResource("2_16sds"), ExtResource("3_frgkf"), ExtResource("1_acqvj"), ExtResource("1_acqvj"), ExtResource("1_acqvj"), ExtResource("2_jjfkf"), ExtResource("3_6nr7t")])
-Descriptions = PackedStringArray("blinny_honeycomb", "blinny_hive", "blinny_claw", "blinny_forest_essence_1", "blinny_forest_essence_2", "blinny_forest_essence_3", "blinny_honey_wine", "blinny_mystic_ore")
-Stock = PackedInt32Array(1, 1, 1, 1, 1, 1, 1, 1)
-Price = PackedInt32Array(200, 200, 400, 200, 500, 1000, 500, 400)
-SellOutReq = PackedInt32Array(-1, -1, -1, -1, 3, 4, -1, -1)
+Inventory = Array[Object]([ExtResource("1_rpf1g"), ExtResource("2_16sds"), ExtResource("3_frgkf"), ExtResource("1_acqvj"), ExtResource("1_acqvj"), ExtResource("1_acqvj")])
+Descriptions = PackedStringArray("blinny_honeycomb", "blinny_hive", "blinny_claw", "blinny_forest_essence_1", "blinny_forest_essence_2", "blinny_forest_essence_3")
+Stock = PackedInt32Array(1, 1, 1, 1, 1, 1)
+Price = PackedInt32Array(100, 150, 200, 200, 250, 1000)
+SellOutReq = PackedInt32Array(-1, -1, -1, -1, 3, 4)

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qtlxo")
-healAmt = 2
+healAmt = 5
 ID = "honeycomb"
 Description = "description_honeycomb"
 ItemTier = 0.0
@@ -13,5 +13,5 @@ SortingID = 49
 Image = ExtResource("1_uc0a3")
 Type = 2
 _attributeNames = PackedStringArray("heal_amount")
-_attributeValues = PackedStringArray("2")
+_attributeValues = PackedStringArray("5")
 Stackable = false

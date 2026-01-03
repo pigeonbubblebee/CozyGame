@@ -113,6 +113,7 @@ public partial class PlayerDeflectController : Node
 	public int Block(EnemyAttackData data, Enemy e) {
 		// _gameManager.FreezeFrame(3f, 0.1f);
 		// GD.Print(_deflectWindowTimer.TimeLeft + " deflect");
+		_player.CurseController.AddCurse(_player.CurrentPlayerStats.CurseBuildRate);
 		if(InDeflectWindow()) {
 			_deflectSFX.Play();
 			_emitDeflectParticle();

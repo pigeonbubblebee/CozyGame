@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="StatBoostSpirit" load_steps=3 format=3 uid="uid://b2sjblvox1dqj"]
+
+[ext_resource type="Texture2D" uid="uid://bgltw6uvmwm0y" path="res://Assets/Art/Item/crystal.png" id="1_03p04"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/StatBoostSpirit.cs" id="1_jcnv4"]
+
+[resource]
+script = ExtResource("1_jcnv4")
+strength_gain = 0
+dexterity_gain = 0
+vitality_gain = 0
+focus_gain = 4
+harmony_gain = 4
+ID = "crystal"
+Description = "description_crystal"
+ItemTier = 0.0
+SortingID = 46
+Image = ExtResource("1_03p04")
+Type = 2
+_attributeNames = PackedStringArray("focus_gain", "harmony_gain")
+_attributeValues = PackedStringArray("4", "4")
+Stackable = false

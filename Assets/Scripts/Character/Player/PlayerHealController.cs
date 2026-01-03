@@ -8,8 +8,8 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 	[Export] public int CurrentHeals { get; private set; }
 	
 	public event Action FinishHealChargeEvent;
-	public event Action HealEvent;
-	public event Action AddHealEvent;
+	public event Action<Player> HealEvent;
+	public event Action<Player> AddHealEvent;
 	
 	public event Action<int> InternalHealthChangeEvent;
 	
@@ -89,18 +89,18 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 
 	public void ResetHeals() {
 		CurrentHeals = _maxHeals;
-		AddHealEvent?.Invoke();
+		AddHealEvent?.Invoke(_player);
 	}
 
 	public void SetHeals(int amt) {
 		CurrentHeals = amt;
-		AddHealEvent?.Invoke();
+		AddHealEvent?.Invoke(_player);
 	}
 	
 	public void AddHeals(int amt) {
 		CurrentHeals += amt;
 		CurrentHeals = Mathf.Min(CurrentHeals, _maxHeals);
-		AddHealEvent?.Invoke();
+		AddHealEvent?.Invoke(_player);
 	}
 
 	public void UseHeal() {
@@ -110,7 +110,7 @@ public partial class PlayerHealController : Node // TODO: Refactor to controller
 		
 		CurrentHeals --;
 		_player.PlayerHealth.AddHealth(_playerStats.HealPower, false);
-		HealEvent?.Invoke();
+		HealEvent?.Invoke(_player);
 	}
 	
 	private bool _CheckDesiredHeal() {

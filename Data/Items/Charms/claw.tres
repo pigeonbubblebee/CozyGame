@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_e5fn2")
-strength_gain = 1
-dexterity_gain = 1
-vitality_gain = 1
+strength_gain = 4
+dexterity_gain = 4
+vitality_gain = 0
 focus_gain = 0
 harmony_gain = 0
 ID = "claw"
@@ -16,6 +16,6 @@ ItemTier = 0.0
 SortingID = 47
 Image = ExtResource("1_fu8tn")
 Type = 2
-_attributeNames = PackedStringArray("strength_gain", "dexterity_gain", "vitality_gain")
-_attributeValues = PackedStringArray("1", "1", "1")
+_attributeNames = PackedStringArray("strength_gain", "dexterity_gain")
+_attributeValues = PackedStringArray("4", "4")
 Stackable = false

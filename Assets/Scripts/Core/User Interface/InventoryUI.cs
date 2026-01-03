@@ -187,26 +187,34 @@ public partial class InventoryUI : Control
 		if(_inputManager.GetInteractActuation() && CurrentScreen == 1 && Visible) {
 			bool emptySlot = false;
 			bool alreadyEquipped = false;
-			for(SelectedEquipSlot = 0; SelectedEquipSlot < _currentScenePlayer.InventoryManager.EquippedItems.Length; SelectedEquipSlot++) {
-				if(_currentScenePlayer.InventoryManager.EquippedItems[SelectedEquipSlot] == null) {
-					emptySlot = true;
-					break;
-				}
-				if(_currentScenePlayer.InventoryManager.EquippedItems[SelectedEquipSlot] == _currentSelectedItem) {
-					alreadyEquipped = true;
-					_currentScenePlayer.InventoryManager.UnequipItem(SelectedEquipSlot);
 
-					// equippedSlots[SelectedEquipSlot].RemoveItem();
+			for(SelectedEquipSlot = 0; SelectedEquipSlot < _currentScenePlayer.InventoryManager.EquippedItems.Length; SelectedEquipSlot++) { // Checking if item already equipped
+				if(_currentScenePlayer.InventoryManager.EquippedItems[SelectedEquipSlot] == _currentSelectedItem) {
+					alreadyEquipped = true; // If it is already equipped, unequip it
+					_currentScenePlayer.InventoryManager.UnequipItem(SelectedEquipSlot);
 
 					_updateEquipPrompt();
 				}
 			}
-			if(emptySlot && !alreadyEquipped) {
-				if(_currentSelectedItem is Equippable) {
-					_currentScenePlayer.InventoryManager.EquipItem((Equippable)_currentSelectedItem, SelectedEquipSlot);
-					// equippedSlots[SelectedEquipSlot].ChangeItem(_currentSelectedItem, 1);
 
-					_updateEquipPrompt();
+			if(!alreadyEquipped) // Otherwise, continue
+			{
+				// Checking for an empty slot
+				for(SelectedEquipSlot = 0; SelectedEquipSlot < _currentScenePlayer.InventoryManager.EquippedItems.Length; SelectedEquipSlot++) {
+					if(_currentScenePlayer.InventoryManager.EquippedItems[SelectedEquipSlot] == null) {
+						// Found empty slot. Break, so we can get the leftmost one
+						emptySlot = true;
+						break;
+					}
+				}
+				if(emptySlot) {
+					// If there is an empty slot, equip the current item
+					if(_currentSelectedItem is Equippable) {
+						_currentScenePlayer.InventoryManager.EquipItem((Equippable)_currentSelectedItem, SelectedEquipSlot);
+						// equippedSlots[SelectedEquipSlot].ChangeItem(_currentSelectedItem, 1);
+
+						_updateEquipPrompt();
+					}
 				}
 			}
 		}

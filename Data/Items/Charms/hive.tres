@@ -13,5 +13,5 @@ SortingID = 48
 Image = ExtResource("1_j3gnl")
 Type = 2
 _attributeNames = PackedStringArray("damage", "attack_speed", "poison_buildup")
-_attributeValues = PackedStringArray("10 + HARMONY", "0.5", "1")
+_attributeValues = PackedStringArray("10 + HARMONY", "0.5", "2")
 Stackable = false

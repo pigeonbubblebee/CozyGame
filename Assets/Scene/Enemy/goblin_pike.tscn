@@ -347,13 +347,13 @@ script = ExtResource("4_wq7el")
 Damage = 4
 InternalDamage = 2
 PostureDamage = 34
-DeflectPostureDamage = 134
+DeflectPostureDamage = 300
 Unstoppable = false
 Type = 0
 DeflectKnockbackMultiplier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw64k"]
-size = Vector2(224, 96)
+size = Vector2(192, 96)
 
 [node name="goblin_pike" type="Node2D"]
 
@@ -366,7 +366,8 @@ EnemyNameLocalizationKey = "goblin_pike"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
-animation = &"sweep"
+animation = &"charge"
+frame_progress = 0.056992
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_0nfbp")
@@ -479,7 +480,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Charge/Hit"]
-position = Vector2(80, -8)
+position = Vector2(64, -8)
 shape = SubResource("RectangleShape2D_sw64k")
 disabled = true
 

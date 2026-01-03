@@ -101,6 +101,7 @@ z_index = 4
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_3lx3s")
+_PoisonBuildup = 2
 _attackCooldown = 2.0
 _dashSpeed = 1000.0
 _attackAreaPath = NodePath("DamageBox")

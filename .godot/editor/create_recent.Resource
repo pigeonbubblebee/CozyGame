@@ -1,7 +1,13 @@
+PoisonScaleSpirit
+MysticGainSpirit
+PoisonSpellParrySpirit
+Equippable
+SummonSpirit
+HealVigDamageSpirit
+StatBoostSpirit
 DialogueData
 Item
 Resource
-Equippable
 MerchantInventory
 MerchantDialogueData
 PowerSpirit

@@ -84,11 +84,13 @@ public partial class Enemy : CharacterBody2D
 	[Export] public string EnemyNameLocalizationKey;
 
 	private List<BleedData> _bleedStacks = new List<BleedData>();
+	private Player _player;
 	
 	public override void _EnterTree() {
 		StateMachine = GetNode<EnemyStateMachine>(StateMachinePath);
 		StateMachine.Initialize(this);
 		
+		_player = GetNode<Player>("/root/Player");
 		Sprite = GetNode<AnimatedSprite2D>(_spritePath);
 	}
 	
@@ -266,6 +268,10 @@ public partial class Enemy : CharacterBody2D
 	}
 	
 	public virtual void OnHit(Player player, int damage, int direction, int postureDamage) {
+		if(Staggered)
+		{
+			_RecoverStagger();
+		}
 		if(_iFrameOn)
 			return;
 		// GD.Print("OUCH!");
@@ -324,8 +330,8 @@ public partial class Enemy : CharacterBody2D
 
 		foreach(BleedData bd in _bleedStacks) {
 			if(!bd.doneTick) {
-				_health.TakeDamage(1);
-				TakePostureDamage(1);
+				_health.TakeDamage(1 + bd.bonusDamage);
+				TakePostureDamage(1 + bd.bonusDamage);
 				bd.doneTick = true;
 				bd.timeLeft = 0.5f;
 				bd.totalTicksDone ++; 
@@ -349,11 +355,11 @@ public partial class Enemy : CharacterBody2D
     }
 
 	public void AddBleed() {
-		_bleedStacks.Add(new BleedData());
+		_bleedStacks.Add(new BleedData(_player.CurrentBuffs.BonusBleedDamage));
 	}
 	public void AddBleed(int buildup) {
 		for(int i = 0; i < buildup; i++) {
-			_bleedStacks.Add(new BleedData());
+			_bleedStacks.Add(new BleedData(_player.CurrentBuffs.BonusBleedDamage));
 		}
 	}
 }

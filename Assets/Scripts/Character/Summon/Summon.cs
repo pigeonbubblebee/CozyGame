@@ -17,6 +17,9 @@ public partial class Summon : CharacterBody2D
 	[Export] public float TargetStepRange { get; private set; }
     private double idleTime;
 	protected bool attacking = false;
+
+	public event Action<Enemy, int, Summon> OnHitEvent;
+
 	public void Initialize(Player p) {
 		this._player = p;
 		_player.AttackController.HitEvent += ChangeAggro;
@@ -72,7 +75,7 @@ public partial class Summon : CharacterBody2D
 		MoveAndSlide();
     }
 
-	public void ChangeAggro(IHittable i, int damage, int direction, int pDamage) {
+	public void ChangeAggro(IHittable i, int damage, int direction, int pDamage, Player p) {
 		if(i is EnemyHitbox) {
 			_target = ((EnemyHitbox)i).EnemyAIParent;
 			// ((EnemyHitbox)i).EnemyAIParent.DeathEvent += _DeAggroHelper();
@@ -82,5 +85,10 @@ public partial class Summon : CharacterBody2D
 
 	public void DeAggro() {
 		_target = null;
+	}
+
+	protected virtual void _InvokeOnHitEvent(Enemy hittable, int damage)
+	{
+		OnHitEvent?.Invoke(hittable, damage, this);
 	}
 }

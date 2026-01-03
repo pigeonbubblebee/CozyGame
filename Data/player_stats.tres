@@ -77,4 +77,4 @@ MaxCurse = 100
 CurseBuildRate = 10
 CurseUsePerSpell = 30
 CanCounterCleave = false
-EquipSlots = 2
+EquipSlots = 3

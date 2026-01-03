@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HealVigDamageSpirit" load_steps=3 format=3 uid="uid://bevwcugn11d86"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/HealVigDamageSpirit.cs" id="1_e5kvh"]
+[ext_resource type="Texture2D" uid="uid://cbn4vwjgmoljr" path="res://Assets/Art/Item/heart.png" id="1_ijmfy"]
+
+[resource]
+script = ExtResource("1_e5kvh")
+damageScale = 1
+ID = "heart"
+Description = "description_heart"
+ItemTier = 0.0
+SortingID = 45
+Image = ExtResource("1_ijmfy")
+Type = 2
+_attributeNames = PackedStringArray("bonus_damage", "buff_duration")
+_attributeValues = PackedStringArray("0.5 x VITALITY", "7")
+Stackable = false

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cozy Game")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+141a5287b60027f3c241b614ea749773e099e3f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f76029d0431c4d84b7bdaa51aa57395ca6b949e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cozy Game")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cozy Game")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

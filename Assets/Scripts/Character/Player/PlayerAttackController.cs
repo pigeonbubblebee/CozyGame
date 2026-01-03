@@ -16,7 +16,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 	private GameManager _gameManager;
 
 	public event Action<int, float, float> SlashEvent; // Damage, Speed, Range
-	public event Action<IHittable, int, int, int> HitEvent; // Hittable, Damage, Direction
+	public event Action<IHittable, int, int, int, Player> HitEvent; // Hittable, Damage, Direction, Posture Damage
 	public event Action FinishSlashEvent;
 
 	[Export] private NodePath _attackAreaPath;
@@ -224,7 +224,7 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 			return;
 		}
 		
-		int damage = _playerStats.SlashDamage + _player.CurrentBuffs.Strength;
+		int damage = _playerStats.SlashDamage + _player.CurrentBuffs.Strength + _player.CurrentBuffs.BonusSlashDamage;
 		
 		if(hit is EnemyHitbox) {
 			// GD.Print(((Enemy) hit).Staggered);
@@ -240,10 +240,10 @@ public partial class PlayerAttackController : Node2D // TODO: Attack Buffer
 		
 		// GD.Print(damage);
 		
-		HitEvent?.Invoke((IHittable) hit, damage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1,  _playerStats.SlashDamage + _player.CurrentBuffs.Strength);
+		HitEvent?.Invoke((IHittable) hit, damage, this.GlobalPosition.X > hit.GlobalPosition.X ? 1 : -1,  damage, _player);
 	}
 
-	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage) {
+	private void _OnHit(IHittable hittable, int damage, int direction, int postureDamage, Player _p) {
 		// GD.Print(_slashHitParticle.Emitting);
 		
 		if(_invincibleHittables.Contains(hittable))

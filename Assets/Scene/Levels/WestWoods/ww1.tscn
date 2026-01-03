@@ -1,8 +1,10 @@
-[gd_scene load_steps=41 format=4 uid="uid://cxeyk37wrxud7"]
+[gd_scene load_steps=49 format=4 uid="uid://cxeyk37wrxud7"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_xqtdr"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_idepv"]
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="2_ur3jk"]
 [ext_resource type="PackedScene" uid="uid://dteadx5vcybmk" path="res://Assets/Scene/Environment/hidden_area.tscn" id="3_cwuyn"]
+[ext_resource type="Script" path="res://Assets/Scripts/Interactables/TestingItem.cs" id="3_g36jn"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/DialogueTriggerArea.cs" id="3_q17go"]
 [ext_resource type="Resource" uid="uid://ds5r1vm1y5yp1" path="res://Data/Dialogue/Tutorial/tutorialDialogueStart.tres" id="4_81id0"]
 [ext_resource type="Texture2D" uid="uid://bsst4jdtiynq1" path="res://Assets/Art/Background/parallax1.png" id="4_yt5po"]
@@ -10,10 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://d03ridhuig42t" path="res://Assets/Art/Background/parallaxsky.png" id="5_s0vyw"]
 [ext_resource type="Resource" uid="uid://dejomm544rfkm" path="res://Data/Dialogue/Tutorial/tutorialDialogueJump.tres" id="5_tc6s3"]
 [ext_resource type="Texture2D" uid="uid://bce7ebqbug6dv" path="res://Assets/Art/Background/parallax3.png" id="6_850j5"]
+[ext_resource type="PackedScene" uid="uid://kl1nyrpnxbuo" path="res://Assets/Scene/interact_prompt.tscn" id="6_gyt4w"]
 [ext_resource type="Texture2D" uid="uid://ibmgk1bbcyso" path="res://Assets/Art/Background/parallaxhills.png" id="7_74nxx"]
 [ext_resource type="PackedScene" uid="uid://75lrmo0fad7o" path="res://Assets/Scene/Environment/money.tscn" id="8_1bqkq"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/TransitionTriggerArea.cs" id="8_a333h"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/CameraBound.cs" id="8_if8a4"]
+[ext_resource type="Resource" uid="uid://bgo6kj04mhm47" path="res://Data/Items/forest_essence.tres" id="11_mbtqi"]
+[ext_resource type="Texture2D" uid="uid://bjkw733jbyws4" path="res://Assets/Art/Item/book.png" id="12_seymu"]
 [ext_resource type="Texture2D" uid="uid://bysb6stxxm36o" path="res://Assets/Art/VFX/16299.jpg" id="15_qkoir"]
 [ext_resource type="Texture2D" uid="uid://dve4uotp1gtog" path="res://Assets/Art/Environment/WestWoodsBGArt/WestWoodsBGLarge4.png" id="16_n3bsu"]
 [ext_resource type="Texture2D" uid="uid://5iiqkduj2bt7" path="res://Assets/Art/Environment/WestWoodsBGArt/WestWoodsBGLarge3.png" id="17_6riw0"]
@@ -39,6 +44,21 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4k8ha"]
 size = Vector2(2283, 1406)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0114"]
+shader = ExtResource("2_ur3jk")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4gxk"]
+shader = ExtResource("2_ur3jk")
+shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
+shader_parameter/line_thickness = 1.0
+shader_parameter/shaderon = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idvg0"]
+radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5vyp"]
 size = Vector2(514, 944)
@@ -101,6 +121,33 @@ position = Vector2(1176, 3432)
 
 [node name="Money2" parent="Breakables" instance=ExtResource("8_1bqkq")]
 position = Vector2(792, 3432)
+
+[node name="pickup5" type="Area2D" parent="Breakables"]
+material = SubResource("ShaderMaterial_e0114")
+position = Vector2(4192, 2400)
+scale = Vector2(4, 4)
+script = ExtResource("3_g36jn")
+_itemResource = ExtResource("11_mbtqi")
+_itemIconPath = NodePath("Sprite2D")
+_outlinedSpritePath = NodePath("Sprite2D")
+_interactPromptPath = NodePath("InteractPrompt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Breakables/pickup5"]
+material = SubResource("ShaderMaterial_p4gxk")
+texture = ExtResource("12_seymu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakables/pickup5"]
+shape = SubResource("CircleShape2D_idvg0")
+
+[node name="InteractPrompt" parent="Breakables/pickup5" instance=ExtResource("6_gyt4w")]
+position = Vector2(0, -48)
+scale = Vector2(0.5, 0.5)
+PromptText = "Take"
+
+[node name="PointLight2D" type="PointLight2D" parent="Breakables/pickup5"]
+color = Color(0.892315, 0.619573, 0.467095, 1)
+energy = 0.2
+texture = ExtResource("22_l3kbt")
 
 [node name="Enemies" type="Node2D" parent="."]
 

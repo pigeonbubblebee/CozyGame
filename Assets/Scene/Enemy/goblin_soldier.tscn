@@ -437,8 +437,8 @@ size = Vector2(336, 38.5)
 Speed = 200.0
 _currency_drop_amount = 15
 MaxHealth = 400
-MaxPosture = 800
-DeathBlowDamage = 400
+MaxPosture = 600
+DeathBlowDamage = 200
 EnemyNameLocalizationKey = "goblin_soldier"
 
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]

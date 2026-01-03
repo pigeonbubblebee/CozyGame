@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PoisonScaleSpirit" load_steps=3 format=3 uid="uid://nfooovp6ack4"]
+
+[ext_resource type="Texture2D" uid="uid://rjwen2jngyms" path="res://Assets/Art/Item/mushroom.png" id="1_ddq41"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Charms/PoisonScaleSpirit.cs" id="1_pdbmj"]
+
+[resource]
+script = ExtResource("1_pdbmj")
+ID = "mushroom"
+Description = "description_mushroom"
+ItemTier = 0.0
+SortingID = 41
+Image = ExtResource("1_ddq41")
+Type = 2
+_attributeNames = PackedStringArray("bonus_poison")
+_attributeValues = PackedStringArray("1")
+Stackable = false

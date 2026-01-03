@@ -9,24 +9,35 @@ public class PlayerBuffs
 	public int Harmony = 0;
 	public int Focus = 0;
 	public int Prowess = 0;
+	
+	public int BonusSlashDamage = 0;
+	public int BonusBleedDamage = 0;
 
-	public PlayerBuffs(PlayerBuffs p) {
+	public PlayerBuffs(PlayerBuffs p)
+	{
 		Strength = p.Strength;
 		Dexterity = p.Dexterity;
 		Vitality = p.Vitality;
 		Harmony = p.Harmony;
 		Focus = p.Focus;
 		Prowess = p.Prowess;
+
+		BonusSlashDamage = p.BonusSlashDamage;
+		BonusBleedDamage = p.BonusBleedDamage;
 	}
 	public PlayerBuffs() {
 	}
 
-	public void ResetBuffs(PlayerBuffs p) {
+	public void ResetBuffs(PlayerBuffs p)
+	{
 		Strength = p.Strength;
 		Dexterity = p.Dexterity;
 		Vitality = p.Vitality;
 		Harmony = p.Harmony;
 		Focus = p.Focus;
 		Prowess = p.Prowess;
+
+		BonusSlashDamage = p.BonusSlashDamage;
+		BonusBleedDamage = p.BonusBleedDamage;
 	}
 }

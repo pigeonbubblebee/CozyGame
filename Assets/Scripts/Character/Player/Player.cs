@@ -42,11 +42,13 @@ public partial class Player : CharacterBody2D
 	private AudioStreamPlayer2D _hitSFX;
 	
 	public event Action ExitGrabEvent;
+	public event Action<int, Player> PlayerHealEvent;
 	
 	private GameManager _gameManager;
 
 	private UIManager _uiManager;
 
+	private Dictionary<string, float> _timers = new();
 	public override void _EnterTree()
 	{
 		base._EnterTree();
@@ -65,10 +67,12 @@ public partial class Player : CharacterBody2D
 		CurseController = GetNode<PlayerCurseController>(_curseControllerPath);
 		SummonController = GetNode<PlayerSummonController>(_summonControllerPath);
 		Camera = GetNode<PlayerCamera>(_cameraPath);
-		
+
 		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + CurrentBuffs.Vitality;
 		CurseController.MaxCurse = PlayerStatsResource.MaxCurse + CurrentBuffs.Harmony;
-		
+
+		PlayerHealth.HealEvent += _CallPlayerHealEvent;
+
 		// PlayerHealth.DeathEvent += Quit;
 		PlayerHealth.Invincible = false;
 
@@ -86,11 +90,11 @@ public partial class Player : CharacterBody2D
 		InventoryManager.Initialize(this);
 		SummonController.Initialize(this);
 
-// 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
-		
+		// 		PlayerSprite.ZIndex = RenderingLayers.PlayerLayer;
+
 		_hitSFX = GetNode<AudioStreamPlayer2D>(_hitSFXPath);
 
-		
+
 	}
 	
 	public void Respawn() {
@@ -132,11 +136,47 @@ public partial class Player : CharacterBody2D
 
 	private int _prevVit = 0;
 
-	public void UpdateBuffs() {
+	public void CreateCustomTimer(string id, float duration)
+    {
+        _timers[id] = duration;
+    }
+	public void CancelCustomTimer(string id)
+    {
+        _timers.Remove(id);
+    }
+	public bool GetCustomTimerActive(string id)
+	{
+		if (!_timers.ContainsKey(id))
+		{
+			return false;
+		}
+		return _timers[id] > 0f;
+	}
+
+	public void UpdateTimers(double delta)
+	{
+		var finished = new List<string>();
+
+		foreach (var keyval in _timers)
+		{
+			_timers[keyval.Key] -= (float)delta;
+			if (_timers[keyval.Key] <= 0f)
+				finished.Add(keyval.Key);
+		}
+
+		foreach (var id in finished)
+		{
+			_timers.Remove(id);
+		}
+	}
+
+	public void UpdateBuffs()
+	{
 		CurrentBuffs.ResetBuffs(BaseBuffs);
 		int i = 0;
-		foreach(Equippable e in InventoryManager.EquippedItems){
-			if(e != null)
+		foreach (Equippable e in InventoryManager.EquippedItems)
+		{
+			if (e != null)
 				CurrentBuffs = e.ApplyStatic(CurrentBuffs, this, i);
 			i++;
 		}
@@ -147,15 +187,15 @@ public partial class Player : CharacterBody2D
 
 		int diff = 0;
 
-		if(_prevVit < CurrentBuffs.Vitality)
+		if (_prevVit < CurrentBuffs.Vitality)
 			diff = CurrentBuffs.Vitality - _prevVit;
 		_prevVit = CurrentBuffs.Vitality;
 
-		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + (int)Math.Ceiling(2.5*(double)CurrentBuffs.Vitality);
+		PlayerHealth.MaxHealthPoints = PlayerStatsResource.MaxHealth + (int)Math.Ceiling(2.5 * (double)CurrentBuffs.Vitality);
 		// PlayerHealth.AddHealth((int)Math.Ceiling(2.5*(double)diff), false);
-		 PlayerHealth.AddHealth(0, false);
+		PlayerHealth.AddHealth(0, false);
 
-		CurseController.MaxCurse = PlayerStatsResource.MaxCurse + (int)Math.Ceiling(5*(double)CurrentBuffs.Harmony);
+		CurseController.MaxCurse = PlayerStatsResource.MaxCurse + (int)Math.Ceiling(5 * (double)CurrentBuffs.Harmony);
 		CurseController.AddCurse(0);
 
 		_uiManager.UpdateStatus();
@@ -176,8 +216,10 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
 		UpdateBuffs();
+		UpdateTimers(delta);
 
-		if(Input.IsActionJustPressed("debug")) { // TODO: Delete this before export
+		if (Input.IsActionJustPressed("debug"))
+		{ // TODO: Delete this before export
 			this.GlobalPosition = GetGlobalMousePosition();
 		}
 		if(Input.IsActionPressed("debug")) {
@@ -200,11 +242,11 @@ public partial class Player : CharacterBody2D
 		MovementController.ApplyKnockback(enemy.GlobalPosition.X > GlobalPosition.X ? -1 : 1, 1000, 500f, 0.1f);
 		
 		if(DeflectController.Blocking) {
-			if(e.Unstoppable && (e.Type == EnemyAttackData.AttackType.Sweep || e.Type == EnemyAttackData.AttackType.Cleave)) {
+			if(e.Unstoppable) {
 				TakeTrueDamage(e);
 				return;
 			}
-			CurseController.AddCurse(CurrentPlayerStats.CurseBuildRate);
+			// CurseController.AddCurse(CurrentPlayerStats.CurseBuildRate);
 			DeflectController.Block(e, enemy);
 		} else {
 			TakeTrueDamage(e);
@@ -236,5 +278,10 @@ public partial class Player : CharacterBody2D
 	
 	public void ExitGrab() {
 		ExitGrabEvent?.Invoke();
+	}
+
+	private void _CallPlayerHealEvent(int amt)
+	{
+		PlayerHealEvent?.Invoke(amt, this);
 	}
 }
