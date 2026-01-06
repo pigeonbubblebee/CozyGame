@@ -13,7 +13,7 @@ shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 7.025
 shader_parameter/shaderon = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcfyf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tiixg"]
 shader = ExtResource("1_s0axn")
 shader_parameter/line_color = Color(0.992157, 1, 0.823529, 1)
 shader_parameter/line_thickness = 1.0
@@ -32,7 +32,7 @@ _outlinedSpritePath = NodePath("Sprite2D")
 _interactPromptPath = NodePath("InteractPrompt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_wcfyf")
+material = SubResource("ShaderMaterial_tiixg")
 texture = ExtResource("4_vrbok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

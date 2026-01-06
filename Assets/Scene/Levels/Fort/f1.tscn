@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://b4cjaa1j88txy"]
+[gd_scene load_steps=30 format=4 uid="uid://b4cjaa1j88txy"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_ku8i8"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_sfpbn"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://brlayd7re18fg" path="res://Assets/Scene/Environment/respawn_point.tscn" id="4_iaabd"]
 [ext_resource type="Resource" uid="uid://exvde1a7vvpb" path="res://Data/Items/sellable_1.tres" id="4_kb6vx"]
 [ext_resource type="PackedScene" uid="uid://75lrmo0fad7o" path="res://Assets/Scene/Environment/money.tscn" id="4_lrt20"]
+[ext_resource type="Shader" path="res://Shader/outline.gdshader" id="4_plljk"]
 [ext_resource type="Script" path="res://Assets/Scripts/Environmental/CameraBound.cs" id="4_s7tij"]
 [ext_resource type="PackedScene" uid="uid://bwud6pqm7cylu" path="res://Assets/Scene/Environment/breakable_wall.tscn" id="5_cg3hl"]
 [ext_resource type="Resource" uid="uid://cd5i4i0qhg25b" path="res://Data/Items/equip_slot_shard.tres" id="7_w64qf"]
@@ -21,6 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://bskrg487tax4i" path="res://Assets/Scene/Enemy/worg.tscn" id="15_awhls"]
 [ext_resource type="PackedScene" uid="uid://cyh5eomsd4eor" path="res://Assets/Scene/Environment/Obstacle/cannon.tscn" id="18_2o5qc"]
 [ext_resource type="PackedScene" uid="uid://br5bshgtwiuld" path="res://Assets/Scene/Environment/moving_platform.tscn" id="18_5ecj7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf23q"]
+shader = ExtResource("4_plljk")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c5xm"]
 size = Vector2(242, 1106)
@@ -68,14 +75,17 @@ rendering_quadrant_size = 32
 [node name="Breakables" type="Node2D" parent="."]
 
 [node name="pickup" parent="Breakables" instance=ExtResource("3_0g4ex")]
+material = SubResource("ShaderMaterial_yf23q")
 position = Vector2(3056, 2040)
 _itemResource = ExtResource("4_kb6vx")
 
 [node name="pickup3" parent="Breakables" instance=ExtResource("3_0g4ex")]
+material = SubResource("ShaderMaterial_yf23q")
 position = Vector2(-1544, 3304)
 _itemResource = ExtResource("4_kb6vx")
 
 [node name="pickup4" parent="Breakables" instance=ExtResource("3_0g4ex")]
+material = SubResource("ShaderMaterial_yf23q")
 position = Vector2(-1544, 3304)
 _itemResource = ExtResource("4_kb6vx")
 
@@ -87,6 +97,7 @@ position = Vector2(4232, 4152)
 scale = Vector2(4, 4)
 
 [node name="pickup2" parent="Breakables" instance=ExtResource("3_0g4ex")]
+material = SubResource("ShaderMaterial_yf23q")
 position = Vector2(4608, 4616)
 _itemResource = ExtResource("7_w64qf")
 

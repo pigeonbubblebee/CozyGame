@@ -17,6 +17,7 @@ public abstract partial class Interactable : Area2D, IInteractable
 		CollisionLayer = (uint) PhysicsLayers.InteractableLayer;
 		if(_outlinedSpritePath != null)
 			_outlinedSprite = GetNode<Sprite2D>(_outlinedSpritePath);
+			
 		if(_outlinedAnimatedSpritePath != null) {
 			_outlinedAnimatedSprite = GetNode<AnimatedSprite2D>(_outlinedAnimatedSpritePath);
 			_outlinedAnimatedSprite.Play("default");
@@ -25,7 +26,17 @@ public abstract partial class Interactable : Area2D, IInteractable
 
 		_interactPrompt.Visible = false;
 		// _interactArea.CollisionLayer = (uint) PhysicsLayers.UntouchableLayer;
+		if (_outlinedSprite != null) // Mat Sharing
+		{
+			var mat = (ShaderMaterial)_outlinedSprite.Material;
+			_outlinedSprite.Material = (ShaderMaterial)mat.Duplicate();
+		}
 
+		if (_outlinedAnimatedSprite != null)
+		{
+			var mat = (ShaderMaterial)_outlinedAnimatedSprite.Material;
+			_outlinedAnimatedSprite.Material = (ShaderMaterial)mat.Duplicate();
+		}
 		if(_outlinedSprite != null)
 			((ShaderMaterial)_outlinedSprite.GetMaterial()).SetShaderParameter("shaderon", false);
 		if(_outlinedAnimatedSprite != null)

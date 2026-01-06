@@ -10,10 +10,12 @@ script = ExtResource("1_qp4ov")
 _textPath = NodePath("Prompt")
 
 [node name="Interactbar" type="Sprite2D" parent="."]
+z_index = 13
 scale = Vector2(4.5, 4.5)
 texture = ExtResource("1_po521")
 
 [node name="Key" type="RichTextLabel" parent="."]
+z_index = 13
 offset_left = -86.0
 offset_top = -16.0
 offset_right = -58.0
@@ -26,6 +28,7 @@ bbcode_enabled = true
 text = "[center]F"
 
 [node name="Prompt" type="RichTextLabel" parent="."]
+z_index = 13
 offset_left = -36.0
 offset_top = -17.0
 offset_right = 20.0

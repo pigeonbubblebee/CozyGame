@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://ca3hwpjletf4g"]
+[gd_scene load_steps=56 format=4 uid="uid://ca3hwpjletf4g"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Core/Game/SceneManager.cs" id="1_attnp"]
 [ext_resource type="TileSet" uid="uid://bfj1f23jglyvw" path="res://Data/Tileset/testing.tres" id="2_atx6q"]
@@ -46,6 +46,12 @@ shader_parameter/shaderon = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xf2cr"]
 radius = 64.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf23q"]
+shader = ExtResource("9_nddkt")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 7.025
+shader_parameter/shaderon = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aysdc"]
 size = Vector2(514, 2528)
@@ -209,7 +215,7 @@ position = Vector2(800, 208)
 
 [node name="pickup4" type="Area2D" parent="Breakables"]
 material = SubResource("ShaderMaterial_u8wlb")
-position = Vector2(-7408, 7256)
+position = Vector2(-7432, 7320)
 scale = Vector2(4, 4)
 script = ExtResource("7_2l64l")
 _itemResource = ExtResource("8_nsa2g")
@@ -235,19 +241,23 @@ energy = 0.2
 texture = ExtResource("21_4tujl")
 
 [node name="pickup" parent="Breakables" instance=ExtResource("12_rv81p")]
-position = Vector2(-6776, 6536)
+material = SubResource("ShaderMaterial_yf23q")
+position = Vector2(-6880, 6680)
 _itemResource = ExtResource("12_rxj26")
 
 [node name="pickup2" parent="Breakables" instance=ExtResource("12_rv81p")]
-position = Vector2(-5648, 6352)
+material = SubResource("ShaderMaterial_yf23q")
+position = Vector2(-5696, 6440)
 _itemResource = ExtResource("12_rxj26")
 
 [node name="pickup5" parent="Breakables" instance=ExtResource("12_rv81p")]
+material = SubResource("ShaderMaterial_yf23q")
 position = Vector2(-4496, 8160)
 _itemResource = ExtResource("12_rxj26")
 
 [node name="pickup3" parent="Breakables" instance=ExtResource("12_rv81p")]
-position = Vector2(-4736, 6568)
+material = SubResource("ShaderMaterial_yf23q")
+position = Vector2(-4632, 6672)
 _itemResource = ExtResource("12_rxj26")
 
 [node name="Enemies" type="Node2D" parent="."]

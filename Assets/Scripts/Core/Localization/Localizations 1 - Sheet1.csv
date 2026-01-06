@@ -3,7 +3,7 @@ testing_item,Testing
 description_testing_item,Testing item description
 
 goblin_boss_1,General Borbsnop - Goblin Elite
-goblin_warden,Onion Jr. - Prison Warden
+goblin_warden,Onion Jr. - Goblin Elite
 
 sword,Arboreal Edge
 description_sword,An ancient blade gifted to you"," used to protect the forest. Metaphysical properties allow it to absorb MYSTIC when blocking and release it in the form of a CAST"," or a magical slash.
@@ -85,7 +85,7 @@ tooltip_critical,Landing a CRITICAL triples damage.
 tooltip_cast,Using a CAST releases MYSTIC and deals damage in the form of a projectile.
 tooltip_familiar,A FAMILIAR is a summoned ally that will attack enemies after you attack them.
 
-name_player,Player
+name_player,Ms. Mushroom
 name_cat,Cat
 name_blinny,Blinny
 
@@ -101,10 +101,10 @@ price,Price:
 stock,Stock: 
 stock_left, Left
 
-dialogue_cat_tutorial_1,Are you awake? My friend is trapped and I-
-dialogue_player_tutorial,Are you a talking cat?
-dialogue_cat_tutorial_2,I just freed you. Some gratitude would be nice.
-dialogue_cat_tutorial_3,We need to move quick. Do your legs feel spry? Try moving around.
+dialogue_cat_tutorial_1,Oh great mushroom one, awaken!
+dialogue_player_tutorial,ughh...
+dialogue_cat_tutorial_2,Oh forest gods be praised it worked.
+dialogue_cat_tutorial_3,Listen, I have a friend who has been captured by the goblins. Please help me.
 dialogue_move_instruction,Movement - \nUse A and D to move. Use L or Shift to dash around while on the ground.
 dialogue_cat_jump_tutorial_1,That's a big ledge ahead.
 dialogue_cat_jump_tutorial_2,Though I trust your legs will be enough to carry us.
@@ -114,10 +114,10 @@ dialogue_rest_instruction,Resting - \nInteract with trees to fully restore your 
 dialogue_cat_slash_tutorial_1,Looks like our path has been blocked.
 dialogue_cat_slash_tutorial_2,The blade I gave you should be more than enough to deal with it though.
 dialogue_slash_instruction,Attacking - \nTap LMB or P to attack. Attacking can break some walls.
-dialogue_cat_block_tutorial_1,YIKES! Those are the guys that took over after you died. They took my friend and stuffed him up one of their outposts.
+dialogue_cat_block_tutorial_1,YIKES! Those are the guys that took over after you died. They took my friend.
 dialogue_cat_block_tutorial_2,Goblins are ferocious. Blindly attacking may not be enough to take them down.
 dialogue_block_instruction,Blocking - \nTap RMB or O before an attack lands to block it.
-dialogue_composure_instruction,Composure - \nBlocking RIGHT BEFORE an attack lands deals composure damage. When the composure meter (the orange bar) is full"," you can instantly execute an enemy.
+dialogue_composure_instruction,Composure - \nBlocking RIGHT BEFORE an attack lands deals composure damage. When the composure meter (the orange bar) is full"," you can deal a large amount of damage to an enemy.
 dialogue_cat_heal_tutorial_1,What a rough battle. Let me take a look at your wounds.
 dialogue_internal_health_instruction,Internal Health - \nBlocking early"," denoted by orange sparks"," deals internal damage to you. Internal damage is healed over time and by executing.
 dialogue_cat_heal_tutorial_2,Looks like you might need some healing. I can lend my power to you.
@@ -125,9 +125,9 @@ dialogue_heal_instruction,Regrowths - \nHold E to regenerate health. The big red
 dialogue_cat_cast_tutorial,That's a giant horde... Fortunately"," the magical energy your sword holds can deal with it.
 dialogue_mystic_instruction,Mystic - \nBlocking attacks generates mystic energy"," denoted by the green bar in your HUD.
 dialogue_cast_instruction,Casting - \nTap R to release your mystic and fire a piercing bolt in front of you.
-dialogue_cat_pretutboss_1,We're getting pretty close to exiting the forest. I heard there's an outpost up ahead.
-dialogue_cat_pretutboss_2,I really hope we can find my friend in there...
-dialogue_cat_charm_tutorial_1,Oooh! A woodland spirit! They're fiesty little creatures who find themselves in random objects.
+dialogue_cat_pretutboss_1,We're getting pretty close to exiting the forest. I heard that the goblin chief up ahead.
+dialogue_cat_pretutboss_2,I really hope we can find my friend...
+dialogue_cat_charm_tutorial_1,A woodland spirit! They're fiesty little creatures who burrow themselves in random objects.
 dialogue_cat_charm_tutorial_2,If you give them to me"," I'll help you channel them!
 dialogue_charm_instruction,Woodland Spirits - \nTap B to open your inventory. Select a spirit and press F to equip and unequip it. Each spirit grants you a powerful bonus.
 dialogue_cat_map_tutorial_1,Mystic trees also allow you to travel instantaneously between them.

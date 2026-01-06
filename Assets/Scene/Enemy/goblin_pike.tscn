@@ -296,7 +296,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ps3fr")
 }, {
-"duration": 5.0,
+"duration": 8.0,
 "texture": SubResource("AtlasTexture_48dxb")
 }, {
 "duration": 1.0,
@@ -316,19 +316,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Resource" id="Resource_51tf4"]
-script = ExtResource("4_wq7el")
-Damage = 6
-InternalDamage = 3
-PostureDamage = 50
-DeflectPostureDamage = 266
-Unstoppable = true
-Type = 2
-DeflectKnockbackMultiplier = 1.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cenhr"]
-size = Vector2(316, 64)
-
 [sub_resource type="Resource" id="Resource_3bojv"]
 script = ExtResource("4_wq7el")
 Damage = 4
@@ -341,6 +328,19 @@ DeflectKnockbackMultiplier = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jpx4g"]
 size = Vector2(692, 20)
+
+[sub_resource type="Resource" id="Resource_51tf4"]
+script = ExtResource("4_wq7el")
+Damage = 6
+InternalDamage = 3
+PostureDamage = 50
+DeflectPostureDamage = 266
+Unstoppable = true
+Type = 2
+DeflectKnockbackMultiplier = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cenhr"]
+size = Vector2(316, 64)
 
 [sub_resource type="Resource" id="Resource_jlgd0"]
 script = ExtResource("4_wq7el")
@@ -367,7 +367,37 @@ EnemyNameLocalizationKey = "goblin_pike"
 [node name="AnimatedSprite2D" parent="ChaserEnemy/EnemyTemplate" index="2"]
 sprite_frames = SubResource("SpriteFrames_l1qsa")
 animation = &"charge"
-frame_progress = 0.056992
+frame_progress = 0.100371
+
+[node name="Sweep" type="Node2D" parent="ChaserEnemy/EnemyTemplate" index="3"]
+script = ExtResource("5_ua45f")
+SlashRange = 200.0
+SlashCooldown = 1.0
+StopLungeFrame = 100
+OnFrame = 6
+OffFrame = 7
+_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
+_attackAreaPath = NodePath("SwordHit")
+_slashSFXPath = NodePath("SlashSFX")
+AttackCooldown = 3.0
+AnimationName = "sweep"
+AttackLength = 1.1
+NotChainAttack = true
+_attackData = SubResource("Resource_3bojv")
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/Sweep"]
+stream = ExtResource("8_rwjnt")
+script = ExtResource("6_v188s")
+
+[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/Sweep"]
+position = Vector2(-8, 96)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/Sweep/SwordHit"]
+position = Vector2(30, -32)
+shape = SubResource("RectangleShape2D_jpx4g")
+disabled = true
 
 [node name="Retreat" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="0"]
 script = ExtResource("4_0nfbp")
@@ -400,9 +430,9 @@ OffFrame = 7
 _attackAreaColliderPath = NodePath("SwordHit/Hitbox")
 _attackAreaPath = NodePath("SwordHit")
 _slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 1.5
+AttackCooldown = 4.0
 AnimationName = "thrust"
-AttackLength = 1.2
+AttackLength = 1.5
 NotChainAttack = true
 _attackData = SubResource("Resource_51tf4")
 
@@ -420,37 +450,7 @@ position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_cenhr")
 disabled = true
 
-[node name="Sweep" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="2"]
-script = ExtResource("5_ua45f")
-SlashRange = 200.0
-SlashCooldown = 1.0
-StopLungeFrame = 100
-OnFrame = 6
-OffFrame = 7
-_attackAreaColliderPath = NodePath("SwordHit/Hitbox")
-_attackAreaPath = NodePath("SwordHit")
-_slashSFXPath = NodePath("SlashSFX")
-AttackCooldown = 3.0
-AnimationName = "sweep"
-AttackLength = 1.1
-NotChainAttack = true
-_attackData = SubResource("Resource_3bojv")
-
-[node name="SlashSFX" type="AudioStreamPlayer2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Sweep"]
-stream = ExtResource("8_rwjnt")
-script = ExtResource("6_v188s")
-
-[node name="SwordHit" type="Area2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Sweep"]
-position = Vector2(-8, 96)
-collision_layer = 2
-collision_mask = 2
-
-[node name="Hitbox" type="CollisionShape2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern/Sweep/SwordHit"]
-position = Vector2(30, -32)
-shape = SubResource("RectangleShape2D_jpx4g")
-disabled = true
-
-[node name="Charge" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="3"]
+[node name="Charge" type="Node2D" parent="ChaserEnemy/EnemyTemplate/AttackPattern" index="2"]
 script = ExtResource("3_sjcd8")
 _checkLedge = true
 _stopAccelOnInterrupt = true
