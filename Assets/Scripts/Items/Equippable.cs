@@ -34,13 +34,17 @@ public partial class Equippable : Item
 
 	public virtual void OnSwordHit(IHittable hittable, int dmg, int dir, int posture, Player p) {}
 
-	public virtual void OnSummonHit(Enemy e, int damage, Summon s, Player p)
-	{
-		
-	}
+	public virtual void OnSummonHit(Enemy e, int damage, Summon s, Player p) { }
 
 	public virtual void OnEquip(Player p)
 	{
+		p.SpellController.ShootEvent -= OnShoot;
+		p.PlayerHealEvent -= OnHeal;
+		p.SpellController.HitEvent -= OnShootHit;
+		p.DeflectController.BlockEvent -= OnBlock;
+		p.AttackController.HitEvent -= OnSwordHit;
+		p.SummonController.SummonHitEvent -= OnSummonHit;
+
 		p.SpellController.ShootEvent += OnShoot;
 		p.PlayerHealEvent += OnHeal;
 		p.SpellController.HitEvent += OnShootHit;

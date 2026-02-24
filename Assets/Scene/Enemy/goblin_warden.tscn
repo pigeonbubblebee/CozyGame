@@ -405,7 +405,7 @@ Speed = 100.0
 _currency_drop_amount = 125
 MaxHealth = 1000
 MaxPosture = 1200
-DeathBlowDamage = 500
+DeathBlowDamage = 1000
 HasBossBar = true
 EnemyNameLocalizationKey = "goblin_warden"
 

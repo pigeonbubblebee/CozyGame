@@ -101,10 +101,10 @@ price,Price:
 stock,Stock: 
 stock_left, Left
 
-dialogue_cat_tutorial_1,Oh great mushroom one, awaken!
+dialogue_cat_tutorial_1,Oh great mushroom one"," awaken!
 dialogue_player_tutorial,ughh...
 dialogue_cat_tutorial_2,Oh forest gods be praised it worked.
-dialogue_cat_tutorial_3,Listen, I have a friend who has been captured by the goblins. Please help me.
+dialogue_cat_tutorial_3,Listen"," I have a friend who has been captured by the goblins. Please help me.
 dialogue_move_instruction,Movement - \nUse A and D to move. Use L or Shift to dash around while on the ground.
 dialogue_cat_jump_tutorial_1,That's a big ledge ahead.
 dialogue_cat_jump_tutorial_2,Though I trust your legs will be enough to carry us.

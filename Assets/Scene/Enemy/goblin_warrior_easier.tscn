@@ -664,7 +664,7 @@ Speed = 150.0
 _currency_drop_amount = 100
 MaxHealth = 1800
 MaxPosture = 2000
-DeathBlowDamage = 500
+DeathBlowDamage = 1800
 HasBossBar = true
 EnemyNameLocalizationKey = "goblin_boss_1"
 
